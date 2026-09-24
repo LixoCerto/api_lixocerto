@@ -1,59 +1,60 @@
 # Configuração de desenvolvimento — API Lixo Certo
 
-Este documento descreve o ambiente local da API para desenvolvimento, testes de migrations, PostgreSQL, Redis e autenticação OIDC. **Não coloque tokens, senhas reais ou arquivos `.env` no Git.**
+A API é executada diretamente com Node/NestJS. A gestão de containers foi removida deste repositório e está centralizada no projeto `infra_lixocerto`.
 
 ## Arquivo local
 
-Crie, na raiz do projeto, um arquivo chamado `.env` e preencha-o com:
+Crie `.env` a partir de `.env.exemplo`. O arquivo real é local e não deve ser versionado.
 
 ```env
 AMBIENTE_EXECUCAO=desenvolvimento
 VERSAO_API=0.1.0
 PORTA_GRPC=50051
 
-URL_BANCO_DADOS=postgres://lixo_certo:alterar_senha_local@127.0.0.1:5432/lixo_certo
-URL_BANCO_DADOS_TESTE=postgres://lcr_integracao:lcr_integracao_local@127.0.0.1:5432/lcr_integracao
+# PostgreSQL externo; não usar o PostgreSQL do projeto de infraestrutura.
+URL_BANCO_DADOS=postgres://postgres:SENHA_CODIFICADA@177.223.51.10:5432/lixocerto
+URL_BANCO_DADOS_TESTE=postgres://postgres:SENHA_CODIFICADA@177.223.51.10:5432/lixocerto_teste
 
-URL_REDIS=redis://127.0.0.1:6379
-URL_REDIS_TESTE=redis://127.0.0.1:6379/15
+# Redis local gerenciado por ../infra_lixocerto.
+URL_REDIS=redis://:SENHA_REDIS_CODIFICADA@127.0.0.1:6379
+URL_REDIS_TESTE=redis://:SENHA_REDIS_CODIFICADA@127.0.0.1:6379/15
 ORIGENS_PERMITIDAS=http://localhost:3000
 
-# Substituir pelos dados reais do provedor OIDC antes de testar login com JWT.
-EMISSOR_OIDC=https://seu-provedor-oidc.local
+EMISSOR_OIDC=https://exemplo.invalid
 AUDIENCIA_OIDC=lixo-certo-api
-ENDERECO_JWKS=https://seu-provedor-oidc.local/.well-known/jwks.json
-
-SEGREDO_HASH_PARTICIPANTE=LCR_DEV_SEGREDO_HASH_2026_32_CARACTERES_MINIMO
+ENDERECO_JWKS=https://exemplo.invalid/.well-known/jwks.json
+SEGREDO_HASH_PARTICIPANTE=gerar-com-secrets-manager
 CAMINHO_PROTO=contratos/lixo_certo/v1/servico_saude.proto
 ```
 
-Os campos `EMISSOR_OIDC`, `AUDIENCIA_OIDC` e `ENDERECO_JWKS` são apenas placeholders neste exemplo. Para validar tokens, eles devem apontar para o emissor, a audiência e o endpoint JWKS reais. O segredo de anonimização deve possuir pelo menos 32 caracteres.
+As senhas precisam ser codificadas na URL quando possuírem caracteres reservados. Nunca copie a senha do banco ou do Redis para o GitHub, Postman ou frontend.
 
-## PostgreSQL e Redis
+## Infraestrutura
 
-O projeto possui um Compose local em `implantacao/docker-compose.yml`. Para iniciar as dependências:
+Na pasta irmã `infra_lixocerto`, inicie somente o Redis:
 
 ```powershell
-docker compose -f implantacao\docker-compose.yml up -d banco cache
+.\scripts\iniciar.ps1
+.\scripts\status.ps1
 ```
 
-Para executar a API fora do container, use `127.0.0.1` nas URLs. Para executar a API dentro do Compose, use os nomes dos serviços:
+O PostgreSQL é externo e não é criado, migrado ou destruído pela infraestrutura local. Antes de executar migrations, confirme que o banco remoto está preparado, incluindo a extensão `pgcrypto` exigida pelo schema.
 
-```env
-URL_BANCO_DADOS=postgres://lixo_certo:alterar_senha_local@banco:5432/lixo_certo
-URL_REDIS=redis://cache:6379
-```
-
-## Fluxo recomendado
+## Execução da API
 
 ```powershell
 pnpm install
-pnpm migrar
-pnpm semear
+pnpm contratos:validar
 pnpm tipos
 pnpm testar
 pnpm compilar
-pnpm desenvolvimento
+pnpm migrar
+pnpm semear
+pnpm desenvolver
 ```
 
-A porta gRPC padrão é `50051`. Navegadores não consomem diretamente gRPC tradicional; o frontend deve utilizar um gateway Connect/gRPC-Web ou Envoy para encaminhar chamadas à API.
+A porta gRPC padrão é `50051`. O frontend deve utilizar Connect/gRPC-Web ou um gateway apropriado para consumo pelo navegador.
+
+## Testes
+
+Use um banco de testes separado em `URL_BANCO_DADOS_TESTE`. Não execute os testes de integração apontando para o banco externo principal, pois eles criam e removem registros de teste.
