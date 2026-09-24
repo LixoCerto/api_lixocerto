@@ -34,7 +34,15 @@ export class ControladorGrpcGamificacao {
   }
 
   @GrpcMethod('ServicoGamificacao', 'ObterRanking')
-  obterRanking() {
-    return { itens_ranking: [] };
+  async obterRanking(requisicao: { limite_resultado?: number }) {
+    const itens = await this.servico.obterRanking(requisicao.limite_resultado);
+    return {
+      itens_ranking: itens.map(item => ({
+        posicao_ranking: item.posicaoRanking,
+        nome_usuario: item.nomeUsuario,
+        quantidade_pontos: item.quantidadePontos,
+        nivel_gamificacao: item.nivelGamificacao,
+      })),
+    };
   }
 }

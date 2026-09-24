@@ -27,6 +27,10 @@ export class ServicoGamificacao {
     return this.progresso.obter(idUsuario);
   }
 
+  obterRanking(limiteResultado?: number) {
+    return this.progresso.ranking(limiteResultado);
+  }
+
   async concederPontos(idUsuario: string, quantidadePontosConcedidos: number) {
     const atual = await this.progresso.obter(idUsuario);
     const novo = this.aplicarPontos(atual.quantidadePontos, quantidadePontosConcedidos);
