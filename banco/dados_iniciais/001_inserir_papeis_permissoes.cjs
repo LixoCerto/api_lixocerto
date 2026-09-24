@@ -20,6 +20,13 @@ const permissoes = [
   ['10000000-0000-4000-8000-000000000010', 'auditoria:consultar', 'Consultar auditoria'],
 ];
 
+const permissoesPorPapel = {
+  usuario: ['materiais:ler', 'pontos_coleta:ler', 'questionarios:responder', 'gamificacao:ler', 'avaliacao_usabilidade:enviar'],
+  pesquisador: ['materiais:ler', 'pontos_coleta:ler', 'gamificacao:ler', 'avaliacao_usabilidade:consultar_agregados'],
+  revisor: ['materiais:ler', 'materiais:escrever', 'pontos_coleta:ler', 'pontos_coleta:aprovar', 'questionarios:administrar'],
+  administrador: permissoes.map(([, codigo]) => codigo),
+};
+
 module.exports = {
   async up(queryInterface) {
     const data = new Date();
@@ -40,8 +47,21 @@ module.exports = {
       lcr_prm_data_criacao: data,
       lcr_prm_data_atualizacao: data,
     })));
+
+    const idsPapeis = new Map(papeis.map(([id, nome]) => [nome, id]));
+    const idsPermissoes = new Map(permissoes.map(([id, codigo]) => [codigo, id]));
+    const relacoes = Object.entries(permissoesPorPapel).flatMap(([nomePapel, codigos], indicePapel) =>
+      codigos.map((codigo, indicePermissao) => ({
+        lcr_ppm_id_papel_permissao: `20000000-0000-4000-8000-${String(indicePapel + 1).padStart(6, '0')}${String(indicePermissao + 1).padStart(6, '0')}`,
+        lcr_ppm_id_papel: idsPapeis.get(nomePapel),
+        lcr_ppm_id_permissao: idsPermissoes.get(codigo),
+        lcr_ppm_data_atribuicao: data,
+      })),
+    );
+    await queryInterface.bulkInsert('lcr_papeis_permissoes', relacoes);
   },
   async down(queryInterface) {
+    await queryInterface.bulkDelete('lcr_papeis_permissoes', null, {});
     await queryInterface.bulkDelete('lcr_permissoes', null, {});
     await queryInterface.bulkDelete('lcr_papeis', null, {});
   },

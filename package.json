@@ -7,12 +7,15 @@
     "desenvolver": "tsx watch src/principal.ts",
     "tipos": "tsc --noEmit",
     "compilar": "tsc -p tsconfig.compilacao.json",
-    "testar": "vitest run",
+    "testar": "vitest run testes/unidade",
+    "testar:integracao": "vitest run testes/integracao",
     "formatar": "prettier --write .",
     "contratos:validar": "buf lint",
     "contratos:gerar": "buf generate",
     "migrar": "sequelize-cli db:migrate --config configuracao_sequelize.cjs --migrations-path banco/migracoes",
-    "desfazer:migracao": "sequelize-cli db:migrate:undo --config configuracao_sequelize.cjs --migrations-path banco/migracoes"
+    "desfazer:migracao": "sequelize-cli db:migrate:undo --config configuracao_sequelize.cjs --migrations-path banco/migracoes",
+    "semear": "sequelize-cli db:seed:all --config configuracao_sequelize.cjs --seeders-path banco/dados_iniciais",
+    "integracao:banco": "pnpm migrar && pnpm semear"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.13.4",
