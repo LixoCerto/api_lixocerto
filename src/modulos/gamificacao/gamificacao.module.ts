@@ -1,4 +1,8 @@
 import { Module } from '@nestjs/common';
+import { ServicoGamificacao } from './gamificacao.servico.js';
 
-@Module({})
+@Module({
+  providers: [ServicoGamificacao],
+  exports: [ServicoGamificacao],
+})
 export class ModuloGamificacao {}

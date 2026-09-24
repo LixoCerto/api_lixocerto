@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { FiltroPontosColeta, RepositorioPontosColeta } from './pontos_coleta.repositorio.js';
 
 @Injectable()
 export class ServicoPontosColeta {
-  // Regras de negocio do modulo serao implementadas nesta camada.
+  constructor(private readonly repositorio: RepositorioPontosColeta) {}
+
+  listar(filtro: FiltroPontosColeta) {
+    return this.repositorio.listar(filtro);
+  }
 }

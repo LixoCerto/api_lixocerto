@@ -1,10 +1,15 @@
 import { Sequelize } from 'sequelize';
+import { inicializarModeloMaterial } from './modelos/material.modelo.js';
+import { inicializarModeloPapel } from './modelos/papel.modelo.js';
+import { inicializarModeloPermissao } from './modelos/permissao.modelo.js';
+import { inicializarModeloPontoColeta } from './modelos/ponto_coleta.modelo.js';
+import { inicializarModeloUsuario } from './modelos/usuario.modelo.js';
 
 export function criarConexaoBanco(): Sequelize | null {
   const url = process.env.URL_BANCO_DADOS;
   if (!url) return null;
 
-  return new Sequelize(url, {
+  const sequelize = new Sequelize(url, {
     dialect: 'postgres',
     logging: false,
     dialectOptions: process.env.AMBIENTE_EXECUCAO === 'producao'
@@ -12,4 +17,12 @@ export function criarConexaoBanco(): Sequelize | null {
       : undefined,
     pool: { max: 10, min: 0, idle: 10000, acquire: 30000 },
   });
+
+  inicializarModeloUsuario(sequelize);
+  inicializarModeloPapel(sequelize);
+  inicializarModeloPermissao(sequelize);
+  inicializarModeloMaterial(sequelize);
+  inicializarModeloPontoColeta(sequelize);
+
+  return sequelize;
 }
