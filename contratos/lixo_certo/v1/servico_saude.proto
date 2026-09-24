@@ -1,12 +1,14 @@
 syntax = "proto3";
 package lixo_certo.v1;
 
-message VerificarSaudeRequisicao {
-}
+message VerificarSaudeRequisicao {}
 
 message VerificarSaudeResposta {
   string status_servico = 1;
   string data_verificacao = 2;
+  string status_banco = 3;
+  string status_redis = 4;
+  string versao_api = 5;
 }
 
 service ServicoSaude {

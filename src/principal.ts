@@ -2,9 +2,14 @@ import 'reflect-metadata';
 import { join } from 'node:path';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { FiltroErroGrpc } from './comum/erros/filtro_erro_grpc.js';
+import { InterceptorObservabilidade } from './comum/observabilidade/interceptor_grpc.js';
+import { registrarEvento } from './comum/observabilidade/registrador.js';
+import { validarAmbiente } from './configuracao/validacao_ambiente.js';
 import { ModuloPrincipal } from './modulo_principal.js';
 
 async function iniciarAplicacao(): Promise<void> {
+  validarAmbiente(process.env);
   const aplicacao = await NestFactory.createMicroservice<MicroserviceOptions>(ModuloPrincipal, {
     transport: Transport.GRPC,
     options: {
@@ -35,6 +40,13 @@ async function iniciarAplicacao(): Promise<void> {
     },
   });
 
+  aplicacao.useGlobalInterceptors(new InterceptorObservabilidade());
+  aplicacao.useGlobalFilters(new FiltroErroGrpc());
+  aplicacao.enableShutdownHooks();
+  registrarEvento('api_inicializada', {
+    ambiente: process.env.AMBIENTE_EXECUCAO ?? 'desenvolvimento',
+    porta: process.env.PORTA_GRPC ?? '50051',
+  });
   await aplicacao.listen();
 }
 

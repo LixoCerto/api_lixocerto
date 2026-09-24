@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file lixo_certo/v1/servico_saude.proto.
  */
 export const file_lixo_certo_v1_servico_saude: GenFile = /*@__PURE__*/
-  fileDesc("CiFsaXhvX2NlcnRvL3YxL3NlcnZpY29fc2F1ZGUucHJvdG8SDWxpeG9fY2VydG8udjEiGgoYVmVyaWZpY2FyU2F1ZGVSZXF1aXNpY2FvIkoKFlZlcmlmaWNhclNhdWRlUmVzcG9zdGESFgoOc3RhdHVzX3NlcnZpY28YASABKAkSGAoQZGF0YV92ZXJpZmljYWNhbxgCIAEoCTJrCgxTZXJ2aWNvU2F1ZGUSWwoJVmVyaWZpY2FyEicubGl4b19jZXJ0by52MS5WZXJpZmljYXJTYXVkZVJlcXVpc2ljYW8aJS5saXhvX2NlcnRvLnYxLlZlcmlmaWNhclNhdWRlUmVzcG9zdGFiBnByb3RvMw");
+  fileDesc("CiFsaXhvX2NlcnRvL3YxL3NlcnZpY29fc2F1ZGUucHJvdG8SDWxpeG9fY2VydG8udjEiGgoYVmVyaWZpY2FyU2F1ZGVSZXF1aXNpY2FvIooBChZWZXJpZmljYXJTYXVkZVJlc3Bvc3RhEhYKDnN0YXR1c19zZXJ2aWNvGAEgASgJEhgKEGRhdGFfdmVyaWZpY2FjYW8YAiABKAkSFAoMc3RhdHVzX2JhbmNvGAMgASgJEhQKDHN0YXR1c19yZWRpcxgEIAEoCRISCgp2ZXJzYW9fYXBpGAUgASgJMmsKDFNlcnZpY29TYXVkZRJbCglWZXJpZmljYXISJy5saXhvX2NlcnRvLnYxLlZlcmlmaWNhclNhdWRlUmVxdWlzaWNhbxolLmxpeG9fY2VydG8udjEuVmVyaWZpY2FyU2F1ZGVSZXNwb3N0YWIGcHJvdG8z");
 
 /**
  * @generated from message lixo_certo.v1.VerificarSaudeRequisicao
@@ -38,6 +38,21 @@ export type VerificarSaudeResposta = Message<"lixo_certo.v1.VerificarSaudeRespos
    * @generated from field: string data_verificacao = 2;
    */
   dataVerificacao: string;
+
+  /**
+   * @generated from field: string status_banco = 3;
+   */
+  statusBanco: string;
+
+  /**
+   * @generated from field: string status_redis = 4;
+   */
+  statusRedis: string;
+
+  /**
+   * @generated from field: string versao_api = 5;
+   */
+  versaoApi: string;
 };
 
 /**
