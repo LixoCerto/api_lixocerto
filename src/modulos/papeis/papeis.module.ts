@@ -1,4 +1,8 @@
 import { Module } from '@nestjs/common';
+import { ServicoPapeis } from './papeis.servico.js';
 
-@Module({})
+@Module({
+  providers: [ServicoPapeis],
+  exports: [ServicoPapeis],
+})
 export class ModuloPapeis {}

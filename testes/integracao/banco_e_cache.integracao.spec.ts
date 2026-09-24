@@ -11,6 +11,7 @@ import { ModeloMaterial } from '../../src/infraestrutura/banco/modelos/material.
 import { ModeloPontoColeta } from '../../src/infraestrutura/banco/modelos/ponto_coleta.modelo.js';
 import { ModeloUsuario } from '../../src/infraestrutura/banco/modelos/usuario.modelo.js';
 import { ModeloUsuarioDesafio } from '../../src/infraestrutura/banco/modelos/usuario_desafio.modelo.js';
+import { ServicoAdministracao } from '../../src/modulos/administracao/administracao.servico.js';
 import { RepositorioAuditoria } from '../../src/modulos/auditoria/auditoria.repositorio.js';
 import { ServicoAuditoria } from '../../src/modulos/auditoria/auditoria.servico.js';
 import { RepositorioProgresso } from '../../src/modulos/gamificacao/progresso.repositorio.js';
@@ -20,6 +21,8 @@ import { ServicoDesafios } from '../../src/modulos/desafios/desafios.servico.js'
 import { RepositorioMateriais } from '../../src/modulos/materiais/materiais.repositorio.js';
 import { RepositorioPontosColeta } from '../../src/modulos/pontos_coleta/pontos_coleta.repositorio.js';
 import { ServicoUsuarios } from '../../src/modulos/usuarios/usuarios.servico.js';
+import { ServicoPapeis } from '../../src/modulos/papeis/papeis.servico.js';
+import { ServicoPermissoes } from '../../src/modulos/permissoes/permissoes.servico.js';
 
 const urlBanco = process.env.URL_BANCO_DADOS_TESTE ?? process.env.URL_BANCO_DADOS;
 const urlRedis = process.env.URL_REDIS_TESTE ?? process.env.URL_REDIS;
@@ -110,6 +113,12 @@ bancoDescribe('integração PostgreSQL', () => {
     const pontos = await new RepositorioPontosColeta(banco).listar({ cidadePontoColeta: 'João Pessoa' });
     expect(pontos.map(ponto => ponto.lcr_pco_id_ponto_coleta)).toContain(verificado.lcr_pco_id_ponto_coleta);
     expect(pontos.map(ponto => ponto.lcr_pco_id_ponto_coleta)).not.toContain(pendente.lcr_pco_id_ponto_coleta);
+
+    const resumo = await new ServicoAdministracao(banco).obterResumo();
+    expect(resumo.quantidadeUsuarios).toBeGreaterThanOrEqual(1);
+    expect(resumo.quantidadeMateriais).toBeGreaterThanOrEqual(1);
+    expect(await new ServicoPapeis(banco).listarAtivos()).toHaveLength(4);
+    expect(await new ServicoPermissoes(banco).listarAtivas()).toHaveLength(11);
   });
 
   it('processa desafio, concede pontos na conclusão e grava auditoria', async () => {

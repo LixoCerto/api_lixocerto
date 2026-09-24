@@ -20,6 +20,7 @@ const permissoes = [
   ['10000000-0000-4000-8000-000000000008', 'avaliacao_usabilidade:enviar', 'Enviar avaliacao de usabilidade'],
   ['10000000-0000-4000-8000-000000000009', 'avaliacao_usabilidade:consultar_agregados', 'Consultar resultados agregados'],
   ['10000000-0000-4000-8000-000000000010', 'auditoria:consultar', 'Consultar auditoria'],
+  ['10000000-0000-4000-8000-000000000011', 'administracao:consultar', 'Consultar resumo administrativo'],
 ];
 
 const permissoesPorPapel = {
