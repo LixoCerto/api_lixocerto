@@ -1,4 +1,6 @@
 import { Sequelize } from 'sequelize';
+import { inicializarModeloAcaoSustentavel } from './modelos/acao_sustentavel.modelo.js';
+import { inicializarModeloDesafio } from './modelos/desafio.modelo.js';
 import { inicializarModeloMaterial } from './modelos/material.modelo.js';
 import { inicializarModeloAlternativa } from './modelos/alternativa.modelo.js';
 import { inicializarModeloPapel } from './modelos/papel.modelo.js';
@@ -7,9 +9,11 @@ import { inicializarModeloPontoColeta } from './modelos/ponto_coleta.modelo.js';
 import { inicializarModeloProgressoUsuario } from './modelos/progresso_usuario.modelo.js';
 import { inicializarModeloQuestao } from './modelos/questao.modelo.js';
 import { inicializarModeloRespostaSus } from './modelos/resposta_sus.modelo.js';
+import { inicializarModeloRegistroAuditoria } from './modelos/registro_auditoria.modelo.js';
 import { inicializarModeloSessaoAvaliacao } from './modelos/sessao_avaliacao.modelo.js';
 import { inicializarModeloTentativaQuestionario } from './modelos/tentativa_questionario.modelo.js';
 import { inicializarModeloUsuario } from './modelos/usuario.modelo.js';
+import { inicializarModeloUsuarioDesafio } from './modelos/usuario_desafio.modelo.js';
 
 export function criarConexaoBanco(): Sequelize | null {
   const url = process.env.URL_BANCO_DADOS;
@@ -35,6 +39,10 @@ export function criarConexaoBanco(): Sequelize | null {
   inicializarModeloProgressoUsuario(sequelize);
   inicializarModeloSessaoAvaliacao(sequelize);
   inicializarModeloRespostaSus(sequelize);
+  inicializarModeloDesafio(sequelize);
+  inicializarModeloUsuarioDesafio(sequelize);
+  inicializarModeloAcaoSustentavel(sequelize);
+  inicializarModeloRegistroAuditoria(sequelize);
 
   return sequelize;
 }

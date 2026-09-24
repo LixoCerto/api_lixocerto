@@ -1,0 +1,39 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message RegistrarEventoAuditoriaRequisicao {
+  string tipo_evento = 1;
+  string recurso_evento = 2;
+  string id_recurso = 3;
+  string endereco_ip = 4;
+  string id_correlacao = 5;
+  string detalhes_evento_json = 6;
+}
+
+message RegistrarEventoAuditoriaResposta {
+  bool evento_aceito = 1;
+  string id_registro_auditoria = 2;
+}
+
+message ListarAuditoriaRequisicao {
+  string tipo_evento = 1;
+  int32 limite_resultado = 2;
+}
+
+message RegistroAuditoriaResposta {
+  string id_registro_auditoria = 1;
+  string tipo_evento = 2;
+  string recurso_evento = 3;
+  string id_correlacao = 4;
+  string detalhes_evento_json = 5;
+  string data_criacao = 6;
+}
+
+message ListarAuditoriaResposta {
+  repeated RegistroAuditoriaResposta registros = 1;
+}
+
+service ServicoAuditoria {
+  rpc RegistrarEventoAuditoria(RegistrarEventoAuditoriaRequisicao) returns (RegistrarEventoAuditoriaResposta);
+  rpc ListarAuditoria(ListarAuditoriaRequisicao) returns (ListarAuditoriaResposta);
+}

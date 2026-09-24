@@ -4,9 +4,19 @@ import { Redis } from 'ioredis';
 import { criarConexaoBanco } from '../../src/infraestrutura/banco/conexao.js';
 import { criarConexaoRedis } from '../../src/infraestrutura/cache/conexao_redis.js';
 import { ServicoCache } from '../../src/infraestrutura/cache/cache.servico.js';
+import { ServicoRateLimit } from '../../src/infraestrutura/cache/rate_limit.servico.js';
+import { ModeloAcaoSustentavel } from '../../src/infraestrutura/banco/modelos/acao_sustentavel.modelo.js';
+import { ModeloDesafio } from '../../src/infraestrutura/banco/modelos/desafio.modelo.js';
 import { ModeloMaterial } from '../../src/infraestrutura/banco/modelos/material.modelo.js';
 import { ModeloPontoColeta } from '../../src/infraestrutura/banco/modelos/ponto_coleta.modelo.js';
 import { ModeloUsuario } from '../../src/infraestrutura/banco/modelos/usuario.modelo.js';
+import { ModeloUsuarioDesafio } from '../../src/infraestrutura/banco/modelos/usuario_desafio.modelo.js';
+import { RepositorioAuditoria } from '../../src/modulos/auditoria/auditoria.repositorio.js';
+import { ServicoAuditoria } from '../../src/modulos/auditoria/auditoria.servico.js';
+import { RepositorioProgresso } from '../../src/modulos/gamificacao/progresso.repositorio.js';
+import { ServicoGamificacao } from '../../src/modulos/gamificacao/gamificacao.servico.js';
+import { RepositorioDesafios } from '../../src/modulos/desafios/desafios.repositorio.js';
+import { ServicoDesafios } from '../../src/modulos/desafios/desafios.servico.js';
 import { RepositorioMateriais } from '../../src/modulos/materiais/materiais.repositorio.js';
 import { RepositorioPontosColeta } from '../../src/modulos/pontos_coleta/pontos_coleta.repositorio.js';
 import { ServicoUsuarios } from '../../src/modulos/usuarios/usuarios.servico.js';
@@ -31,6 +41,8 @@ afterAll(async () => {
     if (idsPontos.length) await ModeloPontoColeta.destroy({ where: { lcr_pco_id_ponto_coleta: idsPontos } });
     if (idsMateriais.length) await ModeloMaterial.destroy({ where: { lcr_mat_id_material: idsMateriais } });
     for (const idUsuario of idsUsuarios) {
+      await ModeloAcaoSustentavel.destroy({ where: { lcr_ast_id_usuario: idUsuario } });
+      await ModeloUsuarioDesafio.destroy({ where: { lcr_ude_id_usuario: idUsuario } });
       await banco.query('DELETE FROM lcr_usuarios_papeis WHERE lcr_upr_id_usuario = :idUsuario', { replacements: { idUsuario } });
       await ModeloUsuario.destroy({ where: { lcr_usr_id_usuario: idUsuario } });
     }
@@ -99,6 +111,49 @@ bancoDescribe('integração PostgreSQL', () => {
     expect(pontos.map(ponto => ponto.lcr_pco_id_ponto_coleta)).toContain(verificado.lcr_pco_id_ponto_coleta);
     expect(pontos.map(ponto => ponto.lcr_pco_id_ponto_coleta)).not.toContain(pendente.lcr_pco_id_ponto_coleta);
   });
+
+  it('processa desafio, concede pontos na conclusão e grava auditoria', async () => {
+    const idExterno = `desafio-${randomUUID()}`;
+    const identidade = await new ServicoUsuarios(banco).sincronizarUsuario({
+      idExterno,
+      nome: 'Usuário Desafio',
+      email: `${idExterno}@exemplo.test`,
+      papeis: [],
+      permissoes: [],
+    });
+    const usuario = await ModeloUsuario.findOne({ where: { lcr_usr_id_externo: idExterno } });
+    expect(usuario).toBeTruthy();
+    idsUsuarios.push(usuario!.lcr_usr_id_usuario);
+    expect(identidade.permissoes).toContain('gamificacao:ler');
+
+    const desafio = await ModeloDesafio.findOne({ where: { lcr_des_tipo_acao: 'separacao_residuos', lcr_des_status_desafio: 'publicado' } });
+    expect(desafio).toBeTruthy();
+    const auditoria = new ServicoAuditoria(new RepositorioAuditoria(banco));
+    const servico = new ServicoDesafios(
+      new RepositorioDesafios(banco),
+      new ServicoGamificacao(new RepositorioProgresso(banco)),
+      auditoria,
+    );
+    const participacao = await servico.participar(usuario!.lcr_usr_id_usuario, desafio!.lcr_des_id_desafio, 'correlacao-desafio');
+    expect(participacao?.statusParticipacao).toBe('participando');
+    for (let indice = 0; indice < desafio!.lcr_des_meta_quantidade; indice += 1) {
+      const resultado = await servico.registrarAcao(usuario!.lcr_usr_id_usuario, {
+        idDesafio: desafio!.lcr_des_id_desafio,
+        tipoAcao: 'separacao_residuos',
+        descricaoAcao: `Ação de integração ${indice + 1}`,
+      }, `correlacao-acao-${indice}`);
+      expect(resultado).toBeTruthy();
+      if (indice < desafio!.lcr_des_meta_quantidade - 1) expect(resultado?.desafioConcluido).toBe(false);
+      if (indice === desafio!.lcr_des_meta_quantidade - 1) {
+        expect(resultado?.desafioConcluido).toBe(true);
+        expect(resultado?.quantidadePontos).toBe(desafio!.lcr_des_quantidade_pontos);
+      }
+    }
+    const progresso = await new ServicoGamificacao(new RepositorioProgresso(banco)).obterProgresso(usuario!.lcr_usr_id_usuario);
+    expect(progresso.quantidadePontos).toBe(desafio!.lcr_des_quantidade_pontos);
+    const eventos = await auditoria.listar('desafio_concluido', 10);
+    expect(eventos.some(evento => evento.lcr_aud_id_usuario === usuario!.lcr_usr_id_usuario)).toBe(true);
+  });
 });
 
 redisDescribe('integração Redis', () => {
@@ -110,5 +165,14 @@ redisDescribe('integração Redis', () => {
     expect(await cache.remover(chave)).toBe(true);
     expect(await cache.obter(chave)).toBeNull();
     await expect(cache.definir(chave, 'invalido', 0)).rejects.toThrow('TTL do cache');
+  });
+
+  it('bloqueia a terceira operação acima do limite da janela', async () => {
+    const rateLimit = new ServicoRateLimit(redis);
+    const chave = `integracao:rate:${randomUUID()}`;
+    await expect(rateLimit.permitir(chave, 2, 60)).resolves.toMatchObject({ permitido: true, restante: 1, disponivel: true });
+    await expect(rateLimit.permitir(chave, 2, 60)).resolves.toMatchObject({ permitido: true, restante: 0, disponivel: true });
+    await expect(rateLimit.permitir(chave, 2, 60)).resolves.toMatchObject({ permitido: false, restante: 0, disponivel: true });
+    await cache.remover(chave);
   });
 });

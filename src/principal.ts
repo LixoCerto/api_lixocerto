@@ -17,6 +17,8 @@ async function iniciarAplicacao(): Promise<void> {
         join(process.cwd(), 'contratos/lixo_certo/v1/servico_questionarios.proto'),
         join(process.cwd(), 'contratos/lixo_certo/v1/servico_gamificacao.proto'),
         join(process.cwd(), 'contratos/lixo_certo/v1/servico_avaliacao_usabilidade.proto'),
+        join(process.cwd(), 'contratos/lixo_certo/v1/servico_desafios.proto'),
+        join(process.cwd(), 'contratos/lixo_certo/v1/servico_auditoria.proto'),
         join(process.cwd(), 'contratos/lixo_certo/v1/servico_administracao.proto'),
       ],
       url: `0.0.0.0:${process.env.PORTA_GRPC ?? '50051'}`,

@@ -1,5 +1,7 @@
 'use strict';
 
+const { QueryTypes } = require('sequelize');
+
 const papeis = [
   ['00000000-0000-4000-8000-000000000001', 'usuario', 'Usuario comum da plataforma'],
   ['00000000-0000-4000-8000-000000000002', 'pesquisador', 'Consulta resultados agregados da pesquisa'],
@@ -30,26 +32,48 @@ const permissoesPorPapel = {
 module.exports = {
   async up(queryInterface) {
     const data = new Date();
-    await queryInterface.bulkInsert('lcr_papeis', papeis.map(([id, nome, descricao]) => ({
-      lcr_pap_id_papel: id,
-      lcr_pap_nome_papel: nome,
-      lcr_pap_descricao_papel: descricao,
-      lcr_pap_status_papel: 'ativo',
-      lcr_pap_data_criacao: data,
-      lcr_pap_data_atualizacao: data,
-    })));
-    await queryInterface.bulkInsert('lcr_permissoes', permissoes.map(([id, codigo, nome]) => ({
-      lcr_prm_id_permissao: id,
-      lcr_prm_codigo_permissao: codigo,
-      lcr_prm_nome_permissao: nome,
-      lcr_prm_descricao_permissao: nome,
-      lcr_prm_status_permissao: 'ativo',
-      lcr_prm_data_criacao: data,
-      lcr_prm_data_atualizacao: data,
-    })));
+    const papeisExistentes = await queryInterface.sequelize.query(
+      'SELECT lcr_pap_id_papel FROM lcr_papeis',
+      { type: QueryTypes.SELECT },
+    );
+    const permissoesExistentes = await queryInterface.sequelize.query(
+      'SELECT lcr_prm_id_permissao FROM lcr_permissoes',
+      { type: QueryTypes.SELECT },
+    );
+    const idsPapeisExistentes = new Set(papeisExistentes.map(item => item.lcr_pap_id_papel));
+    const idsPermissoesExistentes = new Set(permissoesExistentes.map(item => item.lcr_prm_id_permissao));
+
+    const papeisNovos = papeis
+      .filter(([id]) => !idsPapeisExistentes.has(id))
+      .map(([id, nome, descricao]) => ({
+        lcr_pap_id_papel: id,
+        lcr_pap_nome_papel: nome,
+        lcr_pap_descricao_papel: descricao,
+        lcr_pap_status_papel: 'ativo',
+        lcr_pap_data_criacao: data,
+        lcr_pap_data_atualizacao: data,
+      }));
+    const permissoesNovas = permissoes
+      .filter(([id]) => !idsPermissoesExistentes.has(id))
+      .map(([id, codigo, nome]) => ({
+        lcr_prm_id_permissao: id,
+        lcr_prm_codigo_permissao: codigo,
+        lcr_prm_nome_permissao: nome,
+        lcr_prm_descricao_permissao: nome,
+        lcr_prm_status_permissao: 'ativo',
+        lcr_prm_data_criacao: data,
+        lcr_prm_data_atualizacao: data,
+      }));
+    if (papeisNovos.length) await queryInterface.bulkInsert('lcr_papeis', papeisNovos);
+    if (permissoesNovas.length) await queryInterface.bulkInsert('lcr_permissoes', permissoesNovas);
 
     const idsPapeis = new Map(papeis.map(([id, nome]) => [nome, id]));
     const idsPermissoes = new Map(permissoes.map(([id, codigo]) => [codigo, id]));
+    const relacoesExistentes = await queryInterface.sequelize.query(
+      'SELECT lcr_ppm_id_papel, lcr_ppm_id_permissao FROM lcr_papeis_permissoes',
+      { type: QueryTypes.SELECT },
+    );
+    const chavesExistentes = new Set(relacoesExistentes.map(item => `${item.lcr_ppm_id_papel}:${item.lcr_ppm_id_permissao}`));
     const relacoes = Object.entries(permissoesPorPapel).flatMap(([nomePapel, codigos], indicePapel) =>
       codigos.map((codigo, indicePermissao) => ({
         lcr_ppm_id_papel_permissao: `20000000-0000-4000-8000-${String(indicePapel + 1).padStart(6, '0')}${String(indicePermissao + 1).padStart(6, '0')}`,
@@ -57,8 +81,8 @@ module.exports = {
         lcr_ppm_id_permissao: idsPermissoes.get(codigo),
         lcr_ppm_data_atribuicao: data,
       })),
-    );
-    await queryInterface.bulkInsert('lcr_papeis_permissoes', relacoes);
+    ).filter(relacao => !chavesExistentes.has(`${relacao.lcr_ppm_id_papel}:${relacao.lcr_ppm_id_permissao}`));
+    if (relacoes.length) await queryInterface.bulkInsert('lcr_papeis_permissoes', relacoes);
   },
   async down(queryInterface) {
     await queryInterface.bulkDelete('lcr_papeis_permissoes', null, {});

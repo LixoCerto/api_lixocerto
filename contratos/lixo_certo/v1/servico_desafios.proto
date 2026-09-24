@@ -1,0 +1,53 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message ListarDesafiosRequisicao {
+  int32 numero_pagina = 1;
+  int32 tamanho_pagina = 2;
+}
+
+message DesafioResposta {
+  string id_desafio = 1;
+  string nome_desafio = 2;
+  string descricao_desafio = 3;
+  string tipo_acao = 4;
+  int32 meta_quantidade = 5;
+  int32 quantidade_pontos = 6;
+  string status_desafio = 7;
+  int32 quantidade_progresso = 8;
+  string status_participacao = 9;
+}
+
+message ListarDesafiosResposta {
+  repeated DesafioResposta desafios = 1;
+}
+
+message ParticiparDesafioRequisicao {
+  string id_desafio = 1;
+}
+
+message ParticiparDesafioResposta {
+  bool participacao_aceita = 1;
+  DesafioResposta desafio = 2;
+  string mensagem_resultado = 3;
+}
+
+message RegistrarAcaoSustentavelRequisicao {
+  string id_desafio = 1;
+  string tipo_acao = 2;
+  string descricao_acao = 3;
+}
+
+message RegistrarAcaoSustentavelResposta {
+  bool acao_aceita = 1;
+  int32 quantidade_pontos = 2;
+  int32 quantidade_progresso = 3;
+  bool desafio_concluido = 4;
+  string mensagem_resultado = 5;
+}
+
+service ServicoDesafios {
+  rpc ListarDesafios(ListarDesafiosRequisicao) returns (ListarDesafiosResposta);
+  rpc ParticiparDesafio(ParticiparDesafioRequisicao) returns (ParticiparDesafioResposta);
+  rpc RegistrarAcaoSustentavel(RegistrarAcaoSustentavelRequisicao) returns (RegistrarAcaoSustentavelResposta);
+}
