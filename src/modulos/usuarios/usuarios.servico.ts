@@ -7,6 +7,12 @@ import { ModeloUsuario } from '../../infraestrutura/banco/modelos/usuario.modelo
 export class ServicoUsuarios {
   constructor(@Inject('CONEXAO_BANCO_DADOS') private readonly banco: Sequelize | null) {}
 
+  async obterIdInterno(idExterno: string): Promise<string | null> {
+    if (!this.banco) return null;
+    const usuario = await ModeloUsuario.findOne({ where: { lcr_usr_id_externo: idExterno } });
+    return usuario?.lcr_usr_id_usuario ?? null;
+  }
+
   async sincronizarUsuario(identidade: UsuarioAutenticado): Promise<UsuarioAutenticado> {
     if (!this.banco) return identidade;
 

@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { ServicoGamificacao } from '../../src/modulos/gamificacao/gamificacao.servico.js';
+import { RepositorioProgresso } from '../../src/modulos/gamificacao/progresso.repositorio.js';
 
 describe('ServicoGamificacao', () => {
-  const servico = new ServicoGamificacao();
+  const servico = new ServicoGamificacao({} as RepositorioProgresso);
 
   it('calcula níveis sem misturar gamificação com autorização', () => {
     expect(servico.calcularNivel(0)).toBe('iniciante');
