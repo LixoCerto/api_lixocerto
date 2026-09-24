@@ -1,0 +1,27 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message ListarMateriaisRequisicao {
+  string texto_pesquisa = 1;
+  string categoria_material = 2;
+  int32 numero_pagina = 3;
+  int32 tamanho_pagina = 4;
+}
+
+message MaterialResposta {
+  string id_material = 1;
+  string nome_material = 2;
+  string categoria_material = 3;
+  string instrucao_descarte = 4;
+  string observacao_impacto = 5;
+  string status_material = 6;
+}
+
+message ListarMateriaisResposta {
+  repeated MaterialResposta materiais = 1;
+  int32 quantidade_total = 2;
+}
+
+service ServicoMateriais {
+  rpc ListarMateriais(ListarMateriaisRequisicao) returns (ListarMateriaisResposta);
+}

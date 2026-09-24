@@ -1,0 +1,14 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message VerificarSaudeRequisicao {
+}
+
+message VerificarSaudeResposta {
+  string status_servico = 1;
+  string data_verificacao = 2;
+}
+
+service ServicoSaude {
+  rpc Verificar(VerificarSaudeRequisicao) returns (VerificarSaudeResposta);
+}

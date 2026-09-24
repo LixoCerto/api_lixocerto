@@ -1,0 +1,17 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message ObterIdentidadeAtualRequisicao {
+}
+
+message ObterIdentidadeAtualResposta {
+  string id_usuario = 1;
+  string nome_usuario = 2;
+  string email_usuario = 3;
+  repeated string papeis_usuario = 4;
+  repeated string permissoes_usuario = 5;
+}
+
+service ServicoAutenticacao {
+  rpc ObterIdentidadeAtual(ObterIdentidadeAtualRequisicao) returns (ObterIdentidadeAtualResposta);
+}

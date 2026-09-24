@@ -1,0 +1,40 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message ListarQuestoesRequisicao {
+  int32 numero_pagina = 1;
+  int32 tamanho_pagina = 2;
+}
+
+message AlternativaResposta {
+  string id_alternativa = 1;
+  string texto_alternativa = 2;
+  int32 ordem_exibicao = 3;
+}
+
+message QuestaoResposta {
+  string id_questao = 1;
+  string enunciado_questao = 2;
+  int32 quantidade_pontos = 3;
+  repeated AlternativaResposta alternativas = 4;
+}
+
+message ListarQuestoesResposta {
+  repeated QuestaoResposta questoes = 1;
+}
+
+message EnviarRespostaQuestionarioRequisicao {
+  string id_questao = 1;
+  string id_alternativa = 2;
+}
+
+message EnviarRespostaQuestionarioResposta {
+  bool indica_correta = 1;
+  int32 quantidade_pontos = 2;
+  string explicacao_resposta = 3;
+}
+
+service ServicoQuestionarios {
+  rpc ListarQuestoes(ListarQuestoesRequisicao) returns (ListarQuestoesResposta);
+  rpc EnviarRespostaQuestionario(EnviarRespostaQuestionarioRequisicao) returns (EnviarRespostaQuestionarioResposta);
+}

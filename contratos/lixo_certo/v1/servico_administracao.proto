@@ -1,0 +1,16 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message ObterResumoAdministrativoRequisicao {
+}
+
+message ObterResumoAdministrativoResposta {
+  int32 quantidade_usuarios = 1;
+  int32 quantidade_materiais = 2;
+  int32 quantidade_pontos_pendentes = 3;
+  int32 quantidade_avaliacoes = 4;
+}
+
+service ServicoAdministracao {
+  rpc ObterResumoAdministrativo(ObterResumoAdministrativoRequisicao) returns (ObterResumoAdministrativoResposta);
+}

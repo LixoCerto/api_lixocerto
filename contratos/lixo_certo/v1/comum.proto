@@ -1,0 +1,11 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message Nenhum {
+}
+
+message ErroResposta {
+  string codigo_erro = 1;
+  string mensagem = 2;
+  string id_correlacao = 3;
+}

@@ -1,0 +1,50 @@
+{
+  "name": "api-lixo-certo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "desenvolver": "tsx watch src/principal.ts",
+    "tipos": "tsc --noEmit",
+    "compilar": "tsc -p tsconfig.compilacao.json",
+    "testar": "vitest run",
+    "formatar": "prettier --write .",
+    "contratos:validar": "buf lint",
+    "contratos:gerar": "buf generate",
+    "migrar": "sequelize-cli db:migrate --config configuracao_sequelize.cjs --migrations-path banco/migracoes",
+    "desfazer:migracao": "sequelize-cli db:migrate:undo --config configuracao_sequelize.cjs --migrations-path banco/migracoes"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.13.4",
+    "@grpc/proto-loader": "^0.7.15",
+    "@nestjs/common": "^11.1.6",
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/core": "^11.1.6",
+    "@nestjs/microservices": "^11.1.6",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "dotenv": "^18.0.3",
+    "ioredis": "^5.7.0",
+    "jose": "^6.1.0",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "pino": "^9.9.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "sequelize": "^6.37.7",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "^1.73.0",
+    "@bufbuild/protobuf": "^2.15.0",
+    "@bufbuild/protoc-gen-es": "^2.15.0",
+    "@nestjs/testing": "^11.1.6",
+    "@types/node": "^24.7.2",
+    "prettier": "^3.6.2",
+    "sequelize-cli": "^6.6.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "packageManager": "pnpm@10.4.1"
+}

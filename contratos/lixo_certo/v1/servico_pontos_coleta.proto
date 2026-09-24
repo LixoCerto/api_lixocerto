@@ -1,0 +1,27 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message ListarPontosColetaRequisicao {
+  string cidade_ponto_coleta = 1;
+  string categoria_material = 2;
+}
+
+message PontoColetaResposta {
+  string id_ponto_coleta = 1;
+  string nome_ponto_coleta = 2;
+  string endereco_ponto_coleta = 3;
+  string cidade_ponto_coleta = 4;
+  string estado_ponto_coleta = 5;
+  double latitude_ponto_coleta = 6;
+  double longitude_ponto_coleta = 7;
+  string status_verificacao = 8;
+  repeated string categorias_aceitas = 9;
+}
+
+message ListarPontosColetaResposta {
+  repeated PontoColetaResposta pontos_coleta = 1;
+}
+
+service ServicoPontosColeta {
+  rpc ListarPontosColeta(ListarPontosColetaRequisicao) returns (ListarPontosColetaResposta);
+}

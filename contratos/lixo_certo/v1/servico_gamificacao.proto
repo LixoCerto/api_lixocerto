@@ -1,0 +1,32 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message ObterProgressoUsuarioRequisicao {
+}
+
+message ObterProgressoUsuarioResposta {
+  int32 quantidade_pontos = 1;
+  string nivel_gamificacao = 2;
+  int32 sequencia_dias = 3;
+  int32 quantidade_conquistas = 4;
+}
+
+message ObterRankingRequisicao {
+  int32 limite_resultado = 1;
+}
+
+message ItemRankingResposta {
+  int32 posicao_ranking = 1;
+  string nome_usuario = 2;
+  int32 quantidade_pontos = 3;
+  string nivel_gamificacao = 4;
+}
+
+message ObterRankingResposta {
+  repeated ItemRankingResposta itens_ranking = 1;
+}
+
+service ServicoGamificacao {
+  rpc ObterProgressoUsuario(ObterProgressoUsuarioRequisicao) returns (ObterProgressoUsuarioResposta);
+  rpc ObterRanking(ObterRankingRequisicao) returns (ObterRankingResposta);
+}

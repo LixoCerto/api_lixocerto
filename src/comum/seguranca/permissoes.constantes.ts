@@ -1,0 +1,12 @@
+export const permissoes = {
+  materiaisLer: 'materiais:ler',
+  materiaisEscrever: 'materiais:escrever',
+  pontosColetaLer: 'pontos_coleta:ler',
+  pontosColetaAprovar: 'pontos_coleta:aprovar',
+  questionariosResponder: 'questionarios:responder',
+  questionariosAdministrar: 'questionarios:administrar',
+  gamificacaoLer: 'gamificacao:ler',
+  avaliacaoSusEnviar: 'avaliacao_usabilidade:enviar',
+  avaliacaoSusConsultarAgregados: 'avaliacao_usabilidade:consultar_agregados',
+  auditoriaConsultar: 'auditoria:consultar',
+} as const;

@@ -1,0 +1,28 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message EnviarAvaliacaoSusRequisicao {
+  string codigo_participante = 1;
+  bool indica_consentimento = 2;
+  repeated int32 notas_itens = 3;
+}
+
+message EnviarAvaliacaoSusResposta {
+  bool avaliacao_aceita = 1;
+  int32 pontuacao_sus = 2;
+  string mensagem_resultado = 3;
+}
+
+message ObterResultadosAgregadosRequisicao {
+}
+
+message ObterResultadosAgregadosResposta {
+  int32 quantidade_participantes = 1;
+  double media_pontuacao_sus = 2;
+  double mediana_pontuacao_sus = 3;
+}
+
+service ServicoAvaliacaoUsabilidade {
+  rpc EnviarAvaliacaoSus(EnviarAvaliacaoSusRequisicao) returns (EnviarAvaliacaoSusResposta);
+  rpc ObterResultadosAgregados(ObterResultadosAgregadosRequisicao) returns (ObterResultadosAgregadosResposta);
+}
