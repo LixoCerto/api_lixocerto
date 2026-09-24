@@ -141,6 +141,19 @@ bancoDescribe('integração PostgreSQL', () => {
     });
     expect(idSessao).toBeTruthy();
     expect(await sessoes.listar(idExterno)).toHaveLength(1);
+    const outroIdExterno = `outro-${randomUUID()}`;
+    const outraIdentidade = await usuarioServico.sincronizarUsuario({
+      idExterno: outroIdExterno,
+      nome: 'Outro Usuário',
+      email: `${outroIdExterno}@exemplo.test`,
+      papeis: [],
+      permissoes: [],
+    });
+    const outroUsuario = await ModeloUsuario.findOne({ where: { lcr_usr_id_externo: outroIdExterno } });
+    expect(outroUsuario).toBeTruthy();
+    idsUsuarios.push(outroUsuario!.lcr_usr_id_usuario);
+    expect(outraIdentidade.papeis).toContain('usuario');
+    expect(await sessoes.revogar(outroIdExterno, idSessao!)).toBe(false);
     expect(await sessoes.revogar(idExterno, idSessao!)).toBe(true);
     expect((await sessoes.listar(idExterno))[0]?.dataRevogacao).toBeTruthy();
   });

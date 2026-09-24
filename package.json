@@ -9,6 +9,7 @@
     "compilar": "tsc -p tsconfig.compilacao.json",
     "testar": "vitest run testes/unidade",
     "testar:integracao": "vitest run testes/integracao",
+    "testar:e2e": "pnpm compilar && vitest run testes/e2e",
     "formatar": "prettier --write .",
     "contratos:validar": "buf lint",
     "contratos:gerar": "buf generate",
