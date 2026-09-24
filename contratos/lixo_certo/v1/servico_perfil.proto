@@ -1,0 +1,28 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message ObterPerfilAtualRequisicao {}
+
+message PerfilAtualResposta {
+  string id_usuario = 1;
+  string id_externo = 2;
+  string nome_usuario = 3;
+  string email_usuario = 4;
+  string status_usuario = 5;
+  repeated string papeis_usuario = 6;
+  repeated string permissoes_usuario = 7;
+}
+
+message AtualizarPerfilRequisicao {
+  string nome_usuario = 1;
+}
+
+message AtualizarPerfilResposta {
+  bool perfil_atualizado = 1;
+  PerfilAtualResposta perfil = 2;
+}
+
+service ServicoPerfil {
+  rpc ObterPerfilAtual(ObterPerfilAtualRequisicao) returns (PerfilAtualResposta);
+  rpc AtualizarPerfil(AtualizarPerfilRequisicao) returns (AtualizarPerfilResposta);
+}

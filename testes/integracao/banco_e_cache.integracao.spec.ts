@@ -23,6 +23,9 @@ import { RepositorioPontosColeta } from '../../src/modulos/pontos_coleta/pontos_
 import { ServicoUsuarios } from '../../src/modulos/usuarios/usuarios.servico.js';
 import { ServicoPapeis } from '../../src/modulos/papeis/papeis.servico.js';
 import { ServicoPermissoes } from '../../src/modulos/permissoes/permissoes.servico.js';
+import { ServicoIdentidade } from '../../src/modulos/identidade/identidade.servico.js';
+import { ServicoPerfil } from '../../src/modulos/perfil/perfil.servico.js';
+import { ServicoSessoes } from '../../src/modulos/sessoes/sessoes.servico.js';
 
 const urlBanco = process.env.URL_BANCO_DADOS_TESTE ?? process.env.URL_BANCO_DADOS;
 const urlRedis = process.env.URL_REDIS_TESTE ?? process.env.URL_REDIS;
@@ -119,6 +122,27 @@ bancoDescribe('integração PostgreSQL', () => {
     expect(resumo.quantidadeMateriais).toBeGreaterThanOrEqual(1);
     expect(await new ServicoPapeis(banco).listarAtivos()).toHaveLength(4);
     expect(await new ServicoPermissoes(banco).listarAtivas()).toHaveLength(11);
+
+    const identidadeInterna = new ServicoIdentidade(banco);
+    const perfil = new ServicoPerfil(banco, identidadeInterna);
+    const perfilAtual = await perfil.obter(idExterno, identidade.papeis, identidade.permissoes);
+    expect(perfilAtual.nome).toBe('Usuário Integração');
+    const perfilAtualizado = await perfil.atualizarNome(idExterno, 'Usuário Atualizado', identidade.papeis, identidade.permissoes);
+    expect(perfilAtualizado.nome).toBe('Usuário Atualizado');
+
+    const sessoes = new ServicoSessoes(banco, identidadeInterna);
+    const idSessao = await sessoes.registrar({
+      idExterno,
+      token: `token-${randomUUID()}`,
+      tokenAtualizacao: `refresh-${randomUUID()}`,
+      enderecoIp: '127.0.0.1',
+      agenteUsuario: 'teste-integracao',
+      dataExpiracao: new Date(Date.now() + 60_000),
+    });
+    expect(idSessao).toBeTruthy();
+    expect(await sessoes.listar(idExterno)).toHaveLength(1);
+    expect(await sessoes.revogar(idExterno, idSessao!)).toBe(true);
+    expect((await sessoes.listar(idExterno))[0]?.dataRevogacao).toBeTruthy();
   });
 
   it('processa desafio, concede pontos na conclusão e grava auditoria', async () => {

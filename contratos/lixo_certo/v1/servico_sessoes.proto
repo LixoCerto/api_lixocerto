@@ -1,0 +1,38 @@
+syntax = "proto3";
+package lixo_certo.v1;
+
+message ListarSessoesRequisicao {}
+
+message SessaoResposta {
+  string id_sessao = 1;
+  string endereco_ip = 2;
+  string agente_usuario = 3;
+  string data_expiracao = 4;
+  string data_revogacao = 5;
+  string data_criacao = 6;
+  bool atual = 7;
+}
+
+message ListarSessoesResposta {
+  repeated SessaoResposta sessoes = 1;
+}
+
+message RevogarSessaoRequisicao {
+  string id_sessao = 1;
+}
+
+message RevogarSessaoResposta {
+  bool sessao_revogada = 1;
+}
+
+message RevogarTodasSessoesRequisicao {}
+
+message RevogarTodasSessoesResposta {
+  int32 quantidade_revogada = 1;
+}
+
+service ServicoSessoes {
+  rpc ListarSessoes(ListarSessoesRequisicao) returns (ListarSessoesResposta);
+  rpc RevogarSessao(RevogarSessaoRequisicao) returns (RevogarSessaoResposta);
+  rpc RevogarTodasSessoes(RevogarTodasSessoesRequisicao) returns (RevogarTodasSessoesResposta);
+}
