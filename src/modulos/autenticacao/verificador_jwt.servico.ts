@@ -40,6 +40,15 @@ export class VerificadorJwtServico {
       this.urlChaves = enderecoJwks;
     }
 
+    let diagnosticoIdentidade = {
+      jwtVerificado: false,
+      sub: 'não verificado',
+      email: 'não verificado',
+      usuarioPreferido: 'não verificado',
+      fallbackConfigurado: Boolean(process.env.DOMINIO_EMAIL_OIDC_DESENVOLVIMENTO),
+      ambiente: process.env.AMBIENTE_EXECUCAO ?? '(ausente)',
+    };
+
     try {
       const resultado = await jwtVerify<DadosToken>(token, this.conjuntoChaves!, {
         issuer: emissor,
@@ -48,6 +57,14 @@ export class VerificadorJwtServico {
       });
       const idExterno = resultado.payload.sub;
       const email = this.obterEmail(resultado.payload);
+      diagnosticoIdentidade = {
+        jwtVerificado: true,
+        sub: idExterno ? 'presente' : 'ausente',
+        email: resultado.payload.email ? 'presente' : 'ausente',
+        usuarioPreferido: resultado.payload.preferred_username ? 'presente' : 'ausente',
+        fallbackConfigurado: Boolean(process.env.DOMINIO_EMAIL_OIDC_DESENVOLVIMENTO),
+        ambiente: process.env.AMBIENTE_EXECUCAO ?? '(ausente)',
+      };
       if (!idExterno || !email) {
         throw new Error('Token sem identidade suficiente');
       }
@@ -66,6 +83,7 @@ export class VerificadorJwtServico {
           emissor,
           audiencia,
           enderecoJwks,
+          identidade: diagnosticoIdentidade,
         });
       }
       throw new RpcException({ code: codigoGrpc.UNAUTHENTICATED, message: 'Token invalido ou expirado' });
@@ -90,7 +108,11 @@ export class VerificadorJwtServico {
   private obterEmail(payload: DadosToken): string | null {
     if (typeof payload.email === 'string' && payload.email.trim()) return payload.email.trim();
 
-    const usuario = typeof payload.preferred_username === 'string' ? payload.preferred_username.trim() : '';
+    const usuario = typeof payload.preferred_username === 'string'
+      ? payload.preferred_username.trim()
+      : typeof payload.sub === 'string'
+        ? payload.sub.trim()
+        : '';
     const dominioDesenvolvimento = process.env.DOMINIO_EMAIL_OIDC_DESENVOLVIMENTO?.trim();
     if (process.env.AMBIENTE_EXECUCAO === 'desenvolvimento' && usuario && dominioDesenvolvimento) {
       return `${usuario}@${dominioDesenvolvimento}`;
