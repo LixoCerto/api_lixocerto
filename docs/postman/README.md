@@ -35,7 +35,7 @@ O Postman não oferece atualmente um formato público e confiável para exportar
 
 ## Autorização
 
-Os métodos públicos incluem saúde, materiais, pontos de coleta, listagem de questões, ranking e envio SUS. Os demais exigem Bearer JWT ou metadados específicos. Preencha `jwt_token` somente no ambiente local do Postman e nunca versione o token. O catálogo informa os metadados esperados para cada método.
+Os métodos públicos incluem saúde, materiais, pontos de coleta, listagem de questões, ranking e envio SUS. Os demais exigem Bearer JWT ou metadados específicos. No ambiente Docker local, o Keycloak em `http://localhost:8081` emite os tokens do realm `lixo-certo`. A partir de `infra_lixocerto`, execute `.\scripts\obter-token-postman.ps1` para preencher automaticamente `jwt_token` no ambiente local do Postman; use `-Administrador` para testar permissões administrativas. O script não imprime nem versiona o token. Cada RPC protegido deve conter na aba **Metadata**: `authorization` = `Bearer {{jwt_token}}`. O catálogo informa os metadados esperados para cada método.
 
 ## Endpoint correto
 

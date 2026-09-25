@@ -4,11 +4,20 @@ import { RpcException } from '@nestjs/microservices';
 import { createRemoteJWKSet, jwtVerify, JWTPayload } from 'jose';
 import { UsuarioAutenticado } from '../../comum/autenticacao/usuario_autenticado.js';
 
+const PAPEIS_PERMITIDOS = new Set(['usuario', 'pesquisador', 'revisor', 'administrador']);
+
+type AcessoRealm = {
+  roles?: unknown;
+};
+
 interface DadosToken extends JWTPayload {
+  name?: string;
   nome?: string;
   email?: string;
-  papeis?: string[];
-  permissoes?: string[];
+  preferred_username?: string;
+  papeis?: unknown;
+  permissoes?: unknown;
+  realm_access?: AcessoRealm;
 }
 
 @Injectable()
@@ -43,10 +52,10 @@ export class VerificadorJwtServico {
 
       return {
         idExterno,
-        nome: typeof resultado.payload.nome === 'string' ? resultado.payload.nome : resultado.payload.email,
+        nome: this.obterNome(resultado.payload),
         email: resultado.payload.email,
-        papeis: Array.isArray(resultado.payload.papeis) ? resultado.payload.papeis : ['usuario'],
-        permissoes: Array.isArray(resultado.payload.permissoes) ? resultado.payload.permissoes : [],
+        papeis: this.obterPapeis(resultado.payload),
+        permissoes: this.obterLista(resultado.payload.permissoes),
       };
     } catch {
       throw new RpcException({ code: codigoGrpc.UNAUTHENTICATED, message: 'Token invalido ou expirado' });
@@ -59,5 +68,25 @@ export class VerificadorJwtServico {
       throw new RpcException({ code: codigoGrpc.UNAUTHENTICATED, message: 'Cabecalho de autorizacao ausente' });
     }
     return correspondencia[1];
+  }
+
+  private obterNome(payload: DadosToken): string {
+    if (typeof payload.nome === 'string' && payload.nome.trim()) return payload.nome;
+    if (typeof payload.name === 'string' && payload.name.trim()) return payload.name;
+    if (typeof payload.preferred_username === 'string' && payload.preferred_username.trim()) return payload.preferred_username;
+    return payload.email!;
+  }
+
+  private obterPapeis(payload: DadosToken): string[] {
+    const papeisCustomizados = this.obterLista(payload.papeis);
+    const papeisKeycloak = Array.isArray(payload.realm_access?.roles)
+      ? payload.realm_access.roles.filter((papel): papel is string => typeof papel === 'string')
+      : [];
+    const papeis = [...papeisCustomizados, ...papeisKeycloak].filter(papel => PAPEIS_PERMITIDOS.has(papel));
+    return [...new Set(papeis)].length ? [...new Set(papeis)] : ['usuario'];
+  }
+
+  private obterLista(valor: unknown): string[] {
+    return Array.isArray(valor) ? valor.filter((item): item is string => typeof item === 'string') : [];
   }
 }

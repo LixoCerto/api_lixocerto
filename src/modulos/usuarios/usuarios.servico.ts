@@ -3,6 +3,10 @@ import { QueryTypes, Sequelize } from 'sequelize';
 import { UsuarioAutenticado } from '../../comum/autenticacao/usuario_autenticado.js';
 import { ModeloUsuario } from '../../infraestrutura/banco/modelos/usuario.modelo.js';
 
+const PAPEIS_PERMITIDOS = ['usuario', 'pesquisador', 'revisor', 'administrador'] as const;
+
+type PapelPermitido = (typeof PAPEIS_PERMITIDOS)[number];
+
 @Injectable()
 export class ServicoUsuarios {
   constructor(@Inject('CONEXAO_BANCO_DADOS') private readonly banco: Sequelize | null) {}
@@ -37,30 +41,59 @@ export class ServicoUsuarios {
       lcr_usr_data_ultimo_acesso: new Date(),
     });
 
-    await this.banco.query(
-      `INSERT INTO lcr_usuarios_papeis (
-        lcr_upr_id_usuario_papel,
-        lcr_upr_id_usuario,
-        lcr_upr_id_papel,
-        lcr_upr_data_atribuicao
-      )
-      SELECT gen_random_uuid(), :idUsuario, lcr_pap_id_papel, CURRENT_TIMESTAMP
-      FROM lcr_papeis
-      WHERE lcr_pap_nome_papel = 'usuario'
-        AND lcr_pap_status_papel = 'ativo'
-        AND NOT EXISTS (
-          SELECT 1 FROM lcr_usuarios_papeis existente
-          WHERE existente.lcr_upr_id_usuario = :idUsuario
-            AND existente.lcr_upr_id_papel = lcr_pap_id_papel
-        )`,
-      { replacements: { idUsuario: usuario.lcr_usr_id_usuario } },
+    const papeisSolicitados = new Set<PapelPermitido>(['usuario']);
+    for (const papel of identidade.papeis) {
+      if ((PAPEIS_PERMITIDOS as readonly string[]).includes(papel)) papeisSolicitados.add(papel as PapelPermitido);
+    }
+    const nomesPapeis = [...papeisSolicitados];
+    const papeisBanco = await this.banco.query<{ lcr_pap_id_papel: string; lcr_pap_nome_papel: PapelPermitido }>(
+      `SELECT lcr_pap_id_papel, lcr_pap_nome_papel
+       FROM lcr_papeis
+       WHERE lcr_pap_nome_papel IN (:nomesPapeis)
+         AND lcr_pap_status_papel = 'ativo'`,
+      { replacements: { nomesPapeis }, type: QueryTypes.SELECT },
     );
+    const idsPapeis = papeisBanco.map(papel => papel.lcr_pap_id_papel);
+
+    if (idsPapeis.length > 0) {
+      await this.banco.query(
+        `DELETE FROM lcr_usuarios_papeis relacao
+         WHERE relacao.lcr_upr_id_usuario = :idUsuario
+           AND relacao.lcr_upr_id_papel NOT IN (:idsPapeis)`,
+        { replacements: { idUsuario: usuario.lcr_usr_id_usuario, idsPapeis } },
+      );
+
+      for (const idPapel of idsPapeis) {
+        await this.banco.query(
+          `INSERT INTO lcr_usuarios_papeis (
+            lcr_upr_id_usuario_papel,
+            lcr_upr_id_usuario,
+            lcr_upr_id_papel,
+            lcr_upr_data_atribuicao
+          )
+          SELECT gen_random_uuid(), :idUsuario, :idPapel, CURRENT_TIMESTAMP
+          WHERE NOT EXISTS (
+            SELECT 1 FROM lcr_usuarios_papeis existente
+            WHERE existente.lcr_upr_id_usuario = :idUsuario
+              AND existente.lcr_upr_id_papel = :idPapel
+          )`,
+          { replacements: { idUsuario: usuario.lcr_usr_id_usuario, idPapel } },
+        );
+      }
+    }
 
     const papeis = await this.banco.query<{ lcr_pap_nome_papel: string }>(
       `SELECT papel.lcr_pap_nome_papel
        FROM lcr_papeis papel
        INNER JOIN lcr_usuarios_papeis relacao ON relacao.lcr_upr_id_papel = papel.lcr_pap_id_papel
-       WHERE relacao.lcr_upr_id_usuario = :idUsuario AND papel.lcr_pap_status_papel = 'ativo'`,
+       WHERE relacao.lcr_upr_id_usuario = :idUsuario AND papel.lcr_pap_status_papel = 'ativo'
+       ORDER BY CASE papel.lcr_pap_nome_papel
+         WHEN 'administrador' THEN 1
+         WHEN 'revisor' THEN 2
+         WHEN 'pesquisador' THEN 3
+         WHEN 'usuario' THEN 4
+         ELSE 5
+       END`,
       { replacements: { idUsuario: usuario.lcr_usr_id_usuario }, type: QueryTypes.SELECT },
     );
     const permissoes = await this.banco.query<{ lcr_prm_codigo_permissao: string }>(
