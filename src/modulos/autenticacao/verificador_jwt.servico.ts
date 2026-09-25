@@ -47,14 +47,15 @@ export class VerificadorJwtServico {
         algorithms: ['RS256', 'ES256'],
       });
       const idExterno = resultado.payload.sub;
-      if (!idExterno || typeof resultado.payload.email !== 'string') {
+      const email = this.obterEmail(resultado.payload);
+      if (!idExterno || !email) {
         throw new Error('Token sem identidade suficiente');
       }
 
       return {
         idExterno,
         nome: this.obterNome(resultado.payload),
-        email: resultado.payload.email,
+        email,
         papeis: this.obterPapeis(resultado.payload),
         permissoes: this.obterLista(resultado.payload.permissoes),
       };
@@ -84,6 +85,18 @@ export class VerificadorJwtServico {
     if (typeof payload.name === 'string' && payload.name.trim()) return payload.name;
     if (typeof payload.preferred_username === 'string' && payload.preferred_username.trim()) return payload.preferred_username;
     return payload.email!;
+  }
+
+  private obterEmail(payload: DadosToken): string | null {
+    if (typeof payload.email === 'string' && payload.email.trim()) return payload.email.trim();
+
+    const usuario = typeof payload.preferred_username === 'string' ? payload.preferred_username.trim() : '';
+    const dominioDesenvolvimento = process.env.DOMINIO_EMAIL_OIDC_DESENVOLVIMENTO?.trim();
+    if (process.env.AMBIENTE_EXECUCAO === 'desenvolvimento' && usuario && dominioDesenvolvimento) {
+      return `${usuario}@${dominioDesenvolvimento}`;
+    }
+
+    return null;
   }
 
   private obterPapeis(payload: DadosToken): string[] {
