@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 import { createRemoteJWKSet, jwtVerify, JWTPayload } from 'jose';
 import { UsuarioAutenticado } from '../../comum/autenticacao/usuario_autenticado.js';
+import { registrarEvento } from '../../comum/observabilidade/registrador.js';
 
 const PAPEIS_PERMITIDOS = new Set(['usuario', 'pesquisador', 'revisor', 'administrador']);
 
@@ -57,7 +58,15 @@ export class VerificadorJwtServico {
         papeis: this.obterPapeis(resultado.payload),
         permissoes: this.obterLista(resultado.payload.permissoes),
       };
-    } catch {
+    } catch (erro) {
+      if (process.env.AMBIENTE_EXECUCAO !== 'producao') {
+        registrarEvento('falha_validacao_jwt', {
+          motivo: erro instanceof Error ? erro.message : String(erro),
+          emissor,
+          audiencia,
+          enderecoJwks,
+        });
+      }
       throw new RpcException({ code: codigoGrpc.UNAUTHENTICATED, message: 'Token invalido ou expirado' });
     }
   }
