@@ -29,4 +29,21 @@ describe('ServicoQuestionarios', () => {
       explicacaoResposta: 'Questao ou alternativa indisponivel.',
     });
   });
+
+  it('não consulta o banco quando os identificadores da resposta estão vazios', async () => {
+    const repositorio = {
+      obterResposta: async () => { throw new Error('não deveria consultar o banco'); },
+    } as unknown as RepositorioQuestionarios;
+    const servico = new ServicoQuestionarios(
+      repositorio,
+      new ServicoUsuarios(null),
+      new ServicoGamificacao({} as RepositorioProgresso),
+    );
+
+    await expect(servico.responder('', '')).resolves.toEqual({
+      indicaCorreta: false,
+      quantidadePontos: 0,
+      explicacaoResposta: 'Questao ou alternativa indisponivel.',
+    });
+  });
 });

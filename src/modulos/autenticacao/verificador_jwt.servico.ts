@@ -1,4 +1,6 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { status as codigoGrpc } from '@grpc/grpc-js';
+import { Injectable } from '@nestjs/common';
+import { RpcException } from '@nestjs/microservices';
 import { createRemoteJWKSet, jwtVerify, JWTPayload } from 'jose';
 import { UsuarioAutenticado } from '../../comum/autenticacao/usuario_autenticado.js';
 
@@ -20,7 +22,7 @@ export class VerificadorJwtServico {
     const enderecoJwks = process.env.ENDERECO_JWKS;
 
     if (!emissor || !audiencia || !enderecoJwks) {
-      throw new UnauthorizedException('Configuracao OIDC ausente');
+      throw new RpcException({ code: codigoGrpc.INTERNAL, message: 'Configuracao OIDC ausente' });
     }
 
     if (this.urlChaves !== enderecoJwks) {
@@ -36,7 +38,7 @@ export class VerificadorJwtServico {
       });
       const idExterno = resultado.payload.sub;
       if (!idExterno || typeof resultado.payload.email !== 'string') {
-        throw new UnauthorizedException('Token sem identidade suficiente');
+        throw new Error('Token sem identidade suficiente');
       }
 
       return {
@@ -47,14 +49,14 @@ export class VerificadorJwtServico {
         permissoes: Array.isArray(resultado.payload.permissoes) ? resultado.payload.permissoes : [],
       };
     } catch {
-      throw new UnauthorizedException('Token invalido ou expirado');
+      throw new RpcException({ code: codigoGrpc.UNAUTHENTICATED, message: 'Token invalido ou expirado' });
     }
   }
 
   extrairToken(valorAutorizacao: string | undefined): string {
     const correspondencia = valorAutorizacao?.match(/^Bearer\s+(.+)$/i);
     if (!correspondencia?.[1]) {
-      throw new UnauthorizedException('Cabecalho de autorizacao ausente');
+      throw new RpcException({ code: codigoGrpc.UNAUTHENTICATED, message: 'Cabecalho de autorizacao ausente' });
     }
     return correspondencia[1];
   }

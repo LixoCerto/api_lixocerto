@@ -16,6 +16,13 @@ export class ServicoQuestionarios {
   }
 
   async responder(idQuestao: string, idAlternativa: string, idExternoUsuario?: string) {
+    if (!idQuestao.trim() || !idAlternativa.trim()) {
+      return {
+        indicaCorreta: false,
+        quantidadePontos: 0,
+        explicacaoResposta: 'Questao ou alternativa indisponivel.',
+      };
+    }
     const resposta = await this.repositorio.obterResposta(idQuestao, idAlternativa);
     if (!resposta) {
       return {

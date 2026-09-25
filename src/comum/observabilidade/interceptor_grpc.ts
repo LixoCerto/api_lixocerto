@@ -1,5 +1,7 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
-import { Observable, tap } from 'rxjs';
+import { RpcException } from '@nestjs/microservices';
+import { Observable, catchError, tap, throwError } from 'rxjs';
+import { mapearCodigoErroGrpc, mapearMensagemErroGrpc } from '../erros/filtro_erro_grpc.js';
 import { registrarEvento } from './registrador.js';
 
 @Injectable()
@@ -15,6 +17,15 @@ export class InterceptorObservabilidade implements NestInterceptor {
           duracaoMs: Date.now() - inicio,
           tipoErro: erro instanceof Error ? erro.name : 'erro_desconhecido',
         }),
+      }),
+      catchError(erro => {
+        if (erro instanceof RpcException && typeof erro.getError() === 'object') {
+          return throwError(() => erro);
+        }
+        return throwError(() => new RpcException({
+          code: mapearCodigoErroGrpc(erro),
+          message: mapearMensagemErroGrpc(erro),
+        }));
       }),
     );
   }

@@ -43,10 +43,15 @@ export class ControladorGrpcQuestionarios {
     metadados: Metadata,
   ) {
     const idExternoUsuario = metadados.get('x-id-usuario-externo')[0];
-    return this.servico.responder(
+    const resposta = await this.servico.responder(
       requisicao.id_questao ?? '',
       requisicao.id_alternativa ?? '',
       typeof idExternoUsuario === 'string' ? idExternoUsuario : undefined,
     );
+    return {
+      indica_correta: resposta.indicaCorreta,
+      quantidade_pontos: resposta.quantidadePontos,
+      explicacao_resposta: resposta.explicacaoResposta,
+    };
   }
 }

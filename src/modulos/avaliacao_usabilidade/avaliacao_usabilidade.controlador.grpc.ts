@@ -19,7 +19,11 @@ export class ControladorGrpcAvaliacaoUsabilidade {
       requisicao.codigo_participante ?? '',
       requisicao.indica_consentimento === true,
       requisicao.notas_itens ?? [],
-    );
+    ).then(resultado => ({
+      avaliacao_aceita: resultado.avaliacaoAceita,
+      pontuacao_sus: resultado.pontuacaoSus,
+      mensagem_resultado: resultado.mensagemResultado,
+    }));
   }
 
   @GrpcMethod('ServicoAvaliacaoUsabilidade', 'ObterResultadosAgregados')
