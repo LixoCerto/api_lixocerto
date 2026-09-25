@@ -1,0 +1,410 @@
+{
+  "tipo": "catalogo-de-configuracao-postman-grpc-nativo",
+  "versao": 1,
+  "importavelComoCollectionJson": false,
+  "motivo": "O Postman não expõe no formato Collection v2.1 um schema público e confiável para serializar requests gRPC nativos.",
+  "fonte": "Lixo-Certo-API.legado-http.postman_collection.json",
+  "endpoint": "grpc://{{grpc_host}}",
+  "definicaoServico": "Lixo-Certo-API.postman.proto",
+  "quantidadeMetodos": 22,
+  "metodos": [
+    {
+      "ordem": 1,
+      "grupo": "01 - Saúde",
+      "servico": "lixo_certo.v1.ServicoSaude",
+      "metodo": "Verificar",
+      "caminhoRpc": "/lixo_certo.v1.ServicoSaude/Verificar",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {},
+      "metadados": [],
+      "autenticacao": "Nenhuma",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 2,
+      "grupo": "02 - Autenticação",
+      "servico": "lixo_certo.v1.ServicoAutenticacao",
+      "metodo": "ObterIdentidadeAtual",
+      "caminhoRpc": "/lixo_certo.v1.ServicoAutenticacao/ObterIdentidadeAtual",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {},
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 3,
+      "grupo": "03 - Identidade",
+      "servico": "lixo_certo.v1.ServicoIdentidade",
+      "metodo": "ObterIdentidadeInterna",
+      "caminhoRpc": "/lixo_certo.v1.ServicoIdentidade/ObterIdentidadeInterna",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {},
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 4,
+      "grupo": "04 - Materiais",
+      "servico": "lixo_certo.v1.ServicoMateriais",
+      "metodo": "ListarMateriais",
+      "caminhoRpc": "/lixo_certo.v1.ServicoMateriais/ListarMateriais",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "texto_pesquisa": "",
+        "categoria_material": "",
+        "numero_pagina": 1,
+        "tamanho_pagina": 20
+      },
+      "metadados": [],
+      "autenticacao": "Nenhuma",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 5,
+      "grupo": "05 - Pontos de coleta",
+      "servico": "lixo_certo.v1.ServicoPontosColeta",
+      "metodo": "ListarPontosColeta",
+      "caminhoRpc": "/lixo_certo.v1.ServicoPontosColeta/ListarPontosColeta",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "cidade_ponto_coleta": "João Pessoa",
+        "categoria_material": "vidro"
+      },
+      "metadados": [],
+      "autenticacao": "Nenhuma",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 6,
+      "grupo": "06 - Questionários",
+      "servico": "lixo_certo.v1.ServicoQuestionarios",
+      "metodo": "ListarQuestoes",
+      "caminhoRpc": "/lixo_certo.v1.ServicoQuestionarios/ListarQuestoes",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "numero_pagina": 1,
+        "tamanho_pagina": 10
+      },
+      "metadados": [],
+      "autenticacao": "Nenhuma",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 7,
+      "grupo": "06 - Questionários",
+      "servico": "lixo_certo.v1.ServicoQuestionarios",
+      "metodo": "EnviarRespostaQuestionario",
+      "caminhoRpc": "/lixo_certo.v1.ServicoQuestionarios/EnviarRespostaQuestionario",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "id_questao": "{{id_questao}}",
+        "id_alternativa": "{{id_alternativa}}"
+      },
+      "metadados": [
+        {
+          "nome": "x-id-usuario-externo",
+          "valor": "{{id_usuario_externo}}"
+        }
+      ],
+      "autenticacao": "Nenhuma",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 8,
+      "grupo": "07 - Gamificação",
+      "servico": "lixo_certo.v1.ServicoGamificacao",
+      "metodo": "ObterProgressoUsuario",
+      "caminhoRpc": "/lixo_certo.v1.ServicoGamificacao/ObterProgressoUsuario",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {},
+      "metadados": [
+        {
+          "nome": "x-id-usuario-externo",
+          "valor": "{{id_usuario_externo}}"
+        }
+      ],
+      "autenticacao": "Nenhuma",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 9,
+      "grupo": "07 - Gamificação",
+      "servico": "lixo_certo.v1.ServicoGamificacao",
+      "metodo": "ObterRanking",
+      "caminhoRpc": "/lixo_certo.v1.ServicoGamificacao/ObterRanking",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "limite_resultado": 10
+      },
+      "metadados": [],
+      "autenticacao": "Nenhuma",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 10,
+      "grupo": "08 - Desafios",
+      "servico": "lixo_certo.v1.ServicoDesafios",
+      "metodo": "ListarDesafios",
+      "caminhoRpc": "/lixo_certo.v1.ServicoDesafios/ListarDesafios",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "numero_pagina": 1,
+        "tamanho_pagina": 20
+      },
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 11,
+      "grupo": "08 - Desafios",
+      "servico": "lixo_certo.v1.ServicoDesafios",
+      "metodo": "ParticiparDesafio",
+      "caminhoRpc": "/lixo_certo.v1.ServicoDesafios/ParticiparDesafio",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "id_desafio": "{{id_desafio}}"
+      },
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 12,
+      "grupo": "08 - Desafios",
+      "servico": "lixo_certo.v1.ServicoDesafios",
+      "metodo": "RegistrarAcaoSustentavel",
+      "caminhoRpc": "/lixo_certo.v1.ServicoDesafios/RegistrarAcaoSustentavel",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "id_desafio": "{{id_desafio}}",
+        "tipo_acao": "separar_residuos",
+        "descricao_acao": "Ação registrada pelo Postman"
+      },
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 13,
+      "grupo": "09 - Avaliação de usabilidade",
+      "servico": "lixo_certo.v1.ServicoAvaliacaoUsabilidade",
+      "metodo": "EnviarAvaliacaoSus",
+      "caminhoRpc": "/lixo_certo.v1.ServicoAvaliacaoUsabilidade/EnviarAvaliacaoSus",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "codigo_participante": "participante-postman-001",
+        "indica_consentimento": true,
+        "notas_itens": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      },
+      "metadados": [],
+      "autenticacao": "Nenhuma",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 14,
+      "grupo": "09 - Avaliação de usabilidade",
+      "servico": "lixo_certo.v1.ServicoAvaliacaoUsabilidade",
+      "metodo": "ObterResultadosAgregados",
+      "caminhoRpc": "/lixo_certo.v1.ServicoAvaliacaoUsabilidade/ObterResultadosAgregados",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {},
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 15,
+      "grupo": "10 - Perfil",
+      "servico": "lixo_certo.v1.ServicoPerfil",
+      "metodo": "ObterPerfilAtual",
+      "caminhoRpc": "/lixo_certo.v1.ServicoPerfil/ObterPerfilAtual",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {},
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 16,
+      "grupo": "10 - Perfil",
+      "servico": "lixo_certo.v1.ServicoPerfil",
+      "metodo": "AtualizarPerfil",
+      "caminhoRpc": "/lixo_certo.v1.ServicoPerfil/AtualizarPerfil",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "nome_usuario": "Usuário Postman"
+      },
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 17,
+      "grupo": "11 - Sessões",
+      "servico": "lixo_certo.v1.ServicoSessoes",
+      "metodo": "ListarSessoes",
+      "caminhoRpc": "/lixo_certo.v1.ServicoSessoes/ListarSessoes",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {},
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 18,
+      "grupo": "11 - Sessões",
+      "servico": "lixo_certo.v1.ServicoSessoes",
+      "metodo": "RevogarSessao",
+      "caminhoRpc": "/lixo_certo.v1.ServicoSessoes/RevogarSessao",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "id_sessao": "{{id_sessao}}"
+      },
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 19,
+      "grupo": "11 - Sessões",
+      "servico": "lixo_certo.v1.ServicoSessoes",
+      "metodo": "RevogarTodasSessoes",
+      "caminhoRpc": "/lixo_certo.v1.ServicoSessoes/RevogarTodasSessoes",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {},
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 20,
+      "grupo": "12 - Auditoria",
+      "servico": "lixo_certo.v1.ServicoAuditoria",
+      "metodo": "RegistrarEventoAuditoria",
+      "caminhoRpc": "/lixo_certo.v1.ServicoAuditoria/RegistrarEventoAuditoria",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "tipo_evento": "teste_postman",
+        "recurso_evento": "colecao",
+        "id_recurso": "postman-001",
+        "endereco_ip": "127.0.0.1",
+        "id_correlacao": "{{correlation_id}}",
+        "detalhes_evento_json": "{\"origem\":\"postman\",\"ambiente\":\"desenvolvimento\"}"
+      },
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 21,
+      "grupo": "12 - Auditoria",
+      "servico": "lixo_certo.v1.ServicoAuditoria",
+      "metodo": "ListarAuditoria",
+      "caminhoRpc": "/lixo_certo.v1.ServicoAuditoria/ListarAuditoria",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "tipo_evento": "",
+        "limite_resultado": 50
+      },
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 22,
+      "grupo": "13 - Administração",
+      "servico": "lixo_certo.v1.ServicoAdministracao",
+      "metodo": "ObterResumoAdministrativo",
+      "caminhoRpc": "/lixo_certo.v1.ServicoAdministracao/ObterResumoAdministrativo",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {},
+      "metadados": [
+        {
+          "nome": "authorization",
+          "valor": "Bearer {{jwt_token}}"
+        }
+      ],
+      "autenticacao": "Bearer JWT",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    }
+  ]
+}

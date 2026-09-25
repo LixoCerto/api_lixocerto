@@ -10,6 +10,13 @@ describe('validacao de ambiente', () => {
     expect(() => validarAmbiente({ AMBIENTE_EXECUCAO: 'producao' })).toThrow(/URL_BANCO_DADOS/);
   });
 
+  it('rejeita server reflection explicitamente habilitado em produção', () => {
+    expect(() => validarAmbiente({
+      AMBIENTE_EXECUCAO: 'producao',
+      HABILITAR_REFLECTION_GRPC: 'true',
+    })).toThrow(/HABILITAR_REFLECTION_GRPC/);
+  });
+
   it('rejeita segredo curto mesmo com URLs válidas', () => {
     expect(() => validarAmbiente({
       AMBIENTE_EXECUCAO: 'producao',

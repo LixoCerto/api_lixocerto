@@ -11,6 +11,9 @@ const variaveisUrl = ['URL_BANCO_DADOS', 'URL_REDIS', 'EMISSOR_OIDC', 'ENDERECO_
 
 export function validarAmbiente(ambiente: NodeJS.ProcessEnv): void {
   if (ambiente.AMBIENTE_EXECUCAO !== 'producao') return;
+  if (ambiente.HABILITAR_REFLECTION_GRPC === 'true') {
+    throw new Error('HABILITAR_REFLECTION_GRPC deve permanecer desabilitada em producao');
+  }
   const ausentes = nomesVariaveisObrigatorias.filter(nome => !ambiente[nome]?.trim());
   if (ausentes.length > 0) throw new Error(`Variaveis obrigatorias ausentes: ${ausentes.join(', ')}`);
 

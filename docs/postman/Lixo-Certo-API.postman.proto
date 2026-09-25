@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+// Arquivo raiz para o cliente gRPC do Postman.
+// Os contratos de produção permanecem em contratos/lixo_certo/v1/.
+import "contratos/lixo_certo/v1/comum.proto";
+import "contratos/lixo_certo/v1/servico_administracao.proto";
+import "contratos/lixo_certo/v1/servico_auditoria.proto";
+import "contratos/lixo_certo/v1/servico_autenticacao.proto";
+import "contratos/lixo_certo/v1/servico_avaliacao_usabilidade.proto";
+import "contratos/lixo_certo/v1/servico_desafios.proto";
+import "contratos/lixo_certo/v1/servico_gamificacao.proto";
+import "contratos/lixo_certo/v1/servico_identidade.proto";
+import "contratos/lixo_certo/v1/servico_materiais.proto";
+import "contratos/lixo_certo/v1/servico_perfil.proto";
+import "contratos/lixo_certo/v1/servico_pontos_coleta.proto";
+import "contratos/lixo_certo/v1/servico_questionarios.proto";
+import "contratos/lixo_certo/v1/servico_saude.proto";
+import "contratos/lixo_certo/v1/servico_sessoes.proto";

@@ -1,0 +1,1257 @@
+{
+  "info": {
+    "_postman_id": "9b077df9-5098-4021-ab04-47f8ba61f077",
+    "name": "Lixo Certo — API gRPC — Desenvolvimento",
+    "description": "Coleção completa dos 22 métodos gRPC atualmente expostos pela API Lixo Certo. A API é gRPC nativa, não REST. Importe os arquivos .proto de contratos/lixo_certo/v1 como definição de serviço no Postman e use grpc://{{grpc_host}}. Não contém tokens ou credenciais reais.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.environment.get(\"correlation_id\")) {",
+          "  pm.environment.set(\"correlation_id\", pm.variables.replaceIn(\"{{$guid}}\"));",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "grpc_host",
+      "value": "127.0.0.1:50051",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "id_usuario_externo",
+      "value": "usuario-postman-001",
+      "type": "string"
+    },
+    {
+      "key": "id_desafio",
+      "value": "00000000-0000-4000-8000-000000000001",
+      "type": "string"
+    },
+    {
+      "key": "id_questao",
+      "value": "00000000-0000-4000-8000-000000000001",
+      "type": "string"
+    },
+    {
+      "key": "id_alternativa",
+      "value": "00000000-0000-4000-8000-000000000001",
+      "type": "string"
+    },
+    {
+      "key": "id_sessao",
+      "value": "00000000-0000-4000-8000-000000000001",
+      "type": "string"
+    },
+    {
+      "key": "correlation_id",
+      "value": "postman-local",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 - Saúde",
+      "description": "1 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "Verificar",
+          "description": "Health check do serviço, PostgreSQL e Redis. Não exige autenticação.\n\nRPC: lixo_certo.v1.ServicoSaude/Verificar\nMensagem: VerificarSaudeRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoSaude/Verificar",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoSaude",
+                "Verificar"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 - Autenticação",
+      "description": "1 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "ObterIdentidadeAtual",
+          "description": "Retorna a identidade, papéis e permissões do JWT enviado em authorization.\n\nRPC: lixo_certo.v1.ServicoAutenticacao/ObterIdentidadeAtual\nMensagem: ObterIdentidadeAtualRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoAutenticacao/ObterIdentidadeAtual",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoAutenticacao",
+                "ObterIdentidadeAtual"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 - Identidade",
+      "description": "1 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "ObterIdentidadeInterna",
+          "description": "Consulta o usuário interno autenticado e exige status ativo.\n\nRPC: lixo_certo.v1.ServicoIdentidade/ObterIdentidadeInterna\nMensagem: ObterIdentidadeInternaRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoIdentidade/ObterIdentidadeInterna",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoIdentidade",
+                "ObterIdentidadeInterna"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 - Materiais",
+      "description": "1 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "ListarMateriais",
+          "description": "Lista materiais publicados com filtros e paginação. Método público.\n\nRPC: lixo_certo.v1.ServicoMateriais/ListarMateriais\nMensagem: ListarMateriaisRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"texto_pesquisa\": \"\",\n  \"categoria_material\": \"\",\n  \"numero_pagina\": 1,\n  \"tamanho_pagina\": 20\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoMateriais/ListarMateriais",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoMateriais",
+                "ListarMateriais"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 - Pontos de coleta",
+      "description": "1 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "ListarPontosColeta",
+          "description": "Lista pontos de coleta verificados por cidade e categoria. Método público.\n\nRPC: lixo_certo.v1.ServicoPontosColeta/ListarPontosColeta\nMensagem: ListarPontosColetaRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cidade_ponto_coleta\": \"João Pessoa\",\n  \"categoria_material\": \"vidro\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoPontosColeta/ListarPontosColeta",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoPontosColeta",
+                "ListarPontosColeta"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "06 - Questionários",
+      "description": "2 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "ListarQuestoes",
+          "description": "Lista questões publicadas sem expor a alternativa correta. Método público.\n\nRPC: lixo_certo.v1.ServicoQuestionarios/ListarQuestoes\nMensagem: ListarQuestoesRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numero_pagina\": 1,\n  \"tamanho_pagina\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoQuestionarios/ListarQuestoes",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoQuestionarios",
+                "ListarQuestoes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "EnviarRespostaQuestionario",
+          "description": "Envia uma resposta e usa o metadata x-id-usuario-externo para registrar a tentativa.\n\nRPC: lixo_certo.v1.ServicoQuestionarios/EnviarRespostaQuestionario\nMensagem: EnviarRespostaQuestionarioRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "x-id-usuario-externo",
+                "value": "{{id_usuario_externo}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_questao\": \"{{id_questao}}\",\n  \"id_alternativa\": \"{{id_alternativa}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoQuestionarios/EnviarRespostaQuestionario",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoQuestionarios",
+                "EnviarRespostaQuestionario"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "07 - Gamificação",
+      "description": "2 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "ObterProgressoUsuario",
+          "description": "Retorna o progresso do usuário indicado em x-id-usuario-externo.\n\nRPC: lixo_certo.v1.ServicoGamificacao/ObterProgressoUsuario\nMensagem: ObterProgressoUsuarioRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "x-id-usuario-externo",
+                "value": "{{id_usuario_externo}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoGamificacao/ObterProgressoUsuario",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoGamificacao",
+                "ObterProgressoUsuario"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ObterRanking",
+          "description": "Retorna o ranking anonimizado/pseudonimizado. Método público.\n\nRPC: lixo_certo.v1.ServicoGamificacao/ObterRanking\nMensagem: ObterRankingRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limite_resultado\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoGamificacao/ObterRanking",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoGamificacao",
+                "ObterRanking"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "08 - Desafios",
+      "description": "3 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "ListarDesafios",
+          "description": "Lista desafios para o usuário autenticado.\n\nRPC: lixo_certo.v1.ServicoDesafios/ListarDesafios\nMensagem: ListarDesafiosRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numero_pagina\": 1,\n  \"tamanho_pagina\": 20\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoDesafios/ListarDesafios",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoDesafios",
+                "ListarDesafios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ParticiparDesafio",
+          "description": "Registra a participação do usuário autenticado em um desafio.\n\nRPC: lixo_certo.v1.ServicoDesafios/ParticiparDesafio\nMensagem: ParticiparDesafioRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_desafio\": \"{{id_desafio}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoDesafios/ParticiparDesafio",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoDesafios",
+                "ParticiparDesafio"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RegistrarAcaoSustentavel",
+          "description": "Registra ação sustentável, atualiza progresso e pode concluir o desafio. Envia x-id-correlacao opcional.\n\nRPC: lixo_certo.v1.ServicoDesafios/RegistrarAcaoSustentavel\nMensagem: RegistrarAcaoSustentavelRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_desafio\": \"{{id_desafio}}\",\n  \"tipo_acao\": \"separar_residuos\",\n  \"descricao_acao\": \"Ação registrada pelo Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoDesafios/RegistrarAcaoSustentavel",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoDesafios",
+                "RegistrarAcaoSustentavel"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "09 - Avaliação de usabilidade",
+      "description": "2 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "EnviarAvaliacaoSus",
+          "description": "Submete avaliação SUS anônima. Exige consentimento e exatamente dez notas entre 1 e 5.\n\nRPC: lixo_certo.v1.ServicoAvaliacaoUsabilidade/EnviarAvaliacaoSus\nMensagem: EnviarAvaliacaoSusRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo_participante\": \"participante-postman-001\",\n  \"indica_consentimento\": true,\n  \"notas_itens\": [\n    3,\n    3,\n    3,\n    3,\n    3,\n    3,\n    3,\n    3,\n    3,\n    3\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoAvaliacaoUsabilidade/EnviarAvaliacaoSus",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoAvaliacaoUsabilidade",
+                "EnviarAvaliacaoSus"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ObterResultadosAgregados",
+          "description": "Consulta resultados agregados e exige a permissão avaliacao_usabilidade:consultar_agregados.\n\nRPC: lixo_certo.v1.ServicoAvaliacaoUsabilidade/ObterResultadosAgregados\nMensagem: ObterResultadosAgregadosRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoAvaliacaoUsabilidade/ObterResultadosAgregados",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoAvaliacaoUsabilidade",
+                "ObterResultadosAgregados"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "10 - Perfil",
+      "description": "2 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "ObterPerfilAtual",
+          "description": "Consulta o perfil do usuário autenticado.\n\nRPC: lixo_certo.v1.ServicoPerfil/ObterPerfilAtual\nMensagem: ObterPerfilAtualRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoPerfil/ObterPerfilAtual",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoPerfil",
+                "ObterPerfilAtual"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AtualizarPerfil",
+          "description": "Atualiza somente o nome do usuário autenticado.\n\nRPC: lixo_certo.v1.ServicoPerfil/AtualizarPerfil\nMensagem: AtualizarPerfilRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome_usuario\": \"Usuário Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoPerfil/AtualizarPerfil",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoPerfil",
+                "AtualizarPerfil"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "11 - Sessões",
+      "description": "3 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "ListarSessoes",
+          "description": "Lista as sessões do usuário autenticado. x-id-sessao é opcional para marcar a sessão atual.\n\nRPC: lixo_certo.v1.ServicoSessoes/ListarSessoes\nMensagem: ListarSessoesRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoSessoes/ListarSessoes",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoSessoes",
+                "ListarSessoes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RevogarSessao",
+          "description": "Revoga uma sessão pertencente ao próprio usuário autenticado.\n\nRPC: lixo_certo.v1.ServicoSessoes/RevogarSessao\nMensagem: RevogarSessaoRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_sessao\": \"{{id_sessao}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoSessoes/RevogarSessao",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoSessoes",
+                "RevogarSessao"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RevogarTodasSessoes",
+          "description": "Revoga todas as sessões do usuário autenticado.\n\nRPC: lixo_certo.v1.ServicoSessoes/RevogarTodasSessoes\nMensagem: RevogarTodasSessoesRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoSessoes/RevogarTodasSessoes",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoSessoes",
+                "RevogarTodasSessoes"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "12 - Auditoria",
+      "description": "2 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "RegistrarEventoAuditoria",
+          "description": "Registra evento associado ao usuário autenticado. O backend sanitiza detalhes sensíveis.\n\nRPC: lixo_certo.v1.ServicoAuditoria/RegistrarEventoAuditoria\nMensagem: RegistrarEventoAuditoriaRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipo_evento\": \"teste_postman\",\n  \"recurso_evento\": \"colecao\",\n  \"id_recurso\": \"postman-001\",\n  \"endereco_ip\": \"127.0.0.1\",\n  \"id_correlacao\": \"{{correlation_id}}\",\n  \"detalhes_evento_json\": \"{\\\"origem\\\":\\\"postman\\\",\\\"ambiente\\\":\\\"desenvolvimento\\\"}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoAuditoria/RegistrarEventoAuditoria",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoAuditoria",
+                "RegistrarEventoAuditoria"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ListarAuditoria",
+          "description": "Lista auditoria e exige a permissão auditoria:consultar.\n\nRPC: lixo_certo.v1.ServicoAuditoria/ListarAuditoria\nMensagem: ListarAuditoriaRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipo_evento\": \"\",\n  \"limite_resultado\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoAuditoria/ListarAuditoria",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoAuditoria",
+                "ListarAuditoria"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "13 - Administração",
+      "description": "1 método(s) gRPC do serviço Lixo Certo.",
+      "item": [
+        {
+          "name": "ObterResumoAdministrativo",
+          "description": "Consulta resumo administrativo e exige a permissão administracao:consultar.\n\nRPC: lixo_certo.v1.ServicoAdministracao/ObterResumoAdministrativo\nMensagem: ObterResumoAdministrativoRequisicao.",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/grpc+json",
+                "type": "text"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-id-correlacao",
+                "value": "{{correlation_id}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-id-sessao",
+                "value": "{{id_sessao}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "grpc://{{grpc_host}}/lixo_certo.v1.ServicoAdministracao/ObterResumoAdministrativo",
+              "protocol": "grpc",
+              "host": [
+                "{{grpc_host}}"
+              ],
+              "path": [
+                "lixo_certo.v1.ServicoAdministracao",
+                "ObterResumoAdministrativo"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
