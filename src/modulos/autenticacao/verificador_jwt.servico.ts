@@ -40,11 +40,20 @@ export class VerificadorJwtServico {
       this.urlChaves = enderecoJwks;
     }
 
-    let diagnosticoIdentidade = {
+    let diagnosticoIdentidade: {
+      jwtVerificado: boolean;
+      sub: string;
+      email: string;
+      usuarioPreferido: string;
+      fonteIdExterno: string;
+      fallbackConfigurado: boolean;
+      ambiente: string;
+    } = {
       jwtVerificado: false,
       sub: 'não verificado',
       email: 'não verificado',
       usuarioPreferido: 'não verificado',
+      fonteIdExterno: 'não verificado',
       fallbackConfigurado: Boolean(process.env.DOMINIO_EMAIL_OIDC_DESENVOLVIMENTO),
       ambiente: process.env.AMBIENTE_EXECUCAO ?? '(ausente)',
     };
@@ -55,13 +64,14 @@ export class VerificadorJwtServico {
         audience: audiencia,
         algorithms: ['RS256', 'ES256'],
       });
-      const idExterno = resultado.payload.sub;
+      const idExterno = this.obterIdExterno(resultado.payload);
       const email = this.obterEmail(resultado.payload);
       diagnosticoIdentidade = {
         jwtVerificado: true,
-        sub: idExterno ? 'presente' : 'ausente',
+        sub: resultado.payload.sub ? 'presente' : 'ausente',
         email: resultado.payload.email ? 'presente' : 'ausente',
         usuarioPreferido: resultado.payload.preferred_username ? 'presente' : 'ausente',
+        fonteIdExterno: resultado.payload.sub ? 'sub' : idExterno ? 'preferred_username_desenvolvimento' : 'ausente',
         fallbackConfigurado: Boolean(process.env.DOMINIO_EMAIL_OIDC_DESENVOLVIMENTO),
         ambiente: process.env.AMBIENTE_EXECUCAO ?? '(ausente)',
       };
@@ -103,6 +113,17 @@ export class VerificadorJwtServico {
     if (typeof payload.name === 'string' && payload.name.trim()) return payload.name;
     if (typeof payload.preferred_username === 'string' && payload.preferred_username.trim()) return payload.preferred_username;
     return payload.email!;
+  }
+
+  private obterIdExterno(payload: DadosToken): string | null {
+    if (typeof payload.sub === 'string' && payload.sub.trim()) return payload.sub.trim();
+
+    const usuario = typeof payload.preferred_username === 'string' ? payload.preferred_username.trim() : '';
+    if (process.env.AMBIENTE_EXECUCAO === 'desenvolvimento' && usuario) {
+      return `desenvolvimento:${usuario}`;
+    }
+
+    return null;
   }
 
   private obterEmail(payload: DadosToken): string | null {

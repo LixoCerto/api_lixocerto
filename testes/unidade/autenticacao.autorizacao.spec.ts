@@ -26,4 +26,23 @@ describe('autenticacao e autorizacao', () => {
     expect(autorizacao.temPermissao(usuario, 'materiais:escrever')).toBe(false);
     expect(autorizacao.temPermissao({ ...usuario, papeis: ['administrador'], permissoes: [] }, 'auditoria:consultar')).toBe(true);
   });
+
+  it('usa preferred_username somente como identificador local de desenvolvimento', () => {
+    const verificador = new VerificadorJwtServico() as unknown as {
+      obterIdExterno: (payload: { sub?: string; preferred_username?: string }) => string | null;
+    };
+    const ambienteAnterior = process.env.AMBIENTE_EXECUCAO;
+
+    try {
+      process.env.AMBIENTE_EXECUCAO = 'desenvolvimento';
+      expect(verificador.obterIdExterno({ preferred_username: 'administrador' })).toBe('desenvolvimento:administrador');
+      expect(verificador.obterIdExterno({ sub: 'id-real', preferred_username: 'administrador' })).toBe('id-real');
+
+      process.env.AMBIENTE_EXECUCAO = 'producao';
+      expect(verificador.obterIdExterno({ preferred_username: 'administrador' })).toBeNull();
+    } finally {
+      if (ambienteAnterior === undefined) delete process.env.AMBIENTE_EXECUCAO;
+      else process.env.AMBIENTE_EXECUCAO = ambienteAnterior;
+    }
+  });
 });
