@@ -62,7 +62,22 @@ try {
     'SELECT lcr_usr_id_usuario, lcr_usr_nome, lcr_usr_status_usuario FROM lcr_usuarios WHERE lcr_usr_email = $1',
     [email],
   );
-  if (usuario.rowCount === 0) encerrar(`Nenhuma conta encontrada para ${email}.`);
+  if (usuario.rowCount === 0) {
+    const existentes = await banco.query(
+      `SELECT lcr_usr_email, lcr_usr_status_usuario FROM lcr_usuarios
+       ORDER BY lcr_usr_data_criacao DESC LIMIT 10`,
+    );
+    if (existentes.rowCount === 0) {
+      encerrar(
+        `Nenhuma conta encontrada para ${email} e o banco não possui usuários cadastrados.\n` +
+          '        Crie uma conta pela interface (http://localhost:3000) e tente de novo.',
+      );
+    }
+    const lista = existentes.rows
+      .map(linha => `        - ${linha.lcr_usr_email} (${linha.lcr_usr_status_usuario})`)
+      .join('\n');
+    encerrar(`Nenhuma conta encontrada para ${email}.\n\n        Contas existentes (mais recentes primeiro):\n${lista}`);
+  }
   if (usuario.rows[0].lcr_usr_status_usuario !== 'ativo') {
     encerrar(`A conta ${email} está com status "${usuario.rows[0].lcr_usr_status_usuario}".`);
   }
