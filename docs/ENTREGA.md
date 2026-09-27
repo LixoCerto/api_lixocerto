@@ -41,7 +41,7 @@ lcr_pco_status_verificacao
 - definição raiz Protobuf, ambiente e catálogo dos 26 métodos para criação de requisições gRPC nativas no Postman em `docs/postman/`; a coleção nativa é salva pelo cliente Postman;
 - configuração de ambiente sem credenciais reais em `.env.exemplo`.
 
-A gestão Docker foi retirada da API e está no projeto separado `infra_lixocerto`, responsável pelo Redis local. O PostgreSQL da aplicação é externo e configurado por `URL_BANCO_DADOS`.
+A gestão Docker foi retirada da API e está no projeto separado `infra_lixocerto`, responsável pelo Redis local. O PostgreSQL da aplicação é externo e configurado por `BANCO_DADOS_HOST/PORTA/USUARIO/SENHA/NOME`.
 
 ## Migrations
 

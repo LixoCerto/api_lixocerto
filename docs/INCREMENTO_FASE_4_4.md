@@ -40,4 +40,4 @@ pnpm tipos
 pnpm compilar
 ```
 
-As variáveis `URL_BANCO_DADOS_TESTE` e `URL_REDIS_TESTE` devem apontar para serviços de teste separados. Nenhum segredo de produção foi incluído no repositório.
+As variáveis `BANCO_DADOS_TESTE_HOST/PORTA/USUARIO/SENHA/NOME` e `REDIS_TESTE_HOST/PORT/PASSWORD/DB` devem apontar para serviços de teste separados. Nenhum segredo de produção foi incluído no repositório.

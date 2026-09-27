@@ -12,12 +12,26 @@ VERSAO_API=0.1.0
 PORTA_GRPC=50051
 
 # PostgreSQL externo; não usar o PostgreSQL do projeto de infraestrutura.
-URL_BANCO_DADOS=postgres://postgres:SENHA_CODIFICADA@177.223.51.10:5432/lixocerto
-URL_BANCO_DADOS_TESTE=postgres://postgres:SENHA_CODIFICADA@177.223.51.10:5432/lixocerto_teste
+BANCO_DADOS_HOST=177.223.51.10
+BANCO_DADOS_PORTA=5432
+BANCO_DADOS_USUARIO=postgres
+BANCO_DADOS_SENHA=SENHA_LOCAL
+BANCO_DADOS_NOME=lixocerto
+BANCO_DADOS_TESTE_HOST=177.223.51.10
+BANCO_DADOS_TESTE_PORTA=5432
+BANCO_DADOS_TESTE_USUARIO=postgres
+BANCO_DADOS_TESTE_SENHA=SENHA_LOCAL
+BANCO_DADOS_TESTE_NOME=lixocerto_teste
 
 # Redis local gerenciado por ../infra_lixocerto.
-URL_REDIS=redis://:SENHA_REDIS_CODIFICADA@127.0.0.1:6379
-URL_REDIS_TESTE=redis://:SENHA_REDIS_CODIFICADA@127.0.0.1:6379/15
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
+REDIS_PASSWORD=SENHA_REDIS_LOCAL
+REDIS_DB=0
+REDIS_TESTE_HOST=127.0.0.1
+REDIS_TESTE_PORT=6379
+REDIS_TESTE_PASSWORD=SENHA_REDIS_LOCAL
+REDIS_TESTE_DB=15
 ORIGENS_PERMITIDAS=http://localhost:3000
 
 # Autenticação própria da API; gere um valor aleatório com pelo menos 32 caracteres.
@@ -28,7 +42,7 @@ SEGREDO_HASH_PARTICIPANTE=gerar-com-secrets-manager-com-no-minimo-32-caracteres
 CAMINHO_PROTO=contratos/lixo_certo/v1/servico_saude.proto
 ```
 
-As senhas precisam ser codificadas na URL quando possuírem caracteres reservados. Nunca copie a senha do banco ou do Redis para o GitHub, Postman ou frontend.
+As senhas são informadas diretamente em variáveis separadas; use um gerenciador de segredos em produção. Nunca copie a senha do banco ou do Redis para o GitHub, Postman ou frontend.
 
 ## Infraestrutura
 
@@ -58,4 +72,4 @@ A porta gRPC padrão é `50051`. O frontend deve utilizar Connect/gRPC-Web ou um
 
 ## Testes
 
-Use um banco de testes separado em `URL_BANCO_DADOS_TESTE`. Não execute os testes de integração apontando para o banco externo principal, pois eles criam e removem registros de teste.
+Use um banco de testes separado em `BANCO_DADOS_TESTE_HOST/PORTA/USUARIO/SENHA/NOME`. Não execute os testes de integração apontando para o banco externo principal, pois eles criam e removem registros de teste.

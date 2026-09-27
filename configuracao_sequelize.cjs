@@ -1,20 +1,30 @@
-require('dotenv').config({ path: '.env' });
+require("dotenv").config({ path: ".env" });
+
+const banco = {
+  host: process.env.BANCO_DADOS_HOST,
+  port: Number.parseInt(process.env.BANCO_DADOS_PORTA || "5432", 10),
+  username: process.env.BANCO_DADOS_USUARIO,
+  password: process.env.BANCO_DADOS_SENHA,
+  database: process.env.BANCO_DADOS_NOME,
+  dialect: "postgres",
+  logging: false,
+};
 
 module.exports = {
-  development: {
-    url: process.env.URL_BANCO_DADOS,
-    dialect: 'postgres',
-    logging: false,
-  },
+  development: banco,
   test: {
-    url: process.env.URL_BANCO_DADOS_TESTE || process.env.URL_BANCO_DADOS,
-    dialect: 'postgres',
-    logging: false,
+    ...banco,
+    host: process.env.BANCO_DADOS_TESTE_HOST || banco.host,
+    port: Number.parseInt(
+      process.env.BANCO_DADOS_TESTE_PORTA || String(banco.port),
+      10,
+    ),
+    username: process.env.BANCO_DADOS_TESTE_USUARIO || banco.username,
+    password: process.env.BANCO_DADOS_TESTE_SENHA || banco.password,
+    database: process.env.BANCO_DADOS_TESTE_NOME || banco.database,
   },
   production: {
-    url: process.env.URL_BANCO_DADOS,
-    dialect: 'postgres',
-    logging: false,
+    ...banco,
     dialectOptions: { ssl: { require: true, rejectUnauthorized: true } },
   },
 };

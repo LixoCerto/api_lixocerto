@@ -22,7 +22,7 @@ pnpm compilar
 pnpm migrar
 ```
 
-As migrations exigem PostgreSQL disponível e uma variável `URL_BANCO_DADOS` configurada. O projeto não utiliza `sequelize.sync()`; a estrutura do banco é controlada exclusivamente por migrations.
+As migrations exigem PostgreSQL disponível e uma variável `BANCO_DADOS_HOST/PORTA/USUARIO/SENHA/NOME` configurada. O projeto não utiliza `sequelize.sync()`; a estrutura do banco é controlada exclusivamente por migrations.
 
 ## Segurança
 
