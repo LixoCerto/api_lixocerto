@@ -3,6 +3,3 @@ dist/
 coverage/
 relatorios/
 *.log
-.env
-.env.*
-!.env.exemplo
