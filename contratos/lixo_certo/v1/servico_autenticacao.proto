@@ -1,8 +1,59 @@
 syntax = "proto3";
 package lixo_certo.v1;
 
-message ObterIdentidadeAtualRequisicao {
+message IdentidadeAutenticada {
+  string id_usuario = 1;
+  string nome_usuario = 2;
+  string email_usuario = 3;
+  repeated string papeis_usuario = 4;
+  repeated string permissoes_usuario = 5;
 }
+
+message CadastrarUsuarioRequisicao {
+  string nome_usuario = 1;
+  string email_usuario = 2;
+  string senha_usuario = 3;
+}
+
+message EntrarRequisicao {
+  string email_usuario = 1;
+  string senha_usuario = 2;
+}
+
+message RenovarTokenRequisicao {
+  string token_atualizacao = 1;
+}
+
+message SairRequisicao {
+  string token_atualizacao = 1;
+}
+
+message CadastrarUsuarioResposta {
+  string token_acesso = 1;
+  string token_atualizacao = 2;
+  int32 expira_em_segundos = 3;
+  IdentidadeAutenticada identidade = 4;
+}
+
+message EntrarResposta {
+  string token_acesso = 1;
+  string token_atualizacao = 2;
+  int32 expira_em_segundos = 3;
+  IdentidadeAutenticada identidade = 4;
+}
+
+message RenovarTokenResposta {
+  string token_acesso = 1;
+  string token_atualizacao = 2;
+  int32 expira_em_segundos = 3;
+  IdentidadeAutenticada identidade = 4;
+}
+
+message SairResposta {
+  bool sessao_revogada = 1;
+}
+
+message ObterIdentidadeAtualRequisicao {}
 
 message ObterIdentidadeAtualResposta {
   string id_usuario = 1;
@@ -13,5 +64,9 @@ message ObterIdentidadeAtualResposta {
 }
 
 service ServicoAutenticacao {
+  rpc CadastrarUsuario(CadastrarUsuarioRequisicao) returns (CadastrarUsuarioResposta);
+  rpc Entrar(EntrarRequisicao) returns (EntrarResposta);
+  rpc RenovarToken(RenovarTokenRequisicao) returns (RenovarTokenResposta);
+  rpc Sair(SairRequisicao) returns (SairResposta);
   rpc ObterIdentidadeAtual(ObterIdentidadeAtualRequisicao) returns (ObterIdentidadeAtualResposta);
 }

@@ -20,10 +20,11 @@ URL_REDIS=redis://:SENHA_REDIS_CODIFICADA@127.0.0.1:6379
 URL_REDIS_TESTE=redis://:SENHA_REDIS_CODIFICADA@127.0.0.1:6379/15
 ORIGENS_PERMITIDAS=http://localhost:3000
 
-EMISSOR_OIDC=https://exemplo.invalid
-AUDIENCIA_OIDC=lixo-certo-api
-ENDERECO_JWKS=https://exemplo.invalid/.well-known/jwks.json
-SEGREDO_HASH_PARTICIPANTE=gerar-com-secrets-manager
+# Autenticação própria da API; gere um valor aleatório com pelo menos 32 caracteres.
+SEGREDO_JWT=gerar-com-secrets-manager-com-no-minimo-32-caracteres
+EMISSOR_JWT=lixo-certo-api
+AUDIENCIA_JWT=lixo-certo-client
+SEGREDO_HASH_PARTICIPANTE=gerar-com-secrets-manager-com-no-minimo-32-caracteres
 CAMINHO_PROTO=contratos/lixo_certo/v1/servico_saude.proto
 ```
 
@@ -53,7 +54,7 @@ pnpm semear
 pnpm desenvolver
 ```
 
-A porta gRPC padrão é `50051`. O frontend deve utilizar Connect/gRPC-Web ou um gateway apropriado para consumo pelo navegador.
+A porta gRPC padrão é `50051`. O frontend deve utilizar Connect/gRPC-Web ou um gateway apropriado para consumo pelo navegador. O ciclo de conta local usa `CadastrarUsuario`, `Entrar`, `RenovarToken` e `Sair`; as chamadas protegidas usam `authorization: Bearer <token_acesso>`.
 
 ## Testes
 

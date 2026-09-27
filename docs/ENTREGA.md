@@ -38,7 +38,7 @@ lcr_pco_status_verificacao
 - 21 migrations Sequelize no diretório `banco/migracoes/`;
 - dados iniciais de papéis, permissões e desafios em `banco/dados_iniciais/`;
 - testes unitários, integração PostgreSQL/Redis e E2E gRPC;
-- definição raiz Protobuf, ambiente e catálogo dos 22 métodos para criação de requisições gRPC nativas no Postman em `docs/postman/`; a coleção nativa é salva pelo cliente Postman;
+- definição raiz Protobuf, ambiente e catálogo dos 26 métodos para criação de requisições gRPC nativas no Postman em `docs/postman/`; a coleção nativa é salva pelo cliente Postman;
 - configuração de ambiente sem credenciais reais em `.env.exemplo`.
 
 A gestão Docker foi retirada da API e está no projeto separado `infra_lixocerto`, responsável pelo Redis local. O PostgreSQL da aplicação é externo e configurado por `URL_BANCO_DADOS`.

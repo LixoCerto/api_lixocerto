@@ -1,11 +1,19 @@
+import { randomUUID } from 'node:crypto';
 import { Inject, Injectable } from '@nestjs/common';
 import { QueryTypes, Sequelize } from 'sequelize';
 import { UsuarioAutenticado } from '../../comum/autenticacao/usuario_autenticado.js';
 import { ModeloUsuario } from '../../infraestrutura/banco/modelos/usuario.modelo.js';
 
 const PAPEIS_PERMITIDOS = ['usuario', 'pesquisador', 'revisor', 'administrador'] as const;
-
 type PapelPermitido = (typeof PAPEIS_PERMITIDOS)[number];
+
+export interface CredencialUsuarioLocal {
+  idExterno: string;
+  nome: string;
+  email: string;
+  hashSenha: string | null;
+  status: 'ativo' | 'bloqueado' | 'anonimizado';
+}
 
 @Injectable()
 export class ServicoUsuarios {
@@ -17,6 +25,85 @@ export class ServicoUsuarios {
     return usuario?.lcr_usr_id_usuario ?? null;
   }
 
+  async obterCredencialPorEmail(email: string): Promise<CredencialUsuarioLocal | null> {
+    if (!this.banco) return null;
+    const usuario = await ModeloUsuario.findOne({ where: { lcr_usr_email: email.trim().toLowerCase() } });
+    if (!usuario) return null;
+    return {
+      idExterno: usuario.lcr_usr_id_externo,
+      nome: usuario.lcr_usr_nome,
+      email: usuario.lcr_usr_email,
+      hashSenha: usuario.lcr_usr_hash_senha,
+      status: usuario.lcr_usr_status_usuario,
+    };
+  }
+
+  async cadastrarUsuarioLocal(dados: { nome: string; email: string; hashSenha: string }): Promise<UsuarioAutenticado> {
+    if (!this.banco) throw new Error('Banco de dados indisponivel');
+    const email = dados.email.trim().toLowerCase();
+    const existente = await ModeloUsuario.findOne({ where: { lcr_usr_email: email } });
+    if (existente) throw new Error('Email ja cadastrado');
+
+    const usuario = await ModeloUsuario.create({
+      lcr_usr_id_externo: `local:${randomUUID()}`,
+      lcr_usr_nome: dados.nome.trim(),
+      lcr_usr_email: email,
+      lcr_usr_hash_senha: dados.hashSenha,
+      lcr_usr_status_usuario: 'ativo',
+      lcr_usr_data_ultimo_acesso: new Date(),
+    });
+
+    const papel = await this.banco.query<{ lcr_pap_id_papel: string }>(
+      `SELECT lcr_pap_id_papel
+       FROM lcr_papeis
+       WHERE lcr_pap_nome_papel = 'usuario' AND lcr_pap_status_papel = 'ativo'
+       LIMIT 1`,
+      { type: QueryTypes.SELECT },
+    );
+    if (!papel[0]) throw new Error('Papel usuario nao configurado');
+    await this.banco.query(
+      `INSERT INTO lcr_usuarios_papeis (
+        lcr_upr_id_usuario_papel, lcr_upr_id_usuario, lcr_upr_id_papel, lcr_upr_data_atribuicao
+      ) VALUES (gen_random_uuid(), :idUsuario, :idPapel, CURRENT_TIMESTAMP)`,
+      { replacements: { idUsuario: usuario.lcr_usr_id_usuario, idPapel: papel[0].lcr_pap_id_papel } },
+    );
+    return this.obterIdentidadeLocal(usuario.lcr_usr_id_externo) as Promise<UsuarioAutenticado>;
+  }
+
+  async obterIdentidadeLocal(idExterno: string): Promise<UsuarioAutenticado | null> {
+    if (!this.banco) return null;
+    const usuario = await ModeloUsuario.findOne({ where: { lcr_usr_id_externo: idExterno } });
+    if (!usuario) return null;
+    if (usuario.lcr_usr_status_usuario !== 'ativo') throw new Error('Usuario sem acesso ativo');
+
+    const papeis = await this.banco.query<{ lcr_pap_nome_papel: string }>(
+      `SELECT papel.lcr_pap_nome_papel
+       FROM lcr_papeis papel
+       INNER JOIN lcr_usuarios_papeis relacao ON relacao.lcr_upr_id_papel = papel.lcr_pap_id_papel
+       WHERE relacao.lcr_upr_id_usuario = :idUsuario AND papel.lcr_pap_status_papel = 'ativo'
+       ORDER BY CASE papel.lcr_pap_nome_papel
+         WHEN 'administrador' THEN 1 WHEN 'revisor' THEN 2 WHEN 'pesquisador' THEN 3
+         WHEN 'usuario' THEN 4 ELSE 5 END`,
+      { replacements: { idUsuario: usuario.lcr_usr_id_usuario }, type: QueryTypes.SELECT },
+    );
+    const permissoes = await this.banco.query<{ lcr_prm_codigo_permissao: string }>(
+      `SELECT DISTINCT permissao.lcr_prm_codigo_permissao
+       FROM lcr_permissoes permissao
+       INNER JOIN lcr_papeis_permissoes papel_permissao ON papel_permissao.lcr_ppm_id_permissao = permissao.lcr_prm_id_permissao
+       INNER JOIN lcr_usuarios_papeis relacao ON relacao.lcr_upr_id_papel = papel_permissao.lcr_ppm_id_papel
+       WHERE relacao.lcr_upr_id_usuario = :idUsuario AND permissao.lcr_prm_status_permissao = 'ativo'`,
+      { replacements: { idUsuario: usuario.lcr_usr_id_usuario }, type: QueryTypes.SELECT },
+    );
+    await usuario.update({ lcr_usr_data_ultimo_acesso: new Date() });
+    return {
+      idExterno: usuario.lcr_usr_id_externo,
+      nome: usuario.lcr_usr_nome,
+      email: usuario.lcr_usr_email,
+      papeis: papeis.map(item => item.lcr_pap_nome_papel),
+      permissoes: permissoes.map(item => item.lcr_prm_codigo_permissao),
+    };
+  }
+
   async sincronizarUsuario(identidade: UsuarioAutenticado): Promise<UsuarioAutenticado> {
     if (!this.banco) return identidade;
 
@@ -26,20 +113,13 @@ export class ServicoUsuarios {
         lcr_usr_id_externo: identidade.idExterno,
         lcr_usr_nome: identidade.nome,
         lcr_usr_email: identidade.email,
+        lcr_usr_hash_senha: null,
         lcr_usr_status_usuario: 'ativo',
         lcr_usr_data_ultimo_acesso: new Date(),
       },
     });
-
-    if (usuario.lcr_usr_status_usuario !== 'ativo') {
-      throw new Error('Usuario sem acesso ativo');
-    }
-
-    await usuario.update({
-      lcr_usr_nome: identidade.nome,
-      lcr_usr_email: identidade.email,
-      lcr_usr_data_ultimo_acesso: new Date(),
-    });
+    if (usuario.lcr_usr_status_usuario !== 'ativo') throw new Error('Usuario sem acesso ativo');
+    await usuario.update({ lcr_usr_nome: identidade.nome, lcr_usr_email: identidade.email, lcr_usr_data_ultimo_acesso: new Date() });
 
     const papeisSolicitados = new Set<PapelPermitido>(['usuario']);
     for (const papel of identidade.papeis) {
@@ -47,69 +127,27 @@ export class ServicoUsuarios {
     }
     const nomesPapeis = [...papeisSolicitados];
     const papeisBanco = await this.banco.query<{ lcr_pap_id_papel: string; lcr_pap_nome_papel: PapelPermitido }>(
-      `SELECT lcr_pap_id_papel, lcr_pap_nome_papel
-       FROM lcr_papeis
-       WHERE lcr_pap_nome_papel IN (:nomesPapeis)
-         AND lcr_pap_status_papel = 'ativo'`,
+      `SELECT lcr_pap_id_papel, lcr_pap_nome_papel FROM lcr_papeis
+       WHERE lcr_pap_nome_papel IN (:nomesPapeis) AND lcr_pap_status_papel = 'ativo'`,
       { replacements: { nomesPapeis }, type: QueryTypes.SELECT },
     );
-    const idsPapeis = papeisBanco.map(papel => papel.lcr_pap_id_papel);
-
+    const idsPapeis = papeisBanco.map(item => item.lcr_pap_id_papel);
     if (idsPapeis.length > 0) {
       await this.banco.query(
-        `DELETE FROM lcr_usuarios_papeis relacao
-         WHERE relacao.lcr_upr_id_usuario = :idUsuario
-           AND relacao.lcr_upr_id_papel NOT IN (:idsPapeis)`,
+        `DELETE FROM lcr_usuarios_papeis relacao WHERE relacao.lcr_upr_id_usuario = :idUsuario
+         AND relacao.lcr_upr_id_papel NOT IN (:idsPapeis)`,
         { replacements: { idUsuario: usuario.lcr_usr_id_usuario, idsPapeis } },
       );
-
       for (const idPapel of idsPapeis) {
         await this.banco.query(
-          `INSERT INTO lcr_usuarios_papeis (
-            lcr_upr_id_usuario_papel,
-            lcr_upr_id_usuario,
-            lcr_upr_id_papel,
-            lcr_upr_data_atribuicao
-          )
-          SELECT gen_random_uuid(), :idUsuario, :idPapel, CURRENT_TIMESTAMP
-          WHERE NOT EXISTS (
-            SELECT 1 FROM lcr_usuarios_papeis existente
-            WHERE existente.lcr_upr_id_usuario = :idUsuario
-              AND existente.lcr_upr_id_papel = :idPapel
-          )`,
+          `INSERT INTO lcr_usuarios_papeis (lcr_upr_id_usuario_papel, lcr_upr_id_usuario, lcr_upr_id_papel, lcr_upr_data_atribuicao)
+           SELECT gen_random_uuid(), :idUsuario, :idPapel, CURRENT_TIMESTAMP
+           WHERE NOT EXISTS (SELECT 1 FROM lcr_usuarios_papeis existente
+             WHERE existente.lcr_upr_id_usuario = :idUsuario AND existente.lcr_upr_id_papel = :idPapel)`,
           { replacements: { idUsuario: usuario.lcr_usr_id_usuario, idPapel } },
         );
       }
     }
-
-    const papeis = await this.banco.query<{ lcr_pap_nome_papel: string }>(
-      `SELECT papel.lcr_pap_nome_papel
-       FROM lcr_papeis papel
-       INNER JOIN lcr_usuarios_papeis relacao ON relacao.lcr_upr_id_papel = papel.lcr_pap_id_papel
-       WHERE relacao.lcr_upr_id_usuario = :idUsuario AND papel.lcr_pap_status_papel = 'ativo'
-       ORDER BY CASE papel.lcr_pap_nome_papel
-         WHEN 'administrador' THEN 1
-         WHEN 'revisor' THEN 2
-         WHEN 'pesquisador' THEN 3
-         WHEN 'usuario' THEN 4
-         ELSE 5
-       END`,
-      { replacements: { idUsuario: usuario.lcr_usr_id_usuario }, type: QueryTypes.SELECT },
-    );
-    const permissoes = await this.banco.query<{ lcr_prm_codigo_permissao: string }>(
-      `SELECT DISTINCT permissao.lcr_prm_codigo_permissao
-       FROM lcr_permissoes permissao
-       INNER JOIN lcr_papeis_permissoes papel_permissao ON papel_permissao.lcr_ppm_id_permissao = permissao.lcr_prm_id_permissao
-       INNER JOIN lcr_usuarios_papeis relacao ON relacao.lcr_upr_id_papel = papel_permissao.lcr_ppm_id_papel
-       WHERE relacao.lcr_upr_id_usuario = :idUsuario
-         AND permissao.lcr_prm_status_permissao = 'ativo'`,
-      { replacements: { idUsuario: usuario.lcr_usr_id_usuario }, type: QueryTypes.SELECT },
-    );
-
-    return {
-      ...identidade,
-      papeis: papeis.map(papel => papel.lcr_pap_nome_papel),
-      permissoes: permissoes.map(permissao => permissao.lcr_prm_codigo_permissao),
-    };
+    return (await this.obterIdentidadeLocal(identidade.idExterno)) ?? identidade;
   }
 }

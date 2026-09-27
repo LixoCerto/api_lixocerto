@@ -1,18 +1,72 @@
 import { Controller } from '@nestjs/common';
 import { Metadata } from '@grpc/grpc-js';
 import { GrpcMethod } from '@nestjs/microservices';
-import { ServicoAutenticacao } from './autenticacao.servico.js';
+import { ContextoSessao, RespostaAutenticacao, ServicoAutenticacao } from './autenticacao.servico.js';
+
+interface RequisicaoCadastro {
+  nome_usuario?: string;
+  email_usuario?: string;
+  senha_usuario?: string;
+}
+
+interface RequisicaoLogin {
+  email_usuario?: string;
+  senha_usuario?: string;
+}
+
+interface RequisicaoTokenAtualizacao {
+  token_atualizacao?: string;
+}
 
 @Controller()
 export class ControladorGrpcAutenticacao {
   constructor(private readonly servico: ServicoAutenticacao) {}
 
+  @GrpcMethod('ServicoAutenticacao', 'CadastrarUsuario')
+  async cadastrarUsuario(requisicao: RequisicaoCadastro, metadados: Metadata) {
+    return this.mapearResposta(await this.servico.cadastrarUsuario(
+      requisicao.nome_usuario ?? '',
+      requisicao.email_usuario ?? '',
+      requisicao.senha_usuario ?? '',
+      this.obterContexto(metadados),
+    ));
+  }
+
+  @GrpcMethod('ServicoAutenticacao', 'Entrar')
+  async entrar(requisicao: RequisicaoLogin, metadados: Metadata) {
+    return this.mapearResposta(await this.servico.entrar(
+      requisicao.email_usuario ?? '',
+      requisicao.senha_usuario ?? '',
+      this.obterContexto(metadados),
+    ));
+  }
+
+  @GrpcMethod('ServicoAutenticacao', 'RenovarToken')
+  async renovarToken(requisicao: RequisicaoTokenAtualizacao, metadados: Metadata) {
+    return this.mapearResposta(await this.servico.renovarToken(requisicao.token_atualizacao ?? '', this.obterContexto(metadados)));
+  }
+
+  @GrpcMethod('ServicoAutenticacao', 'Sair')
+  async sair(requisicao: RequisicaoTokenAtualizacao) {
+    return { sessao_revogada: await this.servico.sair(requisicao.token_atualizacao ?? '') };
+  }
+
   @GrpcMethod('ServicoAutenticacao', 'ObterIdentidadeAtual')
   async obterIdentidadeAtual(_requisicao: unknown, metadados: Metadata) {
-    const valor = metadados.get('authorization')[0];
-    const autorizacao = Buffer.isBuffer(valor) ? valor.toString('utf8') : typeof valor === 'string' ? valor : undefined;
-    const identidade = await this.servico.obterIdentidadeAtual(autorizacao);
+    const identidade = await this.servico.obterIdentidadeAtual(this.obterMetadado(metadados, 'authorization'));
+    return this.mapearIdentidade(identidade);
+  }
 
+  private mapearResposta(resposta: RespostaAutenticacao) {
+    return {
+      token_acesso: resposta.tokenAcesso,
+      token_atualizacao: resposta.tokenAtualizacao,
+      expira_em_segundos: resposta.expiraEmSegundos,
+      identidade: this.mapearIdentidade(resposta.identidade),
+    };
+  }
+
+  private mapearIdentidade(identidade: RespostaAutenticacao['identidade']) {
     return {
       id_usuario: identidade.idExterno,
       nome_usuario: identidade.nome,
@@ -20,5 +74,17 @@ export class ControladorGrpcAutenticacao {
       papeis_usuario: identidade.papeis,
       permissoes_usuario: identidade.permissoes,
     };
+  }
+
+  private obterContexto(metadados: Metadata): ContextoSessao {
+    return {
+      enderecoIp: this.obterMetadado(metadados, 'x-forwarded-for') ?? this.obterMetadado(metadados, 'x-real-ip'),
+      agenteUsuario: this.obterMetadado(metadados, 'user-agent'),
+    };
+  }
+
+  private obterMetadado(metadados: Metadata, nome: string): string | undefined {
+    const valor = metadados.get(nome)[0];
+    return Buffer.isBuffer(valor) ? valor.toString('utf8') : typeof valor === 'string' ? valor : undefined;
   }
 }

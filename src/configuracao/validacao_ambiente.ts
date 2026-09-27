@@ -1,13 +1,11 @@
 export const nomesVariaveisObrigatorias = [
   'URL_BANCO_DADOS',
   'URL_REDIS',
-  'EMISSOR_OIDC',
-  'AUDIENCIA_OIDC',
-  'ENDERECO_JWKS',
   'SEGREDO_HASH_PARTICIPANTE',
+  'SEGREDO_JWT',
 ] as const;
 
-const variaveisUrl = ['URL_BANCO_DADOS', 'URL_REDIS', 'EMISSOR_OIDC', 'ENDERECO_JWKS'] as const;
+const variaveisUrl = ['URL_BANCO_DADOS', 'URL_REDIS'] as const;
 
 export function validarAmbiente(ambiente: NodeJS.ProcessEnv): void {
   if (ambiente.AMBIENTE_EXECUCAO !== 'producao') return;
@@ -30,5 +28,8 @@ export function validarAmbiente(ambiente: NodeJS.ProcessEnv): void {
   if (urlsInvalidas.length > 0) throw new Error(`URLs invalidas: ${urlsInvalidas.join(', ')}`);
   if ((ambiente.SEGREDO_HASH_PARTICIPANTE?.length ?? 0) < 32) {
     throw new Error('SEGREDO_HASH_PARTICIPANTE deve possuir pelo menos 32 caracteres');
+  }
+  if ((ambiente.SEGREDO_JWT?.length ?? 0) < 32) {
+    throw new Error('SEGREDO_JWT deve possuir pelo menos 32 caracteres');
   }
 }

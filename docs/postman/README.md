@@ -1,14 +1,17 @@
 # Postman nativo — Lixo Certo API gRPC
 
-A API Lixo Certo expõe **22 métodos gRPC em 13 serviços** no pacote `lixo_certo.v1`. Ela não possui rotas REST equivalentes. Para que o Postman mostre **Invoke**, e não `POST`/`Send`, cada item precisa ser criado pelo cliente gRPC nativo do Postman e salvo em uma coleção a partir de **New > gRPC**.
+A API Lixo Certo expõe **26 métodos gRPC em 13 serviços** no pacote `lixo_certo.v1`. Ela não possui rotas REST equivalentes. Para que o Postman mostre **Invoke**, e não `POST`/`Send`, cada item precisa ser criado pelo cliente gRPC nativo do Postman e salvo em uma coleção a partir de **New > gRPC**.
 
-## O que é entregue pelo repositório
+## Arquivos entregues
 
-O arquivo `Lixo-Certo-API.postman_environment.json` contém apenas variáveis locais sem credenciais reais. O arquivo `Lixo-Certo-API.postman.proto` é uma definição raiz que agrega os contratos Protobuf dos 13 serviços. O arquivo `Lixo-Certo-API.grpc.manifest.json` é um catálogo de configuração com os 22 métodos, mensagens e metadados; ele é deliberadamente marcado como `importavelComoCollectionJson: false` e **não deve ser importado como coleção**.
+- `Lixo-Certo-API.postman_environment.json`: ambiente local sem tokens reais.
+- `Lixo-Certo-API.postman.proto`: definição raiz que agrega os contratos Protobuf.
+- `Lixo-Certo-API.grpc.manifest.json`: catálogo dos 26 métodos, mensagens e metadados.
+- `legado/Lixo-Certo-API.legado-http.postman_collection.json`: referência histórica não executável como gRPC nativo.
 
-O artefato `legado/Lixo-Certo-API.legado-http.postman_collection.json` é mantido somente para auditoria histórica. Ele contém itens HTTP `POST` e não representa uma coleção gRPC nativa. O script de preparação não o copia para o diretório do Postman.
+O manifesto é deliberadamente marcado como `importavelComoCollectionJson: false`. Ele não deve ser importado como coleção.
 
-## Preparação automática no Windows
+## Preparação no Windows
 
 A partir de `G:\LixoCerto\infra_lixocerto`, execute:
 
@@ -16,41 +19,89 @@ A partir de `G:\LixoCerto\infra_lixocerto`, execute:
 .\scripts\iniciar.ps1 -Aplicacao -PrepararPostman -SmokeTests
 ```
 
-O comando sobe o Docker local, habilita server reflection somente no ambiente de desenvolvimento, copia os contratos para `%USERPROFILE%\Postman\files\lixo-certo`, copia a definição raiz, o ambiente e o catálogo, e remove uma coleção HTTP antiga que tenha ficado no diretório de trabalho.
+O comando sobe o ambiente local, copia os contratos, o ambiente e o catálogo para `%USERPROFILE%\Postman\files\lixo-certo`, e não copia a coleção HTTP legada.
 
-## Criação da coleção nativa no Postman
+## Criação da coleção nativa
 
-Depois da preparação, selecione o ambiente `Lixo Certo — API local — gRPC` e siga este fluxo no Postman Desktop:
+1. Selecione o ambiente `Lixo Certo — API local — gRPC`.
+2. Abra **New > gRPC**.
+3. Informe `grpc://{{grpc_host}}`, que resolve para `grpc://127.0.0.1:50051`.
+4. Use server reflection ou importe `Lixo-Certo-API.postman.proto` na aba **Service definition**.
+5. Selecione o serviço e o método.
+6. Preencha a mensagem conforme o manifesto.
+7. Clique em **Save As** e salve na coleção `Lixo Certo — API gRPC — Nativa`.
 
-1. Abra **New > gRPC**.
-2. Informe `grpc://{{grpc_host}}`, que resolve para `grpc://127.0.0.1:50051`.
-3. Aguarde o server reflection carregar os serviços e métodos. Se a sua versão não carregar reflection, abra a aba **Service definition**, importe `Lixo-Certo-API.postman.proto` e mantenha o diretório de trabalho preparado.
-4. Selecione um método. Para uma chamada unary, o botão correto será **Invoke**.
-5. Use a mensagem e os metadados correspondentes no `Lixo-Certo-API.grpc.manifest.json`.
-6. Use **Save As** e salve em uma coleção chamada `Lixo Certo — API gRPC — Nativa`. Organize os itens por serviço.
+Repita para os 26 métodos. Nenhum item deve ser HTTP `POST`, possuir URL HTTP ou usar `Content-Type: application/grpc+json`.
 
-Repita os passos 4 a 6 para os 22 métodos do catálogo. O endpoint, a definição Protobuf, a mensagem e os metadados são preservados pela requisição gRPC nativa; nenhum item deve ter método HTTP `POST`, cabeçalho `Content-Type: application/grpc+json` ou URL HTTP.
+## Fluxo de autenticação local
 
-O Postman não oferece atualmente um formato público e confiável para exportar/importar essas requisições nativas como Collection JSON v2.1. Por esse motivo, o repositório não finge entregar uma coleção JSON importável: ele automatiza o ambiente, os contratos, a descoberta por reflection, os payloads e a conferência dos 22 métodos, enquanto o cliente Postman faz o salvamento nativo no workspace.
+A API agora gera seus próprios tokens. Não é necessário Keycloak, OIDC ou login externo.
 
-## Autorização
+### 1. Cadastro ou login
 
-Os métodos públicos incluem saúde, materiais, pontos de coleta, listagem de questões, ranking e envio SUS. Os demais exigem Bearer JWT ou metadados específicos. No ambiente Docker local, o Keycloak em `http://localhost:8081` emite os tokens do realm `lixo-certo`. A partir de `infra_lixocerto`, execute `.\scripts\obter-token-postman.ps1` para preencher automaticamente `jwt_token` no ambiente local do Postman; use `-Administrador` para testar permissões administrativas. O script não imprime nem versiona o token. Cada RPC protegido deve conter na aba **Metadata**: `authorization` = `Bearer {{jwt_token}}`. O catálogo informa os metadados esperados para cada método.
+Crie uma requisição gRPC para `ServicoAutenticacao/CadastrarUsuario` ou `ServicoAutenticacao/Entrar`.
+
+Exemplo de cadastro:
+
+```json
+{
+  "nome_usuario": "Usuario Postman",
+  "email_usuario": "usuario@exemplo.test",
+  "senha_usuario": "SenhaSegura123"
+}
+```
+
+Exemplo de login:
+
+```json
+{
+  "email_usuario": "usuario@exemplo.test",
+  "senha_usuario": "SenhaSegura123"
+}
+```
+
+Copie os valores retornados para as variáveis locais `jwt_token` e `token_atualizacao`. Não versionar esses valores.
+
+### 2. Chamadas protegidas
+
+Na aba **Metadata**, use:
+
+```text
+authorization: Bearer {{jwt_token}}
+```
+
+### 3. Renovação
+
+Use `ServicoAutenticacao/RenovarToken` com:
+
+```json
+{
+  "token_atualizacao": "{{token_atualizacao}}"
+}
+```
+
+Substitua as duas variáveis pelos novos tokens retornados.
+
+### 4. Logout
+
+Use `ServicoAutenticacao/Sair` com o token de atualização atual:
+
+```json
+{
+  "token_atualizacao": "{{token_atualizacao}}"
+}
+```
 
 ## Endpoint correto
 
-Use `grpc://127.0.0.1:50051` para o cliente gRPC nativo do Postman. A porta `8080` é o gateway Envoy gRPC-Web usado pelo frontend e não substitui a API gRPC nativa. O frontend fica em `http://127.0.0.1:3000`.
+Use `grpc://127.0.0.1:50051` no cliente gRPC nativo do Postman. A porta `8080` é o gateway Envoy gRPC-Web utilizado pelo frontend e não substitui a API gRPC nativa.
 
 ## Validação automatizada
 
-O Postman é usado para inspeção visual e chamadas interativas. A validação determinística não depende da interface do Postman:
+O Postman é usado para inspeção visual e chamadas interativas. A validação determinística é feita pelos scripts da infraestrutura:
 
 ```powershell
 .\scripts\testar.ps1
 ```
 
-O resultado esperado é `Smoke gRPC: 5/5 aprovados`. O runner usa diretamente `127.0.0.1:50051` e não altera nem migra o PostgreSQL externo.
-
-## Referências
-
-As fontes oficiais e as limitações de exportação estão registradas em [`docs/REFERENCIAS_POSTMAN_GRPC.md`](../../../infra-lixo-certo/docs/REFERENCIAS_POSTMAN_GRPC.md), incluindo a documentação da interface gRPC, das definições Protobuf e as issues oficiais de exportação.
+A rotina não altera nem migra o PostgreSQL externo.

@@ -26,7 +26,7 @@ As migrations exigem PostgreSQL disponível e uma variável `URL_BANCO_DADOS` co
 
 ## Segurança
 
-A API foi organizada para autenticação OIDC/JWT, autorização por papel e permissão, rate limiting via Redis, auditoria, validação de contratos, deadlines gRPC, TLS no gateway e execução em container sem privilégios. Os controles de produção devem ser configurados antes da publicação.
+A API foi organizada para autenticação própria com JWT, hash `scrypt` de senhas, refresh tokens rotacionados, autorização por papel e permissão, rate limiting via Redis, auditoria, validação de contratos, deadlines gRPC, TLS no gateway e execução em container sem privilégios. Os controles de produção devem ser configurados antes da publicação.
 
 ## Ordem dos domínios
 

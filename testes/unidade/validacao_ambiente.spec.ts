@@ -17,15 +17,13 @@ describe('validacao de ambiente', () => {
     })).toThrow(/HABILITAR_REFLECTION_GRPC/);
   });
 
-  it('rejeita segredo curto mesmo com URLs válidas', () => {
+  it('rejeita segredo JWT curto mesmo com infraestrutura válida', () => {
     expect(() => validarAmbiente({
       AMBIENTE_EXECUCAO: 'producao',
       URL_BANCO_DADOS: 'postgres://usuario:senha@localhost:5432/banco',
       URL_REDIS: 'redis://localhost:6379',
-      EMISSOR_OIDC: 'https://oidc.exemplo.test',
-      AUDIENCIA_OIDC: 'lixo-certo-api',
-      ENDERECO_JWKS: 'https://oidc.exemplo.test/.well-known/jwks.json',
-      SEGREDO_HASH_PARTICIPANTE: 'curto',
-    })).toThrow(/SEGREDO_HASH_PARTICIPANTE/);
+      SEGREDO_JWT: 'curto',
+      SEGREDO_HASH_PARTICIPANTE: 'segredo-de-participante-com-32-caracteres',
+    })).toThrow(/SEGREDO_JWT/);
   });
 });

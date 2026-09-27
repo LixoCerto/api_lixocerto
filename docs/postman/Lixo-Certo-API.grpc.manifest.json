@@ -3,10 +3,10 @@
   "versao": 1,
   "importavelComoCollectionJson": false,
   "motivo": "O Postman não expõe no formato Collection v2.1 um schema público e confiável para serializar requests gRPC nativos.",
-  "fonte": "Lixo-Certo-API.legado-http.postman_collection.json",
+  "fonte": "contratos/lixo_certo/v1/*.proto",
   "endpoint": "grpc://{{grpc_host}}",
   "definicaoServico": "Lixo-Certo-API.postman.proto",
-  "quantidadeMetodos": 22,
+  "quantidadeMetodos": 26,
   "metodos": [
     {
       "ordem": 1,
@@ -24,6 +24,65 @@
       "ordem": 2,
       "grupo": "02 - Autenticação",
       "servico": "lixo_certo.v1.ServicoAutenticacao",
+      "metodo": "CadastrarUsuario",
+      "caminhoRpc": "/lixo_certo.v1.ServicoAutenticacao/CadastrarUsuario",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "nome_usuario": "{{nome_usuario}}",
+        "email_usuario": "{{email_usuario}}",
+        "senha_usuario": "{{senha_usuario}}"
+      },
+      "metadados": [],
+      "autenticacao": "Nenhuma",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 3,
+      "grupo": "02 - Autenticação",
+      "servico": "lixo_certo.v1.ServicoAutenticacao",
+      "metodo": "Entrar",
+      "caminhoRpc": "/lixo_certo.v1.ServicoAutenticacao/Entrar",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "email_usuario": "{{email_usuario}}",
+        "senha_usuario": "{{senha_usuario}}"
+      },
+      "metadados": [],
+      "autenticacao": "Nenhuma",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 4,
+      "grupo": "02 - Autenticação",
+      "servico": "lixo_certo.v1.ServicoAutenticacao",
+      "metodo": "RenovarToken",
+      "caminhoRpc": "/lixo_certo.v1.ServicoAutenticacao/RenovarToken",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "token_atualizacao": "{{token_atualizacao}}"
+      },
+      "metadados": [],
+      "autenticacao": "Token de atualização",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 5,
+      "grupo": "02 - Autenticação",
+      "servico": "lixo_certo.v1.ServicoAutenticacao",
+      "metodo": "Sair",
+      "caminhoRpc": "/lixo_certo.v1.ServicoAutenticacao/Sair",
+      "url": "grpc://{{grpc_host}}",
+      "mensagem": {
+        "token_atualizacao": "{{token_atualizacao}}"
+      },
+      "metadados": [],
+      "autenticacao": "Token de atualização",
+      "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
+    },
+    {
+      "ordem": 6,
+      "grupo": "02 - Autenticação",
+      "servico": "lixo_certo.v1.ServicoAutenticacao",
       "metodo": "ObterIdentidadeAtual",
       "caminhoRpc": "/lixo_certo.v1.ServicoAutenticacao/ObterIdentidadeAtual",
       "url": "grpc://{{grpc_host}}",
@@ -38,7 +97,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 3,
+      "ordem": 7,
       "grupo": "03 - Identidade",
       "servico": "lixo_certo.v1.ServicoIdentidade",
       "metodo": "ObterIdentidadeInterna",
@@ -55,7 +114,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 4,
+      "ordem": 8,
       "grupo": "04 - Materiais",
       "servico": "lixo_certo.v1.ServicoMateriais",
       "metodo": "ListarMateriais",
@@ -72,7 +131,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 5,
+      "ordem": 9,
       "grupo": "05 - Pontos de coleta",
       "servico": "lixo_certo.v1.ServicoPontosColeta",
       "metodo": "ListarPontosColeta",
@@ -87,7 +146,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 6,
+      "ordem": 10,
       "grupo": "06 - Questionários",
       "servico": "lixo_certo.v1.ServicoQuestionarios",
       "metodo": "ListarQuestoes",
@@ -102,7 +161,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 7,
+      "ordem": 11,
       "grupo": "06 - Questionários",
       "servico": "lixo_certo.v1.ServicoQuestionarios",
       "metodo": "EnviarRespostaQuestionario",
@@ -122,7 +181,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 8,
+      "ordem": 12,
       "grupo": "07 - Gamificação",
       "servico": "lixo_certo.v1.ServicoGamificacao",
       "metodo": "ObterProgressoUsuario",
@@ -139,7 +198,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 9,
+      "ordem": 13,
       "grupo": "07 - Gamificação",
       "servico": "lixo_certo.v1.ServicoGamificacao",
       "metodo": "ObterRanking",
@@ -153,7 +212,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 10,
+      "ordem": 14,
       "grupo": "08 - Desafios",
       "servico": "lixo_certo.v1.ServicoDesafios",
       "metodo": "ListarDesafios",
@@ -173,7 +232,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 11,
+      "ordem": 15,
       "grupo": "08 - Desafios",
       "servico": "lixo_certo.v1.ServicoDesafios",
       "metodo": "ParticiparDesafio",
@@ -192,7 +251,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 12,
+      "ordem": 16,
       "grupo": "08 - Desafios",
       "servico": "lixo_certo.v1.ServicoDesafios",
       "metodo": "RegistrarAcaoSustentavel",
@@ -213,7 +272,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 13,
+      "ordem": 17,
       "grupo": "09 - Avaliação de usabilidade",
       "servico": "lixo_certo.v1.ServicoAvaliacaoUsabilidade",
       "metodo": "EnviarAvaliacaoSus",
@@ -240,7 +299,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 14,
+      "ordem": 18,
       "grupo": "09 - Avaliação de usabilidade",
       "servico": "lixo_certo.v1.ServicoAvaliacaoUsabilidade",
       "metodo": "ObterResultadosAgregados",
@@ -257,7 +316,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 15,
+      "ordem": 19,
       "grupo": "10 - Perfil",
       "servico": "lixo_certo.v1.ServicoPerfil",
       "metodo": "ObterPerfilAtual",
@@ -274,7 +333,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 16,
+      "ordem": 20,
       "grupo": "10 - Perfil",
       "servico": "lixo_certo.v1.ServicoPerfil",
       "metodo": "AtualizarPerfil",
@@ -293,7 +352,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 17,
+      "ordem": 21,
       "grupo": "11 - Sessões",
       "servico": "lixo_certo.v1.ServicoSessoes",
       "metodo": "ListarSessoes",
@@ -310,7 +369,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 18,
+      "ordem": 22,
       "grupo": "11 - Sessões",
       "servico": "lixo_certo.v1.ServicoSessoes",
       "metodo": "RevogarSessao",
@@ -329,7 +388,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 19,
+      "ordem": 23,
       "grupo": "11 - Sessões",
       "servico": "lixo_certo.v1.ServicoSessoes",
       "metodo": "RevogarTodasSessoes",
@@ -346,7 +405,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 20,
+      "ordem": 24,
       "grupo": "12 - Auditoria",
       "servico": "lixo_certo.v1.ServicoAuditoria",
       "metodo": "RegistrarEventoAuditoria",
@@ -370,7 +429,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 21,
+      "ordem": 25,
       "grupo": "12 - Auditoria",
       "servico": "lixo_certo.v1.ServicoAuditoria",
       "metodo": "ListarAuditoria",
@@ -390,7 +449,7 @@
       "instrucoes": "Criar como requisição New > gRPC e salvar em uma coleção nativa; não importar este catálogo como collection JSON."
     },
     {
-      "ordem": 22,
+      "ordem": 26,
       "grupo": "13 - Administração",
       "servico": "lixo_certo.v1.ServicoAdministracao",
       "metodo": "ObterResumoAdministrativo",

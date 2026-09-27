@@ -2,7 +2,7 @@
 
 **Status: concluída em 100%.**
 
-A Fase 4 entregou a API independente do Lixo Certo com NestJS, gRPC, Protocol Buffers, PostgreSQL, Sequelize, Redis, autenticação OIDC/JWT, autorização por papéis e permissões, auditoria, gamificação, avaliação SUS e proteção contra abuso.
+A Fase 4 entregou a API independente do Lixo Certo com NestJS, gRPC, Protocol Buffers, PostgreSQL, Sequelize, Redis, autenticação própria com JWT, autorização por papéis e permissões, auditoria, gamificação, avaliação SUS e proteção contra abuso.
 
 ## Escopo concluído
 
@@ -14,7 +14,7 @@ O backend segue a convenção LCR definida para o projeto. Tabelas, colunas, mig
 
 | Item | Resultado |
 |---|---:|
-| Migrations Sequelize aplicadas | 21 |
+| Migrations Sequelize versionadas | 22 |
 | Tabelas LCR no PostgreSQL de integração | 20 |
 | Papéis semeados | 4 |
 | Permissões semeadas | 11 |
