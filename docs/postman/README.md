@@ -24,6 +24,7 @@ O comando sobe o ambiente local, copia os contratos, o ambiente e o catálogo pa
 ## Criação da coleção nativa
 
 1. Selecione o ambiente `Lixo Certo — API local — gRPC`.
+   Confirme no seletor de ambiente no canto superior direito que ele aparece como **ativo**; se aparecer `No environment`, `{{nome_usuario}}` e os demais placeholders serão enviados vazios.
 2. Abra **New > gRPC**.
 3. Informe `grpc://{{grpc_host}}`, que resolve para `grpc://127.0.0.1:50051`.
 4. Use server reflection ou importe `Lixo-Certo-API.postman.proto` na aba **Service definition**.
@@ -32,6 +33,18 @@ O comando sobe o ambiente local, copia os contratos, o ambiente e o catálogo pa
 7. Clique em **Save As** e salve na coleção `Lixo Certo — API gRPC — Nativa`.
 
 Repita para os 26 métodos. Nenhum item deve ser HTTP `POST`, possuir URL HTTP ou usar `Content-Type: application/grpc+json`.
+
+Para o cadastro, não deixe os campos vazios. O Postman pode exibir os nomes protobuf como `nome_usuario`/`email_usuario`/`senha_usuario` ou como `nomeUsuario`/`emailUsuario`/`senhaUsuario`; ambos são aceitos pela API. Uma mensagem mínima válida é:
+
+```json
+{
+  "nome_usuario": "Usuario Postman",
+  "email_usuario": "usuario-novo@exemplo.test",
+  "senha_usuario": "SenhaPostman123"
+}
+```
+
+Se o editor mostrar `{{nome_usuario}}`, verifique que o ambiente está ativo e que a variável possui valor. O valor de `senha_usuario` permanece vazio no arquivo versionado por segurança e precisa ser preenchido somente no ambiente local.
 
 ## Fluxo de autenticação local
 

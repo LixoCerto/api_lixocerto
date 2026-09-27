@@ -5,17 +5,23 @@ import { ContextoSessao, RespostaAutenticacao, ServicoAutenticacao } from './aut
 
 interface RequisicaoCadastro {
   nome_usuario?: string;
+  nomeUsuario?: string;
   email_usuario?: string;
+  emailUsuario?: string;
   senha_usuario?: string;
+  senhaUsuario?: string;
 }
 
 interface RequisicaoLogin {
   email_usuario?: string;
+  emailUsuario?: string;
   senha_usuario?: string;
+  senhaUsuario?: string;
 }
 
 interface RequisicaoTokenAtualizacao {
   token_atualizacao?: string;
+  tokenAtualizacao?: string;
 }
 
 @Controller()
@@ -25,9 +31,9 @@ export class ControladorGrpcAutenticacao {
   @GrpcMethod('ServicoAutenticacao', 'CadastrarUsuario')
   async cadastrarUsuario(requisicao: RequisicaoCadastro, metadados: Metadata) {
     return this.mapearResposta(await this.servico.cadastrarUsuario(
-      requisicao.nome_usuario ?? '',
-      requisicao.email_usuario ?? '',
-      requisicao.senha_usuario ?? '',
+      requisicao.nome_usuario?.trim() || requisicao.nomeUsuario?.trim() || '',
+      requisicao.email_usuario?.trim() || requisicao.emailUsuario?.trim() || '',
+      requisicao.senha_usuario || requisicao.senhaUsuario || '',
       this.obterContexto(metadados),
     ));
   }
@@ -35,20 +41,20 @@ export class ControladorGrpcAutenticacao {
   @GrpcMethod('ServicoAutenticacao', 'Entrar')
   async entrar(requisicao: RequisicaoLogin, metadados: Metadata) {
     return this.mapearResposta(await this.servico.entrar(
-      requisicao.email_usuario ?? '',
-      requisicao.senha_usuario ?? '',
+      requisicao.email_usuario?.trim() || requisicao.emailUsuario?.trim() || '',
+      requisicao.senha_usuario || requisicao.senhaUsuario || '',
       this.obterContexto(metadados),
     ));
   }
 
   @GrpcMethod('ServicoAutenticacao', 'RenovarToken')
   async renovarToken(requisicao: RequisicaoTokenAtualizacao, metadados: Metadata) {
-    return this.mapearResposta(await this.servico.renovarToken(requisicao.token_atualizacao ?? '', this.obterContexto(metadados)));
+    return this.mapearResposta(await this.servico.renovarToken(requisicao.token_atualizacao || requisicao.tokenAtualizacao || '', this.obterContexto(metadados)));
   }
 
   @GrpcMethod('ServicoAutenticacao', 'Sair')
   async sair(requisicao: RequisicaoTokenAtualizacao) {
-    return { sessao_revogada: await this.servico.sair(requisicao.token_atualizacao ?? '') };
+    return { sessao_revogada: await this.servico.sair(requisicao.token_atualizacao || requisicao.tokenAtualizacao || '') };
   }
 
   @GrpcMethod('ServicoAutenticacao', 'ObterIdentidadeAtual')
