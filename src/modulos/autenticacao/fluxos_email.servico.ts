@@ -9,21 +9,28 @@ import { ServicoRateLimit } from '../../infraestrutura/cache/rate_limit.servico.
 import { ServicoAuditoria } from '../auditoria/auditoria.servico.js';
 import { ServicoUsuarios } from '../usuarios/usuarios.servico.js';
 import {
+  COMPRIMENTO_CODIGO_VERIFICACAO,
   EXPIRACAO_REDEFINICAO_SENHA_MINUTOS,
-  EXPIRACAO_VERIFICACAO_EMAIL_HORAS,
+  EXPIRACAO_VERIFICACAO_EMAIL_MINUTOS,
   JANELA_CONFIRMACOES_SEGUNDOS,
   JANELA_SOLICITACOES_SEGUNDOS,
   LIMITE_CONFIRMACOES_POR_ORIGEM,
   LIMITE_SOLICITACOES_POR_IDENTIFICADOR,
   LIMITE_SOLICITACOES_POR_ORIGEM,
-  LIMITE_TENTATIVAS_TOKEN,
+  LIMITE_TENTATIVAS_CODIGO,
   MENSAGEM_SOLICITACAO_NEUTRA,
   expiracaoRedefinicaoSenha,
   expiracaoVerificacaoEmail,
 } from './fluxos_email.constantes.js';
 import { RepositorioTokensAutenticacao } from './tokens_autenticacao.repositorio.js';
 import { criarHashSenha, senhaValida } from './senha.util.js';
-import { gerarTokenUsoUnico, hashTokenUsoUnico, tokenUsoUnicoValido } from './token_uso_unico.util.js';
+import {
+  TENTATIVAS_GERACAO_CODIGO,
+  codigoVerificacaoValido,
+  gerarCodigoVerificacao,
+  hashCodigoVerificacao,
+  normalizarCodigoVerificacao,
+} from './codigo_verificacao.util.js';
 
 export interface ContextoFluxoEmail {
   enderecoIp?: string;
@@ -34,6 +41,7 @@ export interface RespostaSolicitacao {
   solicitacaoAceita: boolean;
   expiraEmSegundos: number;
   mensagemResultado: string;
+  comprimentoCodigo: number;
 }
 
 export interface RespostaConfirmacaoEmail {
@@ -51,6 +59,10 @@ export interface RespostaRedefinicaoSenha {
 const MENSAGEM_EMAIL_CONFIRMADO = 'Email confirmado com sucesso.';
 const MENSAGEM_SENHA_REDEFINIDA = 'Senha redefinida com sucesso. Entre novamente com a nova senha.';
 
+/** Mensagens de recusa — idênticas para código errado, expirado ou já utilizado. */
+const MENSAGEM_CODIGO_VERIFICACAO_INVALIDO = 'Codigo de verificacao invalido ou expirado';
+const MENSAGEM_CODIGO_REDEFINICAO_INVALIDO = 'Codigo de redefinicao invalido ou expirado';
+
 @Injectable()
 export class ServicoFluxosEmail {
   constructor(
@@ -62,7 +74,7 @@ export class ServicoFluxosEmail {
   ) {}
 
   /**
-   * Solicita o envio do link de confirmação de e-mail.
+   * Envia o código de confirmação de e-mail.
    * A resposta é sempre neutra: não revela se o endereço existe na base.
    */
   async solicitarVerificacaoEmail(email: string, contexto?: ContextoFluxoEmail): Promise<RespostaSolicitacao> {
@@ -71,28 +83,27 @@ export class ServicoFluxosEmail {
     await this.protegerSolicitacao(emailNormalizado, 'verificacao_email', contexto);
 
     const credencial = await this.usuarios.obterCredencialPorEmail(emailNormalizado);
-    if (!credencial) return this.respostaNeutra(EXPIRACAO_VERIFICACAO_EMAIL_HORAS * 3600);
+    if (!credencial) return this.respostaNeutra();
     if (credencial.status !== 'ativo') {
       registrarEvento('verificacao_email_ignorada', { motivo: 'usuario_sem_acesso_ativo' });
-      return this.respostaNeutra(EXPIRACAO_VERIFICACAO_EMAIL_HORAS * 3600);
+      return this.respostaNeutra();
     }
 
-    const token = gerarTokenUsoUnico();
+    const codigo = await this.gerarCodigoUnico(credencial.idInterno, 'verificacao_email');
     const criado = await this.tokens.criar({
       idUsuario: credencial.idInterno,
       tipo: 'verificacao_email',
-      hashToken: hashTokenUsoUnico(token),
+      hashToken: hashCodigoVerificacao(codigo, 'verificacao_email'),
       dataExpiracao: expiracaoVerificacaoEmail(),
       enderecoIp: contexto?.enderecoIp ?? null,
       agenteUsuario: contexto?.agenteUsuario ?? null,
     });
     if (!criado) this.erro(codigoGrpc.UNAVAILABLE, 'Banco de dados indisponivel');
 
-    const url = this.montarUrl('confirmar-email', token);
     const mensagem = montarEmailVerificacao({
       nomeUsuario: credencial.nome,
-      urlConfirmacao: url,
-      expiraEmHoras: EXPIRACAO_VERIFICACAO_EMAIL_HORAS,
+      codigo,
+      expiraEmMinutos: EXPIRACAO_VERIFICACAO_EMAIL_MINUTOS,
     });
     const envio = await this.email.enviar({ destinatario: credencial.email, ...mensagem });
 
@@ -102,50 +113,50 @@ export class ServicoFluxosEmail {
       idMensagem: envio.idMensagem,
     });
 
-    // Se o provedor de e-mail está configurado e falhou, o token é invalidado para não
-    // deixar um link válido que nunca chegou ao destinatário.
+    // Se o provedor está configurado e falhou, o código é invalidado para não
+    // deixar um código válido que nunca chegou ao destinatário.
     if (!envio.enviado) {
       await this.tokens.consumirPendentesDoUsuario(credencial.idInterno, 'verificacao_email');
-      this.erro(codigoGrpc.UNAVAILABLE, 'Nao foi possivel enviar o email de confirmacao. Tente novamente.');
+      this.erro(codigoGrpc.UNAVAILABLE, 'Nao foi possivel enviar o codigo de confirmacao. Tente novamente.');
     }
 
-    return {
-      solicitacaoAceita: true,
-      expiraEmSegundos: EXPIRACAO_VERIFICACAO_EMAIL_HORAS * 3600,
-      mensagemResultado: MENSAGEM_SOLICITACAO_NEUTRA,
-    };
+    return this.respostaNeutra();
   }
 
-  /** Consome o token de confirmação e marca o e-mail como verificado. */
-  async confirmarEmail(token: string, contexto?: ContextoFluxoEmail): Promise<RespostaConfirmacaoEmail> {
+  /**
+   * Valida o código digitado no aplicativo e marca o e-mail como verificado.
+   *
+   * O e-mail é exigido junto do código porque, com apenas 6 caracteres, o
+   * código sozinho não é um identificador global: a busca é sempre pelo usuário.
+   */
+  async confirmarEmail(email: string, codigo: string, contexto?: ContextoFluxoEmail): Promise<RespostaConfirmacaoEmail> {
+    const emailNormalizado = this.normalizarEmail(email);
+    this.validarEmail(emailNormalizado);
     await this.protegerConfirmacao(contexto);
-    const tokenLimpo = token?.trim() ?? '';
-    if (!tokenUsoUnicoValido(tokenLimpo)) {
-      this.erro(codigoGrpc.INVALID_ARGUMENT, 'Token de verificacao invalido ou expirado');
+
+    const credencial = await this.usuarios.obterCredencialPorEmail(emailNormalizado);
+    if (!credencial || credencial.status !== 'ativo') {
+      await this.registrarAuditoria('email_confirmacao_recusada', null, contexto, { motivo: 'conta_inexistente_ou_inativa' });
+      this.erro(codigoGrpc.INVALID_ARGUMENT, MENSAGEM_CODIGO_VERIFICACAO_INVALIDO);
     }
 
-    const registro = await this.tokens.buscarPorHash(hashTokenUsoUnico(tokenLimpo), 'verificacao_email');
-    if (!registro) this.erro(codigoGrpc.INVALID_ARGUMENT, 'Token de verificacao invalido ou expirado');
-
-    if (registro.consumido || registro.expirado) {
-      await this.tokens.registrarTentativa(registro.idToken, LIMITE_TENTATIVAS_TOKEN);
-      await this.registrarAuditoria('email_confirmacao_recusada', null, contexto, {
-        motivo: registro.consumido ? 'token_ja_utilizado' : 'token_expirado',
-      });
-      this.erro(codigoGrpc.INVALID_ARGUMENT, 'Token de verificacao invalido ou expirado');
+    const codigoNormalizado = normalizarCodigoVerificacao(codigo);
+    const registro = await this.tokens.buscarPendenteDoUsuario(credencial.idInterno, 'verificacao_email');
+    if (!registro) {
+      await this.registrarAuditoria('email_confirmacao_recusada', credencial.idExterno, contexto, { motivo: 'sem_codigo_pendente' });
+      this.erro(codigoGrpc.INVALID_ARGUMENT, MENSAGEM_CODIGO_VERIFICACAO_INVALIDO);
     }
 
-    const credencial = await this.usuarios.obterCredencialPorIdInterno(registro.idUsuario);
-    if (!credencial) {
-      await this.tokens.registrarTentativa(registro.idToken, LIMITE_TENTATIVAS_TOKEN);
-      this.erro(codigoGrpc.INVALID_ARGUMENT, 'Token de verificacao invalido ou expirado');
+    if (!codigoVerificacaoValido(codigoNormalizado) ||
+        hashCodigoVerificacao(codigoNormalizado, 'verificacao_email') !== registro.hashToken) {
+      await this.registrarTentativaInvalida(registro.idToken, credencial.idExterno, contexto);
+      this.erro(codigoGrpc.INVALID_ARGUMENT, MENSAGEM_CODIGO_VERIFICACAO_INVALIDO);
     }
 
     const consumido = await this.tokens.consumir(registro.idToken);
     if (!consumido) {
-      await this.tokens.registrarTentativa(registro.idToken, LIMITE_TENTATIVAS_TOKEN);
-      await this.registrarAuditoria('email_confirmacao_recusada', credencial.idExterno, contexto, { motivo: 'corrida_de_consumo' });
-      this.erro(codigoGrpc.INVALID_ARGUMENT, 'Token de verificacao invalido ou expirado');
+      await this.registrarTentativaInvalida(registro.idToken, credencial.idExterno, contexto);
+      this.erro(codigoGrpc.INVALID_ARGUMENT, MENSAGEM_CODIGO_VERIFICACAO_INVALIDO);
     }
 
     const emailConfirmado = await this.usuarios.marcarEmailVerificado(credencial.idInterno);
@@ -156,8 +167,8 @@ export class ServicoFluxosEmail {
   }
 
   /**
-   * Solicita a redefinição de senha.
-   * A resposta é sempre neutra e o token anterior é invalidado por cada nova solicitação.
+   * Envia o código de redefinição de senha.
+   * A resposta é sempre neutra e cada nova solicitação invalida o código anterior.
    */
   async solicitarRecuperacaoSenha(email: string, contexto?: ContextoFluxoEmail): Promise<RespostaSolicitacao> {
     const emailNormalizado = this.normalizarEmail(email);
@@ -165,27 +176,26 @@ export class ServicoFluxosEmail {
     await this.protegerSolicitacao(emailNormalizado, 'redefinicao_senha', contexto);
 
     const credencial = await this.usuarios.obterCredencialPorEmail(emailNormalizado);
-    if (!credencial) return this.respostaNeutra(EXPIRACAO_REDEFINICAO_SENHA_MINUTOS * 60);
+    if (!credencial) return this.respostaNeutra();
     if (credencial.status !== 'ativo') {
       registrarEvento('recuperacao_senha_ignorada', { motivo: 'usuario_sem_acesso_ativo' });
-      return this.respostaNeutra(EXPIRACAO_REDEFINICAO_SENHA_MINUTOS * 60);
+      return this.respostaNeutra();
     }
 
-    const token = gerarTokenUsoUnico();
+    const codigo = await this.gerarCodigoUnico(credencial.idInterno, 'redefinicao_senha');
     const criado = await this.tokens.criar({
       idUsuario: credencial.idInterno,
       tipo: 'redefinicao_senha',
-      hashToken: hashTokenUsoUnico(token),
+      hashToken: hashCodigoVerificacao(codigo, 'redefinicao_senha'),
       dataExpiracao: expiracaoRedefinicaoSenha(),
       enderecoIp: contexto?.enderecoIp ?? null,
       agenteUsuario: contexto?.agenteUsuario ?? null,
     });
     if (!criado) this.erro(codigoGrpc.UNAVAILABLE, 'Banco de dados indisponivel');
 
-    const url = this.montarUrl('redefinir-senha', token);
     const mensagem = montarEmailRedefinicaoSenha({
       nomeUsuario: credencial.nome,
-      urlRedefinicao: url,
+      codigo,
       expiraEmMinutos: EXPIRACAO_REDEFINICAO_SENHA_MINUTOS,
     });
     const envio = await this.email.enviar({ destinatario: credencial.email, ...mensagem });
@@ -198,53 +208,53 @@ export class ServicoFluxosEmail {
 
     if (!envio.enviado) {
       await this.tokens.consumirPendentesDoUsuario(credencial.idInterno, 'redefinicao_senha');
-      this.erro(codigoGrpc.UNAVAILABLE, 'Nao foi possivel enviar o email de recuperacao. Tente novamente.');
+      this.erro(codigoGrpc.UNAVAILABLE, 'Nao foi possivel enviar o codigo de recuperacao. Tente novamente.');
     }
 
-    return {
-      solicitacaoAceita: true,
-      expiraEmSegundos: EXPIRACAO_REDEFINICAO_SENHA_MINUTOS * 60,
-      mensagemResultado: MENSAGEM_SOLICITACAO_NEUTRA,
-    };
+    return this.respostaNeutra();
   }
 
   /**
-   * Redefine a senha com token de uso único e revoga todas as sessões do usuário,
+   * Redefine a senha com o código recebido e revoga todas as sessões do usuário,
    * encerrando qualquer acesso obtido com a senha anterior.
    */
-  async redefinirSenha(token: string, novaSenha: string, contexto?: ContextoFluxoEmail): Promise<RespostaRedefinicaoSenha> {
+  async redefinirSenha(
+    email: string,
+    codigo: string,
+    novaSenha: string,
+    contexto?: ContextoFluxoEmail,
+  ): Promise<RespostaRedefinicaoSenha> {
+    const emailNormalizado = this.normalizarEmail(email);
+    this.validarEmail(emailNormalizado);
     await this.protegerConfirmacao(contexto);
-    const tokenLimpo = token?.trim() ?? '';
-    if (!tokenUsoUnicoValido(tokenLimpo)) {
-      this.erro(codigoGrpc.INVALID_ARGUMENT, 'Token de redefinicao invalido ou expirado');
-    }
+
     if (!senhaValida(novaSenha)) {
       this.erro(codigoGrpc.INVALID_ARGUMENT, 'Senha deve possuir no minimo 12 caracteres, letras e numeros');
     }
 
-    const registro = await this.tokens.buscarPorHash(hashTokenUsoUnico(tokenLimpo), 'redefinicao_senha');
-    if (!registro) this.erro(codigoGrpc.INVALID_ARGUMENT, 'Token de redefinicao invalido ou expirado');
-
-    if (registro.consumido || registro.expirado) {
-      await this.tokens.registrarTentativa(registro.idToken, LIMITE_TENTATIVAS_TOKEN);
-      await this.registrarAuditoria('redefinicao_senha_recusada', null, contexto, {
-        motivo: registro.consumido ? 'token_ja_utilizado' : 'token_expirado',
-      });
-      this.erro(codigoGrpc.INVALID_ARGUMENT, 'Token de redefinicao invalido ou expirado');
+    const credencial = await this.usuarios.obterCredencialPorEmail(emailNormalizado);
+    if (!credencial || credencial.status !== 'ativo') {
+      await this.registrarAuditoria('redefinicao_senha_recusada', null, contexto, { motivo: 'conta_inexistente_ou_inativa' });
+      this.erro(codigoGrpc.INVALID_ARGUMENT, MENSAGEM_CODIGO_REDEFINICAO_INVALIDO);
     }
 
-    const credencial = await this.usuarios.obterCredencialPorIdInterno(registro.idUsuario);
-    if (!credencial) {
-      await this.tokens.registrarTentativa(registro.idToken, LIMITE_TENTATIVAS_TOKEN);
-      this.erro(codigoGrpc.INVALID_ARGUMENT, 'Token de redefinicao invalido ou expirado');
+    const codigoNormalizado = normalizarCodigoVerificacao(codigo);
+    const registro = await this.tokens.buscarPendenteDoUsuario(credencial.idInterno, 'redefinicao_senha');
+    if (!registro) {
+      await this.registrarAuditoria('redefinicao_senha_recusada', credencial.idExterno, contexto, { motivo: 'sem_codigo_pendente' });
+      this.erro(codigoGrpc.INVALID_ARGUMENT, MENSAGEM_CODIGO_REDEFINICAO_INVALIDO);
     }
-    if (credencial.status !== 'ativo') this.erro(codigoGrpc.PERMISSION_DENIED, 'Usuario sem acesso ativo');
+
+    if (!codigoVerificacaoValido(codigoNormalizado) ||
+        hashCodigoVerificacao(codigoNormalizado, 'redefinicao_senha') !== registro.hashToken) {
+      await this.registrarTentativaInvalida(registro.idToken, credencial.idExterno, contexto);
+      this.erro(codigoGrpc.INVALID_ARGUMENT, MENSAGEM_CODIGO_REDEFINICAO_INVALIDO);
+    }
 
     const consumido = await this.tokens.consumir(registro.idToken);
     if (!consumido) {
-      await this.tokens.registrarTentativa(registro.idToken, LIMITE_TENTATIVAS_TOKEN);
-      await this.registrarAuditoria('redefinicao_senha_recusada', credencial.idExterno, contexto, { motivo: 'corrida_de_consumo' });
-      this.erro(codigoGrpc.INVALID_ARGUMENT, 'Token de redefinicao invalido ou expirado');
+      await this.registrarTentativaInvalida(registro.idToken, credencial.idExterno, contexto);
+      this.erro(codigoGrpc.INVALID_ARGUMENT, MENSAGEM_CODIGO_REDEFINICAO_INVALIDO);
     }
 
     const atualizado = await this.usuarios.definirHashSenha(credencial.idInterno, await criarHashSenha(novaSenha));
@@ -253,6 +263,29 @@ export class ServicoFluxosEmail {
     const sessoesRevogadas = await this.revogarSessoes(credencial.idInterno);
     await this.registrarAuditoria('senha_redefinida', credencial.idExterno, contexto, { sessoesRevogadas });
     return { senhaRedefinida: true, sessoesRevogadas, mensagemResultado: MENSAGEM_SENHA_REDEFINIDA };
+  }
+
+  /**
+   * Gera um código que não colide com outro código pendente do mesmo tipo.
+   * A colisão tornaria ambígua a confirmação, então há retentativa limitada.
+   */
+  private async gerarCodigoUnico(idUsuario: string, tipo: 'verificacao_email' | 'redefinicao_senha'): Promise<string> {
+    for (let tentativa = 0; tentativa < TENTATIVAS_GERACAO_CODIGO; tentativa += 1) {
+      const codigo = gerarCodigoVerificacao();
+      const emUso = await this.tokens.hashEmUso(hashCodigoVerificacao(codigo, tipo), tipo);
+      if (!emUso) return codigo;
+    }
+    registrarEvento('codigo_verificacao_colisao', { tipo });
+    this.erro(codigoGrpc.UNAVAILABLE, 'Nao foi possivel gerar o codigo agora. Tente novamente.');
+  }
+
+  private async registrarTentativaInvalida(idToken: string, idExterno: string, contexto?: ContextoFluxoEmail): Promise<void> {
+    const tentativas = await this.tokens.registrarTentativa(idToken, LIMITE_TENTATIVAS_CODIGO);
+    await this.registrarAuditoria('email_confirmacao_recusada', idExterno, contexto, {
+      motivo: 'codigo_incorreto',
+      tentativas,
+      restantes: Math.max(0, LIMITE_TENTATIVAS_CODIGO - tentativas),
+    });
   }
 
   private async revogarSessoes(idInterno: string): Promise<number> {
@@ -283,7 +316,7 @@ export class ServicoFluxosEmail {
   private async protegerConfirmacao(contexto?: ContextoFluxoEmail): Promise<void> {
     const origem = contexto?.enderecoIp?.trim() ?? 'sem-origem';
     const resultado = await this.rateLimit.permitir(
-      `lcr:rate:token_autenticacao:ip:${origem}`,
+      `lcr:rate:codigo_verificacao:ip:${origem}`,
       LIMITE_CONFIRMACOES_POR_ORIGEM,
       JANELA_CONFIRMACOES_SEGUNDOS,
     );
@@ -295,13 +328,13 @@ export class ServicoFluxosEmail {
     if (!disponivel) this.erro(codigoGrpc.UNAVAILABLE, 'Protecao contra abuso indisponivel');
   }
 
-  private montarUrl(caminho: string, token: string): string {
-    const base = (process.env.URL_PUBLICA_FRONTEND?.trim() || 'http://localhost:3000').replace(/\/+$/, '');
-    return `${base}/${caminho}?token=${encodeURIComponent(token)}`;
-  }
-
-  private respostaNeutra(expiraEmSegundos: number): RespostaSolicitacao {
-    return { solicitacaoAceita: true, expiraEmSegundos, mensagemResultado: MENSAGEM_SOLICITACAO_NEUTRA };
+  private respostaNeutra(): RespostaSolicitacao {
+    return {
+      solicitacaoAceita: true,
+      expiraEmSegundos: EXPIRACAO_VERIFICACAO_EMAIL_MINUTOS * 60,
+      mensagemResultado: MENSAGEM_SOLICITACAO_NEUTRA,
+      comprimentoCodigo: COMPRIMENTO_CODIGO_VERIFICACAO,
+    };
   }
 
   private normalizarEmail(email: string): string {
@@ -313,7 +346,7 @@ export class ServicoFluxosEmail {
   }
 
   private hashIdentificador(valor: string): string {
-    return hashTokenUsoUnico(valor).slice(0, 32);
+    return hashCodigoVerificacao(valor, 'identificador-rate-limit');
   }
 
   private mascararEmail(email: string): string {

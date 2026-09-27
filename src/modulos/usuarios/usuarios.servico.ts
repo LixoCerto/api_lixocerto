@@ -15,6 +15,7 @@ export interface CredencialUsuarioLocal {
   email: string;
   hashSenha: string | null;
   status: 'ativo' | 'bloqueado' | 'anonimizado';
+  emailVerificado: boolean;
 }
 
 @Injectable()
@@ -38,6 +39,7 @@ export class ServicoUsuarios {
       email: usuario.lcr_usr_email,
       hashSenha: usuario.lcr_usr_hash_senha,
       status: usuario.lcr_usr_status_usuario,
+      emailVerificado: usuario.lcr_usr_email_verificado_em !== null,
     };
   }
 
@@ -52,6 +54,7 @@ export class ServicoUsuarios {
       email: usuario.lcr_usr_email,
       hashSenha: usuario.lcr_usr_hash_senha,
       status: usuario.lcr_usr_status_usuario,
+      emailVerificado: usuario.lcr_usr_email_verificado_em !== null,
     };
   }
 

@@ -1,20 +1,20 @@
 /**
- * Gera um link de confirmação de e-mail ou de redefinição de senha para teste
+ * Gera um código de confirmação de e-mail ou de redefinição de senha para teste
  * manual em desenvolvimento — sem depender do envio real pelo Resend.
  *
  * Uso:
- *   node scripts/gerar-link-desenvolvimento.mjs <email> [verificacao|redefinicao]
+ *   node scripts/gerar-codigo-desenvolvimento.mjs <email> [verificacao|redefinicao]
  *
  * Por que existe: com PROVEDOR_EMAIL=log o envio real fica desativado e o log
- * mostra apenas metadados (nunca o token), então não há como abrir o link no
- * navegador para testar as telas. Este script grava um token de uso único
- * exatamente como a API faria e imprime a URL correspondente.
+ * mostra apenas metadados (nunca o código), então não há como ler o código para
+ * testar as telas. Este script grava um código real, exatamente como a API
+ * faria, e imprime o valor para digitar no aplicativo.
  *
  * Somente para desenvolvimento: recusa execução quando AMBIENTE_EXECUCAO=producao.
- * O token gerado é um token real — expira, é consumido no uso e pode ser
- * invalidado por uma nova solicitação feita pela própria aplicação.
+ * O código gerado é real — expira, é consumido no uso e pode ser invalidado por
+ * uma nova solicitação feita pela própria aplicação.
  */
-import { createHash, randomBytes } from 'node:crypto';
+import { createHmac, randomInt } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import dotenv from 'dotenv';
@@ -23,27 +23,48 @@ import pg from 'pg';
 const raiz = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 dotenv.config({ path: join(raiz, '.env') });
 
-const EXPIRACAO_PADRAO_MINUTOS = { verificacao: 24 * 60, redefinicao: 60 };
-const CAMINHO_PADRAO = { verificacao: 'confirmar-email', redefinicao: 'redefinir-senha' };
+/** Mesmo alfabeto do código em produção: sem vogais e sem caracteres ambíguos. */
+const ALFABETO_CODIGO = '23456789BCDFGHJKMNPQRSTVWXYZ';
+const COMPRIMENTO_CODIGO = 6;
+const SEGREDO_DOMINIO = 'lcr:codigo-verificacao-email:v1';
+
+const EXPIRACAO_MINUTOS = 15;
 
 function encerrar(mensagem) {
   console.error(`\n[falha] ${mensagem}\n`);
   process.exit(1);
 }
 
-function hashToken(token) {
-  return createHash('sha256').update(token, 'utf8').digest('hex');
+function gerarCodigo() {
+  let codigo = '';
+  for (let posicao = 0; posicao < COMPRIMENTO_CODIGO; posicao += 1) {
+    codigo += ALFABETO_CODIGO[randomInt(ALFABETO_CODIGO.length)];
+  }
+  return codigo;
+}
+
+/**
+ * Reproduz a derivação do serviço: HMAC-SHA256 com subchave derivada do
+ * segredo, isolada por domínio e pelo tipo do fluxo.
+ */
+function hashCodigo(codigo, tipo) {
+  const dedicado = process.env.SEGREDO_CODIGO_EMAIL?.trim();
+  const base = dedicado && dedicado.length >= 32 ? dedicado : process.env.SEGREDO_JWT?.trim();
+  if (!base || base.length < 32) {
+    encerrar('Defina SEGREDO_CODIGO_EMAIL (ou SEGREDO_JWT) com pelo menos 32 caracteres no .env da API.');
+  }
+  const chave = createHmac('sha256', SEGREDO_DOMINIO).update(base, 'utf8').digest();
+  return createHmac('sha256', chave).update(`${tipo}:${codigo}`, 'utf8').digest('hex');
 }
 
 const [emailArgumento, tipoArgumento = 'verificacao'] = process.argv.slice(2);
 
 if (!emailArgumento || emailArgumento.startsWith('-')) {
-  console.error('Uso: node scripts/gerar-link-desenvolvimento.mjs <email> [verificacao|redefinicao]');
+  console.error('Uso: node scripts/gerar-codigo-desenvolvimento.mjs <email> [verificacao|redefinicao]');
   process.exit(2);
 }
 
 const tipo = tipoArgumento === 'redefinicao' ? 'redefinicao_senha' : 'verificacao_email';
-const chavePadrao = tipoArgumento === 'redefinicao' ? 'redefinicao' : 'verificacao';
 
 if (process.env.AMBIENTE_EXECUCAO === 'producao') {
   encerrar('Este utilitário é exclusivo de desenvolvimento e não roda com AMBIENTE_EXECUCAO=producao.');
@@ -59,7 +80,7 @@ try {
   await banco.connect();
 
   const usuario = await banco.query(
-    'SELECT lcr_usr_id_usuario, lcr_usr_nome, lcr_usr_status_usuario FROM lcr_usuarios WHERE lcr_usr_email = $1',
+    'SELECT lcr_usr_id_usuario, lcr_usr_nome, lcr_usr_status_usuario, lcr_usr_email_verificado_em FROM lcr_usuarios WHERE lcr_usr_email = $1',
     [email],
   );
   if (usuario.rowCount === 0) {
@@ -83,8 +104,8 @@ try {
   }
 
   const idUsuario = usuario.rows[0].lcr_usr_id_usuario;
-  const token = randomBytes(32).toString('base64url');
-  const expiraEm = new Date(Date.now() + EXPIRACAO_PADRAO_MINUTOS[chavePadrao] * 60_000);
+  const codigo = gerarCodigo();
+  const expiraEm = new Date(Date.now() + EXPIRACAO_MINUTOS * 60_000);
 
   // Mesmo comportamento do serviço: a nova solicitação substitui as anteriores.
   await banco.query(
@@ -96,18 +117,16 @@ try {
     `INSERT INTO lcr_tokens_autenticacao (
        lcr_tka_id_usuario, lcr_tka_tipo_token, lcr_tka_hash_token, lcr_tka_data_expiracao
      ) VALUES ($1, $2, $3, $4)`,
-    [idUsuario, tipo, hashToken(token), expiraEm],
+    [idUsuario, tipo, hashCodigo(codigo, tipo), expiraEm],
   );
 
-  const base = (process.env.URL_PUBLICA_FRONTEND?.trim() || 'http://localhost:3000').replace(/\/+$/, '');
-  const url = `${base}/${CAMINHO_PADRAO[chavePadrao]}?token=${encodeURIComponent(token)}`;
-
-  console.log('\nLink de desenvolvimento gerado');
+  console.log('\nCódigo de desenvolvimento gerado');
   console.log(`  conta      : ${usuario.rows[0].lcr_usr_nome} <${email}>`);
   console.log(`  tipo       : ${tipo}`);
-  console.log(`  expira em  : ${EXPIRACAO_PADRAO_MINUTOS[chavePadrao]} minuto(s)`);
-  console.log(`\n${url}\n`);
-  console.log('Abra a URL no navegador. O token é de uso único e deixa de valer após o uso.\n');
+  console.log(`  expira em  : ${EXPIRACAO_MINUTOS} minuto(s)`);
+  console.log(`\n    ${codigo}\n`);
+  console.log('Digite este código na tela correspondente do aplicativo.');
+  console.log('Ele é de uso único e deixa de valer após o uso.\n');
 } catch (erro) {
   encerrar(erro.message);
 } finally {

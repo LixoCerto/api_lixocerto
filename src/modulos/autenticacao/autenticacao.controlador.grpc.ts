@@ -69,6 +69,7 @@ export class ControladorGrpcAutenticacao {
       token_atualizacao: resposta.tokenAtualizacao,
       expira_em_segundos: resposta.expiraEmSegundos,
       identidade: this.mapearIdentidade(resposta.identidade),
+      requer_verificacao_email: resposta.requerVerificacaoEmail,
     };
   }
 

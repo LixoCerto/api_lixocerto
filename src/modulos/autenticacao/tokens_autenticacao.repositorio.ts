@@ -15,6 +15,8 @@ export interface TokenPersistido {
   idToken: string;
   idUsuario: string;
   tipo: TipoTokenAutenticacao;
+  /** Hash derivado do código. Usado para comparar o valor digitado sem expor o código. */
+  hashToken: string;
   dataExpiracao: Date;
   quantidadeTentativas: number;
   consumido: boolean;
@@ -68,6 +70,7 @@ export class RepositorioTokensAutenticacao {
       idToken: token.lcr_tka_id_token,
       idUsuario: token.lcr_tka_id_usuario,
       tipo: token.lcr_tka_tipo_token,
+      hashToken: token.lcr_tka_hash_token,
       dataExpiracao: token.lcr_tka_data_expiracao,
       quantidadeTentativas: token.lcr_tka_quantidade_tentativas,
       consumido: token.lcr_tka_data_consumo !== null,
@@ -89,6 +92,56 @@ export class RepositorioTokensAutenticacao {
       },
     );
     return quantidade > 0;
+  }
+
+  /**
+   * Busca o código pendente mais recente do usuário para um tipo.
+   *
+   * Usada no lugar da busca por hash porque o código tem apenas 6 caracteres e
+   * a tentativa precisa ser contada mesmo quando o valor informado está errado:
+   * é o registro do usuário que acumula tentativas e é invalidado no limite.
+   */
+  async buscarPendenteDoUsuario(idUsuario: string, tipo: TipoTokenAutenticacao): Promise<TokenPersistido | null> {
+    if (!this.banco) return null;
+    const token = await ModeloTokenAutenticacao.findOne({
+      where: {
+        lcr_tka_id_usuario: idUsuario,
+        lcr_tka_tipo_token: tipo,
+        lcr_tka_data_consumo: null,
+        lcr_tka_data_expiracao: { [Op.gt]: new Date() },
+      },
+      order: [['lcr_tka_data_criacao', 'DESC']],
+    });
+    if (!token) return null;
+    return {
+      idToken: token.lcr_tka_id_token,
+      idUsuario: token.lcr_tka_id_usuario,
+      tipo: token.lcr_tka_tipo_token,
+      hashToken: token.lcr_tka_hash_token,
+      dataExpiracao: token.lcr_tka_data_expiracao,
+      quantidadeTentativas: token.lcr_tka_quantidade_tentativas,
+      consumido: false,
+      expirado: false,
+    };
+  }
+
+  /**
+   * Verifica se o hash já está em uso por um código pendente.
+   * Protege contra colisão de geração: dois usuários com o mesmo código ativo
+   * tornariam a confirmação ambígua.
+   */
+  async hashEmUso(hashToken: string, tipo: TipoTokenAutenticacao): Promise<boolean> {
+    if (!this.banco) return false;
+    const existente = await ModeloTokenAutenticacao.findOne({
+      where: {
+        lcr_tka_hash_token: hashToken,
+        lcr_tka_tipo_token: tipo,
+        lcr_tka_data_consumo: null,
+        lcr_tka_data_expiracao: { [Op.gt]: new Date() },
+      },
+      attributes: ['lcr_tka_id_token'],
+    });
+    return existente !== null;
   }
 
   /** Registra tentativa inválida e invalida o token ao atingir o limite. */

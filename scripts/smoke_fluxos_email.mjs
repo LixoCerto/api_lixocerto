@@ -6,12 +6,16 @@
  *   node scripts/smoke_fluxos_email.mjs
  *
  * O script inicia a API em uma porta isolada, executa o fluxo completo
- * (cadastro → verificação → recuperação → redefinição) e valida o banco.
- * Nenhum e-mail real é enviado quando PROVEDOR_EMAIL=log.
+ * (cadastro → bloqueio de acesso → código → verificação → recuperação →
+ * redefinição) e valida o banco. Nenhum e-mail real é enviado com
+ * PROVEDOR_EMAIL=log.
+ *
+ * O código de 6 caracteres não é recuperável a partir do hash persistido, então
+ * os caminhos felizes usam um código conhecido gravado diretamente no banco, na
+ * mesma forma em que a API grava.
  */
 import { spawn } from 'node:child_process';
-import { createHash, randomUUID } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { createHmac, randomInt, randomUUID } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { setTimeout as esperar } from 'node:timers/promises';
@@ -22,6 +26,11 @@ import pg from 'pg';
 const raiz = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const PORTA = process.env.PORTA_SMOKE ?? '50999';
 const URL_BANCO = process.env.URL_BANCO_DADOS;
+
+const ALFABETO_CODIGO = '23456789BCDFGHJKMNPQRSTVWXYZ';
+const COMPRIMENTO_CODIGO = 6;
+const SEGREDO_DOMINIO = 'lcr:codigo-verificacao-email:v1';
+const SEGREDO_CODIGO = process.env.SEGREDO_CODIGO_EMAIL ?? process.env.SEGREDO_JWT ?? 'segredo-jwt-de-teste-com-mais-de-32-caracteres';
 
 if (!URL_BANCO) {
   console.error('URL_BANCO_DADOS nao configurada');
@@ -34,20 +43,35 @@ function registrar(nome, aprovado, detalhe = '') {
   console.log(`${aprovado ? '[ok]  ' : '[falha]'} ${nome}${detalhe ? ` — ${detalhe}` : ''}`);
 }
 
-function hashToken(token) {
-  return createHash('sha256').update(token, 'utf8').digest('hex');
+function gerarCodigo() {
+  let codigo = '';
+  for (let posicao = 0; posicao < COMPRIMENTO_CODIGO; posicao += 1) {
+    codigo += ALFABETO_CODIGO[randomInt(ALFABETO_CODIGO.length)];
+  }
+  return codigo;
+}
+
+/** Mesma derivação usada pelo serviço: HMAC com subchave isolada por domínio. */
+function hashCodigo(codigo, tipo) {
+  const chave = createHmac('sha256', SEGREDO_DOMINIO).update(SEGREDO_CODIGO, 'utf8').digest();
+  return createHmac('sha256', chave).update(`${tipo}:${codigo}`, 'utf8').digest('hex');
 }
 
 /**
- * Injeta um token conhecido diretamente no banco, na mesma forma em que a API grava.
+ * Injeta um código conhecido diretamente no banco, na mesma forma em que a API grava.
  * Isso permite validar o caminho feliz do gRPC sem depender do e-mail real.
  */
-async function injetarToken(idUsuario, tipo, token, minutosValidade) {
+async function injetarCodigo(idUsuario, tipo, codigo, minutosValidade) {
+  await banco.query(
+    `UPDATE lcr_tokens_autenticacao SET lcr_tka_data_consumo = CURRENT_TIMESTAMP
+     WHERE lcr_tka_id_usuario = $1 AND lcr_tka_tipo_token = $2 AND lcr_tka_data_consumo IS NULL`,
+    [idUsuario, tipo],
+  );
   await banco.query(
     `INSERT INTO lcr_tokens_autenticacao (
        lcr_tka_id_usuario, lcr_tka_tipo_token, lcr_tka_hash_token, lcr_tka_data_expiracao
      ) VALUES ($1, $2, $3, $4)`,
-    [idUsuario, tipo, hashToken(token), new Date(Date.now() + minutosValidade * 60_000)],
+    [idUsuario, tipo, hashCodigo(codigo, tipo), new Date(Date.now() + minutosValidade * 60_000)],
   );
 }
 
@@ -80,6 +104,7 @@ async function iniciarApi() {
       AMBIENTE_EXECUCAO: 'desenvolvimento',
       PROVEDOR_EMAIL: process.env.PROVEDOR_EMAIL ?? 'log',
       SEGREDO_JWT: process.env.SEGREDO_JWT ?? 'segredo-jwt-de-teste-com-mais-de-32-caracteres',
+      SEGREDO_CODIGO_EMAIL: SEGREDO_CODIGO,
       SEGREDO_HASH_PARTICIPANTE: process.env.SEGREDO_HASH_PARTICIPANTE ?? 'segredo-hash-de-teste-com-mais-de-32-caracteres',
       URL_PUBLICA_FRONTEND: process.env.URL_PUBLICA_FRONTEND ?? 'http://localhost:3000',
     },
@@ -118,109 +143,126 @@ async function principal() {
   const senhaOriginal = 'SenhaOriginal123';
   const senhaNova = 'SenhaRedefinida456';
 
-  // 1. Cadastro
+  // 1. Cadastro: cria a conta, mas não abre sessão antes da verificação
   const cadastro = await chamar('CadastrarUsuario', {
     nome_usuario: 'Smoke Fluxo Email',
     email_usuario: email,
     senha_usuario: senhaOriginal,
   });
   const idExterno = cadastro.identidade.id_usuario;
-  registrar('CadastrarUsuario', Boolean(cadastro.token_acesso && cadastro.token_atualizacao));
+  registrar('CadastrarUsuario cria a conta', Boolean(idExterno));
+  registrar('Cadastro não emite sessão antes da verificação', cadastro.requer_verificacao_email === true && !cadastro.token_acesso);
   registrar('E-mail inicia como não confirmado', cadastro.identidade.email_verificado_usuario === false);
 
   const usuario = await banco.query('SELECT lcr_usr_id_usuario, lcr_usr_email_verificado_em FROM lcr_usuarios WHERE lcr_usr_email = $1', [email]);
   const idInterno = usuario.rows[0]?.lcr_usr_id_usuario;
   registrar('Conta persistida no PostgreSQL', Boolean(idInterno));
 
-  // 2. Solicitação de verificação de e-mail
+  // 2. Login antes da verificação: credenciais corretas, mas sem acesso
+  const loginBloqueado = await chamar('Entrar', { email_usuario: email, senha_usuario: senhaOriginal });
+  registrar('Login bloqueado sem e-mail confirmado', loginBloqueado.requer_verificacao_email === true && !loginBloqueado.token_acesso);
+
+  // 3. Solicitação do código de verificação
   const solicitacao = await chamar('SolicitarVerificacaoEmail', { email_usuario: email });
   registrar('SolicitarVerificacaoEmail', solicitacao.solicitacao_aceita === true, solicitacao.mensagem_resultado);
+  registrar('Contrato informa 6 caracteres', solicitacao.comprimento_codigo === 6);
 
-  const tokenRegistro = await banco.query(
+  const registro = await banco.query(
     `SELECT lcr_tka_hash_token, lcr_tka_tipo_token, lcr_tka_data_consumo, lcr_tka_data_expiracao
      FROM lcr_tokens_autenticacao WHERE lcr_tka_id_usuario = $1 ORDER BY lcr_tka_data_criacao DESC LIMIT 1`,
     [idInterno],
   );
-  const registro = tokenRegistro.rows[0];
-  registrar('Token de verificação gravado como hash', registro?.lcr_tka_tipo_token === 'verificacao_email' && registro.lcr_tka_hash_token.length === 64);
-  registrar('Token pendente de consumo', registro?.lcr_tka_data_consumo === null);
-  const expiracaoHoras = (new Date(registro.lcr_tka_data_expiracao).getTime() - Date.now()) / 3_600_000;
-  registrar('Expiração de 24 horas aplicada', expiracaoHoras > 23 && expiracaoHoras <= 24, `${expiracaoHoras.toFixed(2)} h`);
+  const linha = registro.rows[0];
+  registrar('Código gravado apenas como hash', linha?.lcr_tka_tipo_token === 'verificacao_email' && linha.lcr_tka_hash_token.length === 64);
+  registrar('Código pendente de consumo', linha?.lcr_tka_data_consumo === null);
+  const expiracaoMinutos = (new Date(linha.lcr_tka_data_expiracao).getTime() - Date.now()) / 60_000;
+  registrar('Expiração de 15 minutos aplicada', expiracaoMinutos > 14 && expiracaoMinutos <= 15, `${expiracaoMinutos.toFixed(1)} min`);
 
-  // O token em texto claro não é recuperável: um valor inventado deve ser recusado.
-  let recusouTokenInvalido = false;
+  // 4. Código errado é recusado e conta tentativa
+  let recusouCodigoErrado = false;
   try {
-    await chamar('ConfirmarEmail', { token_verificacao: 'a'.repeat(43) });
+    await chamar('ConfirmarEmail', { email_usuario: email, codigo_verificacao: 'ZZZZZZ' });
   } catch (erro) {
-    recusouTokenInvalido = erro.code === grpc.status.INVALID_ARGUMENT;
+    recusouCodigoErrado = erro.code === grpc.status.INVALID_ARGUMENT;
   }
-  registrar('ConfirmarEmail recusa token inexistente', recusouTokenInvalido);
+  registrar('ConfirmarEmail recusa código incorreto', recusouCodigoErrado);
 
-  // 3. Recuperação de senha
-  const recuperacao = await chamar('SolicitarRecuperacaoSenha', { email_usuario: email });
-  registrar('SolicitarRecuperacaoSenha', recuperacao.solicitacao_aceita === true, recuperacao.mensagem_resultado);
-  const neutraInexistente = await chamar('SolicitarRecuperacaoSenha', { email_usuario: `inexistente-${idUnico}@exemplo.test` });
-  registrar('Resposta neutra para e-mail inexistente', neutraInexistente.solicitacao_aceita === true && neutraInexistente.mensagem_resultado === recuperacao.mensagem_resultado);
-
-  const registroRedefinicao = await banco.query(
-    `SELECT lcr_tka_data_expiracao FROM lcr_tokens_autenticacao
-     WHERE lcr_tka_id_usuario = $1 AND lcr_tka_tipo_token = 'redefinicao_senha' ORDER BY lcr_tka_data_criacao DESC LIMIT 1`,
-    [idInterno],
+  const aposErro = await banco.query(
+    'SELECT lcr_tka_quantidade_tentativas FROM lcr_tokens_autenticacao WHERE lcr_tka_id_usuario = $1 AND lcr_tka_tipo_token = $2',
+    [idInterno, 'verificacao_email'],
   );
-  const expiracaoMinutos = (new Date(registroRedefinicao.rows[0].lcr_tka_data_expiracao).getTime() - Date.now()) / 60_000;
-  registrar('Expiração de 60 minutos aplicada', expiracaoMinutos > 59 && expiracaoMinutos <= 60, `${expiracaoMinutos.toFixed(1)} min`);
+  registrar('Tentativa inválida contabilizada', aposErro.rows[0]?.lcr_tka_quantidade_tentativas === 1);
 
-  // Sessão aberta antes da redefinição deve ser revogada.
-  const sessaoAntes = await banco.query('SELECT COUNT(*)::int AS total FROM lcr_sessoes WHERE lcr_ses_id_usuario = $1 AND lcr_ses_data_revogacao IS NULL', [idInterno]);
-  registrar('Sessão ativa antes da redefinição', sessaoAntes.rows[0].total >= 1, `${sessaoAntes.rows[0].total} sessão(ões)`);
-
-  // 4. Redefinição com token inválido
-  let recusouRedefinicaoInvalida = false;
-  try {
-    await chamar('RedefinirSenha', { token_redefinicao: 'b'.repeat(43), nova_senha_usuario: senhaNova });
-  } catch (erro) {
-    recusouRedefinicaoInvalida = erro.code === grpc.status.INVALID_ARGUMENT;
-  }
-  registrar('RedefinirSenha recusa token inexistente', recusouRedefinicaoInvalida);
-
-  // 5. Redefinição com senha fora da política
-  let recusouSenhaFraca = false;
-  try {
-    await chamar('RedefinirSenha', { token_redefinicao: 'c'.repeat(43), nova_senha_usuario: 'fraca' });
-  } catch (erro) {
-    recusouSenhaFraca = erro.code === grpc.status.INVALID_ARGUMENT;
-  }
-  registrar('RedefinirSenha recusa senha fora da política', recusouSenhaFraca);
-
-  // 6. Login com a senha original continua funcionando (nenhuma troca ocorreu)
-  const loginOriginal = await chamar('Entrar', { email_usuario: email, senha_usuario: senhaOriginal });
-  registrar('Entrar com a senha original', Boolean(loginOriginal.token_acesso));
-
-  // 6.1 Caminho feliz da confirmação de e-mail com token válido
-  const tokenVerificacao = `smoke-verificacao-${randomUUID()}`.replace(/-/g, '');
-  await injetarToken(idInterno, 'verificacao_email', tokenVerificacao, 30);
-  const confirmacao = await chamar('ConfirmarEmail', { token_verificacao: tokenVerificacao });
-  registrar('ConfirmarEmail com token válido', confirmacao.email_confirmado === true && confirmacao.email_usuario === email);
+  // 5. Caminho feliz: código válido confirma o e-mail
+  const codigoVerificacao = gerarCodigo();
+  await injetarCodigo(idInterno, 'verificacao_email', codigoVerificacao, 30);
+  const confirmacao = await chamar('ConfirmarEmail', { email_usuario: email, codigo_verificacao: codigoVerificacao });
+  registrar('ConfirmarEmail com código válido', confirmacao.email_confirmado === true && confirmacao.email_usuario === email);
 
   const usuarioVerificado = await banco.query('SELECT lcr_usr_email_verificado_em FROM lcr_usuarios WHERE lcr_usr_id_usuario = $1', [idInterno]);
   registrar('Data de verificação gravada', usuarioVerificado.rows[0].lcr_usr_email_verificado_em !== null);
 
   let recusouReuso = false;
   try {
-    await chamar('ConfirmarEmail', { token_verificacao: tokenVerificacao });
+    await chamar('ConfirmarEmail', { email_usuario: email, codigo_verificacao: codigoVerificacao });
   } catch (erro) {
     recusouReuso = erro.code === grpc.status.INVALID_ARGUMENT;
   }
-  registrar('Token de verificação não pode ser reutilizado', recusouReuso);
+  registrar('Código de verificação não pode ser reutilizado', recusouReuso);
 
-  const identidadeVerificada = await chamar('ObterIdentidadeAtual', {}, { authorization: `Bearer ${loginOriginal.token_acesso}` });
+  // 6. Agora o login libera a sessão
+  const loginLiberado = await chamar('Entrar', { email_usuario: email, senha_usuario: senhaOriginal });
+  registrar('Login liberado após a confirmação', Boolean(loginLiberado.token_acesso) && loginLiberado.requer_verificacao_email === false);
+
+  const identidadeVerificada = await chamar('ObterIdentidadeAtual', {}, { authorization: `Bearer ${loginLiberado.token_acesso}` });
   registrar('Identidade reporta e-mail confirmado', identidadeVerificada.email_verificado_usuario === true);
 
-  // 6.2 Caminho feliz da redefinição de senha com token válido
-  const tokenRedefinicao = `smoke-redefinicao-${randomUUID()}`.replace(/-/g, '');
-  await injetarToken(idInterno, 'redefinicao_senha', tokenRedefinicao, 30);
-  const redefinicao = await chamar('RedefinirSenha', { token_redefinicao: tokenRedefinicao, nova_senha_usuario: senhaNova });
-  registrar('RedefinirSenha com token válido', redefinicao.senha_redefinida === true, `${redefinicao.sessoes_revogadas} sessão(ões) revogada(s)`);
+  // 7. Recuperação de senha
+  const recuperacao = await chamar('SolicitarRecuperacaoSenha', { email_usuario: email });
+  registrar('SolicitarRecuperacaoSenha', recuperacao.solicitacao_aceita === true, recuperacao.mensagem_resultado);
+  const neutraInexistente = await chamar('SolicitarRecuperacaoSenha', { email_usuario: `inexistente-${idUnico}@exemplo.test` });
+  registrar(
+    'Resposta neutra para e-mail inexistente',
+    neutraInexistente.solicitacao_aceita === true && neutraInexistente.mensagem_resultado === recuperacao.mensagem_resultado,
+  );
+
+  const registroRedefinicao = await banco.query(
+    `SELECT lcr_tka_data_expiracao FROM lcr_tokens_autenticacao
+     WHERE lcr_tka_id_usuario = $1 AND lcr_tka_tipo_token = 'redefinicao_senha' ORDER BY lcr_tka_data_criacao DESC LIMIT 1`,
+    [idInterno],
+  );
+  const expiracaoRedefinicao = (new Date(registroRedefinicao.rows[0].lcr_tka_data_expiracao).getTime() - Date.now()) / 60_000;
+  registrar('Expiração de 15 minutos na redefinição', expiracaoRedefinicao > 14 && expiracaoRedefinicao <= 15, `${expiracaoRedefinicao.toFixed(1)} min`);
+
+  const sessaoAntes = await banco.query('SELECT COUNT(*)::int AS total FROM lcr_sessoes WHERE lcr_ses_id_usuario = $1 AND lcr_ses_data_revogacao IS NULL', [idInterno]);
+  registrar('Sessão ativa antes da redefinição', sessaoAntes.rows[0].total >= 1, `${sessaoAntes.rows[0].total} sessão(ões)`);
+
+  // 8. Redefinição recusa código inexistente e senha fora da política
+  let recusouRedefinicaoInvalida = false;
+  try {
+    await chamar('RedefinirSenha', { email_usuario: email, codigo_redefinicao: 'ZZZZZZ', nova_senha_usuario: senhaNova });
+  } catch (erro) {
+    recusouRedefinicaoInvalida = erro.code === grpc.status.INVALID_ARGUMENT;
+  }
+  registrar('RedefinirSenha recusa código inexistente', recusouRedefinicaoInvalida);
+
+  let recusouSenhaFraca = false;
+  try {
+    await chamar('RedefinirSenha', { email_usuario: email, codigo_redefinicao: 'BCDFGH', nova_senha_usuario: 'fraca' });
+  } catch (erro) {
+    recusouSenhaFraca = erro.code === grpc.status.INVALID_ARGUMENT;
+  }
+  registrar('RedefinirSenha recusa senha fora da política', recusouSenhaFraca);
+
+  // 9. Caminho feliz da redefinição
+  const codigoRedefinicao = gerarCodigo();
+  await injetarCodigo(idInterno, 'redefinicao_senha', codigoRedefinicao, 30);
+  const redefinicao = await chamar('RedefinirSenha', {
+    email_usuario: email,
+    codigo_redefinicao: codigoRedefinicao,
+    nova_senha_usuario: senhaNova,
+  });
+  registrar('RedefinirSenha com código válido', redefinicao.senha_redefinida === true, `${redefinicao.sessoes_revogadas} sessão(ões) revogada(s)`);
 
   const sessoesDepois = await banco.query('SELECT COUNT(*)::int AS total FROM lcr_sessoes WHERE lcr_ses_id_usuario = $1 AND lcr_ses_data_revogacao IS NULL', [idInterno]);
   registrar('Sessões encerradas após a redefinição', sessoesDepois.rows[0].total === 0);
@@ -238,13 +280,13 @@ async function principal() {
 
   let recusouReusoRedefinicao = false;
   try {
-    await chamar('RedefinirSenha', { token_redefinicao: tokenRedefinicao, nova_senha_usuario: 'OutraSenhaSegura789' });
+    await chamar('RedefinirSenha', { email_usuario: email, codigo_redefinicao: codigoRedefinicao, nova_senha_usuario: 'OutraSenhaSegura789' });
   } catch (erro) {
     recusouReusoRedefinicao = erro.code === grpc.status.INVALID_ARGUMENT;
   }
-  registrar('Token de redefinição não pode ser reutilizado', recusouReusoRedefinicao);
+  registrar('Código de redefinição não pode ser reutilizado', recusouReusoRedefinicao);
 
-  // 7. Rate limit por identificador
+  // 10. Rate limit por identificador
   let bloqueou = false;
   for (let tentativa = 0; tentativa < 6; tentativa += 1) {
     try {
@@ -258,23 +300,24 @@ async function principal() {
   }
   registrar('Rate limit bloqueia excesso de solicitações', bloqueou);
 
-  // 8. Auditoria registrada sem expor tokens
+  // 11. Auditoria registrada sem expor o código
   const auditoria = await banco.query(
     `SELECT lcr_aud_tipo_evento, lcr_aud_detalhes_evento::text AS detalhes
      FROM lcr_registros_auditoria WHERE lcr_aud_id_usuario = $1 ORDER BY lcr_aud_data_criacao ASC`,
     [idInterno],
   );
-  const tipos = auditoria.rows.map(linha => linha.lcr_aud_tipo_evento);
+  const tipos = auditoria.rows.map(linhaAuditoria => linhaAuditoria.lcr_aud_tipo_evento);
   registrar('Auditoria de solicitação de verificação', tipos.includes('verificacao_email_solicitada'));
+  registrar('Auditoria de confirmação de e-mail', tipos.includes('email_confirmado'));
   registrar('Auditoria de solicitação de recuperação', tipos.includes('recuperacao_senha_solicitada'));
-  const vazouToken = auditoria.rows.some(linha => /[A-Za-z0-9_-]{43,}/.test(linha.detalhes ?? ''));
-  registrar('Nenhum token gravado na auditoria', !vazouToken);
+  const detalhesAuditoria = auditoria.rows.map(item => item.detalhes ?? '').join(' ');
+  registrar('Código nunca gravado na auditoria', !detalhesAuditoria.includes(codigoVerificacao) && !detalhesAuditoria.includes(codigoRedefinicao));
 
-  // 9. Chave do Resend nunca aparece nos logs da API
+  // 12. Segredos nunca aparecem nos logs da API
   const logs = saidaApi.join('');
   const chave = process.env.RESEND_CHAVE_API?.trim();
   registrar('Chave do Resend ausente dos logs', !chave || !logs.includes(chave));
-  registrar('Log não contém corpo de e-mail com token', !/token=[A-Za-z0-9_-]{43,}/.test(logs));
+  registrar('Log não contém corpo de e-mail com código', !logs.includes(codigoVerificacao) && !logs.includes(codigoRedefinicao));
 
   // Limpeza
   await banco.query('DELETE FROM lcr_tokens_autenticacao WHERE lcr_tka_id_usuario = $1', [idInterno]);

@@ -8,14 +8,18 @@ interface RequisicaoEmail {
   emailUsuario?: string;
 }
 
-interface RequisicaoTokenVerificacao {
-  token_verificacao?: string;
-  tokenVerificacao?: string;
+interface RequisicaoCodigo {
+  email_usuario?: string;
+  emailUsuario?: string;
+  codigo_verificacao?: string;
+  codigoVerificacao?: string;
 }
 
-interface RequisicaoTokenRedefinicao {
-  token_redefinicao?: string;
-  tokenRedefinicao?: string;
+interface RequisicaoCodigoRedefinicao {
+  email_usuario?: string;
+  emailUsuario?: string;
+  codigo_redefinicao?: string;
+  codigoRedefinicao?: string;
   nova_senha_usuario?: string;
   novaSenhaUsuario?: string;
 }
@@ -27,20 +31,22 @@ export class ControladorGrpcFluxosEmail {
   @GrpcMethod('ServicoAutenticacao', 'SolicitarVerificacaoEmail')
   async solicitarVerificacaoEmail(requisicao: RequisicaoEmail, metadados: Metadata) {
     const resposta = await this.servico.solicitarVerificacaoEmail(
-      requisicao.email_usuario?.trim() || requisicao.emailUsuario?.trim() || '',
+      this.obterEmail(requisicao),
       this.obterContexto(metadados),
     );
     return {
       solicitacao_aceita: resposta.solicitacaoAceita,
       expira_em_segundos: resposta.expiraEmSegundos,
       mensagem_resultado: resposta.mensagemResultado,
+      comprimento_codigo: resposta.comprimentoCodigo,
     };
   }
 
   @GrpcMethod('ServicoAutenticacao', 'ConfirmarEmail')
-  async confirmarEmail(requisicao: RequisicaoTokenVerificacao, metadados: Metadata) {
+  async confirmarEmail(requisicao: RequisicaoCodigo, metadados: Metadata) {
     const resposta = await this.servico.confirmarEmail(
-      requisicao.token_verificacao?.trim() || requisicao.tokenVerificacao?.trim() || '',
+      this.obterEmail(requisicao),
+      requisicao.codigo_verificacao?.trim() || requisicao.codigoVerificacao?.trim() || '',
       this.obterContexto(metadados),
     );
     return {
@@ -53,20 +59,22 @@ export class ControladorGrpcFluxosEmail {
   @GrpcMethod('ServicoAutenticacao', 'SolicitarRecuperacaoSenha')
   async solicitarRecuperacaoSenha(requisicao: RequisicaoEmail, metadados: Metadata) {
     const resposta = await this.servico.solicitarRecuperacaoSenha(
-      requisicao.email_usuario?.trim() || requisicao.emailUsuario?.trim() || '',
+      this.obterEmail(requisicao),
       this.obterContexto(metadados),
     );
     return {
       solicitacao_aceita: resposta.solicitacaoAceita,
       expira_em_segundos: resposta.expiraEmSegundos,
       mensagem_resultado: resposta.mensagemResultado,
+      comprimento_codigo: resposta.comprimentoCodigo,
     };
   }
 
   @GrpcMethod('ServicoAutenticacao', 'RedefinirSenha')
-  async redefinirSenha(requisicao: RequisicaoTokenRedefinicao, metadados: Metadata) {
+  async redefinirSenha(requisicao: RequisicaoCodigoRedefinicao, metadados: Metadata) {
     const resposta = await this.servico.redefinirSenha(
-      requisicao.token_redefinicao?.trim() || requisicao.tokenRedefinicao?.trim() || '',
+      this.obterEmail(requisicao),
+      requisicao.codigo_redefinicao?.trim() || requisicao.codigoRedefinicao?.trim() || '',
       requisicao.nova_senha_usuario || requisicao.novaSenhaUsuario || '',
       this.obterContexto(metadados),
     );
@@ -75,6 +83,10 @@ export class ControladorGrpcFluxosEmail {
       sessoes_revogadas: resposta.sessoesRevogadas,
       mensagem_resultado: resposta.mensagemResultado,
     };
+  }
+
+  private obterEmail(requisicao: RequisicaoEmail): string {
+    return requisicao.email_usuario?.trim() || requisicao.emailUsuario?.trim() || '';
   }
 
   private obterContexto(metadados: Metadata): ContextoFluxoEmail {

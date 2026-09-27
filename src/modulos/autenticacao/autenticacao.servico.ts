@@ -24,6 +24,12 @@ export interface RespostaAutenticacao {
   tokenAtualizacao: string;
   expiraEmSegundos: number;
   identidade: UsuarioAutenticado;
+  /**
+   * Verdadeiro quando a conta existe e as credenciais conferem, mas o e-mail
+   * ainda não foi confirmado. Nesse caso nenhum token de sessão é emitido e o
+   * acesso à aplicação permanece bloqueado até a confirmação do código.
+   */
+  requerVerificacaoEmail: boolean;
 }
 
 @Injectable()
@@ -49,7 +55,9 @@ export class ServicoAutenticacao {
       if (mensagem === 'Banco de dados indisponivel') this.erro(codigoGrpc.UNAVAILABLE, mensagem);
       throw erro;
     }
-    return this.emitirTokens(identidade, contexto);
+    // O cadastro cria a conta, mas não abre sessão: o acesso só é liberado
+    // depois que o código enviado por e-mail confirma o endereço.
+    return this.semSessao(identidade);
   }
 
   async entrar(email: string, senha: string, contexto?: ContextoSessao): Promise<RespostaAutenticacao> {
@@ -60,6 +68,11 @@ export class ServicoAutenticacao {
       this.erro(codigoGrpc.UNAUTHENTICATED, 'Email ou senha invalidos');
     }
     if (credencial.status !== 'ativo') this.erro(codigoGrpc.PERMISSION_DENIED, 'Usuario sem acesso ativo');
+    if (!credencial.emailVerificado) {
+      const identidadePendente = await this.usuarios.obterIdentidadeLocal(credencial.idExterno);
+      if (!identidadePendente) this.erro(codigoGrpc.UNAUTHENTICATED, 'Usuario nao encontrado');
+      return this.semSessao(identidadePendente);
+    }
     let identidade: UsuarioAutenticado | null;
     try {
       identidade = await this.usuarios.obterIdentidadeLocal(credencial.idExterno);
@@ -94,7 +107,13 @@ export class ServicoAutenticacao {
       lcr_ses_endereco_ip: contexto?.enderecoIp ?? sessao.lcr_ses_endereco_ip,
       lcr_ses_agente_usuario: contexto?.agenteUsuario?.slice(0, 2000) ?? sessao.lcr_ses_agente_usuario,
     });
-    return { tokenAcesso, tokenAtualizacao: novoTokenAtualizacao, expiraEmSegundos: EXPIRACAO_TOKEN_ACESSO_SEGUNDOS, identidade };
+    return {
+      tokenAcesso,
+      tokenAtualizacao: novoTokenAtualizacao,
+      expiraEmSegundos: EXPIRACAO_TOKEN_ACESSO_SEGUNDOS,
+      identidade,
+      requerVerificacaoEmail: false,
+    };
   }
 
   async sair(tokenAtualizacao: string): Promise<boolean> {
@@ -139,7 +158,22 @@ export class ServicoAutenticacao {
       lcr_ses_data_expiracao: this.dataExpiracaoAtualizacao(),
       lcr_ses_data_revogacao: null,
     });
-    return { tokenAcesso, tokenAtualizacao, expiraEmSegundos: EXPIRACAO_TOKEN_ACESSO_SEGUNDOS, identidade };
+    return { tokenAcesso, tokenAtualizacao, expiraEmSegundos: EXPIRACAO_TOKEN_ACESSO_SEGUNDOS, identidade, requerVerificacaoEmail: false };
+  }
+
+  /**
+   * Resposta para contas que ainda não confirmaram o e-mail.
+   * Não cria sessão e devolve os tokens vazios: a aplicação usa apenas o
+   * endereço e o nome para conduzir o usuário à tela de verificação.
+   */
+  private semSessao(identidade: UsuarioAutenticado): RespostaAutenticacao {
+    return {
+      tokenAcesso: '',
+      tokenAtualizacao: '',
+      expiraEmSegundos: 0,
+      identidade,
+      requerVerificacaoEmail: true,
+    };
   }
 
   private validarCadastro(nome: string, email: string, senha: string): void {

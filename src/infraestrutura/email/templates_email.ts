@@ -1,12 +1,12 @@
 export interface DadosEmailVerificacao {
   nomeUsuario: string;
-  urlConfirmacao: string;
-  expiraEmHoras: number;
+  codigo: string;
+  expiraEmMinutos: number;
 }
 
 export interface DadosEmailRedefinicao {
   nomeUsuario: string;
-  urlRedefinicao: string;
+  codigo: string;
   expiraEmMinutos: number;
 }
 
@@ -37,7 +37,7 @@ function molduraHtml(titulo: string, conteudo: string): string {
     <tr><td style="padding:8px 28px 28px;font-size:15px;line-height:1.65;color:#4b6a59;">${conteudo}</td></tr>
     <tr><td style="padding:0 28px 28px;">
       <p style="margin:0;padding-top:16px;border-top:1px solid #edf2ed;font-size:12px;line-height:1.6;color:#7b9485;">
-        Mensagem automática do projeto Lixo Certo (TCC II). Se você não solicitou este e-mail, ignore-o: nenhuma ação será executada sem o uso do link.
+        Mensagem automática do projeto Lixo Certo (TCC II). Se você não solicitou este e-mail, ignore-o: nenhuma ação será executada sem o código acima.
       </p>
     </td></tr>
   </table>
@@ -45,29 +45,41 @@ function molduraHtml(titulo: string, conteudo: string): string {
 </html>`;
 }
 
-function botaoHtml(url: string, rotulo: string): string {
-  return `<p style="margin:24px 0;"><a href="${escaparHtml(url)}" style="display:inline-block;padding:14px 22px;border-radius:14px;background:#17362a;color:#ffffff;font-size:15px;font-weight:700;text-decoration:none;">${escaparHtml(rotulo)}</a></p>`;
+/**
+ * Bloco do código em destaque, com espaçamento entre os caracteres.
+ * Cada caractere fica em uma célula própria, o que mantém o código legível
+ * mesmo em clientes de e-mail que reduzem a fonte ou removem o espaçamento.
+ */
+function blocoCodigoHtml(codigo: string): string {
+  const celulas = [...codigo]
+    .map(
+      caractere =>
+        `<td style="padding:0 3px;"><span style="display:inline-block;min-width:34px;padding:12px 0;border:1px solid #cfe0d3;border-radius:12px;background:#f4faf2;font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:26px;font-weight:700;letter-spacing:.08em;color:#17362a;text-align:center;">${escaparHtml(caractere)}</span></td>`,
+    )
+    .join('');
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px auto;"><tr>${celulas}</tr></table>`;
 }
 
 export function montarEmailVerificacao(dados: DadosEmailVerificacao): { assunto: string; html: string; texto: string } {
   const nome = primeiroNome(dados.nomeUsuario);
   const conteudo = `
     <p style="margin:16px 0;">Olá, ${escaparHtml(nome)}.</p>
-    <p style="margin:0 0 8px;">Confirme seu endereço de e-mail para concluir a ativação da sua conta no Lixo Certo.</p>
-    ${botaoHtml(dados.urlConfirmacao, 'Confirmar meu e-mail')}
-    <p style="margin:0;font-size:13px;color:#7b9485;">O link expira em ${dados.expiraEmHoras} hora(s) e pode ser usado uma única vez.</p>
-    <p style="margin:16px 0 0;font-size:12px;word-break:break-all;color:#8ea89a;">${escaparHtml(dados.urlConfirmacao)}</p>`;
+    <p style="margin:0 0 8px;">Use o código abaixo para confirmar seu endereço de e-mail e liberar o acesso à sua conta no Lixo Certo.</p>
+    ${blocoCodigoHtml(dados.codigo)}
+    <p style="margin:0;font-size:13px;color:#7b9485;">O código expira em ${dados.expiraEmMinutos} minuto(s) e pode ser usado uma única vez.</p>
+    <p style="margin:16px 0 0;font-size:13px;color:#7b9485;">Digite o código na tela de verificação do aplicativo. Ninguém do Lixo Certo vai pedir este código por telefone ou mensagem.</p>`;
   return {
-    assunto: 'Confirme seu e-mail no Lixo Certo',
+    assunto: `${dados.codigo} é seu código de confirmação do Lixo Certo`,
     html: molduraHtml('Confirme seu e-mail', conteudo),
     texto: [
       `Olá, ${nome}.`,
       '',
-      'Confirme seu endereço de e-mail para concluir a ativação da sua conta no Lixo Certo.',
+      'Use o código abaixo para confirmar seu endereço de e-mail e liberar o acesso à sua conta no Lixo Certo.',
       '',
-      dados.urlConfirmacao,
+      `    ${dados.codigo}`,
       '',
-      `O link expira em ${dados.expiraEmHoras} hora(s) e pode ser usado uma única vez.`,
+      `O código expira em ${dados.expiraEmMinutos} minuto(s) e pode ser usado uma única vez.`,
+      'Digite o código na tela de verificação do aplicativo.',
       '',
       'Se você não criou esta conta, ignore esta mensagem.',
     ].join('\n'),
@@ -78,22 +90,21 @@ export function montarEmailRedefinicaoSenha(dados: DadosEmailRedefinicao): { ass
   const nome = primeiroNome(dados.nomeUsuario);
   const conteudo = `
     <p style="margin:16px 0;">Olá, ${escaparHtml(nome)}.</p>
-    <p style="margin:0 0 8px;">Recebemos um pedido de redefinição da senha da sua conta no Lixo Certo.</p>
-    ${botaoHtml(dados.urlRedefinicao, 'Redefinir minha senha')}
-    <p style="margin:0;font-size:13px;color:#7b9485;">O link expira em ${dados.expiraEmMinutos} minuto(s) e pode ser usado uma única vez.</p>
-    <p style="margin:16px 0 0;font-size:12px;word-break:break-all;color:#8ea89a;">${escaparHtml(dados.urlRedefinicao)}</p>
+    <p style="margin:0 0 8px;">Recebemos um pedido de redefinição da senha da sua conta no Lixo Certo. Use o código abaixo para criar uma nova senha.</p>
+    ${blocoCodigoHtml(dados.codigo)}
+    <p style="margin:0;font-size:13px;color:#7b9485;">O código expira em ${dados.expiraEmMinutos} minuto(s) e pode ser usado uma única vez.</p>
     <p style="margin:16px 0 0;font-size:13px;color:#7b9485;">Se não foi você, ignore este e-mail: sua senha atual continua válida.</p>`;
   return {
-    assunto: 'Redefinição de senha do Lixo Certo',
+    assunto: `${dados.codigo} é seu código de redefinição do Lixo Certo`,
     html: molduraHtml('Redefinir sua senha', conteudo),
     texto: [
       `Olá, ${nome}.`,
       '',
-      'Recebemos um pedido de redefinição da senha da sua conta no Lixo Certo.',
+      'Recebemos um pedido de redefinição da senha da sua conta no Lixo Certo. Use o código abaixo para criar uma nova senha.',
       '',
-      dados.urlRedefinicao,
+      `    ${dados.codigo}`,
       '',
-      `O link expira em ${dados.expiraEmMinutos} minuto(s) e pode ser usado uma única vez.`,
+      `O código expira em ${dados.expiraEmMinutos} minuto(s) e pode ser usado uma única vez.`,
       '',
       'Se não foi você, ignore este e-mail: sua senha atual continua válida.',
     ].join('\n'),
