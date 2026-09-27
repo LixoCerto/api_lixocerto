@@ -98,3 +98,26 @@ O teste de integração substitui o provedor por um coletor em memória: valida
 persistência, expiração, reuso recusado e troca de hash sem enviar e-mail real.
 O envio real deve ser verificado manualmente com `PROVEDOR_EMAIL=resend` e uma
 chave válida, enviando para um endereço controlado.
+
+## Testar o link no navegador sem enviar e-mail
+
+Com `PROVEDOR_EMAIL=log` nenhum e-mail sai e o log mostra apenas metadados —
+por segurança, o token nunca aparece no log. Para testar as telas
+`/confirmar-email` e `/redefinir-senha` no navegador, gere um link de
+desenvolvimento:
+
+```bash
+# confirmação de e-mail (expira em 24 horas)
+node scripts/gerar-link-desenvolvimento.mjs seu-email@exemplo.com
+
+# redefinição de senha (expira em 60 minutos)
+node scripts/gerar-link-desenvolvimento.mjs seu-email@exemplo.com redefinicao
+```
+
+O script grava um token de uso único exatamente como a API faria — mesmo hash
+SHA-256, mesma expiração, mesmo consumo único — e imprime a URL pronta para
+abrir. A conta precisa existir e estar com status `ativo`.
+
+Ele recusa execução com `AMBIENTE_EXECUCAO=producao` e é o único ponto do
+projeto que escreve um token fora do fluxo da aplicação; use apenas em
+desenvolvimento.
