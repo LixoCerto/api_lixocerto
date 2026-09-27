@@ -35,6 +35,7 @@
     "pg-hstore": "^2.3.4",
     "pino": "^9.9.0",
     "reflect-metadata": "^0.2.2",
+    "resend": "^6.30.0",
     "rxjs": "^7.8.2",
     "sequelize": "^6.37.7",
     "uuid": "^11.1.0"

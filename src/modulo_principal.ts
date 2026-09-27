@@ -3,6 +3,7 @@ import { ModuloConfiguracao } from './configuracao/configuracao.module.js';
 import { ModuloBancoDados } from './infraestrutura/banco/banco.module.js';
 import { ModuloCache } from './infraestrutura/cache/cache.module.js';
 import { ModuloAutenticacao } from './modulos/autenticacao/autenticacao.module.js';
+import { ModuloFluxosEmail } from './modulos/autenticacao/fluxos_email.module.js';
 import { ModuloAutorizacao } from './modulos/autorizacao/autorizacao.module.js';
 import { ModuloIdentidade } from './modulos/identidade/identidade.module.js';
 import { ModuloUsuarios } from './modulos/usuarios/usuarios.module.js';
@@ -26,6 +27,7 @@ import { ModuloSaude } from './modulos/saude/saude.module.js';
     ModuloBancoDados,
     ModuloCache,
     ModuloAutenticacao,
+    ModuloFluxosEmail,
     ModuloAutorizacao,
     ModuloIdentidade,
     ModuloUsuarios,

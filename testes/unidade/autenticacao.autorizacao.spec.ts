@@ -10,6 +10,7 @@ const usuario: UsuarioAutenticado = {
   email: 'arthur@exemplo.test',
   papeis: ['usuario'],
   permissoes: ['materiais:ler'],
+  emailVerificado: true,
 };
 
 describe('autenticacao e autorizacao', () => {

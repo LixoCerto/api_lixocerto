@@ -5,6 +5,13 @@ export const nomesVariaveisObrigatorias = [
   'SEGREDO_JWT',
 ] as const;
 
+/** Variáveis exigidas quando o envio real de e-mail está habilitado em produção. */
+export const nomesVariaveisEmailProducao = [
+  'RESEND_CHAVE_API',
+  'EMAIL_REMETENTE',
+  'URL_PUBLICA_FRONTEND',
+] as const;
+
 const variaveisUrl = ['URL_BANCO_DADOS', 'URL_REDIS'] as const;
 
 export function validarAmbiente(ambiente: NodeJS.ProcessEnv): void {
@@ -31,5 +38,19 @@ export function validarAmbiente(ambiente: NodeJS.ProcessEnv): void {
   }
   if ((ambiente.SEGREDO_JWT?.length ?? 0) < 32) {
     throw new Error('SEGREDO_JWT deve possuir pelo menos 32 caracteres');
+  }
+
+  // Em produção o envio real por Resend é obrigatório; o provedor de log é recusado.
+  if ((ambiente.PROVEDOR_EMAIL?.trim().toLowerCase() ?? 'resend') === 'log') {
+    throw new Error('PROVEDOR_EMAIL=log nao e permitido em producao');
+  }
+  const emailAusentes = nomesVariaveisEmailProducao.filter(nome => !ambiente[nome]?.trim());
+  if (emailAusentes.length > 0) throw new Error(`Variaveis de email obrigatorias ausentes: ${emailAusentes.join(', ')}`);
+  if ((ambiente.RESEND_CHAVE_API?.length ?? 0) < 10) {
+    throw new Error('RESEND_CHAVE_API invalida');
+  }
+  const urlPublica = ambiente.URL_PUBLICA_FRONTEND?.trim();
+  if (!urlPublica || !/^https:\/\//.test(urlPublica)) {
+    throw new Error('URL_PUBLICA_FRONTEND deve ser uma URL https valida em producao');
   }
 }

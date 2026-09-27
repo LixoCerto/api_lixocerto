@@ -2,12 +2,14 @@ import { randomUUID } from 'node:crypto';
 import { Inject, Injectable } from '@nestjs/common';
 import { QueryTypes, Sequelize } from 'sequelize';
 import { UsuarioAutenticado } from '../../comum/autenticacao/usuario_autenticado.js';
+import { ModeloSessao } from '../../infraestrutura/banco/modelos/sessao.modelo.js';
 import { ModeloUsuario } from '../../infraestrutura/banco/modelos/usuario.modelo.js';
 
 const PAPEIS_PERMITIDOS = ['usuario', 'pesquisador', 'revisor', 'administrador'] as const;
 type PapelPermitido = (typeof PAPEIS_PERMITIDOS)[number];
 
 export interface CredencialUsuarioLocal {
+  idInterno: string;
   idExterno: string;
   nome: string;
   email: string;
@@ -30,12 +32,59 @@ export class ServicoUsuarios {
     const usuario = await ModeloUsuario.findOne({ where: { lcr_usr_email: email.trim().toLowerCase() } });
     if (!usuario) return null;
     return {
+      idInterno: usuario.lcr_usr_id_usuario,
       idExterno: usuario.lcr_usr_id_externo,
       nome: usuario.lcr_usr_nome,
       email: usuario.lcr_usr_email,
       hashSenha: usuario.lcr_usr_hash_senha,
       status: usuario.lcr_usr_status_usuario,
     };
+  }
+
+  async obterCredencialPorIdInterno(idInterno: string): Promise<CredencialUsuarioLocal | null> {
+    if (!this.banco) return null;
+    const usuario = await ModeloUsuario.findByPk(idInterno);
+    if (!usuario) return null;
+    return {
+      idInterno: usuario.lcr_usr_id_usuario,
+      idExterno: usuario.lcr_usr_id_externo,
+      nome: usuario.lcr_usr_nome,
+      email: usuario.lcr_usr_email,
+      hashSenha: usuario.lcr_usr_hash_senha,
+      status: usuario.lcr_usr_status_usuario,
+    };
+  }
+
+  /** Substitui o hash da senha. A senha em texto claro nunca é persistida. */
+  async definirHashSenha(idInterno: string, hashSenha: string): Promise<boolean> {
+    if (!this.banco) return false;
+    const [quantidade] = await ModeloUsuario.update(
+      { lcr_usr_hash_senha: hashSenha },
+      { where: { lcr_usr_id_usuario: idInterno } },
+    );
+    return quantidade > 0;
+  }
+
+  /** Marca o e-mail como confirmado e devolve o endereço confirmado. */
+  async marcarEmailVerificado(idInterno: string): Promise<string | null> {
+    if (!this.banco) return null;
+    const usuario = await ModeloUsuario.findByPk(idInterno);
+    if (!usuario) return null;
+    await usuario.update({ lcr_usr_email_verificado_em: new Date() });
+    return usuario.lcr_usr_email;
+  }
+
+  /**
+   * Revoga todas as sessões abertas do usuário.
+   * Usado após a redefinição de senha, para encerrar qualquer acesso obtido com a senha anterior.
+   */
+  async revogarSessoes(idInterno: string): Promise<number> {
+    if (!this.banco) return 0;
+    const [quantidade] = await ModeloSessao.update(
+      { lcr_ses_data_revogacao: new Date() },
+      { where: { lcr_ses_id_usuario: idInterno, lcr_ses_data_revogacao: null } },
+    );
+    return quantidade;
   }
 
   async cadastrarUsuarioLocal(dados: { nome: string; email: string; hashSenha: string }): Promise<UsuarioAutenticado> {
@@ -49,6 +98,7 @@ export class ServicoUsuarios {
       lcr_usr_nome: dados.nome.trim(),
       lcr_usr_email: email,
       lcr_usr_hash_senha: dados.hashSenha,
+      lcr_usr_email_verificado_em: null,
       lcr_usr_status_usuario: 'ativo',
       lcr_usr_data_ultimo_acesso: new Date(),
     });
@@ -101,6 +151,7 @@ export class ServicoUsuarios {
       email: usuario.lcr_usr_email,
       papeis: papeis.map(item => item.lcr_pap_nome_papel),
       permissoes: permissoes.map(item => item.lcr_prm_codigo_permissao),
+      emailVerificado: Boolean(usuario.lcr_usr_email_verificado_em),
     };
   }
 
@@ -114,6 +165,7 @@ export class ServicoUsuarios {
         lcr_usr_nome: identidade.nome,
         lcr_usr_email: identidade.email,
         lcr_usr_hash_senha: null,
+        lcr_usr_email_verificado_em: null,
         lcr_usr_status_usuario: 'ativo',
         lcr_usr_data_ultimo_acesso: new Date(),
       },

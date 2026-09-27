@@ -67,6 +67,7 @@ bancoDescribe('integração PostgreSQL', () => {
       email: `${idExterno}@exemplo.test`,
       papeis: [],
       permissoes: [],
+      emailVerificado: true,
     });
     const usuario = await ModeloUsuario.findOne({ where: { lcr_usr_id_externo: idExterno } });
     expect(usuario).toBeTruthy();
@@ -148,6 +149,7 @@ bancoDescribe('integração PostgreSQL', () => {
       email: `${outroIdExterno}@exemplo.test`,
       papeis: [],
       permissoes: [],
+      emailVerificado: true,
     });
     const outroUsuario = await ModeloUsuario.findOne({ where: { lcr_usr_id_externo: outroIdExterno } });
     expect(outroUsuario).toBeTruthy();
@@ -166,6 +168,7 @@ bancoDescribe('integração PostgreSQL', () => {
       email: `${idExterno}@exemplo.test`,
       papeis: [],
       permissoes: [],
+      emailVerificado: true,
     });
     const usuario = await ModeloUsuario.findOne({ where: { lcr_usr_id_externo: idExterno } });
     expect(usuario).toBeTruthy();

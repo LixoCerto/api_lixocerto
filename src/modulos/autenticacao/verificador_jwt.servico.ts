@@ -10,6 +10,7 @@ interface DadosToken extends JWTPayload {
   email?: string;
   papeis?: unknown;
   permissoes?: unknown;
+  emailVerificado?: unknown;
   tipo?: string;
 }
 
@@ -25,6 +26,7 @@ export class VerificadorJwtServico {
       email: identidade.email,
       papeis: identidade.papeis,
       permissoes: identidade.permissoes,
+      emailVerificado: identidade.emailVerificado,
       tipo: 'acesso',
     })
       .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
@@ -61,6 +63,7 @@ export class VerificadorJwtServico {
         email: payload.email.trim().toLowerCase(),
         papeis: this.obterLista(payload.papeis),
         permissoes: this.obterLista(payload.permissoes),
+        emailVerificado: payload.emailVerificado === true,
       };
     } catch {
       throw new RpcException({ code: codigoGrpc.UNAUTHENTICATED, message: 'Token invalido ou expirado' });

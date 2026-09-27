@@ -4,4 +4,5 @@ export interface UsuarioAutenticado {
   email: string;
   papeis: string[];
   permissoes: string[];
+  emailVerificado: boolean;
 }

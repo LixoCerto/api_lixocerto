@@ -7,6 +7,7 @@ message IdentidadeAutenticada {
   string email_usuario = 3;
   repeated string papeis_usuario = 4;
   repeated string permissoes_usuario = 5;
+  bool email_verificado_usuario = 6;
 }
 
 message CadastrarUsuarioRequisicao {
@@ -61,6 +62,48 @@ message ObterIdentidadeAtualResposta {
   string email_usuario = 3;
   repeated string papeis_usuario = 4;
   repeated string permissoes_usuario = 5;
+  bool email_verificado_usuario = 6;
+}
+
+message SolicitarVerificacaoEmailRequisicao {
+  string email_usuario = 1;
+}
+
+message SolicitarVerificacaoEmailResposta {
+  bool solicitacao_aceita = 1;
+  int32 expira_em_segundos = 2;
+  string mensagem_resultado = 3;
+}
+
+message ConfirmarEmailRequisicao {
+  string token_verificacao = 1;
+}
+
+message ConfirmarEmailResposta {
+  bool email_confirmado = 1;
+  string email_usuario = 2;
+  string mensagem_resultado = 3;
+}
+
+message SolicitarRecuperacaoSenhaRequisicao {
+  string email_usuario = 1;
+}
+
+message SolicitarRecuperacaoSenhaResposta {
+  bool solicitacao_aceita = 1;
+  int32 expira_em_segundos = 2;
+  string mensagem_resultado = 3;
+}
+
+message RedefinirSenhaRequisicao {
+  string token_redefinicao = 1;
+  string nova_senha_usuario = 2;
+}
+
+message RedefinirSenhaResposta {
+  bool senha_redefinida = 1;
+  int32 sessoes_revogadas = 2;
+  string mensagem_resultado = 3;
 }
 
 service ServicoAutenticacao {
@@ -69,4 +112,8 @@ service ServicoAutenticacao {
   rpc RenovarToken(RenovarTokenRequisicao) returns (RenovarTokenResposta);
   rpc Sair(SairRequisicao) returns (SairResposta);
   rpc ObterIdentidadeAtual(ObterIdentidadeAtualRequisicao) returns (ObterIdentidadeAtualResposta);
+  rpc SolicitarVerificacaoEmail(SolicitarVerificacaoEmailRequisicao) returns (SolicitarVerificacaoEmailResposta);
+  rpc ConfirmarEmail(ConfirmarEmailRequisicao) returns (ConfirmarEmailResposta);
+  rpc SolicitarRecuperacaoSenha(SolicitarRecuperacaoSenhaRequisicao) returns (SolicitarRecuperacaoSenhaResposta);
+  rpc RedefinirSenha(RedefinirSenhaRequisicao) returns (RedefinirSenhaResposta);
 }

@@ -79,6 +79,7 @@ export class ControladorGrpcAutenticacao {
       email_usuario: identidade.email,
       papeis_usuario: identidade.papeis,
       permissoes_usuario: identidade.permissoes,
+      email_verificado_usuario: identidade.emailVerificado,
     };
   }
 

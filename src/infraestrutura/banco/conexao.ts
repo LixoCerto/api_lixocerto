@@ -12,6 +12,7 @@ import { inicializarModeloRespostaSus } from './modelos/resposta_sus.modelo.js';
 import { inicializarModeloRegistroAuditoria } from './modelos/registro_auditoria.modelo.js';
 import { inicializarModeloSessaoAvaliacao } from './modelos/sessao_avaliacao.modelo.js';
 import { inicializarModeloSessao } from './modelos/sessao.modelo.js';
+import { inicializarModeloTokenAutenticacao } from './modelos/token_autenticacao.modelo.js';
 import { inicializarModeloTentativaQuestionario } from './modelos/tentativa_questionario.modelo.js';
 import { inicializarModeloUsuario } from './modelos/usuario.modelo.js';
 import { inicializarModeloUsuarioDesafio } from './modelos/usuario_desafio.modelo.js';
@@ -45,6 +46,7 @@ export function criarConexaoBanco(): Sequelize | null {
   inicializarModeloAcaoSustentavel(sequelize);
   inicializarModeloRegistroAuditoria(sequelize);
   inicializarModeloSessao(sequelize);
+  inicializarModeloTokenAutenticacao(sequelize);
 
   return sequelize;
 }
