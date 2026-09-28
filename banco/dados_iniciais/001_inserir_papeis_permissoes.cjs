@@ -21,8 +21,7 @@ const permissoes = [
   ['10000000-0000-4000-8000-000000000009', 'avaliacao_usabilidade:consultar_agregados', 'Consultar resultados agregados'],
   ['10000000-0000-4000-8000-000000000010', 'auditoria:consultar', 'Consultar auditoria'],
   ['10000000-0000-4000-8000-000000000011', 'administracao:consultar', 'Consultar resumo administrativo'],
-  ['10000000-0000-4000-8000-000000000012', 'pontos_coleta:escrever', 'Criar e editar pontos de coleta'],
-  ['10000000-0000-4000-8000-000000000012', 'administracao:consultar', 'Consultar resumo administrativo'],
+  ['10000000-0000-4000-8000-000000000013', 'pontos_coleta:escrever', 'Criar e editar pontos de coleta'],
 ];
 
 const permissoesPorPapel = {
