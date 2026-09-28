@@ -6,11 +6,12 @@ import { ModuloUsuarios } from '../usuarios/usuarios.module.js';
 import { ControladorGrpcPontosColeta } from './pontos_coleta.controlador.grpc.js';
 import { RepositorioPontosColeta } from './pontos_coleta.repositorio.js';
 import { ServicoPontosColeta } from './pontos_coleta.servico.js';
+import { GeocodificacaoReversa } from './geocodificacao_reversa.servico.js';
 
 @Module({
   imports: [ModuloAutenticacao, ModuloAutorizacao, ModuloAuditoria, ModuloUsuarios],
   controllers: [ControladorGrpcPontosColeta],
-  providers: [RepositorioPontosColeta, ServicoPontosColeta],
+  providers: [RepositorioPontosColeta, ServicoPontosColeta, GeocodificacaoReversa],
   exports: [ServicoPontosColeta],
 })
 export class ModuloPontosColeta {}

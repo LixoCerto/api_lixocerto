@@ -6,6 +6,7 @@ export class ModeloPontoColeta extends Model<InferAttributes<ModeloPontoColeta>,
   declare lcr_pco_id_ponto_coleta: CreationOptional<string>;
   declare lcr_pco_nome_ponto_coleta: string;
   declare lcr_pco_endereco_ponto_coleta: string;
+  declare lcr_pco_cep_ponto_coleta: string | null;
   declare lcr_pco_cidade_ponto_coleta: string;
   declare lcr_pco_estado_ponto_coleta: string;
   declare lcr_pco_latitude_ponto_coleta: number | null;
@@ -24,6 +25,7 @@ export function inicializarModeloPontoColeta(sequelize: Sequelize): void {
     lcr_pco_id_ponto_coleta: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
     lcr_pco_nome_ponto_coleta: { type: DataTypes.STRING(180), allowNull: false },
     lcr_pco_endereco_ponto_coleta: { type: DataTypes.TEXT, allowNull: false },
+    lcr_pco_cep_ponto_coleta: { type: DataTypes.STRING(8), allowNull: true },
     lcr_pco_cidade_ponto_coleta: { type: DataTypes.STRING(100), allowNull: false },
     lcr_pco_estado_ponto_coleta: { type: DataTypes.CHAR(2), allowNull: false },
     lcr_pco_latitude_ponto_coleta: { type: DataTypes.DECIMAL(10, 7), allowNull: true },

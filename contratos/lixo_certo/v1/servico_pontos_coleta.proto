@@ -18,6 +18,7 @@ message PontoColetaResposta {
   string status_verificacao = 8;
   repeated string categorias_aceitas = 9;
   string origem_informacao = 10;
+  string cep_ponto_coleta = 11;
 }
 message ListarPontosColetaResposta { repeated PontoColetaResposta pontos_coleta = 1; }
 message ObterPontoColetaRequisicao { string id_ponto_coleta = 1; }
@@ -31,6 +32,16 @@ message DadosPontoColetaRequisicao {
   double longitude_ponto_coleta = 6;
   repeated string categorias_aceitas = 7;
   string origem_informacao = 8;
+  string cep_ponto_coleta = 9;
+}
+message BuscarEnderecoPorCoordenadasRequisicao { double latitude = 1; double longitude = 2; }
+message BuscarEnderecoPorCoordenadasResposta {
+  bool encontrado = 1;
+  string cep_ponto_coleta = 2;
+  string endereco_ponto_coleta = 3;
+  string cidade_ponto_coleta = 4;
+  string estado_ponto_coleta = 5;
+  string atribuicao = 6;
 }
 message CriarPontoColetaRequisicao { DadosPontoColetaRequisicao dados = 1; }
 message AtualizarPontoColetaRequisicao { string id_ponto_coleta = 1; DadosPontoColetaRequisicao dados = 2; }
@@ -47,4 +58,5 @@ service ServicoPontosColeta {
   rpc AtualizarPontoColeta(AtualizarPontoColetaRequisicao) returns (AtualizarPontoColetaResposta);
   rpc ExcluirPontoColeta(ExcluirPontoColetaRequisicao) returns (ExcluirPontoColetaResposta);
   rpc AlterarStatusPontoColeta(AlterarStatusPontoColetaRequisicao) returns (AlterarStatusPontoColetaResposta);
+  rpc BuscarEnderecoPorCoordenadas(BuscarEnderecoPorCoordenadasRequisicao) returns (BuscarEnderecoPorCoordenadasResposta);
 }

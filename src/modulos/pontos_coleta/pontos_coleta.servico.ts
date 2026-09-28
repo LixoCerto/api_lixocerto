@@ -34,6 +34,11 @@ function validarDados(dados: Partial<DadosPontoColeta>, parcial: boolean): Parti
     if (!parcial && !resultado[campo]) throw new BadRequestException(`Campo obrigatório: ${campo}`);
     if (resultado[campo] !== undefined && !resultado[campo]) throw new BadRequestException(`Campo inválido: ${campo}`);
   }
+  if (resultado.cepPontoColeta !== undefined) {
+    const cep = resultado.cepPontoColeta?.replace(/\D/g, '') ?? '';
+    if (cep && cep.length !== 8) throw new BadRequestException('CEP deve conter oito dígitos');
+    resultado.cepPontoColeta = cep || null;
+  }
   if (resultado.estadoPontoColeta && !/^[A-Za-z]{2}$/.test(resultado.estadoPontoColeta)) throw new BadRequestException('Estado deve conter duas letras');
   const lat = resultado.latitudePontoColeta;
   const lon = resultado.longitudePontoColeta;

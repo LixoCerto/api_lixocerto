@@ -1,5 +1,6 @@
 'use strict';
 
+const { randomUUID } = require('node:crypto');
 const { QueryTypes } = require('sequelize');
 
 const papeis = [
@@ -78,7 +79,7 @@ module.exports = {
     const chavesExistentes = new Set(relacoesExistentes.map(item => `${item.lcr_ppm_id_papel}:${item.lcr_ppm_id_permissao}`));
     const relacoes = Object.entries(permissoesPorPapel).flatMap(([nomePapel, codigos], indicePapel) =>
       codigos.map((codigo, indicePermissao) => ({
-        lcr_ppm_id_papel_permissao: `20000000-0000-4000-8000-${String(indicePapel + 1).padStart(6, '0')}${String(indicePermissao + 1).padStart(6, '0')}`,
+        lcr_ppm_id_papel_permissao: randomUUID(),
         lcr_ppm_id_papel: idsPapeis.get(nomePapel),
         lcr_ppm_id_permissao: idsPermissoes.get(codigo),
         lcr_ppm_data_atribuicao: data,

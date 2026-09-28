@@ -13,6 +13,7 @@ export interface FiltroPontosColeta {
 export interface DadosPontoColeta {
   nomePontoColeta: string;
   enderecoPontoColeta: string;
+  cepPontoColeta?: string | null;
   cidadePontoColeta: string;
   estadoPontoColeta: string;
   latitudePontoColeta?: number | null;
@@ -79,6 +80,7 @@ function dadosToModel(dados: Partial<DadosPontoColeta>): Record<string, unknown>
   const resultado: Record<string, unknown> = {};
   if (dados.nomePontoColeta !== undefined) resultado.lcr_pco_nome_ponto_coleta = dados.nomePontoColeta;
   if (dados.enderecoPontoColeta !== undefined) resultado.lcr_pco_endereco_ponto_coleta = dados.enderecoPontoColeta;
+  if (dados.cepPontoColeta !== undefined) resultado.lcr_pco_cep_ponto_coleta = dados.cepPontoColeta;
   if (dados.cidadePontoColeta !== undefined) resultado.lcr_pco_cidade_ponto_coleta = dados.cidadePontoColeta;
   if (dados.estadoPontoColeta !== undefined) resultado.lcr_pco_estado_ponto_coleta = dados.estadoPontoColeta;
   if (dados.latitudePontoColeta !== undefined) resultado.lcr_pco_latitude_ponto_coleta = dados.latitudePontoColeta;

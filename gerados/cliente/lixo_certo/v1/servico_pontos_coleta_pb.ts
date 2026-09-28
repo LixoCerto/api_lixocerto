@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file lixo_certo/v1/servico_pontos_coleta.proto.
  */
 export const file_lixo_certo_v1_servico_pontos_coleta: GenFile = /*@__PURE__*/
-  fileDesc("CilsaXhvX2NlcnRvL3YxL3NlcnZpY29fcG9udG9zX2NvbGV0YS5wcm90bxINbGl4b19jZXJ0by52MSJXChxMaXN0YXJQb250b3NDb2xldGFSZXF1aXNpY2FvEhsKE2NpZGFkZV9wb250b19jb2xldGEYASABKAkSGgoSY2F0ZWdvcmlhX21hdGVyaWFsGAIgASgJIpkCChNQb250b0NvbGV0YVJlc3Bvc3RhEhcKD2lkX3BvbnRvX2NvbGV0YRgBIAEoCRIZChFub21lX3BvbnRvX2NvbGV0YRgCIAEoCRIdChVlbmRlcmVjb19wb250b19jb2xldGEYAyABKAkSGwoTY2lkYWRlX3BvbnRvX2NvbGV0YRgEIAEoCRIbChNlc3RhZG9fcG9udG9fY29sZXRhGAUgASgJEh0KFWxhdGl0dWRlX3BvbnRvX2NvbGV0YRgGIAEoARIeChZsb25naXR1ZGVfcG9udG9fY29sZXRhGAcgASgBEhoKEnN0YXR1c192ZXJpZmljYWNhbxgIIAEoCRIaChJjYXRlZ29yaWFzX2FjZWl0YXMYCSADKAkiVwoaTGlzdGFyUG9udG9zQ29sZXRhUmVzcG9zdGESOQoNcG9udG9zX2NvbGV0YRgBIAMoCzIiLmxpeG9fY2VydG8udjEuUG9udG9Db2xldGFSZXNwb3N0YTKDAQoTU2Vydmljb1BvbnRvc0NvbGV0YRJsChJMaXN0YXJQb250b3NDb2xldGESKy5saXhvX2NlcnRvLnYxLkxpc3RhclBvbnRvc0NvbGV0YVJlcXVpc2ljYW8aKS5saXhvX2NlcnRvLnYxLkxpc3RhclBvbnRvc0NvbGV0YVJlc3Bvc3RhYgZwcm90bzM");
+  fileDesc("CilsaXhvX2NlcnRvL3YxL3NlcnZpY29fcG9udG9zX2NvbGV0YS5wcm90bxINbGl4b19jZXJ0by52MSKRAQocTGlzdGFyUG9udG9zQ29sZXRhUmVxdWlzaWNhbxIbChNjaWRhZGVfcG9udG9fY29sZXRhGAEgASgJEhoKEmNhdGVnb3JpYV9tYXRlcmlhbBgCIAEoCRIQCghsYXRpdHVkZRgDIAEoARIRCglsb25naXR1ZGUYBCABKAESEwoLcmFpb19tZXRyb3MYBSABKAUizgIKE1BvbnRvQ29sZXRhUmVzcG9zdGESFwoPaWRfcG9udG9fY29sZXRhGAEgASgJEhkKEW5vbWVfcG9udG9fY29sZXRhGAIgASgJEh0KFWVuZGVyZWNvX3BvbnRvX2NvbGV0YRgDIAEoCRIbChNjaWRhZGVfcG9udG9fY29sZXRhGAQgASgJEhsKE2VzdGFkb19wb250b19jb2xldGEYBSABKAkSHQoVbGF0aXR1ZGVfcG9udG9fY29sZXRhGAYgASgBEh4KFmxvbmdpdHVkZV9wb250b19jb2xldGEYByABKAESGgoSc3RhdHVzX3ZlcmlmaWNhY2FvGAggASgJEhoKEmNhdGVnb3JpYXNfYWNlaXRhcxgJIAMoCRIZChFvcmlnZW1faW5mb3JtYWNhbxgKIAEoCRIYChBjZXBfcG9udG9fY29sZXRhGAsgASgJIlcKGkxpc3RhclBvbnRvc0NvbGV0YVJlc3Bvc3RhEjkKDXBvbnRvc19jb2xldGEYASADKAsyIi5saXhvX2NlcnRvLnYxLlBvbnRvQ29sZXRhUmVzcG9zdGEiNQoaT2J0ZXJQb250b0NvbGV0YVJlcXVpc2ljYW8SFwoPaWRfcG9udG9fY29sZXRhGAEgASgJIk0KGE9idGVyUG9udG9Db2xldGFSZXNwb3N0YRIxCgVwb250bxgBIAEoCzIiLmxpeG9fY2VydG8udjEuUG9udG9Db2xldGFSZXNwb3N0YSKgAgoaRGFkb3NQb250b0NvbGV0YVJlcXVpc2ljYW8SGQoRbm9tZV9wb250b19jb2xldGEYASABKAkSHQoVZW5kZXJlY29fcG9udG9fY29sZXRhGAIgASgJEhsKE2NpZGFkZV9wb250b19jb2xldGEYAyABKAkSGwoTZXN0YWRvX3BvbnRvX2NvbGV0YRgEIAEoCRIdChVsYXRpdHVkZV9wb250b19jb2xldGEYBSABKAESHgoWbG9uZ2l0dWRlX3BvbnRvX2NvbGV0YRgGIAEoARIaChJjYXRlZ29yaWFzX2FjZWl0YXMYByADKAkSGQoRb3JpZ2VtX2luZm9ybWFjYW8YCCABKAkSGAoQY2VwX3BvbnRvX2NvbGV0YRgJIAEoCSJNCiZCdXNjYXJFbmRlcmVjb1BvckNvb3JkZW5hZGFzUmVxdWlzaWNhbxIQCghsYXRpdHVkZRgBIAEoARIRCglsb25naXR1ZGUYAiABKAEiwQEKJEJ1c2NhckVuZGVyZWNvUG9yQ29vcmRlbmFkYXNSZXNwb3N0YRISCgplbmNvbnRyYWRvGAEgASgIEhgKEGNlcF9wb250b19jb2xldGEYAiABKAkSHQoVZW5kZXJlY29fcG9udG9fY29sZXRhGAMgASgJEhsKE2NpZGFkZV9wb250b19jb2xldGEYBCABKAkSGwoTZXN0YWRvX3BvbnRvX2NvbGV0YRgFIAEoCRISCgphdHJpYnVpY2FvGAYgASgJIlYKGkNyaWFyUG9udG9Db2xldGFSZXF1aXNpY2FvEjgKBWRhZG9zGAEgASgLMikubGl4b19jZXJ0by52MS5EYWRvc1BvbnRvQ29sZXRhUmVxdWlzaWNhbyJzCh5BdHVhbGl6YXJQb250b0NvbGV0YVJlcXVpc2ljYW8SFwoPaWRfcG9udG9fY29sZXRhGAEgASgJEjgKBWRhZG9zGAIgASgLMikubGl4b19jZXJ0by52MS5EYWRvc1BvbnRvQ29sZXRhUmVxdWlzaWNhbyJZCiJBbHRlcmFyU3RhdHVzUG9udG9Db2xldGFSZXF1aXNpY2FvEhcKD2lkX3BvbnRvX2NvbGV0YRgBIAEoCRIaChJzdGF0dXNfdmVyaWZpY2FjYW8YAiABKAkiNwocRXhjbHVpclBvbnRvQ29sZXRhUmVxdWlzaWNhbxIXCg9pZF9wb250b19jb2xldGEYASABKAkiggEKGENyaWFyUG9udG9Db2xldGFSZXNwb3N0YRIXCg9vcGVyYWNhb19hY2VpdGEYASABKAgSGgoSbWVuc2FnZW1fcmVzdWx0YWRvGAIgASgJEjEKBXBvbnRvGAMgASgLMiIubGl4b19jZXJ0by52MS5Qb250b0NvbGV0YVJlc3Bvc3RhIoYBChxBdHVhbGl6YXJQb250b0NvbGV0YVJlc3Bvc3RhEhcKD29wZXJhY2FvX2FjZWl0YRgBIAEoCBIaChJtZW5zYWdlbV9yZXN1bHRhZG8YAiABKAkSMQoFcG9udG8YAyABKAsyIi5saXhvX2NlcnRvLnYxLlBvbnRvQ29sZXRhUmVzcG9zdGEiUQoaRXhjbHVpclBvbnRvQ29sZXRhUmVzcG9zdGESFwoPb3BlcmFjYW9fYWNlaXRhGAEgASgIEhoKEm1lbnNhZ2VtX3Jlc3VsdGFkbxgCIAEoCSKKAQogQWx0ZXJhclN0YXR1c1BvbnRvQ29sZXRhUmVzcG9zdGESFwoPb3BlcmFjYW9fYWNlaXRhGAEgASgIEhoKEm1lbnNhZ2VtX3Jlc3VsdGFkbxgCIAEoCRIxCgVwb250bxgDIAEoCzIiLmxpeG9fY2VydG8udjEuUG9udG9Db2xldGFSZXNwb3N0YTLCBgoTU2Vydmljb1BvbnRvc0NvbGV0YRJsChJMaXN0YXJQb250b3NDb2xldGESKy5saXhvX2NlcnRvLnYxLkxpc3RhclBvbnRvc0NvbGV0YVJlcXVpc2ljYW8aKS5saXhvX2NlcnRvLnYxLkxpc3RhclBvbnRvc0NvbGV0YVJlc3Bvc3RhEmYKEE9idGVyUG9udG9Db2xldGESKS5saXhvX2NlcnRvLnYxLk9idGVyUG9udG9Db2xldGFSZXF1aXNpY2FvGicubGl4b19jZXJ0by52MS5PYnRlclBvbnRvQ29sZXRhUmVzcG9zdGESZgoQQ3JpYXJQb250b0NvbGV0YRIpLmxpeG9fY2VydG8udjEuQ3JpYXJQb250b0NvbGV0YVJlcXVpc2ljYW8aJy5saXhvX2NlcnRvLnYxLkNyaWFyUG9udG9Db2xldGFSZXNwb3N0YRJyChRBdHVhbGl6YXJQb250b0NvbGV0YRItLmxpeG9fY2VydG8udjEuQXR1YWxpemFyUG9udG9Db2xldGFSZXF1aXNpY2FvGisubGl4b19jZXJ0by52MS5BdHVhbGl6YXJQb250b0NvbGV0YVJlc3Bvc3RhEmwKEkV4Y2x1aXJQb250b0NvbGV0YRIrLmxpeG9fY2VydG8udjEuRXhjbHVpclBvbnRvQ29sZXRhUmVxdWlzaWNhbxopLmxpeG9fY2VydG8udjEuRXhjbHVpclBvbnRvQ29sZXRhUmVzcG9zdGESfgoYQWx0ZXJhclN0YXR1c1BvbnRvQ29sZXRhEjEubGl4b19jZXJ0by52MS5BbHRlcmFyU3RhdHVzUG9udG9Db2xldGFSZXF1aXNpY2FvGi8ubGl4b19jZXJ0by52MS5BbHRlcmFyU3RhdHVzUG9udG9Db2xldGFSZXNwb3N0YRKKAQocQnVzY2FyRW5kZXJlY29Qb3JDb29yZGVuYWRhcxI1LmxpeG9fY2VydG8udjEuQnVzY2FyRW5kZXJlY29Qb3JDb29yZGVuYWRhc1JlcXVpc2ljYW8aMy5saXhvX2NlcnRvLnYxLkJ1c2NhckVuZGVyZWNvUG9yQ29vcmRlbmFkYXNSZXNwb3N0YWIGcHJvdG8z");
 
 /**
  * @generated from message lixo_certo.v1.ListarPontosColetaRequisicao
@@ -25,6 +25,21 @@ export type ListarPontosColetaRequisicao = Message<"lixo_certo.v1.ListarPontosCo
    * @generated from field: string categoria_material = 2;
    */
   categoriaMaterial: string;
+
+  /**
+   * @generated from field: double latitude = 3;
+   */
+  latitude: number;
+
+  /**
+   * @generated from field: double longitude = 4;
+   */
+  longitude: number;
+
+  /**
+   * @generated from field: int32 raio_metros = 5;
+   */
+  raioMetros: number;
 };
 
 /**
@@ -82,6 +97,16 @@ export type PontoColetaResposta = Message<"lixo_certo.v1.PontoColetaResposta"> &
    * @generated from field: repeated string categorias_aceitas = 9;
    */
   categoriasAceitas: string[];
+
+  /**
+   * @generated from field: string origem_informacao = 10;
+   */
+  origemInformacao: string;
+
+  /**
+   * @generated from field: string cep_ponto_coleta = 11;
+   */
+  cepPontoColeta: string;
 };
 
 /**
@@ -109,6 +134,342 @@ export const ListarPontosColetaRespostaSchema: GenMessage<ListarPontosColetaResp
   messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 2);
 
 /**
+ * @generated from message lixo_certo.v1.ObterPontoColetaRequisicao
+ */
+export type ObterPontoColetaRequisicao = Message<"lixo_certo.v1.ObterPontoColetaRequisicao"> & {
+  /**
+   * @generated from field: string id_ponto_coleta = 1;
+   */
+  idPontoColeta: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ObterPontoColetaRequisicao.
+ * Use `create(ObterPontoColetaRequisicaoSchema)` to create a new message.
+ */
+export const ObterPontoColetaRequisicaoSchema: GenMessage<ObterPontoColetaRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 3);
+
+/**
+ * @generated from message lixo_certo.v1.ObterPontoColetaResposta
+ */
+export type ObterPontoColetaResposta = Message<"lixo_certo.v1.ObterPontoColetaResposta"> & {
+  /**
+   * @generated from field: lixo_certo.v1.PontoColetaResposta ponto = 1;
+   */
+  ponto?: PontoColetaResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ObterPontoColetaResposta.
+ * Use `create(ObterPontoColetaRespostaSchema)` to create a new message.
+ */
+export const ObterPontoColetaRespostaSchema: GenMessage<ObterPontoColetaResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 4);
+
+/**
+ * @generated from message lixo_certo.v1.DadosPontoColetaRequisicao
+ */
+export type DadosPontoColetaRequisicao = Message<"lixo_certo.v1.DadosPontoColetaRequisicao"> & {
+  /**
+   * @generated from field: string nome_ponto_coleta = 1;
+   */
+  nomePontoColeta: string;
+
+  /**
+   * @generated from field: string endereco_ponto_coleta = 2;
+   */
+  enderecoPontoColeta: string;
+
+  /**
+   * @generated from field: string cidade_ponto_coleta = 3;
+   */
+  cidadePontoColeta: string;
+
+  /**
+   * @generated from field: string estado_ponto_coleta = 4;
+   */
+  estadoPontoColeta: string;
+
+  /**
+   * @generated from field: double latitude_ponto_coleta = 5;
+   */
+  latitudePontoColeta: number;
+
+  /**
+   * @generated from field: double longitude_ponto_coleta = 6;
+   */
+  longitudePontoColeta: number;
+
+  /**
+   * @generated from field: repeated string categorias_aceitas = 7;
+   */
+  categoriasAceitas: string[];
+
+  /**
+   * @generated from field: string origem_informacao = 8;
+   */
+  origemInformacao: string;
+
+  /**
+   * @generated from field: string cep_ponto_coleta = 9;
+   */
+  cepPontoColeta: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.DadosPontoColetaRequisicao.
+ * Use `create(DadosPontoColetaRequisicaoSchema)` to create a new message.
+ */
+export const DadosPontoColetaRequisicaoSchema: GenMessage<DadosPontoColetaRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 5);
+
+/**
+ * @generated from message lixo_certo.v1.BuscarEnderecoPorCoordenadasRequisicao
+ */
+export type BuscarEnderecoPorCoordenadasRequisicao = Message<"lixo_certo.v1.BuscarEnderecoPorCoordenadasRequisicao"> & {
+  /**
+   * @generated from field: double latitude = 1;
+   */
+  latitude: number;
+
+  /**
+   * @generated from field: double longitude = 2;
+   */
+  longitude: number;
+};
+
+/**
+ * Describes the message lixo_certo.v1.BuscarEnderecoPorCoordenadasRequisicao.
+ * Use `create(BuscarEnderecoPorCoordenadasRequisicaoSchema)` to create a new message.
+ */
+export const BuscarEnderecoPorCoordenadasRequisicaoSchema: GenMessage<BuscarEnderecoPorCoordenadasRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 6);
+
+/**
+ * @generated from message lixo_certo.v1.BuscarEnderecoPorCoordenadasResposta
+ */
+export type BuscarEnderecoPorCoordenadasResposta = Message<"lixo_certo.v1.BuscarEnderecoPorCoordenadasResposta"> & {
+  /**
+   * @generated from field: bool encontrado = 1;
+   */
+  encontrado: boolean;
+
+  /**
+   * @generated from field: string cep_ponto_coleta = 2;
+   */
+  cepPontoColeta: string;
+
+  /**
+   * @generated from field: string endereco_ponto_coleta = 3;
+   */
+  enderecoPontoColeta: string;
+
+  /**
+   * @generated from field: string cidade_ponto_coleta = 4;
+   */
+  cidadePontoColeta: string;
+
+  /**
+   * @generated from field: string estado_ponto_coleta = 5;
+   */
+  estadoPontoColeta: string;
+
+  /**
+   * @generated from field: string atribuicao = 6;
+   */
+  atribuicao: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.BuscarEnderecoPorCoordenadasResposta.
+ * Use `create(BuscarEnderecoPorCoordenadasRespostaSchema)` to create a new message.
+ */
+export const BuscarEnderecoPorCoordenadasRespostaSchema: GenMessage<BuscarEnderecoPorCoordenadasResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 7);
+
+/**
+ * @generated from message lixo_certo.v1.CriarPontoColetaRequisicao
+ */
+export type CriarPontoColetaRequisicao = Message<"lixo_certo.v1.CriarPontoColetaRequisicao"> & {
+  /**
+   * @generated from field: lixo_certo.v1.DadosPontoColetaRequisicao dados = 1;
+   */
+  dados?: DadosPontoColetaRequisicao | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.CriarPontoColetaRequisicao.
+ * Use `create(CriarPontoColetaRequisicaoSchema)` to create a new message.
+ */
+export const CriarPontoColetaRequisicaoSchema: GenMessage<CriarPontoColetaRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 8);
+
+/**
+ * @generated from message lixo_certo.v1.AtualizarPontoColetaRequisicao
+ */
+export type AtualizarPontoColetaRequisicao = Message<"lixo_certo.v1.AtualizarPontoColetaRequisicao"> & {
+  /**
+   * @generated from field: string id_ponto_coleta = 1;
+   */
+  idPontoColeta: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.DadosPontoColetaRequisicao dados = 2;
+   */
+  dados?: DadosPontoColetaRequisicao | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AtualizarPontoColetaRequisicao.
+ * Use `create(AtualizarPontoColetaRequisicaoSchema)` to create a new message.
+ */
+export const AtualizarPontoColetaRequisicaoSchema: GenMessage<AtualizarPontoColetaRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 9);
+
+/**
+ * @generated from message lixo_certo.v1.AlterarStatusPontoColetaRequisicao
+ */
+export type AlterarStatusPontoColetaRequisicao = Message<"lixo_certo.v1.AlterarStatusPontoColetaRequisicao"> & {
+  /**
+   * @generated from field: string id_ponto_coleta = 1;
+   */
+  idPontoColeta: string;
+
+  /**
+   * @generated from field: string status_verificacao = 2;
+   */
+  statusVerificacao: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AlterarStatusPontoColetaRequisicao.
+ * Use `create(AlterarStatusPontoColetaRequisicaoSchema)` to create a new message.
+ */
+export const AlterarStatusPontoColetaRequisicaoSchema: GenMessage<AlterarStatusPontoColetaRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 10);
+
+/**
+ * @generated from message lixo_certo.v1.ExcluirPontoColetaRequisicao
+ */
+export type ExcluirPontoColetaRequisicao = Message<"lixo_certo.v1.ExcluirPontoColetaRequisicao"> & {
+  /**
+   * @generated from field: string id_ponto_coleta = 1;
+   */
+  idPontoColeta: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ExcluirPontoColetaRequisicao.
+ * Use `create(ExcluirPontoColetaRequisicaoSchema)` to create a new message.
+ */
+export const ExcluirPontoColetaRequisicaoSchema: GenMessage<ExcluirPontoColetaRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 11);
+
+/**
+ * @generated from message lixo_certo.v1.CriarPontoColetaResposta
+ */
+export type CriarPontoColetaResposta = Message<"lixo_certo.v1.CriarPontoColetaResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.PontoColetaResposta ponto = 3;
+   */
+  ponto?: PontoColetaResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.CriarPontoColetaResposta.
+ * Use `create(CriarPontoColetaRespostaSchema)` to create a new message.
+ */
+export const CriarPontoColetaRespostaSchema: GenMessage<CriarPontoColetaResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 12);
+
+/**
+ * @generated from message lixo_certo.v1.AtualizarPontoColetaResposta
+ */
+export type AtualizarPontoColetaResposta = Message<"lixo_certo.v1.AtualizarPontoColetaResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.PontoColetaResposta ponto = 3;
+   */
+  ponto?: PontoColetaResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AtualizarPontoColetaResposta.
+ * Use `create(AtualizarPontoColetaRespostaSchema)` to create a new message.
+ */
+export const AtualizarPontoColetaRespostaSchema: GenMessage<AtualizarPontoColetaResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 13);
+
+/**
+ * @generated from message lixo_certo.v1.ExcluirPontoColetaResposta
+ */
+export type ExcluirPontoColetaResposta = Message<"lixo_certo.v1.ExcluirPontoColetaResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ExcluirPontoColetaResposta.
+ * Use `create(ExcluirPontoColetaRespostaSchema)` to create a new message.
+ */
+export const ExcluirPontoColetaRespostaSchema: GenMessage<ExcluirPontoColetaResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 14);
+
+/**
+ * @generated from message lixo_certo.v1.AlterarStatusPontoColetaResposta
+ */
+export type AlterarStatusPontoColetaResposta = Message<"lixo_certo.v1.AlterarStatusPontoColetaResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.PontoColetaResposta ponto = 3;
+   */
+  ponto?: PontoColetaResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AlterarStatusPontoColetaResposta.
+ * Use `create(AlterarStatusPontoColetaRespostaSchema)` to create a new message.
+ */
+export const AlterarStatusPontoColetaRespostaSchema: GenMessage<AlterarStatusPontoColetaResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_pontos_coleta, 15);
+
+/**
  * @generated from service lixo_certo.v1.ServicoPontosColeta
  */
 export const ServicoPontosColeta: GenService<{
@@ -119,6 +480,54 @@ export const ServicoPontosColeta: GenService<{
     methodKind: "unary";
     input: typeof ListarPontosColetaRequisicaoSchema;
     output: typeof ListarPontosColetaRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoPontosColeta.ObterPontoColeta
+   */
+  obterPontoColeta: {
+    methodKind: "unary";
+    input: typeof ObterPontoColetaRequisicaoSchema;
+    output: typeof ObterPontoColetaRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoPontosColeta.CriarPontoColeta
+   */
+  criarPontoColeta: {
+    methodKind: "unary";
+    input: typeof CriarPontoColetaRequisicaoSchema;
+    output: typeof CriarPontoColetaRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoPontosColeta.AtualizarPontoColeta
+   */
+  atualizarPontoColeta: {
+    methodKind: "unary";
+    input: typeof AtualizarPontoColetaRequisicaoSchema;
+    output: typeof AtualizarPontoColetaRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoPontosColeta.ExcluirPontoColeta
+   */
+  excluirPontoColeta: {
+    methodKind: "unary";
+    input: typeof ExcluirPontoColetaRequisicaoSchema;
+    output: typeof ExcluirPontoColetaRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoPontosColeta.AlterarStatusPontoColeta
+   */
+  alterarStatusPontoColeta: {
+    methodKind: "unary";
+    input: typeof AlterarStatusPontoColetaRequisicaoSchema;
+    output: typeof AlterarStatusPontoColetaRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoPontosColeta.BuscarEnderecoPorCoordenadas
+   */
+  buscarEnderecoPorCoordenadas: {
+    methodKind: "unary";
+    input: typeof BuscarEnderecoPorCoordenadasRequisicaoSchema;
+    output: typeof BuscarEnderecoPorCoordenadasRespostaSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_lixo_certo_v1_servico_pontos_coleta, 0);

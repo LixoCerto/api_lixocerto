@@ -1,5 +1,5 @@
 import { Metadata } from '@grpc/grpc-js';
-import { Controller } from '@nestjs/common';
+import { BadRequestException, Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { randomUUID } from 'node:crypto';
 import { ServicoAutenticacao } from '../autenticacao/autenticacao.servico.js';
@@ -7,12 +7,14 @@ import { ServicoAutorizacao } from '../autorizacao/autorizacao.servico.js';
 import { ServicoAuditoria } from '../auditoria/auditoria.servico.js';
 import { ServicoUsuarios } from '../usuarios/usuarios.servico.js';
 import { ServicoPontosColeta } from './pontos_coleta.servico.js';
+import { GeocodificacaoReversa } from './geocodificacao_reversa.servico.js';
 
 type RequisicaoDados = {
   nome_ponto_coleta?: string;
   endereco_ponto_coleta?: string;
   cidade_ponto_coleta?: string;
   estado_ponto_coleta?: string;
+  cep_ponto_coleta?: string;
   latitude_ponto_coleta?: number;
   longitude_ponto_coleta?: number;
   categorias_aceitas?: string[];
@@ -24,6 +26,7 @@ type PontoResposta = {
   endereco_ponto_coleta: string;
   cidade_ponto_coleta: string;
   estado_ponto_coleta: string;
+  cep_ponto_coleta: string;
   latitude_ponto_coleta: number;
   longitude_ponto_coleta: number;
   status_verificacao: string;
@@ -39,6 +42,7 @@ export class ControladorGrpcPontosColeta {
     private readonly autorizacao: ServicoAutorizacao,
     private readonly usuarios: ServicoUsuarios,
     private readonly auditoria: ServicoAuditoria,
+    private readonly geocodificacao: GeocodificacaoReversa,
   ) {}
 
   @GrpcMethod('ServicoPontosColeta', 'ListarPontosColeta')
@@ -47,6 +51,25 @@ export class ControladorGrpcPontosColeta {
     const incluirTodos = this.autorizacao.temPermissao(identidade, 'pontos_coleta:aprovar');
     const pontos = await this.servico.listar({ cidadePontoColeta: requisicao.cidade_ponto_coleta, categoriaMaterial: requisicao.categoria_material, latitude: requisicao.latitude || undefined, longitude: requisicao.longitude || undefined, raioMetros: requisicao.raio_metros }, incluirTodos);
     return { pontos_coleta: pontos.map(ponto => this.mapear(ponto)) };
+  }
+
+  @GrpcMethod('ServicoPontosColeta', 'BuscarEnderecoPorCoordenadas')
+  async buscarEnderecoPorCoordenadas(requisicao: { latitude?: number; longitude?: number }, metadados: Metadata) {
+    await this.obterUsuario(metadados, 'pontos_coleta:escrever');
+    const latitude = requisicao.latitude;
+    const longitude = requisicao.longitude;
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude) || latitude! < -90 || latitude! > 90 || longitude! < -180 || longitude! > 180) {
+      throw new BadRequestException('Coordenadas inválidas');
+    }
+    const endereco = await this.geocodificacao.buscar(latitude!, longitude!);
+    return endereco ? { encontrado: true, ...endereco } : {
+      encontrado: false,
+      cep_ponto_coleta: '',
+      endereco_ponto_coleta: '',
+      cidade_ponto_coleta: '',
+      estado_ponto_coleta: '',
+      atribuicao: '© OpenStreetMap contributors',
+    };
   }
 
   @GrpcMethod('ServicoPontosColeta', 'ObterPontoColeta')
@@ -102,10 +125,10 @@ export class ControladorGrpcPontosColeta {
     return { idUsuario };
   }
   private converterDados(requisicao: RequisicaoDados) {
-    return { nomePontoColeta: requisicao.nome_ponto_coleta ?? '', enderecoPontoColeta: requisicao.endereco_ponto_coleta ?? '', cidadePontoColeta: requisicao.cidade_ponto_coleta ?? '', estadoPontoColeta: requisicao.estado_ponto_coleta ?? '', latitudePontoColeta: requisicao.latitude_ponto_coleta, longitudePontoColeta: requisicao.longitude_ponto_coleta, categoriasAceitas: requisicao.categorias_aceitas ?? [], origemInformacao: requisicao.origem_informacao };
+    return { nomePontoColeta: requisicao.nome_ponto_coleta ?? '', enderecoPontoColeta: requisicao.endereco_ponto_coleta ?? '', cepPontoColeta: requisicao.cep_ponto_coleta ?? '', cidadePontoColeta: requisicao.cidade_ponto_coleta ?? '', estadoPontoColeta: requisicao.estado_ponto_coleta ?? '', latitudePontoColeta: requisicao.latitude_ponto_coleta, longitudePontoColeta: requisicao.longitude_ponto_coleta, categoriasAceitas: requisicao.categorias_aceitas ?? [], origemInformacao: requisicao.origem_informacao };
   }
   private mapear(ponto: any): PontoResposta {
-    return { id_ponto_coleta: ponto.lcr_pco_id_ponto_coleta, nome_ponto_coleta: ponto.lcr_pco_nome_ponto_coleta, endereco_ponto_coleta: ponto.lcr_pco_endereco_ponto_coleta, cidade_ponto_coleta: ponto.lcr_pco_cidade_ponto_coleta, estado_ponto_coleta: ponto.lcr_pco_estado_ponto_coleta, latitude_ponto_coleta: ponto.lcr_pco_latitude_ponto_coleta === null ? 0 : Number(ponto.lcr_pco_latitude_ponto_coleta), longitude_ponto_coleta: ponto.lcr_pco_longitude_ponto_coleta === null ? 0 : Number(ponto.lcr_pco_longitude_ponto_coleta), status_verificacao: ponto.lcr_pco_status_verificacao, categorias_aceitas: ponto.lcr_pco_categorias_aceitas ?? [], origem_informacao: ponto.lcr_pco_origem_informacao ?? '' };
+    return { id_ponto_coleta: ponto.lcr_pco_id_ponto_coleta, nome_ponto_coleta: ponto.lcr_pco_nome_ponto_coleta, endereco_ponto_coleta: ponto.lcr_pco_endereco_ponto_coleta, cidade_ponto_coleta: ponto.lcr_pco_cidade_ponto_coleta, estado_ponto_coleta: ponto.lcr_pco_estado_ponto_coleta, cep_ponto_coleta: ponto.lcr_pco_cep_ponto_coleta ?? '', latitude_ponto_coleta: ponto.lcr_pco_latitude_ponto_coleta === null ? 0 : Number(ponto.lcr_pco_latitude_ponto_coleta), longitude_ponto_coleta: ponto.lcr_pco_longitude_ponto_coleta === null ? 0 : Number(ponto.lcr_pco_longitude_ponto_coleta), status_verificacao: ponto.lcr_pco_status_verificacao, categorias_aceitas: ponto.lcr_pco_categorias_aceitas ?? [], origem_informacao: ponto.lcr_pco_origem_informacao ?? '' };
   }
   private registrarAuditoria(tipoEvento: string, idRecurso: string | undefined, idUsuario: string, metadados: Metadata) {
     return this.auditoria.registrar({ idUsuario, tipoEvento, recursoEvento: 'ponto_coleta', idRecurso, idCorrelacao: this.obterCorrelacao(metadados), detalhesEvento: { recurso: 'ponto_coleta' } });
