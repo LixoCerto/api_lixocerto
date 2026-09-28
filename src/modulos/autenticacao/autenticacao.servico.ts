@@ -30,6 +30,7 @@ export interface RespostaAutenticacao {
    * acesso à aplicação permanece bloqueado até a confirmação do código.
    */
   requerVerificacaoEmail: boolean;
+  idSessao: string;
 }
 
 @Injectable()
@@ -113,6 +114,7 @@ export class ServicoAutenticacao {
       expiraEmSegundos: EXPIRACAO_TOKEN_ACESSO_SEGUNDOS,
       identidade,
       requerVerificacaoEmail: false,
+      idSessao: sessao.lcr_ses_id_sessao,
     };
   }
 
@@ -149,7 +151,7 @@ export class ServicoAutenticacao {
     if (!this.banco) this.erro(codigoGrpc.UNAVAILABLE, 'Banco de dados indisponivel');
     const idUsuario = await this.usuarios.obterIdInterno(identidade.idExterno);
     if (!idUsuario) this.erro(codigoGrpc.UNAUTHENTICATED, 'Usuario local nao encontrado');
-    await ModeloSessao.create({
+    const sessao = await ModeloSessao.create({
       lcr_ses_id_usuario: idUsuario,
       lcr_ses_hash_token: this.hash(tokenAcesso),
       lcr_ses_hash_token_atualizacao: this.hash(tokenAtualizacao),
@@ -158,7 +160,7 @@ export class ServicoAutenticacao {
       lcr_ses_data_expiracao: this.dataExpiracaoAtualizacao(),
       lcr_ses_data_revogacao: null,
     });
-    return { tokenAcesso, tokenAtualizacao, expiraEmSegundos: EXPIRACAO_TOKEN_ACESSO_SEGUNDOS, identidade, requerVerificacaoEmail: false };
+    return { tokenAcesso, tokenAtualizacao, expiraEmSegundos: EXPIRACAO_TOKEN_ACESSO_SEGUNDOS, identidade, requerVerificacaoEmail: false, idSessao: sessao.lcr_ses_id_sessao };
   }
 
   /**
@@ -173,6 +175,7 @@ export class ServicoAutenticacao {
       expiraEmSegundos: 0,
       identidade,
       requerVerificacaoEmail: true,
+      idSessao: '',
     };
   }
 

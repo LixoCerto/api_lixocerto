@@ -53,6 +53,7 @@ export class ServicoSessoes {
       where: {
         lcr_ses_id_usuario: usuario.idUsuario,
         lcr_ses_data_expiracao: { [Op.gte]: new Date() },
+        lcr_ses_data_revogacao: null,
       },
       order: [['lcr_ses_data_criacao', 'DESC']],
       limit: 50,

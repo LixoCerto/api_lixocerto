@@ -70,6 +70,7 @@ export class ControladorGrpcAutenticacao {
       expira_em_segundos: resposta.expiraEmSegundos,
       identidade: this.mapearIdentidade(resposta.identidade),
       requer_verificacao_email: resposta.requerVerificacaoEmail,
+      id_sessao: resposta.idSessao,
     };
   }
 
