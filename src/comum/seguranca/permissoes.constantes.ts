@@ -2,6 +2,7 @@ export const permissoes = {
   materiaisLer: 'materiais:ler',
   materiaisEscrever: 'materiais:escrever',
   pontosColetaLer: 'pontos_coleta:ler',
+  pontosColetaEscrever: 'pontos_coleta:escrever',
   pontosColetaAprovar: 'pontos_coleta:aprovar',
   questionariosResponder: 'questionarios:responder',
   questionariosAdministrar: 'questionarios:administrar',

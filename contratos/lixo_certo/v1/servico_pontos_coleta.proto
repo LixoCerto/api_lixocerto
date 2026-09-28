@@ -1,11 +1,12 @@
 syntax = "proto3";
 package lixo_certo.v1;
-
 message ListarPontosColetaRequisicao {
   string cidade_ponto_coleta = 1;
   string categoria_material = 2;
+  double latitude = 3;
+  double longitude = 4;
+  int32 raio_metros = 5;
 }
-
 message PontoColetaResposta {
   string id_ponto_coleta = 1;
   string nome_ponto_coleta = 2;
@@ -16,12 +17,34 @@ message PontoColetaResposta {
   double longitude_ponto_coleta = 7;
   string status_verificacao = 8;
   repeated string categorias_aceitas = 9;
+  string origem_informacao = 10;
 }
-
-message ListarPontosColetaResposta {
-  repeated PontoColetaResposta pontos_coleta = 1;
+message ListarPontosColetaResposta { repeated PontoColetaResposta pontos_coleta = 1; }
+message ObterPontoColetaRequisicao { string id_ponto_coleta = 1; }
+message ObterPontoColetaResposta { PontoColetaResposta ponto = 1; }
+message DadosPontoColetaRequisicao {
+  string nome_ponto_coleta = 1;
+  string endereco_ponto_coleta = 2;
+  string cidade_ponto_coleta = 3;
+  string estado_ponto_coleta = 4;
+  double latitude_ponto_coleta = 5;
+  double longitude_ponto_coleta = 6;
+  repeated string categorias_aceitas = 7;
+  string origem_informacao = 8;
 }
-
+message CriarPontoColetaRequisicao { DadosPontoColetaRequisicao dados = 1; }
+message AtualizarPontoColetaRequisicao { string id_ponto_coleta = 1; DadosPontoColetaRequisicao dados = 2; }
+message AlterarStatusPontoColetaRequisicao { string id_ponto_coleta = 1; string status_verificacao = 2; }
+message ExcluirPontoColetaRequisicao { string id_ponto_coleta = 1; }
+message CriarPontoColetaResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; PontoColetaResposta ponto = 3; }
+message AtualizarPontoColetaResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; PontoColetaResposta ponto = 3; }
+message ExcluirPontoColetaResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; }
+message AlterarStatusPontoColetaResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; PontoColetaResposta ponto = 3; }
 service ServicoPontosColeta {
   rpc ListarPontosColeta(ListarPontosColetaRequisicao) returns (ListarPontosColetaResposta);
+  rpc ObterPontoColeta(ObterPontoColetaRequisicao) returns (ObterPontoColetaResposta);
+  rpc CriarPontoColeta(CriarPontoColetaRequisicao) returns (CriarPontoColetaResposta);
+  rpc AtualizarPontoColeta(AtualizarPontoColetaRequisicao) returns (AtualizarPontoColetaResposta);
+  rpc ExcluirPontoColeta(ExcluirPontoColetaRequisicao) returns (ExcluirPontoColetaResposta);
+  rpc AlterarStatusPontoColeta(AlterarStatusPontoColetaRequisicao) returns (AlterarStatusPontoColetaResposta);
 }
