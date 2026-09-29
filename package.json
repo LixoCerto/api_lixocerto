@@ -16,6 +16,7 @@
     "migrar": "sequelize-cli db:migrate --config configuracao_sequelize.cjs --migrations-path banco/migracoes",
     "desfazer:migracao": "sequelize-cli db:migrate:undo --config configuracao_sequelize.cjs --migrations-path banco/migracoes",
     "semear": "sequelize-cli db:seed:all --config configuracao_sequelize.cjs --seeders-path banco/dados_iniciais",
+    "semear:homologacao": "sequelize-cli db:seed:all --config configuracao_sequelize.cjs --seeders-path banco/seeds_homologacao",
     "integracao:banco": "pnpm migrar && pnpm semear"
   },
   "dependencies": {
