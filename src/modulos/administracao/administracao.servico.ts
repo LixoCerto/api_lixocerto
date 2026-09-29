@@ -111,9 +111,9 @@ export class ServicoAdministracao {
     const limite = this.limitar(filtro.limite, 25);
     const status = this.validarStatusUsuarioFiltro(filtro.status);
     const busca = filtro.busca?.trim() ?? '';
-    const where = `WHERE (:status = '' OR u.lcr_usr_status_usuario = :status)
-      AND (:busca = '' OR u.lcr_usr_nome ILIKE :padrao OR u.lcr_usr_email ILIKE :padrao)`;
-    const replacements = { status, busca, padrao: `%${busca}%`, limite, deslocamento };
+    const condicaoStatus = status ? 'u.lcr_usr_status_usuario = :status AND ' : '';
+    const where = `WHERE ${condicaoStatus}(:busca = '' OR u.lcr_usr_nome ILIKE :padrao OR u.lcr_usr_email ILIKE :padrao)`;
+    const replacements = { ...(status ? { status } : {}), busca, padrao: `%${busca}%`, limite, deslocamento };
     const [usuarios, totais] = await Promise.all([
       banco.query<Record<string, unknown>>(
         `SELECT u.lcr_usr_id_usuario, u.lcr_usr_nome, u.lcr_usr_email,
@@ -135,7 +135,7 @@ export class ServicoAdministracao {
       ),
       banco.query<{ total: number }>(
         `SELECT COUNT(*)::int AS total FROM lcr_usuarios u ${where}`,
-        { replacements: { status, busca, padrao: `%${busca}%` }, type: QueryTypes.SELECT },
+        { replacements: { ...(status ? { status } : {}), busca, padrao: `%${busca}%` }, type: QueryTypes.SELECT },
       ),
     ]);
     return {

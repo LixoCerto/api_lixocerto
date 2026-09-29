@@ -59,3 +59,49 @@ describe('ServicoAdministracao — proteção do papel administrador', () => {
     expect(transaction.commit).not.toHaveBeenCalled();
   });
 });
+
+
+describe('ServicoAdministracao — listagem de usuários', () => {
+  it('omite o filtro de status quando a seleção é todos, sem enviar string vazia ao ENUM', async () => {
+    const usuario = {
+      lcr_usr_id_usuario: 'usuario-1',
+      lcr_usr_nome: 'Ana Silva',
+      lcr_usr_email: 'ana@example.test',
+      lcr_usr_status_usuario: 'ativo',
+      lcr_usr_email_verificado_em: null,
+      lcr_usr_data_criacao: new Date('2026-01-01T00:00:00.000Z'),
+      lcr_usr_data_ultimo_acesso: null,
+      papeis: [],
+    };
+    const query = vi.fn()
+      .mockResolvedValueOnce([usuario])
+      .mockResolvedValueOnce([{ total: 1 }]);
+    const banco = { query } as unknown as Sequelize;
+    const servico = new ServicoAdministracao(banco, {} as ServicoAuditoria);
+
+    const resultado = await servico.listarUsuarios({ status: 'todos' });
+
+    expect(resultado.total).toBe(1);
+    expect(resultado.usuarios).toHaveLength(1);
+    expect(query).toHaveBeenCalledTimes(2);
+    for (const [sql, opcoes] of query.mock.calls) {
+      expect(String(sql)).not.toContain('lcr_usr_status_usuario = :status');
+      expect((opcoes as { replacements: Record<string, unknown> }).replacements).not.toHaveProperty('status');
+    }
+  });
+
+  it('aplica somente um status permitido como parâmetro ao filtrar usuários', async () => {
+    const query = vi.fn()
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([{ total: 0 }]);
+    const banco = { query } as unknown as Sequelize;
+    const servico = new ServicoAdministracao(banco, {} as ServicoAuditoria);
+
+    await servico.listarUsuarios({ status: 'ativo' });
+
+    for (const [sql, opcoes] of query.mock.calls) {
+      expect(String(sql)).toContain('u.lcr_usr_status_usuario = :status');
+      expect((opcoes as { replacements: Record<string, unknown> }).replacements.status).toBe('ativo');
+    }
+  });
+});
