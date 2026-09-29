@@ -16,21 +16,21 @@ const CONTAS = [
     idExterno: 'local:homologacao:usuario',
     nome: 'Homologação — Usuário',
     email: 'homologacao.usuario@exemplo.test',
-    variavelSenha: 'LCR_SENHA_HOMOLOGACAO_USUARIO',
+    senhaFixa: 'LcrHml_Usr_7Qv2!2026',
   },
   {
     papel: 'pesquisador',
     idExterno: 'local:homologacao:pesquisador',
     nome: 'Homologação — Pesquisador',
     email: 'homologacao.pesquisador@exemplo.test',
-    variavelSenha: 'LCR_SENHA_HOMOLOGACAO_PESQUISADOR',
+    senhaFixa: 'LcrHml_Pesq_4Mx8!2026',
   },
   {
     papel: 'revisor',
     idExterno: 'local:homologacao:revisor',
     nome: 'Homologação — Revisor',
     email: 'homologacao.revisor@exemplo.test',
-    variavelSenha: 'LCR_SENHA_HOMOLOGACAO_REVISOR',
+    senhaFixa: 'LcrHml_Rev_9Ka3!2026',
   },
 ];
 
@@ -43,15 +43,15 @@ function exigirOptIn() {
   }
 }
 
-function senhasConfiguradas() {
-  const senhas = CONTAS.map(conta => ({ conta, senha: process.env[conta.variavelSenha] ?? '' }));
+function senhasFixas() {
+  const senhas = CONTAS.map(conta => ({ conta, senha: conta.senhaFixa }));
   for (const { conta, senha } of senhas) {
     if (senha.length < 12 || !/[A-Za-z]/.test(senha) || !/\d/.test(senha)) {
-      throw new Error(`${conta.variavelSenha} deve conter pelo menos 12 caracteres, letras e números.`);
+      throw new Error(`A senha fixa configurada para ${conta.email} não atende aos requisitos mínimos.`);
     }
   }
   if (new Set(senhas.map(item => item.senha)).size !== senhas.length) {
-    throw new Error('Use uma senha diferente para cada conta de homologação.');
+    throw new Error('Cada conta de homologação deve ter uma senha fixa diferente.');
   }
   return senhas;
 }
@@ -85,7 +85,7 @@ async function consultar(sequelize, sql, replacements, transaction) {
 
 async function up(queryInterface) {
   exigirOptIn();
-  const senhas = senhasConfiguradas();
+  const senhas = senhasFixas();
   const hashes = new Map();
   for (const { conta, senha } of senhas) hashes.set(conta.papel, await criarHashSenha(senha));
 
