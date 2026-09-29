@@ -18,6 +18,7 @@ message RegistrarEventoAuditoriaResposta {
 message ListarAuditoriaRequisicao {
   string tipo_evento = 1;
   int32 limite_resultado = 2;
+  int32 deslocamento = 3;
 }
 
 message RegistroAuditoriaResposta {
@@ -27,10 +28,13 @@ message RegistroAuditoriaResposta {
   string id_correlacao = 4;
   string detalhes_evento_json = 5;
   string data_criacao = 6;
+  string id_recurso = 7;
+  string id_usuario = 8;
 }
 
 message ListarAuditoriaResposta {
   repeated RegistroAuditoriaResposta registros = 1;
+  int32 total = 2;
 }
 
 service ServicoAuditoria {

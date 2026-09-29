@@ -19,8 +19,8 @@ describe('auditoria, rate limit e desafios', () => {
     });
 
     expect(repositorio.registrar).toHaveBeenCalledWith(expect.objectContaining({
-      detalhesEvento: { token: '[REDACTED]', resultado: 'ok', objeto: '[OMITIDO]' },
-    }));
+      detalhesEvento: { token: '[REDACTED]', resultado: 'ok', objeto: { interno: true } },
+    }), undefined);
   });
 
   it('falha fechado quando Redis não está disponível para rate limiting', async () => {

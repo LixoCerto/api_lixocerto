@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file lixo_certo/v1/servico_auditoria.proto.
  */
 export const file_lixo_certo_v1_servico_auditoria: GenFile = /*@__PURE__*/
-  fileDesc("CiVsaXhvX2NlcnRvL3YxL3NlcnZpY29fYXVkaXRvcmlhLnByb3RvEg1saXhvX2NlcnRvLnYxIq8BCiJSZWdpc3RyYXJFdmVudG9BdWRpdG9yaWFSZXF1aXNpY2FvEhMKC3RpcG9fZXZlbnRvGAEgASgJEhYKDnJlY3Vyc29fZXZlbnRvGAIgASgJEhIKCmlkX3JlY3Vyc28YAyABKAkSEwoLZW5kZXJlY29faXAYBCABKAkSFQoNaWRfY29ycmVsYWNhbxgFIAEoCRIcChRkZXRhbGhlc19ldmVudG9fanNvbhgGIAEoCSJYCiBSZWdpc3RyYXJFdmVudG9BdWRpdG9yaWFSZXNwb3N0YRIVCg1ldmVudG9fYWNlaXRvGAEgASgIEh0KFWlkX3JlZ2lzdHJvX2F1ZGl0b3JpYRgCIAEoCSJKChlMaXN0YXJBdWRpdG9yaWFSZXF1aXNpY2FvEhMKC3RpcG9fZXZlbnRvGAEgASgJEhgKEGxpbWl0ZV9yZXN1bHRhZG8YAiABKAUisgEKGVJlZ2lzdHJvQXVkaXRvcmlhUmVzcG9zdGESHQoVaWRfcmVnaXN0cm9fYXVkaXRvcmlhGAEgASgJEhMKC3RpcG9fZXZlbnRvGAIgASgJEhYKDnJlY3Vyc29fZXZlbnRvGAMgASgJEhUKDWlkX2NvcnJlbGFjYW8YBCABKAkSHAoUZGV0YWxoZXNfZXZlbnRvX2pzb24YBSABKAkSFAoMZGF0YV9jcmlhY2FvGAYgASgJIlYKF0xpc3RhckF1ZGl0b3JpYVJlc3Bvc3RhEjsKCXJlZ2lzdHJvcxgBIAMoCzIoLmxpeG9fY2VydG8udjEuUmVnaXN0cm9BdWRpdG9yaWFSZXNwb3N0YTL3AQoQU2Vydmljb0F1ZGl0b3JpYRJ+ChhSZWdpc3RyYXJFdmVudG9BdWRpdG9yaWESMS5saXhvX2NlcnRvLnYxLlJlZ2lzdHJhckV2ZW50b0F1ZGl0b3JpYVJlcXVpc2ljYW8aLy5saXhvX2NlcnRvLnYxLlJlZ2lzdHJhckV2ZW50b0F1ZGl0b3JpYVJlc3Bvc3RhEmMKD0xpc3RhckF1ZGl0b3JpYRIoLmxpeG9fY2VydG8udjEuTGlzdGFyQXVkaXRvcmlhUmVxdWlzaWNhbxomLmxpeG9fY2VydG8udjEuTGlzdGFyQXVkaXRvcmlhUmVzcG9zdGFiBnByb3RvMw");
+  fileDesc("CiVsaXhvX2NlcnRvL3YxL3NlcnZpY29fYXVkaXRvcmlhLnByb3RvEg1saXhvX2NlcnRvLnYxIq8BCiJSZWdpc3RyYXJFdmVudG9BdWRpdG9yaWFSZXF1aXNpY2FvEhMKC3RpcG9fZXZlbnRvGAEgASgJEhYKDnJlY3Vyc29fZXZlbnRvGAIgASgJEhIKCmlkX3JlY3Vyc28YAyABKAkSEwoLZW5kZXJlY29faXAYBCABKAkSFQoNaWRfY29ycmVsYWNhbxgFIAEoCRIcChRkZXRhbGhlc19ldmVudG9fanNvbhgGIAEoCSJYCiBSZWdpc3RyYXJFdmVudG9BdWRpdG9yaWFSZXNwb3N0YRIVCg1ldmVudG9fYWNlaXRvGAEgASgIEh0KFWlkX3JlZ2lzdHJvX2F1ZGl0b3JpYRgCIAEoCSJgChlMaXN0YXJBdWRpdG9yaWFSZXF1aXNpY2FvEhMKC3RpcG9fZXZlbnRvGAEgASgJEhgKEGxpbWl0ZV9yZXN1bHRhZG8YAiABKAUSFAoMZGVzbG9jYW1lbnRvGAMgASgFItoBChlSZWdpc3Ryb0F1ZGl0b3JpYVJlc3Bvc3RhEh0KFWlkX3JlZ2lzdHJvX2F1ZGl0b3JpYRgBIAEoCRITCgt0aXBvX2V2ZW50bxgCIAEoCRIWCg5yZWN1cnNvX2V2ZW50bxgDIAEoCRIVCg1pZF9jb3JyZWxhY2FvGAQgASgJEhwKFGRldGFsaGVzX2V2ZW50b19qc29uGAUgASgJEhQKDGRhdGFfY3JpYWNhbxgGIAEoCRISCgppZF9yZWN1cnNvGAcgASgJEhIKCmlkX3VzdWFyaW8YCCABKAkiZQoXTGlzdGFyQXVkaXRvcmlhUmVzcG9zdGESOwoJcmVnaXN0cm9zGAEgAygLMigubGl4b19jZXJ0by52MS5SZWdpc3Ryb0F1ZGl0b3JpYVJlc3Bvc3RhEg0KBXRvdGFsGAIgASgFMvcBChBTZXJ2aWNvQXVkaXRvcmlhEn4KGFJlZ2lzdHJhckV2ZW50b0F1ZGl0b3JpYRIxLmxpeG9fY2VydG8udjEuUmVnaXN0cmFyRXZlbnRvQXVkaXRvcmlhUmVxdWlzaWNhbxovLmxpeG9fY2VydG8udjEuUmVnaXN0cmFyRXZlbnRvQXVkaXRvcmlhUmVzcG9zdGESYwoPTGlzdGFyQXVkaXRvcmlhEigubGl4b19jZXJ0by52MS5MaXN0YXJBdWRpdG9yaWFSZXF1aXNpY2FvGiYubGl4b19jZXJ0by52MS5MaXN0YXJBdWRpdG9yaWFSZXNwb3N0YWIGcHJvdG8z");
 
 /**
  * @generated from message lixo_certo.v1.RegistrarEventoAuditoriaRequisicao
@@ -89,6 +89,11 @@ export type ListarAuditoriaRequisicao = Message<"lixo_certo.v1.ListarAuditoriaRe
    * @generated from field: int32 limite_resultado = 2;
    */
   limiteResultado: number;
+
+  /**
+   * @generated from field: int32 deslocamento = 3;
+   */
+  deslocamento: number;
 };
 
 /**
@@ -131,6 +136,16 @@ export type RegistroAuditoriaResposta = Message<"lixo_certo.v1.RegistroAuditoria
    * @generated from field: string data_criacao = 6;
    */
   dataCriacao: string;
+
+  /**
+   * @generated from field: string id_recurso = 7;
+   */
+  idRecurso: string;
+
+  /**
+   * @generated from field: string id_usuario = 8;
+   */
+  idUsuario: string;
 };
 
 /**
@@ -148,6 +163,11 @@ export type ListarAuditoriaResposta = Message<"lixo_certo.v1.ListarAuditoriaResp
    * @generated from field: repeated lixo_certo.v1.RegistroAuditoriaResposta registros = 1;
    */
   registros: RegistroAuditoriaResposta[];
+
+  /**
+   * @generated from field: int32 total = 2;
+   */
+  total: number;
 };
 
 /**

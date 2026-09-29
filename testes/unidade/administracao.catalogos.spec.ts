@@ -8,6 +8,9 @@ describe('administracao e catalogos', () => {
     await expect(new ServicoAdministracao(null).obterResumo()).resolves.toEqual({
       quantidadeUsuarios: 0,
       quantidadeMateriais: 0,
+      quantidadePapeis: 0,
+      quantidadeAuditorias: 0,
+      quantidadeMateriaisPublicados: 0,
       quantidadePontosPendentes: 0,
       quantidadeAvaliacoes: 0,
     });

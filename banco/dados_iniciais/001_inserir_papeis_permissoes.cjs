@@ -25,6 +25,7 @@ const permissoes = [
   ['10000000-0000-4000-8000-000000000011', 'administracao:consultar', 'Consultar resumo administrativo'],
   ['10000000-0000-4000-8000-000000000013', 'pontos_coleta:escrever', 'Criar e editar pontos de coleta'],
   ['10000000-0000-4000-8000-000000000014', 'gamificacao:administrar', 'Administrar desafios'],
+  ['10000000-0000-4000-8000-000000000015', 'administracao:gerenciar_acessos', 'Gerenciar usuários, papéis e matriz de permissões'],
 ];
 
 const permissoesPorPapel = {

@@ -15,9 +15,16 @@ interface ItemAuditoriaGrpc {
   id_registro_auditoria: string;
   tipo_evento: string;
   recurso_evento: string;
+  id_recurso: string;
+  id_usuario: string;
   id_correlacao: string;
   detalhes_evento_json: string;
   data_criacao: string;
+}
+
+function textoMetadata(metadados: Metadata, chave: string): string | undefined {
+  const valor = metadados.get(chave)[0];
+  return Buffer.isBuffer(valor) ? valor.toString('utf8') : typeof valor === 'string' ? valor : undefined;
 }
 
 @Controller()
@@ -30,9 +37,7 @@ export class ControladorGrpcAuditoria {
   ) {}
 
   private async obterContexto(metadados: Metadata) {
-    const valor = metadados.get('authorization')[0];
-    const autorizacao = Buffer.isBuffer(valor) ? valor.toString('utf8') : typeof valor === 'string' ? valor : undefined;
-    const identidade = await this.autenticacao.obterIdentidadeAtual(autorizacao);
+    const identidade = await this.autenticacao.obterIdentidadeAtual(textoMetadata(metadados, 'authorization'));
     const idUsuario = await this.usuarios.obterIdInterno(identidade.idExterno);
     return { identidade, idUsuario };
   }
@@ -42,11 +47,11 @@ export class ControladorGrpcAuditoria {
     tipo_evento?: string;
     recurso_evento?: string;
     id_recurso?: string;
-    endereco_ip?: string;
     id_correlacao?: string;
     detalhes_evento_json?: string;
   }, metadados: Metadata): Promise<RespostaRegistroAuditoria> {
-    const { idUsuario } = await this.obterContexto(metadados);
+    const { identidade, idUsuario } = await this.obterContexto(metadados);
+    this.autorizacao.exigirPermissao(identidade, 'administracao:gerenciar_acessos');
     let detalhes: Record<string, unknown> | undefined;
     if (requisicao.detalhes_evento_json?.trim()) {
       try {
@@ -61,7 +66,6 @@ export class ControladorGrpcAuditoria {
       tipoEvento: requisicao.tipo_evento ?? '',
       recursoEvento: requisicao.recurso_evento,
       idRecurso: requisicao.id_recurso,
-      enderecoIp: requisicao.endereco_ip,
       idCorrelacao: requisicao.id_correlacao ?? '',
       detalhesEvento: detalhes,
     });
@@ -72,15 +76,21 @@ export class ControladorGrpcAuditoria {
   }
 
   @GrpcMethod('ServicoAuditoria', 'ListarAuditoria')
-  async listarAuditoria(requisicao: { tipo_evento?: string; limite_resultado?: number }, metadados: Metadata): Promise<{ registros: ItemAuditoriaGrpc[] }> {
+  async listarAuditoria(
+    requisicao: { tipo_evento?: string; limite_resultado?: number; deslocamento?: number },
+    metadados: Metadata,
+  ): Promise<{ registros: ItemAuditoriaGrpc[]; total: number }> {
     const { identidade } = await this.obterContexto(metadados);
     this.autorizacao.exigirPermissao(identidade, 'auditoria:consultar');
-    const registros = await this.servico.listar(requisicao.tipo_evento, requisicao.limite_resultado);
+    const resultado = await this.servico.listar(requisicao.tipo_evento, requisicao.limite_resultado, requisicao.deslocamento);
     return {
-      registros: registros.map(registro => ({
+      total: resultado.total,
+      registros: resultado.registros.map((registro) => ({
         id_registro_auditoria: registro.lcr_aud_id_registro_auditoria,
         tipo_evento: registro.lcr_aud_tipo_evento,
         recurso_evento: registro.lcr_aud_recurso_evento ?? '',
+        id_recurso: registro.lcr_aud_id_recurso ?? '',
+        id_usuario: registro.lcr_aud_id_usuario ?? '',
         id_correlacao: registro.lcr_aud_id_correlacao,
         detalhes_evento_json: registro.lcr_aud_detalhes_evento ? JSON.stringify(registro.lcr_aud_detalhes_evento) : '{}',
         data_criacao: registro.lcr_aud_data_criacao.toISOString(),

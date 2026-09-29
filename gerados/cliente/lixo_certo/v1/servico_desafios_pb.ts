@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file lixo_certo/v1/servico_desafios.proto.
  */
 export const file_lixo_certo_v1_servico_desafios: GenFile = /*@__PURE__*/
-  fileDesc("CiRsaXhvX2NlcnRvL3YxL3NlcnZpY29fZGVzYWZpb3MucHJvdG8SDWxpeG9fY2VydG8udjEiSQoYTGlzdGFyRGVzYWZpb3NSZXF1aXNpY2FvEhUKDW51bWVyb19wYWdpbmEYASABKAUSFgoOdGFtYW5ob19wYWdpbmEYAiABKAUi8AEKD0Rlc2FmaW9SZXNwb3N0YRISCgppZF9kZXNhZmlvGAEgASgJEhQKDG5vbWVfZGVzYWZpbxgCIAEoCRIZChFkZXNjcmljYW9fZGVzYWZpbxgDIAEoCRIRCgl0aXBvX2FjYW8YBCABKAkSFwoPbWV0YV9xdWFudGlkYWRlGAUgASgFEhkKEXF1YW50aWRhZGVfcG9udG9zGAYgASgFEhYKDnN0YXR1c19kZXNhZmlvGAcgASgJEhwKFHF1YW50aWRhZGVfcHJvZ3Jlc3NvGAggASgFEhsKE3N0YXR1c19wYXJ0aWNpcGFjYW8YCSABKAkiSgoWTGlzdGFyRGVzYWZpb3NSZXNwb3N0YRIwCghkZXNhZmlvcxgBIAMoCzIeLmxpeG9fY2VydG8udjEuRGVzYWZpb1Jlc3Bvc3RhIjEKG1BhcnRpY2lwYXJEZXNhZmlvUmVxdWlzaWNhbxISCgppZF9kZXNhZmlvGAEgASgJIoUBChlQYXJ0aWNpcGFyRGVzYWZpb1Jlc3Bvc3RhEhsKE3BhcnRpY2lwYWNhb19hY2VpdGEYASABKAgSLwoHZGVzYWZpbxgCIAEoCzIeLmxpeG9fY2VydG8udjEuRGVzYWZpb1Jlc3Bvc3RhEhoKEm1lbnNhZ2VtX3Jlc3VsdGFkbxgDIAEoCSJjCiJSZWdpc3RyYXJBY2FvU3VzdGVudGF2ZWxSZXF1aXNpY2FvEhIKCmlkX2Rlc2FmaW8YASABKAkSEQoJdGlwb19hY2FvGAIgASgJEhYKDmRlc2NyaWNhb19hY2FvGAMgASgJIqcBCiBSZWdpc3RyYXJBY2FvU3VzdGVudGF2ZWxSZXNwb3N0YRITCgthY2FvX2FjZWl0YRgBIAEoCBIZChFxdWFudGlkYWRlX3BvbnRvcxgCIAEoBRIcChRxdWFudGlkYWRlX3Byb2dyZXNzbxgDIAEoBRIZChFkZXNhZmlvX2NvbmNsdWlkbxgEIAEoCBIaChJtZW5zYWdlbV9yZXN1bHRhZG8YBSABKAky3gIKD1NlcnZpY29EZXNhZmlvcxJgCg5MaXN0YXJEZXNhZmlvcxInLmxpeG9fY2VydG8udjEuTGlzdGFyRGVzYWZpb3NSZXF1aXNpY2FvGiUubGl4b19jZXJ0by52MS5MaXN0YXJEZXNhZmlvc1Jlc3Bvc3RhEmkKEVBhcnRpY2lwYXJEZXNhZmlvEioubGl4b19jZXJ0by52MS5QYXJ0aWNpcGFyRGVzYWZpb1JlcXVpc2ljYW8aKC5saXhvX2NlcnRvLnYxLlBhcnRpY2lwYXJEZXNhZmlvUmVzcG9zdGESfgoYUmVnaXN0cmFyQWNhb1N1c3RlbnRhdmVsEjEubGl4b19jZXJ0by52MS5SZWdpc3RyYXJBY2FvU3VzdGVudGF2ZWxSZXF1aXNpY2FvGi8ubGl4b19jZXJ0by52MS5SZWdpc3RyYXJBY2FvU3VzdGVudGF2ZWxSZXNwb3N0YWIGcHJvdG8z");
+  fileDesc("CiRsaXhvX2NlcnRvL3YxL3NlcnZpY29fZGVzYWZpb3MucHJvdG8SDWxpeG9fY2VydG8udjEiSQoYTGlzdGFyRGVzYWZpb3NSZXF1aXNpY2FvEhUKDW51bWVyb19wYWdpbmEYASABKAUSFgoOdGFtYW5ob19wYWdpbmEYAiABKAUi8AEKD0Rlc2FmaW9SZXNwb3N0YRISCgppZF9kZXNhZmlvGAEgASgJEhQKDG5vbWVfZGVzYWZpbxgCIAEoCRIZChFkZXNjcmljYW9fZGVzYWZpbxgDIAEoCRIRCgl0aXBvX2FjYW8YBCABKAkSFwoPbWV0YV9xdWFudGlkYWRlGAUgASgFEhkKEXF1YW50aWRhZGVfcG9udG9zGAYgASgFEhYKDnN0YXR1c19kZXNhZmlvGAcgASgJEhwKFHF1YW50aWRhZGVfcHJvZ3Jlc3NvGAggASgFEhsKE3N0YXR1c19wYXJ0aWNpcGFjYW8YCSABKAkiSgoWTGlzdGFyRGVzYWZpb3NSZXNwb3N0YRIwCghkZXNhZmlvcxgBIAMoCzIeLmxpeG9fY2VydG8udjEuRGVzYWZpb1Jlc3Bvc3RhIjEKG1BhcnRpY2lwYXJEZXNhZmlvUmVxdWlzaWNhbxISCgppZF9kZXNhZmlvGAEgASgJIoUBChlQYXJ0aWNpcGFyRGVzYWZpb1Jlc3Bvc3RhEhsKE3BhcnRpY2lwYWNhb19hY2VpdGEYASABKAgSLwoHZGVzYWZpbxgCIAEoCzIeLmxpeG9fY2VydG8udjEuRGVzYWZpb1Jlc3Bvc3RhEhoKEm1lbnNhZ2VtX3Jlc3VsdGFkbxgDIAEoCSJjCiJSZWdpc3RyYXJBY2FvU3VzdGVudGF2ZWxSZXF1aXNpY2FvEhIKCmlkX2Rlc2FmaW8YASABKAkSEQoJdGlwb19hY2FvGAIgASgJEhYKDmRlc2NyaWNhb19hY2FvGAMgASgJIqcBCiBSZWdpc3RyYXJBY2FvU3VzdGVudGF2ZWxSZXNwb3N0YRITCgthY2FvX2FjZWl0YRgBIAEoCBIZChFxdWFudGlkYWRlX3BvbnRvcxgCIAEoBRIcChRxdWFudGlkYWRlX3Byb2dyZXNzbxgDIAEoBRIZChFkZXNhZmlvX2NvbmNsdWlkbxgEIAEoCBIaChJtZW5zYWdlbV9yZXN1bHRhZG8YBSABKAkirQEKDERhZG9zRGVzYWZpbxIUCgxub21lX2Rlc2FmaW8YASABKAkSGQoRZGVzY3JpY2FvX2Rlc2FmaW8YAiABKAkSEQoJdGlwb19hY2FvGAMgASgJEhcKD21ldGFfcXVhbnRpZGFkZRgEIAEoBRIZChFxdWFudGlkYWRlX3BvbnRvcxgFIAEoBRITCgtkYXRhX2luaWNpbxgGIAEoCRIQCghkYXRhX2ZpbRgHIAEoCSJ/Ch5MaXN0YXJEZXNhZmlvc0dlc3Rhb1JlcXVpc2ljYW8SFgoOdGV4dG9fcGVzcXVpc2EYASABKAkSFgoOc3RhdHVzX2Rlc2FmaW8YAiABKAkSFQoNbnVtZXJvX3BhZ2luYRgDIAEoBRIWCg50YW1hbmhvX3BhZ2luYRgEIAEoBSLiAQoVRGVzYWZpb0dlc3Rhb1Jlc3Bvc3RhEhIKCmlkX2Rlc2FmaW8YASABKAkSFAoMbm9tZV9kZXNhZmlvGAIgASgJEhkKEWRlc2NyaWNhb19kZXNhZmlvGAMgASgJEhEKCXRpcG9fYWNhbxgEIAEoCRIXCg9tZXRhX3F1YW50aWRhZGUYBSABKAUSGQoRcXVhbnRpZGFkZV9wb250b3MYBiABKAUSFgoOc3RhdHVzX2Rlc2FmaW8YByABKAkSEwoLZGF0YV9pbmljaW8YCCABKAkSEAoIZGF0YV9maW0YCSABKAkicAocTGlzdGFyRGVzYWZpb3NHZXN0YW9SZXNwb3N0YRI2CghkZXNhZmlvcxgBIAMoCzIkLmxpeG9fY2VydG8udjEuRGVzYWZpb0dlc3Rhb1Jlc3Bvc3RhEhgKEHF1YW50aWRhZGVfdG90YWwYAiABKAUiRAoWQ3JpYXJEZXNhZmlvUmVxdWlzaWNhbxIqCgVkYWRvcxgBIAEoCzIbLmxpeG9fY2VydG8udjEuRGFkb3NEZXNhZmlvIoIBChRDcmlhckRlc2FmaW9SZXNwb3N0YRIXCg9vcGVyYWNhb19hY2VpdGEYASABKAgSGgoSbWVuc2FnZW1fcmVzdWx0YWRvGAIgASgJEjUKB2Rlc2FmaW8YAyABKAsyJC5saXhvX2NlcnRvLnYxLkRlc2FmaW9HZXN0YW9SZXNwb3N0YSJcChpBdHVhbGl6YXJEZXNhZmlvUmVxdWlzaWNhbxISCgppZF9kZXNhZmlvGAEgASgJEioKBWRhZG9zGAIgASgLMhsubGl4b19jZXJ0by52MS5EYWRvc0Rlc2FmaW8ihgEKGEF0dWFsaXphckRlc2FmaW9SZXNwb3N0YRIXCg9vcGVyYWNhb19hY2VpdGEYASABKAgSGgoSbWVuc2FnZW1fcmVzdWx0YWRvGAIgASgJEjUKB2Rlc2FmaW8YAyABKAsyJC5saXhvX2NlcnRvLnYxLkRlc2FmaW9HZXN0YW9SZXNwb3N0YSJMCh5BbHRlcmFyU3RhdHVzRGVzYWZpb1JlcXVpc2ljYW8SEgoKaWRfZGVzYWZpbxgBIAEoCRIWCg5zdGF0dXNfZGVzYWZpbxgCIAEoCSKKAQocQWx0ZXJhclN0YXR1c0Rlc2FmaW9SZXNwb3N0YRIXCg9vcGVyYWNhb19hY2VpdGEYASABKAgSGgoSbWVuc2FnZW1fcmVzdWx0YWRvGAIgASgJEjUKB2Rlc2FmaW8YAyABKAsyJC5saXhvX2NlcnRvLnYxLkRlc2FmaW9HZXN0YW9SZXNwb3N0YTKKBgoPU2Vydmljb0Rlc2FmaW9zEmAKDkxpc3RhckRlc2FmaW9zEicubGl4b19jZXJ0by52MS5MaXN0YXJEZXNhZmlvc1JlcXVpc2ljYW8aJS5saXhvX2NlcnRvLnYxLkxpc3RhckRlc2FmaW9zUmVzcG9zdGESaQoRUGFydGljaXBhckRlc2FmaW8SKi5saXhvX2NlcnRvLnYxLlBhcnRpY2lwYXJEZXNhZmlvUmVxdWlzaWNhbxooLmxpeG9fY2VydG8udjEuUGFydGljaXBhckRlc2FmaW9SZXNwb3N0YRJ+ChhSZWdpc3RyYXJBY2FvU3VzdGVudGF2ZWwSMS5saXhvX2NlcnRvLnYxLlJlZ2lzdHJhckFjYW9TdXN0ZW50YXZlbFJlcXVpc2ljYW8aLy5saXhvX2NlcnRvLnYxLlJlZ2lzdHJhckFjYW9TdXN0ZW50YXZlbFJlc3Bvc3RhEnIKFExpc3RhckRlc2FmaW9zR2VzdGFvEi0ubGl4b19jZXJ0by52MS5MaXN0YXJEZXNhZmlvc0dlc3Rhb1JlcXVpc2ljYW8aKy5saXhvX2NlcnRvLnYxLkxpc3RhckRlc2FmaW9zR2VzdGFvUmVzcG9zdGESWgoMQ3JpYXJEZXNhZmlvEiUubGl4b19jZXJ0by52MS5DcmlhckRlc2FmaW9SZXF1aXNpY2FvGiMubGl4b19jZXJ0by52MS5DcmlhckRlc2FmaW9SZXNwb3N0YRJmChBBdHVhbGl6YXJEZXNhZmlvEikubGl4b19jZXJ0by52MS5BdHVhbGl6YXJEZXNhZmlvUmVxdWlzaWNhbxonLmxpeG9fY2VydG8udjEuQXR1YWxpemFyRGVzYWZpb1Jlc3Bvc3RhEnIKFEFsdGVyYXJTdGF0dXNEZXNhZmlvEi0ubGl4b19jZXJ0by52MS5BbHRlcmFyU3RhdHVzRGVzYWZpb1JlcXVpc2ljYW8aKy5saXhvX2NlcnRvLnYxLkFsdGVyYXJTdGF0dXNEZXNhZmlvUmVzcG9zdGFiBnByb3RvMw");
 
 /**
  * @generated from message lixo_certo.v1.ListarDesafiosRequisicao
@@ -217,6 +217,306 @@ export const RegistrarAcaoSustentavelRespostaSchema: GenMessage<RegistrarAcaoSus
   messageDesc(file_lixo_certo_v1_servico_desafios, 6);
 
 /**
+ * @generated from message lixo_certo.v1.DadosDesafio
+ */
+export type DadosDesafio = Message<"lixo_certo.v1.DadosDesafio"> & {
+  /**
+   * @generated from field: string nome_desafio = 1;
+   */
+  nomeDesafio: string;
+
+  /**
+   * @generated from field: string descricao_desafio = 2;
+   */
+  descricaoDesafio: string;
+
+  /**
+   * @generated from field: string tipo_acao = 3;
+   */
+  tipoAcao: string;
+
+  /**
+   * @generated from field: int32 meta_quantidade = 4;
+   */
+  metaQuantidade: number;
+
+  /**
+   * @generated from field: int32 quantidade_pontos = 5;
+   */
+  quantidadePontos: number;
+
+  /**
+   * @generated from field: string data_inicio = 6;
+   */
+  dataInicio: string;
+
+  /**
+   * @generated from field: string data_fim = 7;
+   */
+  dataFim: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.DadosDesafio.
+ * Use `create(DadosDesafioSchema)` to create a new message.
+ */
+export const DadosDesafioSchema: GenMessage<DadosDesafio> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_desafios, 7);
+
+/**
+ * @generated from message lixo_certo.v1.ListarDesafiosGestaoRequisicao
+ */
+export type ListarDesafiosGestaoRequisicao = Message<"lixo_certo.v1.ListarDesafiosGestaoRequisicao"> & {
+  /**
+   * @generated from field: string texto_pesquisa = 1;
+   */
+  textoPesquisa: string;
+
+  /**
+   * @generated from field: string status_desafio = 2;
+   */
+  statusDesafio: string;
+
+  /**
+   * @generated from field: int32 numero_pagina = 3;
+   */
+  numeroPagina: number;
+
+  /**
+   * @generated from field: int32 tamanho_pagina = 4;
+   */
+  tamanhoPagina: number;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ListarDesafiosGestaoRequisicao.
+ * Use `create(ListarDesafiosGestaoRequisicaoSchema)` to create a new message.
+ */
+export const ListarDesafiosGestaoRequisicaoSchema: GenMessage<ListarDesafiosGestaoRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_desafios, 8);
+
+/**
+ * @generated from message lixo_certo.v1.DesafioGestaoResposta
+ */
+export type DesafioGestaoResposta = Message<"lixo_certo.v1.DesafioGestaoResposta"> & {
+  /**
+   * @generated from field: string id_desafio = 1;
+   */
+  idDesafio: string;
+
+  /**
+   * @generated from field: string nome_desafio = 2;
+   */
+  nomeDesafio: string;
+
+  /**
+   * @generated from field: string descricao_desafio = 3;
+   */
+  descricaoDesafio: string;
+
+  /**
+   * @generated from field: string tipo_acao = 4;
+   */
+  tipoAcao: string;
+
+  /**
+   * @generated from field: int32 meta_quantidade = 5;
+   */
+  metaQuantidade: number;
+
+  /**
+   * @generated from field: int32 quantidade_pontos = 6;
+   */
+  quantidadePontos: number;
+
+  /**
+   * @generated from field: string status_desafio = 7;
+   */
+  statusDesafio: string;
+
+  /**
+   * @generated from field: string data_inicio = 8;
+   */
+  dataInicio: string;
+
+  /**
+   * @generated from field: string data_fim = 9;
+   */
+  dataFim: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.DesafioGestaoResposta.
+ * Use `create(DesafioGestaoRespostaSchema)` to create a new message.
+ */
+export const DesafioGestaoRespostaSchema: GenMessage<DesafioGestaoResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_desafios, 9);
+
+/**
+ * @generated from message lixo_certo.v1.ListarDesafiosGestaoResposta
+ */
+export type ListarDesafiosGestaoResposta = Message<"lixo_certo.v1.ListarDesafiosGestaoResposta"> & {
+  /**
+   * @generated from field: repeated lixo_certo.v1.DesafioGestaoResposta desafios = 1;
+   */
+  desafios: DesafioGestaoResposta[];
+
+  /**
+   * @generated from field: int32 quantidade_total = 2;
+   */
+  quantidadeTotal: number;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ListarDesafiosGestaoResposta.
+ * Use `create(ListarDesafiosGestaoRespostaSchema)` to create a new message.
+ */
+export const ListarDesafiosGestaoRespostaSchema: GenMessage<ListarDesafiosGestaoResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_desafios, 10);
+
+/**
+ * @generated from message lixo_certo.v1.CriarDesafioRequisicao
+ */
+export type CriarDesafioRequisicao = Message<"lixo_certo.v1.CriarDesafioRequisicao"> & {
+  /**
+   * @generated from field: lixo_certo.v1.DadosDesafio dados = 1;
+   */
+  dados?: DadosDesafio | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.CriarDesafioRequisicao.
+ * Use `create(CriarDesafioRequisicaoSchema)` to create a new message.
+ */
+export const CriarDesafioRequisicaoSchema: GenMessage<CriarDesafioRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_desafios, 11);
+
+/**
+ * @generated from message lixo_certo.v1.CriarDesafioResposta
+ */
+export type CriarDesafioResposta = Message<"lixo_certo.v1.CriarDesafioResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.DesafioGestaoResposta desafio = 3;
+   */
+  desafio?: DesafioGestaoResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.CriarDesafioResposta.
+ * Use `create(CriarDesafioRespostaSchema)` to create a new message.
+ */
+export const CriarDesafioRespostaSchema: GenMessage<CriarDesafioResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_desafios, 12);
+
+/**
+ * @generated from message lixo_certo.v1.AtualizarDesafioRequisicao
+ */
+export type AtualizarDesafioRequisicao = Message<"lixo_certo.v1.AtualizarDesafioRequisicao"> & {
+  /**
+   * @generated from field: string id_desafio = 1;
+   */
+  idDesafio: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.DadosDesafio dados = 2;
+   */
+  dados?: DadosDesafio | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AtualizarDesafioRequisicao.
+ * Use `create(AtualizarDesafioRequisicaoSchema)` to create a new message.
+ */
+export const AtualizarDesafioRequisicaoSchema: GenMessage<AtualizarDesafioRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_desafios, 13);
+
+/**
+ * @generated from message lixo_certo.v1.AtualizarDesafioResposta
+ */
+export type AtualizarDesafioResposta = Message<"lixo_certo.v1.AtualizarDesafioResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.DesafioGestaoResposta desafio = 3;
+   */
+  desafio?: DesafioGestaoResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AtualizarDesafioResposta.
+ * Use `create(AtualizarDesafioRespostaSchema)` to create a new message.
+ */
+export const AtualizarDesafioRespostaSchema: GenMessage<AtualizarDesafioResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_desafios, 14);
+
+/**
+ * @generated from message lixo_certo.v1.AlterarStatusDesafioRequisicao
+ */
+export type AlterarStatusDesafioRequisicao = Message<"lixo_certo.v1.AlterarStatusDesafioRequisicao"> & {
+  /**
+   * @generated from field: string id_desafio = 1;
+   */
+  idDesafio: string;
+
+  /**
+   * @generated from field: string status_desafio = 2;
+   */
+  statusDesafio: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AlterarStatusDesafioRequisicao.
+ * Use `create(AlterarStatusDesafioRequisicaoSchema)` to create a new message.
+ */
+export const AlterarStatusDesafioRequisicaoSchema: GenMessage<AlterarStatusDesafioRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_desafios, 15);
+
+/**
+ * @generated from message lixo_certo.v1.AlterarStatusDesafioResposta
+ */
+export type AlterarStatusDesafioResposta = Message<"lixo_certo.v1.AlterarStatusDesafioResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.DesafioGestaoResposta desafio = 3;
+   */
+  desafio?: DesafioGestaoResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AlterarStatusDesafioResposta.
+ * Use `create(AlterarStatusDesafioRespostaSchema)` to create a new message.
+ */
+export const AlterarStatusDesafioRespostaSchema: GenMessage<AlterarStatusDesafioResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_desafios, 16);
+
+/**
  * @generated from service lixo_certo.v1.ServicoDesafios
  */
 export const ServicoDesafios: GenService<{
@@ -243,6 +543,38 @@ export const ServicoDesafios: GenService<{
     methodKind: "unary";
     input: typeof RegistrarAcaoSustentavelRequisicaoSchema;
     output: typeof RegistrarAcaoSustentavelRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoDesafios.ListarDesafiosGestao
+   */
+  listarDesafiosGestao: {
+    methodKind: "unary";
+    input: typeof ListarDesafiosGestaoRequisicaoSchema;
+    output: typeof ListarDesafiosGestaoRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoDesafios.CriarDesafio
+   */
+  criarDesafio: {
+    methodKind: "unary";
+    input: typeof CriarDesafioRequisicaoSchema;
+    output: typeof CriarDesafioRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoDesafios.AtualizarDesafio
+   */
+  atualizarDesafio: {
+    methodKind: "unary";
+    input: typeof AtualizarDesafioRequisicaoSchema;
+    output: typeof AtualizarDesafioRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoDesafios.AlterarStatusDesafio
+   */
+  alterarStatusDesafio: {
+    methodKind: "unary";
+    input: typeof AlterarStatusDesafioRequisicaoSchema;
+    output: typeof AlterarStatusDesafioRespostaSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_lixo_certo_v1_servico_desafios, 0);

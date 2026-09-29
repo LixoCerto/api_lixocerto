@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file lixo_certo/v1/servico_administracao.proto.
  */
 export const file_lixo_certo_v1_servico_administracao: GenFile = /*@__PURE__*/
-  fileDesc("CilsaXhvX2NlcnRvL3YxL3NlcnZpY29fYWRtaW5pc3RyYWNhby5wcm90bxINbGl4b19jZXJ0by52MSIlCiNPYnRlclJlc3Vtb0FkbWluaXN0cmF0aXZvUmVxdWlzaWNhbyKiAQohT2J0ZXJSZXN1bW9BZG1pbmlzdHJhdGl2b1Jlc3Bvc3RhEhsKE3F1YW50aWRhZGVfdXN1YXJpb3MYASABKAUSHAoUcXVhbnRpZGFkZV9tYXRlcmlhaXMYAiABKAUSIwobcXVhbnRpZGFkZV9wb250b3NfcGVuZGVudGVzGAMgASgFEh0KFXF1YW50aWRhZGVfYXZhbGlhY29lcxgEIAEoBTKaAQoUU2Vydmljb0FkbWluaXN0cmFjYW8SgQEKGU9idGVyUmVzdW1vQWRtaW5pc3RyYXRpdm8SMi5saXhvX2NlcnRvLnYxLk9idGVyUmVzdW1vQWRtaW5pc3RyYXRpdm9SZXF1aXNpY2FvGjAubGl4b19jZXJ0by52MS5PYnRlclJlc3Vtb0FkbWluaXN0cmF0aXZvUmVzcG9zdGFiBnByb3RvMw");
+  fileDesc("CilsaXhvX2NlcnRvL3YxL3NlcnZpY29fYWRtaW5pc3RyYWNhby5wcm90bxINbGl4b19jZXJ0by52MSIlCiNPYnRlclJlc3Vtb0FkbWluaXN0cmF0aXZvUmVxdWlzaWNhbyKMAgohT2J0ZXJSZXN1bW9BZG1pbmlzdHJhdGl2b1Jlc3Bvc3RhEhsKE3F1YW50aWRhZGVfdXN1YXJpb3MYASABKAUSHAoUcXVhbnRpZGFkZV9tYXRlcmlhaXMYAiABKAUSIwobcXVhbnRpZGFkZV9wb250b3NfcGVuZGVudGVzGAMgASgFEh0KFXF1YW50aWRhZGVfYXZhbGlhY29lcxgEIAEoBRIZChFxdWFudGlkYWRlX3BhcGVpcxgFIAEoBRIkChxxdWFudGlkYWRlX2V2ZW50b3NfYXVkaXRvcmlhGAYgASgFEicKH3F1YW50aWRhZGVfbWF0ZXJpYWlzX3B1YmxpY2Fkb3MYByABKAUiWAoaUGFwZWxVc3VhcmlvQWRtaW5pc3RyYXRpdm8SEAoIaWRfcGFwZWwYASABKAkSEgoKbm9tZV9wYXBlbBgCIAEoCRIUCgxzdGF0dXNfcGFwZWwYAyABKAki9wEKFVVzdWFyaW9BZG1pbmlzdHJhdGl2bxISCgppZF91c3VhcmlvGAEgASgJEhQKDG5vbWVfdXN1YXJpbxgCIAEoCRIVCg1lbWFpbF91c3VhcmlvGAMgASgJEhYKDnN0YXR1c191c3VhcmlvGAQgASgJEhgKEGVtYWlsX3ZlcmlmaWNhZG8YBSABKAgSFAoMZGF0YV9jcmlhY2FvGAYgASgJEhoKEmRhdGFfdWx0aW1vX2FjZXNzbxgHIAEoCRI5CgZwYXBlaXMYCCADKAsyKS5saXhvX2NlcnRvLnYxLlBhcGVsVXN1YXJpb0FkbWluaXN0cmF0aXZvIm4KJ0xpc3RhclVzdWFyaW9zQWRtaW5pc3RyYXRpdm9zUmVxdWlzaWNhbxINCgVidXNjYRgBIAEoCRIOCgZzdGF0dXMYAiABKAkSFAoMZGVzbG9jYW1lbnRvGAMgASgFEg4KBmxpbWl0ZRgEIAEoBSJuCiVMaXN0YXJVc3Vhcmlvc0FkbWluaXN0cmF0aXZvc1Jlc3Bvc3RhEjYKCHVzdWFyaW9zGAEgAygLMiQubGl4b19jZXJ0by52MS5Vc3VhcmlvQWRtaW5pc3RyYXRpdm8SDQoFdG90YWwYAiABKAUiYgosQWx0ZXJhclN0YXR1c1VzdWFyaW9BZG1pbmlzdHJhdGl2b1JlcXVpc2ljYW8SEgoKaWRfdXN1YXJpbxgBIAEoCRIOCgZzdGF0dXMYAiABKAkSDgoGbW90aXZvGAMgASgJInwKKkFsdGVyYXJTdGF0dXNVc3VhcmlvQWRtaW5pc3RyYXRpdm9SZXNwb3N0YRIXCg9vcGVyYWNhb19hY2VpdGEYASABKAgSGQoRc2Vzc29lc19yZXZvZ2FkYXMYAiABKAUSGgoSbWVuc2FnZW1fcmVzdWx0YWRvGAMgASgJImYKLERlZmluaXJQYXBlaXNVc3VhcmlvQWRtaW5pc3RyYXRpdm9SZXF1aXNpY2FvEhIKCmlkX3VzdWFyaW8YASABKAkSEgoKaWRzX3BhcGVpcxgCIAMoCRIOCgZtb3Rpdm8YAyABKAkiYQoqRGVmaW5pclBhcGVpc1VzdWFyaW9BZG1pbmlzdHJhdGl2b1Jlc3Bvc3RhEhcKD29wZXJhY2FvX2FjZWl0YRgBIAEoCBIaChJtZW5zYWdlbV9yZXN1bHRhZG8YAiABKAkiUwotUmV2b2dhclNlc3NvZXNVc3VhcmlvQWRtaW5pc3RyYXRpdm9SZXF1aXNpY2FvEhIKCmlkX3VzdWFyaW8YASABKAkSDgoGbW90aXZvGAIgASgJImYKK1Jldm9nYXJTZXNzb2VzVXN1YXJpb0FkbWluaXN0cmF0aXZvUmVzcG9zdGESGwoTcXVhbnRpZGFkZV9yZXZvZ2FkYRgBIAEoBRIaChJtZW5zYWdlbV9yZXN1bHRhZG8YAiABKAki0gEKE1BhcGVsQWRtaW5pc3RyYXRpdm8SEAoIaWRfcGFwZWwYASABKAkSEgoKbm9tZV9wYXBlbBgCIAEoCRIXCg9kZXNjcmljYW9fcGFwZWwYAyABKAkSFAoMc3RhdHVzX3BhcGVsGAQgASgJEhUKDXBhcGVsX3Npc3RlbWEYBSABKAgSGwoTcXVhbnRpZGFkZV91c3VhcmlvcxgGIAEoBRIWCg5pZHNfcGVybWlzc29lcxgHIAMoCRIaChJjb2RpZ29zX3Blcm1pc3NvZXMYCCADKAkimAEKF1Blcm1pc3Nhb0FkbWluaXN0cmF0aXZhEhQKDGlkX3Blcm1pc3NhbxgBIAEoCRIYChBjb2RpZ29fcGVybWlzc2FvGAIgASgJEhYKDm5vbWVfcGVybWlzc2FvGAMgASgJEhsKE2Rlc2NyaWNhb19wZXJtaXNzYW8YBCABKAkSGAoQc3RhdHVzX3Blcm1pc3NhbxgFIAEoCSJBCiVMaXN0YXJQYXBlaXNBZG1pbmlzdHJhdGl2b3NSZXF1aXNpY2FvEhgKEGluY2x1aXJfaW5hdGl2b3MYASABKAgiWQojTGlzdGFyUGFwZWlzQWRtaW5pc3RyYXRpdm9zUmVzcG9zdGESMgoGcGFwZWlzGAEgAygLMiIubGl4b19jZXJ0by52MS5QYXBlbEFkbWluaXN0cmF0aXZvIisKKUxpc3RhclBlcm1pc3NvZXNBZG1pbmlzdHJhdGl2YXNSZXF1aXNpY2FvImUKJ0xpc3RhclBlcm1pc3NvZXNBZG1pbmlzdHJhdGl2YXNSZXNwb3N0YRI6CgpwZXJtaXNzb2VzGAEgAygLMiYubGl4b19jZXJ0by52MS5QZXJtaXNzYW9BZG1pbmlzdHJhdGl2YSJ5CiJDcmlhclBhcGVsQWRtaW5pc3RyYXRpdm9SZXF1aXNpY2FvEhIKCm5vbWVfcGFwZWwYASABKAkSFwoPZGVzY3JpY2FvX3BhcGVsGAIgASgJEhYKDmlkc19wZXJtaXNzb2VzGAMgAygJEg4KBm1vdGl2bxgEIAEoCSJpCiBDcmlhclBhcGVsQWRtaW5pc3RyYXRpdm9SZXNwb3N0YRIXCg9vcGVyYWNhb19hY2VpdGEYASABKAgSEAoIaWRfcGFwZWwYAiABKAkSGgoSbWVuc2FnZW1fcmVzdWx0YWRvGAMgASgJIo8BCiZBdHVhbGl6YXJQYXBlbEFkbWluaXN0cmF0aXZvUmVxdWlzaWNhbxIQCghpZF9wYXBlbBgBIAEoCRISCgpub21lX3BhcGVsGAIgASgJEhcKD2Rlc2NyaWNhb19wYXBlbBgDIAEoCRIWCg5pZHNfcGVybWlzc29lcxgEIAMoCRIOCgZtb3Rpdm8YBSABKAkiWwokQXR1YWxpemFyUGFwZWxBZG1pbmlzdHJhdGl2b1Jlc3Bvc3RhEhcKD29wZXJhY2FvX2FjZWl0YRgBIAEoCBIaChJtZW5zYWdlbV9yZXN1bHRhZG8YAiABKAkiSQolQXJxdWl2YXJQYXBlbEFkbWluaXN0cmF0aXZvUmVxdWlzaWNhbxIQCghpZF9wYXBlbBgBIAEoCRIOCgZtb3Rpdm8YAiABKAkiWgojQXJxdWl2YXJQYXBlbEFkbWluaXN0cmF0aXZvUmVzcG9zdGESFwoPb3BlcmFjYW9fYWNlaXRhGAEgASgIEhoKEm1lbnNhZ2VtX3Jlc3VsdGFkbxgCIAEoCSJKCiZSZXN0YXVyYXJQYXBlbEFkbWluaXN0cmF0aXZvUmVxdWlzaWNhbxIQCghpZF9wYXBlbBgBIAEoCRIOCgZtb3Rpdm8YAiABKAkiWwokUmVzdGF1cmFyUGFwZWxBZG1pbmlzdHJhdGl2b1Jlc3Bvc3RhEhcKD29wZXJhY2FvX2FjZWl0YRgBIAEoCBIaChJtZW5zYWdlbV9yZXN1bHRhZG8YAiABKAkiagouRGVmaW5pclBlcm1pc3NvZXNQYXBlbEFkbWluaXN0cmF0aXZvUmVxdWlzaWNhbxIQCghpZF9wYXBlbBgBIAEoCRIWCg5pZHNfcGVybWlzc29lcxgCIAMoCRIOCgZtb3Rpdm8YAyABKAkiYwosRGVmaW5pclBlcm1pc3NvZXNQYXBlbEFkbWluaXN0cmF0aXZvUmVzcG9zdGESFwoPb3BlcmFjYW9fYWNlaXRhGAEgASgIEhoKEm1lbnNhZ2VtX3Jlc3VsdGFkbxgCIAEoCTLzDQoUU2Vydmljb0FkbWluaXN0cmFjYW8SgQEKGU9idGVyUmVzdW1vQWRtaW5pc3RyYXRpdm8SMi5saXhvX2NlcnRvLnYxLk9idGVyUmVzdW1vQWRtaW5pc3RyYXRpdm9SZXF1aXNpY2FvGjAubGl4b19jZXJ0by52MS5PYnRlclJlc3Vtb0FkbWluaXN0cmF0aXZvUmVzcG9zdGESjQEKHUxpc3RhclVzdWFyaW9zQWRtaW5pc3RyYXRpdm9zEjYubGl4b19jZXJ0by52MS5MaXN0YXJVc3Vhcmlvc0FkbWluaXN0cmF0aXZvc1JlcXVpc2ljYW8aNC5saXhvX2NlcnRvLnYxLkxpc3RhclVzdWFyaW9zQWRtaW5pc3RyYXRpdm9zUmVzcG9zdGESnAEKIkFsdGVyYXJTdGF0dXNVc3VhcmlvQWRtaW5pc3RyYXRpdm8SOy5saXhvX2NlcnRvLnYxLkFsdGVyYXJTdGF0dXNVc3VhcmlvQWRtaW5pc3RyYXRpdm9SZXF1aXNpY2FvGjkubGl4b19jZXJ0by52MS5BbHRlcmFyU3RhdHVzVXN1YXJpb0FkbWluaXN0cmF0aXZvUmVzcG9zdGESnAEKIkRlZmluaXJQYXBlaXNVc3VhcmlvQWRtaW5pc3RyYXRpdm8SOy5saXhvX2NlcnRvLnYxLkRlZmluaXJQYXBlaXNVc3VhcmlvQWRtaW5pc3RyYXRpdm9SZXF1aXNpY2FvGjkubGl4b19jZXJ0by52MS5EZWZpbmlyUGFwZWlzVXN1YXJpb0FkbWluaXN0cmF0aXZvUmVzcG9zdGESnwEKI1Jldm9nYXJTZXNzb2VzVXN1YXJpb0FkbWluaXN0cmF0aXZvEjwubGl4b19jZXJ0by52MS5SZXZvZ2FyU2Vzc29lc1VzdWFyaW9BZG1pbmlzdHJhdGl2b1JlcXVpc2ljYW8aOi5saXhvX2NlcnRvLnYxLlJldm9nYXJTZXNzb2VzVXN1YXJpb0FkbWluaXN0cmF0aXZvUmVzcG9zdGEShwEKG0xpc3RhclBhcGVpc0FkbWluaXN0cmF0aXZvcxI0LmxpeG9fY2VydG8udjEuTGlzdGFyUGFwZWlzQWRtaW5pc3RyYXRpdm9zUmVxdWlzaWNhbxoyLmxpeG9fY2VydG8udjEuTGlzdGFyUGFwZWlzQWRtaW5pc3RyYXRpdm9zUmVzcG9zdGESkwEKH0xpc3RhclBlcm1pc3NvZXNBZG1pbmlzdHJhdGl2YXMSOC5saXhvX2NlcnRvLnYxLkxpc3RhclBlcm1pc3NvZXNBZG1pbmlzdHJhdGl2YXNSZXF1aXNpY2FvGjYubGl4b19jZXJ0by52MS5MaXN0YXJQZXJtaXNzb2VzQWRtaW5pc3RyYXRpdmFzUmVzcG9zdGESfgoYQ3JpYXJQYXBlbEFkbWluaXN0cmF0aXZvEjEubGl4b19jZXJ0by52MS5DcmlhclBhcGVsQWRtaW5pc3RyYXRpdm9SZXF1aXNpY2FvGi8ubGl4b19jZXJ0by52MS5DcmlhclBhcGVsQWRtaW5pc3RyYXRpdm9SZXNwb3N0YRKKAQocQXR1YWxpemFyUGFwZWxBZG1pbmlzdHJhdGl2bxI1LmxpeG9fY2VydG8udjEuQXR1YWxpemFyUGFwZWxBZG1pbmlzdHJhdGl2b1JlcXVpc2ljYW8aMy5saXhvX2NlcnRvLnYxLkF0dWFsaXphclBhcGVsQWRtaW5pc3RyYXRpdm9SZXNwb3N0YRKHAQobQXJxdWl2YXJQYXBlbEFkbWluaXN0cmF0aXZvEjQubGl4b19jZXJ0by52MS5BcnF1aXZhclBhcGVsQWRtaW5pc3RyYXRpdm9SZXF1aXNpY2FvGjIubGl4b19jZXJ0by52MS5BcnF1aXZhclBhcGVsQWRtaW5pc3RyYXRpdm9SZXNwb3N0YRKKAQocUmVzdGF1cmFyUGFwZWxBZG1pbmlzdHJhdGl2bxI1LmxpeG9fY2VydG8udjEuUmVzdGF1cmFyUGFwZWxBZG1pbmlzdHJhdGl2b1JlcXVpc2ljYW8aMy5saXhvX2NlcnRvLnYxLlJlc3RhdXJhclBhcGVsQWRtaW5pc3RyYXRpdm9SZXNwb3N0YRKiAQokRGVmaW5pclBlcm1pc3NvZXNQYXBlbEFkbWluaXN0cmF0aXZvEj0ubGl4b19jZXJ0by52MS5EZWZpbmlyUGVybWlzc29lc1BhcGVsQWRtaW5pc3RyYXRpdm9SZXF1aXNpY2FvGjsubGl4b19jZXJ0by52MS5EZWZpbmlyUGVybWlzc29lc1BhcGVsQWRtaW5pc3RyYXRpdm9SZXNwb3N0YWIGcHJvdG8z");
 
 /**
  * @generated from message lixo_certo.v1.ObterResumoAdministrativoRequisicao
@@ -48,6 +48,21 @@ export type ObterResumoAdministrativoResposta = Message<"lixo_certo.v1.ObterResu
    * @generated from field: int32 quantidade_avaliacoes = 4;
    */
   quantidadeAvaliacoes: number;
+
+  /**
+   * @generated from field: int32 quantidade_papeis = 5;
+   */
+  quantidadePapeis: number;
+
+  /**
+   * @generated from field: int32 quantidade_eventos_auditoria = 6;
+   */
+  quantidadeEventosAuditoria: number;
+
+  /**
+   * @generated from field: int32 quantidade_materiais_publicados = 7;
+   */
+  quantidadeMateriaisPublicados: number;
 };
 
 /**
@@ -56,6 +71,694 @@ export type ObterResumoAdministrativoResposta = Message<"lixo_certo.v1.ObterResu
  */
 export const ObterResumoAdministrativoRespostaSchema: GenMessage<ObterResumoAdministrativoResposta> = /*@__PURE__*/
   messageDesc(file_lixo_certo_v1_servico_administracao, 1);
+
+/**
+ * @generated from message lixo_certo.v1.PapelUsuarioAdministrativo
+ */
+export type PapelUsuarioAdministrativo = Message<"lixo_certo.v1.PapelUsuarioAdministrativo"> & {
+  /**
+   * @generated from field: string id_papel = 1;
+   */
+  idPapel: string;
+
+  /**
+   * @generated from field: string nome_papel = 2;
+   */
+  nomePapel: string;
+
+  /**
+   * @generated from field: string status_papel = 3;
+   */
+  statusPapel: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.PapelUsuarioAdministrativo.
+ * Use `create(PapelUsuarioAdministrativoSchema)` to create a new message.
+ */
+export const PapelUsuarioAdministrativoSchema: GenMessage<PapelUsuarioAdministrativo> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 2);
+
+/**
+ * @generated from message lixo_certo.v1.UsuarioAdministrativo
+ */
+export type UsuarioAdministrativo = Message<"lixo_certo.v1.UsuarioAdministrativo"> & {
+  /**
+   * @generated from field: string id_usuario = 1;
+   */
+  idUsuario: string;
+
+  /**
+   * @generated from field: string nome_usuario = 2;
+   */
+  nomeUsuario: string;
+
+  /**
+   * @generated from field: string email_usuario = 3;
+   */
+  emailUsuario: string;
+
+  /**
+   * @generated from field: string status_usuario = 4;
+   */
+  statusUsuario: string;
+
+  /**
+   * @generated from field: bool email_verificado = 5;
+   */
+  emailVerificado: boolean;
+
+  /**
+   * @generated from field: string data_criacao = 6;
+   */
+  dataCriacao: string;
+
+  /**
+   * @generated from field: string data_ultimo_acesso = 7;
+   */
+  dataUltimoAcesso: string;
+
+  /**
+   * @generated from field: repeated lixo_certo.v1.PapelUsuarioAdministrativo papeis = 8;
+   */
+  papeis: PapelUsuarioAdministrativo[];
+};
+
+/**
+ * Describes the message lixo_certo.v1.UsuarioAdministrativo.
+ * Use `create(UsuarioAdministrativoSchema)` to create a new message.
+ */
+export const UsuarioAdministrativoSchema: GenMessage<UsuarioAdministrativo> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 3);
+
+/**
+ * @generated from message lixo_certo.v1.ListarUsuariosAdministrativosRequisicao
+ */
+export type ListarUsuariosAdministrativosRequisicao = Message<"lixo_certo.v1.ListarUsuariosAdministrativosRequisicao"> & {
+  /**
+   * @generated from field: string busca = 1;
+   */
+  busca: string;
+
+  /**
+   * @generated from field: string status = 2;
+   */
+  status: string;
+
+  /**
+   * @generated from field: int32 deslocamento = 3;
+   */
+  deslocamento: number;
+
+  /**
+   * @generated from field: int32 limite = 4;
+   */
+  limite: number;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ListarUsuariosAdministrativosRequisicao.
+ * Use `create(ListarUsuariosAdministrativosRequisicaoSchema)` to create a new message.
+ */
+export const ListarUsuariosAdministrativosRequisicaoSchema: GenMessage<ListarUsuariosAdministrativosRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 4);
+
+/**
+ * @generated from message lixo_certo.v1.ListarUsuariosAdministrativosResposta
+ */
+export type ListarUsuariosAdministrativosResposta = Message<"lixo_certo.v1.ListarUsuariosAdministrativosResposta"> & {
+  /**
+   * @generated from field: repeated lixo_certo.v1.UsuarioAdministrativo usuarios = 1;
+   */
+  usuarios: UsuarioAdministrativo[];
+
+  /**
+   * @generated from field: int32 total = 2;
+   */
+  total: number;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ListarUsuariosAdministrativosResposta.
+ * Use `create(ListarUsuariosAdministrativosRespostaSchema)` to create a new message.
+ */
+export const ListarUsuariosAdministrativosRespostaSchema: GenMessage<ListarUsuariosAdministrativosResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 5);
+
+/**
+ * @generated from message lixo_certo.v1.AlterarStatusUsuarioAdministrativoRequisicao
+ */
+export type AlterarStatusUsuarioAdministrativoRequisicao = Message<"lixo_certo.v1.AlterarStatusUsuarioAdministrativoRequisicao"> & {
+  /**
+   * @generated from field: string id_usuario = 1;
+   */
+  idUsuario: string;
+
+  /**
+   * @generated from field: string status = 2;
+   */
+  status: string;
+
+  /**
+   * @generated from field: string motivo = 3;
+   */
+  motivo: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AlterarStatusUsuarioAdministrativoRequisicao.
+ * Use `create(AlterarStatusUsuarioAdministrativoRequisicaoSchema)` to create a new message.
+ */
+export const AlterarStatusUsuarioAdministrativoRequisicaoSchema: GenMessage<AlterarStatusUsuarioAdministrativoRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 6);
+
+/**
+ * @generated from message lixo_certo.v1.AlterarStatusUsuarioAdministrativoResposta
+ */
+export type AlterarStatusUsuarioAdministrativoResposta = Message<"lixo_certo.v1.AlterarStatusUsuarioAdministrativoResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: int32 sessoes_revogadas = 2;
+   */
+  sessoesRevogadas: number;
+
+  /**
+   * @generated from field: string mensagem_resultado = 3;
+   */
+  mensagemResultado: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AlterarStatusUsuarioAdministrativoResposta.
+ * Use `create(AlterarStatusUsuarioAdministrativoRespostaSchema)` to create a new message.
+ */
+export const AlterarStatusUsuarioAdministrativoRespostaSchema: GenMessage<AlterarStatusUsuarioAdministrativoResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 7);
+
+/**
+ * @generated from message lixo_certo.v1.DefinirPapeisUsuarioAdministrativoRequisicao
+ */
+export type DefinirPapeisUsuarioAdministrativoRequisicao = Message<"lixo_certo.v1.DefinirPapeisUsuarioAdministrativoRequisicao"> & {
+  /**
+   * @generated from field: string id_usuario = 1;
+   */
+  idUsuario: string;
+
+  /**
+   * @generated from field: repeated string ids_papeis = 2;
+   */
+  idsPapeis: string[];
+
+  /**
+   * @generated from field: string motivo = 3;
+   */
+  motivo: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.DefinirPapeisUsuarioAdministrativoRequisicao.
+ * Use `create(DefinirPapeisUsuarioAdministrativoRequisicaoSchema)` to create a new message.
+ */
+export const DefinirPapeisUsuarioAdministrativoRequisicaoSchema: GenMessage<DefinirPapeisUsuarioAdministrativoRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 8);
+
+/**
+ * @generated from message lixo_certo.v1.DefinirPapeisUsuarioAdministrativoResposta
+ */
+export type DefinirPapeisUsuarioAdministrativoResposta = Message<"lixo_certo.v1.DefinirPapeisUsuarioAdministrativoResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.DefinirPapeisUsuarioAdministrativoResposta.
+ * Use `create(DefinirPapeisUsuarioAdministrativoRespostaSchema)` to create a new message.
+ */
+export const DefinirPapeisUsuarioAdministrativoRespostaSchema: GenMessage<DefinirPapeisUsuarioAdministrativoResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 9);
+
+/**
+ * @generated from message lixo_certo.v1.RevogarSessoesUsuarioAdministrativoRequisicao
+ */
+export type RevogarSessoesUsuarioAdministrativoRequisicao = Message<"lixo_certo.v1.RevogarSessoesUsuarioAdministrativoRequisicao"> & {
+  /**
+   * @generated from field: string id_usuario = 1;
+   */
+  idUsuario: string;
+
+  /**
+   * @generated from field: string motivo = 2;
+   */
+  motivo: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.RevogarSessoesUsuarioAdministrativoRequisicao.
+ * Use `create(RevogarSessoesUsuarioAdministrativoRequisicaoSchema)` to create a new message.
+ */
+export const RevogarSessoesUsuarioAdministrativoRequisicaoSchema: GenMessage<RevogarSessoesUsuarioAdministrativoRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 10);
+
+/**
+ * @generated from message lixo_certo.v1.RevogarSessoesUsuarioAdministrativoResposta
+ */
+export type RevogarSessoesUsuarioAdministrativoResposta = Message<"lixo_certo.v1.RevogarSessoesUsuarioAdministrativoResposta"> & {
+  /**
+   * @generated from field: int32 quantidade_revogada = 1;
+   */
+  quantidadeRevogada: number;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.RevogarSessoesUsuarioAdministrativoResposta.
+ * Use `create(RevogarSessoesUsuarioAdministrativoRespostaSchema)` to create a new message.
+ */
+export const RevogarSessoesUsuarioAdministrativoRespostaSchema: GenMessage<RevogarSessoesUsuarioAdministrativoResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 11);
+
+/**
+ * @generated from message lixo_certo.v1.PapelAdministrativo
+ */
+export type PapelAdministrativo = Message<"lixo_certo.v1.PapelAdministrativo"> & {
+  /**
+   * @generated from field: string id_papel = 1;
+   */
+  idPapel: string;
+
+  /**
+   * @generated from field: string nome_papel = 2;
+   */
+  nomePapel: string;
+
+  /**
+   * @generated from field: string descricao_papel = 3;
+   */
+  descricaoPapel: string;
+
+  /**
+   * @generated from field: string status_papel = 4;
+   */
+  statusPapel: string;
+
+  /**
+   * @generated from field: bool papel_sistema = 5;
+   */
+  papelSistema: boolean;
+
+  /**
+   * @generated from field: int32 quantidade_usuarios = 6;
+   */
+  quantidadeUsuarios: number;
+
+  /**
+   * @generated from field: repeated string ids_permissoes = 7;
+   */
+  idsPermissoes: string[];
+
+  /**
+   * @generated from field: repeated string codigos_permissoes = 8;
+   */
+  codigosPermissoes: string[];
+};
+
+/**
+ * Describes the message lixo_certo.v1.PapelAdministrativo.
+ * Use `create(PapelAdministrativoSchema)` to create a new message.
+ */
+export const PapelAdministrativoSchema: GenMessage<PapelAdministrativo> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 12);
+
+/**
+ * @generated from message lixo_certo.v1.PermissaoAdministrativa
+ */
+export type PermissaoAdministrativa = Message<"lixo_certo.v1.PermissaoAdministrativa"> & {
+  /**
+   * @generated from field: string id_permissao = 1;
+   */
+  idPermissao: string;
+
+  /**
+   * @generated from field: string codigo_permissao = 2;
+   */
+  codigoPermissao: string;
+
+  /**
+   * @generated from field: string nome_permissao = 3;
+   */
+  nomePermissao: string;
+
+  /**
+   * @generated from field: string descricao_permissao = 4;
+   */
+  descricaoPermissao: string;
+
+  /**
+   * @generated from field: string status_permissao = 5;
+   */
+  statusPermissao: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.PermissaoAdministrativa.
+ * Use `create(PermissaoAdministrativaSchema)` to create a new message.
+ */
+export const PermissaoAdministrativaSchema: GenMessage<PermissaoAdministrativa> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 13);
+
+/**
+ * @generated from message lixo_certo.v1.ListarPapeisAdministrativosRequisicao
+ */
+export type ListarPapeisAdministrativosRequisicao = Message<"lixo_certo.v1.ListarPapeisAdministrativosRequisicao"> & {
+  /**
+   * @generated from field: bool incluir_inativos = 1;
+   */
+  incluirInativos: boolean;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ListarPapeisAdministrativosRequisicao.
+ * Use `create(ListarPapeisAdministrativosRequisicaoSchema)` to create a new message.
+ */
+export const ListarPapeisAdministrativosRequisicaoSchema: GenMessage<ListarPapeisAdministrativosRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 14);
+
+/**
+ * @generated from message lixo_certo.v1.ListarPapeisAdministrativosResposta
+ */
+export type ListarPapeisAdministrativosResposta = Message<"lixo_certo.v1.ListarPapeisAdministrativosResposta"> & {
+  /**
+   * @generated from field: repeated lixo_certo.v1.PapelAdministrativo papeis = 1;
+   */
+  papeis: PapelAdministrativo[];
+};
+
+/**
+ * Describes the message lixo_certo.v1.ListarPapeisAdministrativosResposta.
+ * Use `create(ListarPapeisAdministrativosRespostaSchema)` to create a new message.
+ */
+export const ListarPapeisAdministrativosRespostaSchema: GenMessage<ListarPapeisAdministrativosResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 15);
+
+/**
+ * @generated from message lixo_certo.v1.ListarPermissoesAdministrativasRequisicao
+ */
+export type ListarPermissoesAdministrativasRequisicao = Message<"lixo_certo.v1.ListarPermissoesAdministrativasRequisicao"> & {
+};
+
+/**
+ * Describes the message lixo_certo.v1.ListarPermissoesAdministrativasRequisicao.
+ * Use `create(ListarPermissoesAdministrativasRequisicaoSchema)` to create a new message.
+ */
+export const ListarPermissoesAdministrativasRequisicaoSchema: GenMessage<ListarPermissoesAdministrativasRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 16);
+
+/**
+ * @generated from message lixo_certo.v1.ListarPermissoesAdministrativasResposta
+ */
+export type ListarPermissoesAdministrativasResposta = Message<"lixo_certo.v1.ListarPermissoesAdministrativasResposta"> & {
+  /**
+   * @generated from field: repeated lixo_certo.v1.PermissaoAdministrativa permissoes = 1;
+   */
+  permissoes: PermissaoAdministrativa[];
+};
+
+/**
+ * Describes the message lixo_certo.v1.ListarPermissoesAdministrativasResposta.
+ * Use `create(ListarPermissoesAdministrativasRespostaSchema)` to create a new message.
+ */
+export const ListarPermissoesAdministrativasRespostaSchema: GenMessage<ListarPermissoesAdministrativasResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 17);
+
+/**
+ * @generated from message lixo_certo.v1.CriarPapelAdministrativoRequisicao
+ */
+export type CriarPapelAdministrativoRequisicao = Message<"lixo_certo.v1.CriarPapelAdministrativoRequisicao"> & {
+  /**
+   * @generated from field: string nome_papel = 1;
+   */
+  nomePapel: string;
+
+  /**
+   * @generated from field: string descricao_papel = 2;
+   */
+  descricaoPapel: string;
+
+  /**
+   * @generated from field: repeated string ids_permissoes = 3;
+   */
+  idsPermissoes: string[];
+
+  /**
+   * @generated from field: string motivo = 4;
+   */
+  motivo: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.CriarPapelAdministrativoRequisicao.
+ * Use `create(CriarPapelAdministrativoRequisicaoSchema)` to create a new message.
+ */
+export const CriarPapelAdministrativoRequisicaoSchema: GenMessage<CriarPapelAdministrativoRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 18);
+
+/**
+ * @generated from message lixo_certo.v1.CriarPapelAdministrativoResposta
+ */
+export type CriarPapelAdministrativoResposta = Message<"lixo_certo.v1.CriarPapelAdministrativoResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string id_papel = 2;
+   */
+  idPapel: string;
+
+  /**
+   * @generated from field: string mensagem_resultado = 3;
+   */
+  mensagemResultado: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.CriarPapelAdministrativoResposta.
+ * Use `create(CriarPapelAdministrativoRespostaSchema)` to create a new message.
+ */
+export const CriarPapelAdministrativoRespostaSchema: GenMessage<CriarPapelAdministrativoResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 19);
+
+/**
+ * @generated from message lixo_certo.v1.AtualizarPapelAdministrativoRequisicao
+ */
+export type AtualizarPapelAdministrativoRequisicao = Message<"lixo_certo.v1.AtualizarPapelAdministrativoRequisicao"> & {
+  /**
+   * @generated from field: string id_papel = 1;
+   */
+  idPapel: string;
+
+  /**
+   * @generated from field: string nome_papel = 2;
+   */
+  nomePapel: string;
+
+  /**
+   * @generated from field: string descricao_papel = 3;
+   */
+  descricaoPapel: string;
+
+  /**
+   * @generated from field: repeated string ids_permissoes = 4;
+   */
+  idsPermissoes: string[];
+
+  /**
+   * @generated from field: string motivo = 5;
+   */
+  motivo: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AtualizarPapelAdministrativoRequisicao.
+ * Use `create(AtualizarPapelAdministrativoRequisicaoSchema)` to create a new message.
+ */
+export const AtualizarPapelAdministrativoRequisicaoSchema: GenMessage<AtualizarPapelAdministrativoRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 20);
+
+/**
+ * @generated from message lixo_certo.v1.AtualizarPapelAdministrativoResposta
+ */
+export type AtualizarPapelAdministrativoResposta = Message<"lixo_certo.v1.AtualizarPapelAdministrativoResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AtualizarPapelAdministrativoResposta.
+ * Use `create(AtualizarPapelAdministrativoRespostaSchema)` to create a new message.
+ */
+export const AtualizarPapelAdministrativoRespostaSchema: GenMessage<AtualizarPapelAdministrativoResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 21);
+
+/**
+ * @generated from message lixo_certo.v1.ArquivarPapelAdministrativoRequisicao
+ */
+export type ArquivarPapelAdministrativoRequisicao = Message<"lixo_certo.v1.ArquivarPapelAdministrativoRequisicao"> & {
+  /**
+   * @generated from field: string id_papel = 1;
+   */
+  idPapel: string;
+
+  /**
+   * @generated from field: string motivo = 2;
+   */
+  motivo: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ArquivarPapelAdministrativoRequisicao.
+ * Use `create(ArquivarPapelAdministrativoRequisicaoSchema)` to create a new message.
+ */
+export const ArquivarPapelAdministrativoRequisicaoSchema: GenMessage<ArquivarPapelAdministrativoRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 22);
+
+/**
+ * @generated from message lixo_certo.v1.ArquivarPapelAdministrativoResposta
+ */
+export type ArquivarPapelAdministrativoResposta = Message<"lixo_certo.v1.ArquivarPapelAdministrativoResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ArquivarPapelAdministrativoResposta.
+ * Use `create(ArquivarPapelAdministrativoRespostaSchema)` to create a new message.
+ */
+export const ArquivarPapelAdministrativoRespostaSchema: GenMessage<ArquivarPapelAdministrativoResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 23);
+
+/**
+ * @generated from message lixo_certo.v1.RestaurarPapelAdministrativoRequisicao
+ */
+export type RestaurarPapelAdministrativoRequisicao = Message<"lixo_certo.v1.RestaurarPapelAdministrativoRequisicao"> & {
+  /**
+   * @generated from field: string id_papel = 1;
+   */
+  idPapel: string;
+
+  /**
+   * @generated from field: string motivo = 2;
+   */
+  motivo: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.RestaurarPapelAdministrativoRequisicao.
+ * Use `create(RestaurarPapelAdministrativoRequisicaoSchema)` to create a new message.
+ */
+export const RestaurarPapelAdministrativoRequisicaoSchema: GenMessage<RestaurarPapelAdministrativoRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 24);
+
+/**
+ * @generated from message lixo_certo.v1.RestaurarPapelAdministrativoResposta
+ */
+export type RestaurarPapelAdministrativoResposta = Message<"lixo_certo.v1.RestaurarPapelAdministrativoResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.RestaurarPapelAdministrativoResposta.
+ * Use `create(RestaurarPapelAdministrativoRespostaSchema)` to create a new message.
+ */
+export const RestaurarPapelAdministrativoRespostaSchema: GenMessage<RestaurarPapelAdministrativoResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 25);
+
+/**
+ * @generated from message lixo_certo.v1.DefinirPermissoesPapelAdministrativoRequisicao
+ */
+export type DefinirPermissoesPapelAdministrativoRequisicao = Message<"lixo_certo.v1.DefinirPermissoesPapelAdministrativoRequisicao"> & {
+  /**
+   * @generated from field: string id_papel = 1;
+   */
+  idPapel: string;
+
+  /**
+   * @generated from field: repeated string ids_permissoes = 2;
+   */
+  idsPermissoes: string[];
+
+  /**
+   * @generated from field: string motivo = 3;
+   */
+  motivo: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.DefinirPermissoesPapelAdministrativoRequisicao.
+ * Use `create(DefinirPermissoesPapelAdministrativoRequisicaoSchema)` to create a new message.
+ */
+export const DefinirPermissoesPapelAdministrativoRequisicaoSchema: GenMessage<DefinirPermissoesPapelAdministrativoRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 26);
+
+/**
+ * @generated from message lixo_certo.v1.DefinirPermissoesPapelAdministrativoResposta
+ */
+export type DefinirPermissoesPapelAdministrativoResposta = Message<"lixo_certo.v1.DefinirPermissoesPapelAdministrativoResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.DefinirPermissoesPapelAdministrativoResposta.
+ * Use `create(DefinirPermissoesPapelAdministrativoRespostaSchema)` to create a new message.
+ */
+export const DefinirPermissoesPapelAdministrativoRespostaSchema: GenMessage<DefinirPermissoesPapelAdministrativoResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_administracao, 27);
 
 /**
  * @generated from service lixo_certo.v1.ServicoAdministracao
@@ -68,6 +771,94 @@ export const ServicoAdministracao: GenService<{
     methodKind: "unary";
     input: typeof ObterResumoAdministrativoRequisicaoSchema;
     output: typeof ObterResumoAdministrativoRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.ListarUsuariosAdministrativos
+   */
+  listarUsuariosAdministrativos: {
+    methodKind: "unary";
+    input: typeof ListarUsuariosAdministrativosRequisicaoSchema;
+    output: typeof ListarUsuariosAdministrativosRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.AlterarStatusUsuarioAdministrativo
+   */
+  alterarStatusUsuarioAdministrativo: {
+    methodKind: "unary";
+    input: typeof AlterarStatusUsuarioAdministrativoRequisicaoSchema;
+    output: typeof AlterarStatusUsuarioAdministrativoRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.DefinirPapeisUsuarioAdministrativo
+   */
+  definirPapeisUsuarioAdministrativo: {
+    methodKind: "unary";
+    input: typeof DefinirPapeisUsuarioAdministrativoRequisicaoSchema;
+    output: typeof DefinirPapeisUsuarioAdministrativoRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.RevogarSessoesUsuarioAdministrativo
+   */
+  revogarSessoesUsuarioAdministrativo: {
+    methodKind: "unary";
+    input: typeof RevogarSessoesUsuarioAdministrativoRequisicaoSchema;
+    output: typeof RevogarSessoesUsuarioAdministrativoRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.ListarPapeisAdministrativos
+   */
+  listarPapeisAdministrativos: {
+    methodKind: "unary";
+    input: typeof ListarPapeisAdministrativosRequisicaoSchema;
+    output: typeof ListarPapeisAdministrativosRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.ListarPermissoesAdministrativas
+   */
+  listarPermissoesAdministrativas: {
+    methodKind: "unary";
+    input: typeof ListarPermissoesAdministrativasRequisicaoSchema;
+    output: typeof ListarPermissoesAdministrativasRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.CriarPapelAdministrativo
+   */
+  criarPapelAdministrativo: {
+    methodKind: "unary";
+    input: typeof CriarPapelAdministrativoRequisicaoSchema;
+    output: typeof CriarPapelAdministrativoRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.AtualizarPapelAdministrativo
+   */
+  atualizarPapelAdministrativo: {
+    methodKind: "unary";
+    input: typeof AtualizarPapelAdministrativoRequisicaoSchema;
+    output: typeof AtualizarPapelAdministrativoRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.ArquivarPapelAdministrativo
+   */
+  arquivarPapelAdministrativo: {
+    methodKind: "unary";
+    input: typeof ArquivarPapelAdministrativoRequisicaoSchema;
+    output: typeof ArquivarPapelAdministrativoRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.RestaurarPapelAdministrativo
+   */
+  restaurarPapelAdministrativo: {
+    methodKind: "unary";
+    input: typeof RestaurarPapelAdministrativoRequisicaoSchema;
+    output: typeof RestaurarPapelAdministrativoRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoAdministracao.DefinirPermissoesPapelAdministrativo
+   */
+  definirPermissoesPapelAdministrativo: {
+    methodKind: "unary";
+    input: typeof DefinirPermissoesPapelAdministrativoRequisicaoSchema;
+    output: typeof DefinirPermissoesPapelAdministrativoRespostaSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_lixo_certo_v1_servico_administracao, 0);

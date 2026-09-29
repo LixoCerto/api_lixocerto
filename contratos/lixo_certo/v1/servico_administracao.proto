@@ -1,16 +1,132 @@
 syntax = "proto3";
 package lixo_certo.v1;
 
-message ObterResumoAdministrativoRequisicao {
-}
-
+message ObterResumoAdministrativoRequisicao {}
 message ObterResumoAdministrativoResposta {
   int32 quantidade_usuarios = 1;
   int32 quantidade_materiais = 2;
   int32 quantidade_pontos_pendentes = 3;
   int32 quantidade_avaliacoes = 4;
+  int32 quantidade_papeis = 5;
+  int32 quantidade_eventos_auditoria = 6;
+  int32 quantidade_materiais_publicados = 7;
 }
+
+message PapelUsuarioAdministrativo {
+  string id_papel = 1;
+  string nome_papel = 2;
+  string status_papel = 3;
+}
+message UsuarioAdministrativo {
+  string id_usuario = 1;
+  string nome_usuario = 2;
+  string email_usuario = 3;
+  string status_usuario = 4;
+  bool email_verificado = 5;
+  string data_criacao = 6;
+  string data_ultimo_acesso = 7;
+  repeated PapelUsuarioAdministrativo papeis = 8;
+}
+message ListarUsuariosAdministrativosRequisicao {
+  string busca = 1;
+  string status = 2;
+  int32 deslocamento = 3;
+  int32 limite = 4;
+}
+message ListarUsuariosAdministrativosResposta {
+  repeated UsuarioAdministrativo usuarios = 1;
+  int32 total = 2;
+}
+message AlterarStatusUsuarioAdministrativoRequisicao {
+  string id_usuario = 1;
+  string status = 2;
+  string motivo = 3;
+}
+message AlterarStatusUsuarioAdministrativoResposta {
+  bool operacao_aceita = 1;
+  int32 sessoes_revogadas = 2;
+  string mensagem_resultado = 3;
+}
+message DefinirPapeisUsuarioAdministrativoRequisicao {
+  string id_usuario = 1;
+  repeated string ids_papeis = 2;
+  string motivo = 3;
+}
+message DefinirPapeisUsuarioAdministrativoResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+}
+message RevogarSessoesUsuarioAdministrativoRequisicao {
+  string id_usuario = 1;
+  string motivo = 2;
+}
+message RevogarSessoesUsuarioAdministrativoResposta {
+  int32 quantidade_revogada = 1;
+  string mensagem_resultado = 2;
+}
+
+message PapelAdministrativo {
+  string id_papel = 1;
+  string nome_papel = 2;
+  string descricao_papel = 3;
+  string status_papel = 4;
+  bool papel_sistema = 5;
+  int32 quantidade_usuarios = 6;
+  repeated string ids_permissoes = 7;
+  repeated string codigos_permissoes = 8;
+}
+message PermissaoAdministrativa {
+  string id_permissao = 1;
+  string codigo_permissao = 2;
+  string nome_permissao = 3;
+  string descricao_permissao = 4;
+  string status_permissao = 5;
+}
+message ListarPapeisAdministrativosRequisicao { bool incluir_inativos = 1; }
+message ListarPapeisAdministrativosResposta { repeated PapelAdministrativo papeis = 1; }
+message ListarPermissoesAdministrativasRequisicao {}
+message ListarPermissoesAdministrativasResposta { repeated PermissaoAdministrativa permissoes = 1; }
+message CriarPapelAdministrativoRequisicao {
+  string nome_papel = 1;
+  string descricao_papel = 2;
+  repeated string ids_permissoes = 3;
+  string motivo = 4;
+}
+message CriarPapelAdministrativoResposta {
+  bool operacao_aceita = 1;
+  string id_papel = 2;
+  string mensagem_resultado = 3;
+}
+message AtualizarPapelAdministrativoRequisicao {
+  string id_papel = 1;
+  string nome_papel = 2;
+  string descricao_papel = 3;
+  repeated string ids_permissoes = 4;
+  string motivo = 5;
+}
+message AtualizarPapelAdministrativoResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; }
+message ArquivarPapelAdministrativoRequisicao { string id_papel = 1; string motivo = 2; }
+message ArquivarPapelAdministrativoResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; }
+message RestaurarPapelAdministrativoRequisicao { string id_papel = 1; string motivo = 2; }
+message RestaurarPapelAdministrativoResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; }
+message DefinirPermissoesPapelAdministrativoRequisicao {
+  string id_papel = 1;
+  repeated string ids_permissoes = 2;
+  string motivo = 3;
+}
+message DefinirPermissoesPapelAdministrativoResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; }
 
 service ServicoAdministracao {
   rpc ObterResumoAdministrativo(ObterResumoAdministrativoRequisicao) returns (ObterResumoAdministrativoResposta);
+  rpc ListarUsuariosAdministrativos(ListarUsuariosAdministrativosRequisicao) returns (ListarUsuariosAdministrativosResposta);
+  rpc AlterarStatusUsuarioAdministrativo(AlterarStatusUsuarioAdministrativoRequisicao) returns (AlterarStatusUsuarioAdministrativoResposta);
+  rpc DefinirPapeisUsuarioAdministrativo(DefinirPapeisUsuarioAdministrativoRequisicao) returns (DefinirPapeisUsuarioAdministrativoResposta);
+  rpc RevogarSessoesUsuarioAdministrativo(RevogarSessoesUsuarioAdministrativoRequisicao) returns (RevogarSessoesUsuarioAdministrativoResposta);
+  rpc ListarPapeisAdministrativos(ListarPapeisAdministrativosRequisicao) returns (ListarPapeisAdministrativosResposta);
+  rpc ListarPermissoesAdministrativas(ListarPermissoesAdministrativasRequisicao) returns (ListarPermissoesAdministrativasResposta);
+  rpc CriarPapelAdministrativo(CriarPapelAdministrativoRequisicao) returns (CriarPapelAdministrativoResposta);
+  rpc AtualizarPapelAdministrativo(AtualizarPapelAdministrativoRequisicao) returns (AtualizarPapelAdministrativoResposta);
+  rpc ArquivarPapelAdministrativo(ArquivarPapelAdministrativoRequisicao) returns (ArquivarPapelAdministrativoResposta);
+  rpc RestaurarPapelAdministrativo(RestaurarPapelAdministrativoRequisicao) returns (RestaurarPapelAdministrativoResposta);
+  rpc DefinirPermissoesPapelAdministrativo(DefinirPermissoesPapelAdministrativoRequisicao) returns (DefinirPermissoesPapelAdministrativoResposta);
 }
