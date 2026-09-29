@@ -46,8 +46,78 @@ message RegistrarAcaoSustentavelResposta {
   string mensagem_resultado = 5;
 }
 
+message DadosDesafio {
+  string nome_desafio = 1;
+  string descricao_desafio = 2;
+  string tipo_acao = 3;
+  int32 meta_quantidade = 4;
+  int32 quantidade_pontos = 5;
+  string data_inicio = 6;
+  string data_fim = 7;
+}
+
+message ListarDesafiosGestaoRequisicao {
+  string texto_pesquisa = 1;
+  string status_desafio = 2;
+  int32 numero_pagina = 3;
+  int32 tamanho_pagina = 4;
+}
+
+message DesafioGestaoResposta {
+  string id_desafio = 1;
+  string nome_desafio = 2;
+  string descricao_desafio = 3;
+  string tipo_acao = 4;
+  int32 meta_quantidade = 5;
+  int32 quantidade_pontos = 6;
+  string status_desafio = 7;
+  string data_inicio = 8;
+  string data_fim = 9;
+}
+
+message ListarDesafiosGestaoResposta {
+  repeated DesafioGestaoResposta desafios = 1;
+  int32 quantidade_total = 2;
+}
+
+message CriarDesafioRequisicao {
+  DadosDesafio dados = 1;
+}
+
+message CriarDesafioResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  DesafioGestaoResposta desafio = 3;
+}
+
+message AtualizarDesafioRequisicao {
+  string id_desafio = 1;
+  DadosDesafio dados = 2;
+}
+
+message AtualizarDesafioResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  DesafioGestaoResposta desafio = 3;
+}
+
+message AlterarStatusDesafioRequisicao {
+  string id_desafio = 1;
+  string status_desafio = 2;
+}
+
+message AlterarStatusDesafioResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  DesafioGestaoResposta desafio = 3;
+}
+
 service ServicoDesafios {
   rpc ListarDesafios(ListarDesafiosRequisicao) returns (ListarDesafiosResposta);
   rpc ParticiparDesafio(ParticiparDesafioRequisicao) returns (ParticiparDesafioResposta);
   rpc RegistrarAcaoSustentavel(RegistrarAcaoSustentavelRequisicao) returns (RegistrarAcaoSustentavelResposta);
+  rpc ListarDesafiosGestao(ListarDesafiosGestaoRequisicao) returns (ListarDesafiosGestaoResposta);
+  rpc CriarDesafio(CriarDesafioRequisicao) returns (CriarDesafioResposta);
+  rpc AtualizarDesafio(AtualizarDesafioRequisicao) returns (AtualizarDesafioResposta);
+  rpc AlterarStatusDesafio(AlterarStatusDesafioRequisicao) returns (AlterarStatusDesafioResposta);
 }

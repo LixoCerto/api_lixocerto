@@ -34,7 +34,79 @@ message EnviarRespostaQuestionarioResposta {
   string explicacao_resposta = 3;
 }
 
+message AlternativaQuestaoGestao {
+  string id_alternativa = 1;
+  string texto_alternativa = 2;
+  bool indica_correta = 3;
+  int32 ordem_exibicao = 4;
+}
+
+message DadosQuestao {
+  string enunciado_questao = 1;
+  string explicacao_questao = 2;
+  int32 quantidade_pontos = 3;
+  repeated AlternativaQuestaoGestao alternativas = 4;
+}
+
+message ListarQuestoesGestaoRequisicao {
+  string texto_pesquisa = 1;
+  string status_questao = 2;
+  int32 numero_pagina = 3;
+  int32 tamanho_pagina = 4;
+}
+
+message QuestaoGestaoResposta {
+  string id_questao = 1;
+  string enunciado_questao = 2;
+  string explicacao_questao = 3;
+  int32 quantidade_pontos = 4;
+  string status_questao = 5;
+  string data_atualizacao = 6;
+  repeated AlternativaQuestaoGestao alternativas = 7;
+}
+
+message ListarQuestoesGestaoResposta {
+  repeated QuestaoGestaoResposta questoes = 1;
+  int32 quantidade_total = 2;
+}
+
+message CriarQuestaoRequisicao {
+  DadosQuestao dados = 1;
+}
+
+message CriarQuestaoResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  QuestaoGestaoResposta questao = 3;
+}
+
+message AtualizarQuestaoRequisicao {
+  string id_questao = 1;
+  DadosQuestao dados = 2;
+}
+
+message AtualizarQuestaoResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  QuestaoGestaoResposta questao = 3;
+}
+
+message AlterarStatusQuestaoRequisicao {
+  string id_questao = 1;
+  string status_questao = 2;
+}
+
+message AlterarStatusQuestaoResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  QuestaoGestaoResposta questao = 3;
+}
+
 service ServicoQuestionarios {
   rpc ListarQuestoes(ListarQuestoesRequisicao) returns (ListarQuestoesResposta);
   rpc EnviarRespostaQuestionario(EnviarRespostaQuestionarioRequisicao) returns (EnviarRespostaQuestionarioResposta);
+  rpc ListarQuestoesGestao(ListarQuestoesGestaoRequisicao) returns (ListarQuestoesGestaoResposta);
+  rpc CriarQuestao(CriarQuestaoRequisicao) returns (CriarQuestaoResposta);
+  rpc AtualizarQuestao(AtualizarQuestaoRequisicao) returns (AtualizarQuestaoResposta);
+  rpc AlterarStatusQuestao(AlterarStatusQuestaoRequisicao) returns (AlterarStatusQuestaoResposta);
 }

@@ -24,12 +24,13 @@ const permissoes = [
   ['10000000-0000-4000-8000-000000000010', 'auditoria:consultar', 'Consultar auditoria'],
   ['10000000-0000-4000-8000-000000000011', 'administracao:consultar', 'Consultar resumo administrativo'],
   ['10000000-0000-4000-8000-000000000013', 'pontos_coleta:escrever', 'Criar e editar pontos de coleta'],
+  ['10000000-0000-4000-8000-000000000014', 'gamificacao:administrar', 'Administrar desafios'],
 ];
 
 const permissoesPorPapel = {
   usuario: ['materiais:ler', 'pontos_coleta:ler', 'questionarios:responder', 'gamificacao:ler', 'avaliacao_usabilidade:enviar'],
   pesquisador: ['materiais:ler', 'pontos_coleta:ler', 'gamificacao:ler', 'avaliacao_usabilidade:consultar_agregados'],
-  revisor: ['materiais:ler', 'materiais:escrever', 'materiais:aprovar', 'pontos_coleta:ler', 'pontos_coleta:escrever', 'pontos_coleta:aprovar', 'questionarios:administrar'],
+  revisor: ['materiais:ler', 'materiais:escrever', 'materiais:aprovar', 'pontos_coleta:ler', 'pontos_coleta:escrever', 'pontos_coleta:aprovar', 'questionarios:responder', 'questionarios:administrar', 'gamificacao:ler', 'gamificacao:administrar'],
   administrador: permissoes.map(([, codigo]) => codigo),
 };
 

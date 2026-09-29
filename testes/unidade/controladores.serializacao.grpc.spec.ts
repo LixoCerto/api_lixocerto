@@ -1,18 +1,34 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { Metadata } from '@grpc/grpc-js';
 import { ControladorGrpcAvaliacaoUsabilidade } from '../../src/modulos/avaliacao_usabilidade/avaliacao_usabilidade.controlador.grpc.js';
 import { ControladorGrpcQuestionarios } from '../../src/modulos/questionarios/questionarios.controlador.grpc.js';
 import { ServicoAvaliacaoUsabilidade } from '../../src/modulos/avaliacao_usabilidade/avaliacao_usabilidade.servico.js';
-import { ServicoAutenticacao } from '../../src/modulos/autenticacao/autenticacao.servico.js';
-import { ServicoAutorizacao } from '../../src/modulos/autorizacao/autorizacao.servico.js';
 import { ServicoQuestionarios } from '../../src/modulos/questionarios/questionarios.servico.js';
+
+const identidade = {
+  idExterno: 'local:usuario-teste',
+  nome: 'Usuário teste',
+  email: 'usuario@exemplo.test',
+  papeis: ['usuario'],
+  permissoes: ['questionarios:responder'],
+};
+
+function dependenciasQuestionario(servico: object) {
+  return [
+    servico,
+    { obterIdentidadeAtual: vi.fn().mockResolvedValue(identidade) },
+    { exigirPermissao: vi.fn() },
+    { obterIdInterno: vi.fn().mockResolvedValue('usuario-interno') },
+    { registrar: vi.fn().mockResolvedValue(undefined) },
+  ] as const;
+}
 
 describe('serialização dos controladores gRPC', () => {
   it('converte o resultado SUS para snake_case do Protobuf', async () => {
     const controlador = new ControladorGrpcAvaliacaoUsabilidade(
       { enviar: async () => ({ avaliacaoAceita: false, pontuacaoSus: 0, mensagemResultado: 'Consentimento obrigatorio.' }) } as unknown as ServicoAvaliacaoUsabilidade,
-      {} as ServicoAutenticacao,
-      {} as ServicoAutorizacao,
+      {} as never,
+      {} as never,
     );
 
     await expect(controlador.enviarAvaliacaoSus({})).resolves.toEqual({
@@ -22,20 +38,21 @@ describe('serialização dos controladores gRPC', () => {
     });
   });
 
-  it('converte o resultado de resposta de questionário para snake_case do Protobuf', async () => {
-    const controlador = new ControladorGrpcQuestionarios({
-      responder: async () => ({
-        indicaCorreta: false,
-        quantidadePontos: 0,
-        explicacaoResposta: 'Questao ou alternativa indisponivel.',
-      }),
-    } as unknown as ServicoQuestionarios);
+  it('serializa resposta de quiz e registra a tentativa do usuário autenticado', async () => {
+    const servico = { responder: vi.fn().mockResolvedValue({
+      indicaCorreta: false,
+      quantidadePontos: 0,
+      explicacaoResposta: 'Questao ou alternativa indisponivel.',
+    }) };
+    const controlador = new ControladorGrpcQuestionarios(...dependenciasQuestionario(servico) as never);
     const metadados = new Metadata();
+    metadados.set('authorization', 'Bearer token-teste');
 
-    await expect(controlador.enviarRespostaQuestionario({}, metadados)).resolves.toEqual({
+    await expect(controlador.enviarRespostaQuestionario({ id_questao: 'questao-1', id_alternativa: 'alternativa-1' }, metadados)).resolves.toEqual({
       indica_correta: false,
       quantidade_pontos: 0,
       explicacao_resposta: 'Questao ou alternativa indisponivel.',
     });
+    expect(servico.responder).toHaveBeenCalledWith('questao-1', 'alternativa-1', identidade.idExterno);
   });
 });

@@ -41,6 +41,34 @@ describe('auditoria, rate limit e desafios', () => {
     );
 
     await expect(servico.listar(null)).resolves.toEqual([]);
+    await expect(servico.listarGestao({ status: 'todos' })).resolves.toEqual({ desafios: [], quantidadeTotal: 0 });
     await expect(servico.participar('usuario', 'desafio', 'correlacao')).resolves.toBeNull();
+  });
+
+  it('valida conteúdo e mantém novos desafios como rascunho', async () => {
+    const servico = new ServicoDesafios(
+      new RepositorioDesafios(null),
+      new ServicoGamificacao({} as RepositorioProgresso),
+      new ServicoAuditoria({ registrar: vi.fn() } as unknown as RepositorioAuditoria),
+    );
+
+    await expect(servico.criar({
+      nomeDesafio: 'Separação consciente',
+      descricaoDesafio: 'Separe resíduos para descarte correto.',
+      tipoAcao: 'separacao_residuos',
+      metaQuantidade: 5,
+      quantidadePontos: 100,
+      dataInicio: new Date(),
+      dataFim: null,
+    })).resolves.toBeNull();
+    expect(() => servico.criar({
+      nomeDesafio: '',
+      descricaoDesafio: 'Descrição',
+      tipoAcao: 'separacao residuos',
+      metaQuantidade: 0,
+      quantidadePontos: -1,
+      dataInicio: new Date(Number.NaN),
+      dataFim: null,
+    })).toThrow('Nome obrigatório');
   });
 });
