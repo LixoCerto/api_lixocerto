@@ -13,6 +13,7 @@ const papeis = [
 const permissoes = [
   ['10000000-0000-4000-8000-000000000001', 'materiais:ler', 'Ler materiais'],
   ['10000000-0000-4000-8000-000000000002', 'materiais:escrever', 'Escrever materiais'],
+  ['10000000-0000-4000-8000-000000000012', 'materiais:aprovar', 'Aprovar e publicar materiais'],
   ['10000000-0000-4000-8000-000000000003', 'pontos_coleta:ler', 'Ler pontos de coleta'],
   ['10000000-0000-4000-8000-000000000004', 'pontos_coleta:aprovar', 'Aprovar pontos de coleta'],
   ['10000000-0000-4000-8000-000000000005', 'questionarios:responder', 'Responder questionarios'],
@@ -28,7 +29,7 @@ const permissoes = [
 const permissoesPorPapel = {
   usuario: ['materiais:ler', 'pontos_coleta:ler', 'questionarios:responder', 'gamificacao:ler', 'avaliacao_usabilidade:enviar'],
   pesquisador: ['materiais:ler', 'pontos_coleta:ler', 'gamificacao:ler', 'avaliacao_usabilidade:consultar_agregados'],
-  revisor: ['materiais:ler', 'materiais:escrever', 'pontos_coleta:ler', 'pontos_coleta:escrever', 'pontos_coleta:aprovar', 'questionarios:administrar'],
+  revisor: ['materiais:ler', 'materiais:escrever', 'materiais:aprovar', 'pontos_coleta:ler', 'pontos_coleta:escrever', 'pontos_coleta:aprovar', 'questionarios:administrar'],
   administrador: permissoes.map(([, codigo]) => codigo),
 };
 
@@ -36,42 +37,54 @@ module.exports = {
   async up(queryInterface) {
     const data = new Date();
     const papeisExistentes = await queryInterface.sequelize.query(
-      'SELECT lcr_pap_id_papel FROM lcr_papeis',
+      'SELECT lcr_pap_id_papel, lcr_pap_nome_papel FROM lcr_papeis',
       { type: QueryTypes.SELECT },
     );
     const permissoesExistentes = await queryInterface.sequelize.query(
-      'SELECT lcr_prm_id_permissao FROM lcr_permissoes',
+      'SELECT lcr_prm_id_permissao, lcr_prm_codigo_permissao FROM lcr_permissoes',
       { type: QueryTypes.SELECT },
     );
     const idsPapeisExistentes = new Set(papeisExistentes.map(item => item.lcr_pap_id_papel));
     const idsPermissoesExistentes = new Set(permissoesExistentes.map(item => item.lcr_prm_id_permissao));
+    const idsPapeisPorNome = new Map(papeisExistentes.map(item => [item.lcr_pap_nome_papel, item.lcr_pap_id_papel]));
+    const idsPermissoesPorCodigo = new Map(permissoesExistentes.map(item => [item.lcr_prm_codigo_permissao, item.lcr_prm_id_permissao]));
 
     const papeisNovos = papeis
-      .filter(([id]) => !idsPapeisExistentes.has(id))
-      .map(([id, nome, descricao]) => ({
-        lcr_pap_id_papel: id,
-        lcr_pap_nome_papel: nome,
-        lcr_pap_descricao_papel: descricao,
-        lcr_pap_status_papel: 'ativo',
-        lcr_pap_data_criacao: data,
-        lcr_pap_data_atualizacao: data,
-      }));
+      .filter(([, nome]) => !idsPapeisPorNome.has(nome))
+      .map(([idPreferencial, nome, descricao]) => {
+        const id = idsPapeisExistentes.has(idPreferencial) ? randomUUID() : idPreferencial;
+        idsPapeisExistentes.add(id);
+        idsPapeisPorNome.set(nome, id);
+        return {
+          lcr_pap_id_papel: id,
+          lcr_pap_nome_papel: nome,
+          lcr_pap_descricao_papel: descricao,
+          lcr_pap_status_papel: 'ativo',
+          lcr_pap_data_criacao: data,
+          lcr_pap_data_atualizacao: data,
+        };
+      });
     const permissoesNovas = permissoes
-      .filter(([id]) => !idsPermissoesExistentes.has(id))
-      .map(([id, codigo, nome]) => ({
-        lcr_prm_id_permissao: id,
-        lcr_prm_codigo_permissao: codigo,
-        lcr_prm_nome_permissao: nome,
-        lcr_prm_descricao_permissao: nome,
-        lcr_prm_status_permissao: 'ativo',
-        lcr_prm_data_criacao: data,
-        lcr_prm_data_atualizacao: data,
-      }));
+      .filter(([, codigo]) => !idsPermissoesPorCodigo.has(codigo))
+      .map(([idPreferencial, codigo, nome]) => {
+        const id = idsPermissoesExistentes.has(idPreferencial) ? randomUUID() : idPreferencial;
+        idsPermissoesExistentes.add(id);
+        idsPermissoesPorCodigo.set(codigo, id);
+        return {
+          lcr_prm_id_permissao: id,
+          lcr_prm_codigo_permissao: codigo,
+          lcr_prm_nome_permissao: nome,
+          lcr_prm_descricao_permissao: nome,
+          lcr_prm_status_permissao: 'ativo',
+          lcr_prm_data_criacao: data,
+          lcr_prm_data_atualizacao: data,
+        };
+      });
     if (papeisNovos.length) await queryInterface.bulkInsert('lcr_papeis', papeisNovos);
     if (permissoesNovas.length) await queryInterface.bulkInsert('lcr_permissoes', permissoesNovas);
 
-    const idsPapeis = new Map(papeis.map(([id, nome]) => [nome, id]));
-    const idsPermissoes = new Map(permissoes.map(([id, codigo]) => [codigo, id]));
+    const idsPapeis = idsPapeisPorNome;
+    const idsPermissoes = idsPermissoesPorCodigo;
     const relacoesExistentes = await queryInterface.sequelize.query(
       'SELECT lcr_ppm_id_papel, lcr_ppm_id_permissao FROM lcr_papeis_permissoes',
       { type: QueryTypes.SELECT },

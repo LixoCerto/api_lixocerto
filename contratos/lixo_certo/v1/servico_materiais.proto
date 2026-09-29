@@ -6,6 +6,13 @@ message ListarMateriaisRequisicao {
   string categoria_material = 2;
   int32 numero_pagina = 3;
   int32 tamanho_pagina = 4;
+  string status_material = 5;
+}
+
+message FonteReferenciaMaterial {
+  string titulo = 1;
+  string url = 2;
+  string comprova = 3;
 }
 
 message MaterialResposta {
@@ -15,13 +22,72 @@ message MaterialResposta {
   string instrucao_descarte = 4;
   string observacao_impacto = 5;
   string status_material = 6;
+  string codigo_catalogo = 7;
+  repeated string sinonimos = 8;
+  string preparacao = 9;
+  string cuidados = 10;
+  repeated string categorias_pontos = 11;
+  string abrangencia = 12;
+  repeated FonteReferenciaMaterial fontes_referencia = 13;
+  string data_verificacao = 14;
+  int32 versao_conteudo = 15;
+  string observacao_revisao = 16;
+  repeated string rotas_referencia = 17;
+  string classificacao = 18;
+  string nota_abrangencia = 19;
+}
+
+message MaterialDadosRequisicao {
+  string codigo_catalogo = 1;
+  string nome_material = 2;
+  string categoria_material = 3;
+  string instrucao_descarte = 4;
+  string observacao_impacto = 5;
+  repeated string sinonimos = 6;
+  string preparacao = 7;
+  string cuidados = 8;
+  repeated string categorias_pontos = 9;
+  string abrangencia = 10;
+  repeated FonteReferenciaMaterial fontes_referencia = 11;
+  string data_verificacao = 12;
+  repeated string rotas_referencia = 13;
+  string classificacao = 14;
+  string nota_abrangencia = 15;
 }
 
 message ListarMateriaisResposta {
   repeated MaterialResposta materiais = 1;
   int32 quantidade_total = 2;
 }
+message ObterMaterialRequisicao { string id_material = 1; }
+message ObterMaterialResposta { bool encontrado = 1; MaterialResposta material = 2; }
+message CriarMaterialRequisicao { MaterialDadosRequisicao dados = 1; }
+message AtualizarMaterialRequisicao { string id_material = 1; MaterialDadosRequisicao dados = 2; }
+message AlterarStatusMaterialRequisicao {
+  string id_material = 1;
+  string status_material = 2;
+  string observacao_revisao = 3;
+}
+message CriarMaterialResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  MaterialResposta material = 3;
+}
+message AtualizarMaterialResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  MaterialResposta material = 3;
+}
+message AlterarStatusMaterialResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  MaterialResposta material = 3;
+}
 
 service ServicoMateriais {
   rpc ListarMateriais(ListarMateriaisRequisicao) returns (ListarMateriaisResposta);
+  rpc ObterMaterial(ObterMaterialRequisicao) returns (ObterMaterialResposta);
+  rpc CriarMaterial(CriarMaterialRequisicao) returns (CriarMaterialResposta);
+  rpc AtualizarMaterial(AtualizarMaterialRequisicao) returns (AtualizarMaterialResposta);
+  rpc AlterarStatusMaterial(AlterarStatusMaterialRequisicao) returns (AlterarStatusMaterialResposta);
 }

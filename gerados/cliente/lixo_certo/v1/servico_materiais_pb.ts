@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file lixo_certo/v1/servico_materiais.proto.
  */
 export const file_lixo_certo_v1_servico_materiais: GenFile = /*@__PURE__*/
-  fileDesc("CiVsaXhvX2NlcnRvL3YxL3NlcnZpY29fbWF0ZXJpYWlzLnByb3RvEg1saXhvX2NlcnRvLnYxIn4KGUxpc3Rhck1hdGVyaWFpc1JlcXVpc2ljYW8SFgoOdGV4dG9fcGVzcXVpc2EYASABKAkSGgoSY2F0ZWdvcmlhX21hdGVyaWFsGAIgASgJEhUKDW51bWVyb19wYWdpbmEYAyABKAUSFgoOdGFtYW5ob19wYWdpbmEYBCABKAUiqwEKEE1hdGVyaWFsUmVzcG9zdGESEwoLaWRfbWF0ZXJpYWwYASABKAkSFQoNbm9tZV9tYXRlcmlhbBgCIAEoCRIaChJjYXRlZ29yaWFfbWF0ZXJpYWwYAyABKAkSGgoSaW5zdHJ1Y2FvX2Rlc2NhcnRlGAQgASgJEhoKEm9ic2VydmFjYW9faW1wYWN0bxgFIAEoCRIXCg9zdGF0dXNfbWF0ZXJpYWwYBiABKAkiZwoXTGlzdGFyTWF0ZXJpYWlzUmVzcG9zdGESMgoJbWF0ZXJpYWlzGAEgAygLMh8ubGl4b19jZXJ0by52MS5NYXRlcmlhbFJlc3Bvc3RhEhgKEHF1YW50aWRhZGVfdG90YWwYAiABKAUydwoQU2Vydmljb01hdGVyaWFpcxJjCg9MaXN0YXJNYXRlcmlhaXMSKC5saXhvX2NlcnRvLnYxLkxpc3Rhck1hdGVyaWFpc1JlcXVpc2ljYW8aJi5saXhvX2NlcnRvLnYxLkxpc3Rhck1hdGVyaWFpc1Jlc3Bvc3RhYgZwcm90bzM");
+  fileDesc("CiVsaXhvX2NlcnRvL3YxL3NlcnZpY29fbWF0ZXJpYWlzLnByb3RvEg1saXhvX2NlcnRvLnYxIpcBChlMaXN0YXJNYXRlcmlhaXNSZXF1aXNpY2FvEhYKDnRleHRvX3Blc3F1aXNhGAEgASgJEhoKEmNhdGVnb3JpYV9tYXRlcmlhbBgCIAEoCRIVCg1udW1lcm9fcGFnaW5hGAMgASgFEhYKDnRhbWFuaG9fcGFnaW5hGAQgASgFEhcKD3N0YXR1c19tYXRlcmlhbBgFIAEoCSJIChdGb250ZVJlZmVyZW5jaWFNYXRlcmlhbBIOCgZ0aXR1bG8YASABKAkSCwoDdXJsGAIgASgJEhAKCGNvbXByb3ZhGAMgASgJIooEChBNYXRlcmlhbFJlc3Bvc3RhEhMKC2lkX21hdGVyaWFsGAEgASgJEhUKDW5vbWVfbWF0ZXJpYWwYAiABKAkSGgoSY2F0ZWdvcmlhX21hdGVyaWFsGAMgASgJEhoKEmluc3RydWNhb19kZXNjYXJ0ZRgEIAEoCRIaChJvYnNlcnZhY2FvX2ltcGFjdG8YBSABKAkSFwoPc3RhdHVzX21hdGVyaWFsGAYgASgJEhcKD2NvZGlnb19jYXRhbG9nbxgHIAEoCRIRCglzaW5vbmltb3MYCCADKAkSEgoKcHJlcGFyYWNhbxgJIAEoCRIQCghjdWlkYWRvcxgKIAEoCRIZChFjYXRlZ29yaWFzX3BvbnRvcxgLIAMoCRITCgthYnJhbmdlbmNpYRgMIAEoCRJBChFmb250ZXNfcmVmZXJlbmNpYRgNIAMoCzImLmxpeG9fY2VydG8udjEuRm9udGVSZWZlcmVuY2lhTWF0ZXJpYWwSGAoQZGF0YV92ZXJpZmljYWNhbxgOIAEoCRIXCg92ZXJzYW9fY29udGV1ZG8YDyABKAUSGgoSb2JzZXJ2YWNhb19yZXZpc2FvGBAgASgJEhgKEHJvdGFzX3JlZmVyZW5jaWEYESADKAkSFQoNY2xhc3NpZmljYWNhbxgSIAEoCRIYChBub3RhX2FicmFuZ2VuY2lhGBMgASgJIq4DChdNYXRlcmlhbERhZG9zUmVxdWlzaWNhbxIXCg9jb2RpZ29fY2F0YWxvZ28YASABKAkSFQoNbm9tZV9tYXRlcmlhbBgCIAEoCRIaChJjYXRlZ29yaWFfbWF0ZXJpYWwYAyABKAkSGgoSaW5zdHJ1Y2FvX2Rlc2NhcnRlGAQgASgJEhoKEm9ic2VydmFjYW9faW1wYWN0bxgFIAEoCRIRCglzaW5vbmltb3MYBiADKAkSEgoKcHJlcGFyYWNhbxgHIAEoCRIQCghjdWlkYWRvcxgIIAEoCRIZChFjYXRlZ29yaWFzX3BvbnRvcxgJIAMoCRITCgthYnJhbmdlbmNpYRgKIAEoCRJBChFmb250ZXNfcmVmZXJlbmNpYRgLIAMoCzImLmxpeG9fY2VydG8udjEuRm9udGVSZWZlcmVuY2lhTWF0ZXJpYWwSGAoQZGF0YV92ZXJpZmljYWNhbxgMIAEoCRIYChByb3Rhc19yZWZlcmVuY2lhGA0gAygJEhUKDWNsYXNzaWZpY2FjYW8YDiABKAkSGAoQbm90YV9hYnJhbmdlbmNpYRgPIAEoCSJnChdMaXN0YXJNYXRlcmlhaXNSZXNwb3N0YRIyCgltYXRlcmlhaXMYASADKAsyHy5saXhvX2NlcnRvLnYxLk1hdGVyaWFsUmVzcG9zdGESGAoQcXVhbnRpZGFkZV90b3RhbBgCIAEoBSIuChdPYnRlck1hdGVyaWFsUmVxdWlzaWNhbxITCgtpZF9tYXRlcmlhbBgBIAEoCSJeChVPYnRlck1hdGVyaWFsUmVzcG9zdGESEgoKZW5jb250cmFkbxgBIAEoCBIxCghtYXRlcmlhbBgCIAEoCzIfLmxpeG9fY2VydG8udjEuTWF0ZXJpYWxSZXNwb3N0YSJQChdDcmlhck1hdGVyaWFsUmVxdWlzaWNhbxI1CgVkYWRvcxgBIAEoCzImLmxpeG9fY2VydG8udjEuTWF0ZXJpYWxEYWRvc1JlcXVpc2ljYW8iaQobQXR1YWxpemFyTWF0ZXJpYWxSZXF1aXNpY2FvEhMKC2lkX21hdGVyaWFsGAEgASgJEjUKBWRhZG9zGAIgASgLMiYubGl4b19jZXJ0by52MS5NYXRlcmlhbERhZG9zUmVxdWlzaWNhbyJrCh9BbHRlcmFyU3RhdHVzTWF0ZXJpYWxSZXF1aXNpY2FvEhMKC2lkX21hdGVyaWFsGAEgASgJEhcKD3N0YXR1c19tYXRlcmlhbBgCIAEoCRIaChJvYnNlcnZhY2FvX3JldmlzYW8YAyABKAkifwoVQ3JpYXJNYXRlcmlhbFJlc3Bvc3RhEhcKD29wZXJhY2FvX2FjZWl0YRgBIAEoCBIaChJtZW5zYWdlbV9yZXN1bHRhZG8YAiABKAkSMQoIbWF0ZXJpYWwYAyABKAsyHy5saXhvX2NlcnRvLnYxLk1hdGVyaWFsUmVzcG9zdGEigwEKGUF0dWFsaXphck1hdGVyaWFsUmVzcG9zdGESFwoPb3BlcmFjYW9fYWNlaXRhGAEgASgIEhoKEm1lbnNhZ2VtX3Jlc3VsdGFkbxgCIAEoCRIxCghtYXRlcmlhbBgDIAEoCzIfLmxpeG9fY2VydG8udjEuTWF0ZXJpYWxSZXNwb3N0YSKHAQodQWx0ZXJhclN0YXR1c01hdGVyaWFsUmVzcG9zdGESFwoPb3BlcmFjYW9fYWNlaXRhGAEgASgIEhoKEm1lbnNhZ2VtX3Jlc3VsdGFkbxgCIAEoCRIxCghtYXRlcmlhbBgDIAEoCzIfLmxpeG9fY2VydG8udjEuTWF0ZXJpYWxSZXNwb3N0YTKXBAoQU2Vydmljb01hdGVyaWFpcxJjCg9MaXN0YXJNYXRlcmlhaXMSKC5saXhvX2NlcnRvLnYxLkxpc3Rhck1hdGVyaWFpc1JlcXVpc2ljYW8aJi5saXhvX2NlcnRvLnYxLkxpc3Rhck1hdGVyaWFpc1Jlc3Bvc3RhEl0KDU9idGVyTWF0ZXJpYWwSJi5saXhvX2NlcnRvLnYxLk9idGVyTWF0ZXJpYWxSZXF1aXNpY2FvGiQubGl4b19jZXJ0by52MS5PYnRlck1hdGVyaWFsUmVzcG9zdGESXQoNQ3JpYXJNYXRlcmlhbBImLmxpeG9fY2VydG8udjEuQ3JpYXJNYXRlcmlhbFJlcXVpc2ljYW8aJC5saXhvX2NlcnRvLnYxLkNyaWFyTWF0ZXJpYWxSZXNwb3N0YRJpChFBdHVhbGl6YXJNYXRlcmlhbBIqLmxpeG9fY2VydG8udjEuQXR1YWxpemFyTWF0ZXJpYWxSZXF1aXNpY2FvGigubGl4b19jZXJ0by52MS5BdHVhbGl6YXJNYXRlcmlhbFJlc3Bvc3RhEnUKFUFsdGVyYXJTdGF0dXNNYXRlcmlhbBIuLmxpeG9fY2VydG8udjEuQWx0ZXJhclN0YXR1c01hdGVyaWFsUmVxdWlzaWNhbxosLmxpeG9fY2VydG8udjEuQWx0ZXJhclN0YXR1c01hdGVyaWFsUmVzcG9zdGFiBnByb3RvMw");
 
 /**
  * @generated from message lixo_certo.v1.ListarMateriaisRequisicao
@@ -35,6 +35,11 @@ export type ListarMateriaisRequisicao = Message<"lixo_certo.v1.ListarMateriaisRe
    * @generated from field: int32 tamanho_pagina = 4;
    */
   tamanhoPagina: number;
+
+  /**
+   * @generated from field: string status_material = 5;
+   */
+  statusMaterial: string;
 };
 
 /**
@@ -43,6 +48,33 @@ export type ListarMateriaisRequisicao = Message<"lixo_certo.v1.ListarMateriaisRe
  */
 export const ListarMateriaisRequisicaoSchema: GenMessage<ListarMateriaisRequisicao> = /*@__PURE__*/
   messageDesc(file_lixo_certo_v1_servico_materiais, 0);
+
+/**
+ * @generated from message lixo_certo.v1.FonteReferenciaMaterial
+ */
+export type FonteReferenciaMaterial = Message<"lixo_certo.v1.FonteReferenciaMaterial"> & {
+  /**
+   * @generated from field: string titulo = 1;
+   */
+  titulo: string;
+
+  /**
+   * @generated from field: string url = 2;
+   */
+  url: string;
+
+  /**
+   * @generated from field: string comprova = 3;
+   */
+  comprova: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.FonteReferenciaMaterial.
+ * Use `create(FonteReferenciaMaterialSchema)` to create a new message.
+ */
+export const FonteReferenciaMaterialSchema: GenMessage<FonteReferenciaMaterial> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_materiais, 1);
 
 /**
  * @generated from message lixo_certo.v1.MaterialResposta
@@ -77,6 +109,71 @@ export type MaterialResposta = Message<"lixo_certo.v1.MaterialResposta"> & {
    * @generated from field: string status_material = 6;
    */
   statusMaterial: string;
+
+  /**
+   * @generated from field: string codigo_catalogo = 7;
+   */
+  codigoCatalogo: string;
+
+  /**
+   * @generated from field: repeated string sinonimos = 8;
+   */
+  sinonimos: string[];
+
+  /**
+   * @generated from field: string preparacao = 9;
+   */
+  preparacao: string;
+
+  /**
+   * @generated from field: string cuidados = 10;
+   */
+  cuidados: string;
+
+  /**
+   * @generated from field: repeated string categorias_pontos = 11;
+   */
+  categoriasPontos: string[];
+
+  /**
+   * @generated from field: string abrangencia = 12;
+   */
+  abrangencia: string;
+
+  /**
+   * @generated from field: repeated lixo_certo.v1.FonteReferenciaMaterial fontes_referencia = 13;
+   */
+  fontesReferencia: FonteReferenciaMaterial[];
+
+  /**
+   * @generated from field: string data_verificacao = 14;
+   */
+  dataVerificacao: string;
+
+  /**
+   * @generated from field: int32 versao_conteudo = 15;
+   */
+  versaoConteudo: number;
+
+  /**
+   * @generated from field: string observacao_revisao = 16;
+   */
+  observacaoRevisao: string;
+
+  /**
+   * @generated from field: repeated string rotas_referencia = 17;
+   */
+  rotasReferencia: string[];
+
+  /**
+   * @generated from field: string classificacao = 18;
+   */
+  classificacao: string;
+
+  /**
+   * @generated from field: string nota_abrangencia = 19;
+   */
+  notaAbrangencia: string;
 };
 
 /**
@@ -84,7 +181,94 @@ export type MaterialResposta = Message<"lixo_certo.v1.MaterialResposta"> & {
  * Use `create(MaterialRespostaSchema)` to create a new message.
  */
 export const MaterialRespostaSchema: GenMessage<MaterialResposta> = /*@__PURE__*/
-  messageDesc(file_lixo_certo_v1_servico_materiais, 1);
+  messageDesc(file_lixo_certo_v1_servico_materiais, 2);
+
+/**
+ * @generated from message lixo_certo.v1.MaterialDadosRequisicao
+ */
+export type MaterialDadosRequisicao = Message<"lixo_certo.v1.MaterialDadosRequisicao"> & {
+  /**
+   * @generated from field: string codigo_catalogo = 1;
+   */
+  codigoCatalogo: string;
+
+  /**
+   * @generated from field: string nome_material = 2;
+   */
+  nomeMaterial: string;
+
+  /**
+   * @generated from field: string categoria_material = 3;
+   */
+  categoriaMaterial: string;
+
+  /**
+   * @generated from field: string instrucao_descarte = 4;
+   */
+  instrucaoDescarte: string;
+
+  /**
+   * @generated from field: string observacao_impacto = 5;
+   */
+  observacaoImpacto: string;
+
+  /**
+   * @generated from field: repeated string sinonimos = 6;
+   */
+  sinonimos: string[];
+
+  /**
+   * @generated from field: string preparacao = 7;
+   */
+  preparacao: string;
+
+  /**
+   * @generated from field: string cuidados = 8;
+   */
+  cuidados: string;
+
+  /**
+   * @generated from field: repeated string categorias_pontos = 9;
+   */
+  categoriasPontos: string[];
+
+  /**
+   * @generated from field: string abrangencia = 10;
+   */
+  abrangencia: string;
+
+  /**
+   * @generated from field: repeated lixo_certo.v1.FonteReferenciaMaterial fontes_referencia = 11;
+   */
+  fontesReferencia: FonteReferenciaMaterial[];
+
+  /**
+   * @generated from field: string data_verificacao = 12;
+   */
+  dataVerificacao: string;
+
+  /**
+   * @generated from field: repeated string rotas_referencia = 13;
+   */
+  rotasReferencia: string[];
+
+  /**
+   * @generated from field: string classificacao = 14;
+   */
+  classificacao: string;
+
+  /**
+   * @generated from field: string nota_abrangencia = 15;
+   */
+  notaAbrangencia: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.MaterialDadosRequisicao.
+ * Use `create(MaterialDadosRequisicaoSchema)` to create a new message.
+ */
+export const MaterialDadosRequisicaoSchema: GenMessage<MaterialDadosRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_materiais, 3);
 
 /**
  * @generated from message lixo_certo.v1.ListarMateriaisResposta
@@ -106,7 +290,193 @@ export type ListarMateriaisResposta = Message<"lixo_certo.v1.ListarMateriaisResp
  * Use `create(ListarMateriaisRespostaSchema)` to create a new message.
  */
 export const ListarMateriaisRespostaSchema: GenMessage<ListarMateriaisResposta> = /*@__PURE__*/
-  messageDesc(file_lixo_certo_v1_servico_materiais, 2);
+  messageDesc(file_lixo_certo_v1_servico_materiais, 4);
+
+/**
+ * @generated from message lixo_certo.v1.ObterMaterialRequisicao
+ */
+export type ObterMaterialRequisicao = Message<"lixo_certo.v1.ObterMaterialRequisicao"> & {
+  /**
+   * @generated from field: string id_material = 1;
+   */
+  idMaterial: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ObterMaterialRequisicao.
+ * Use `create(ObterMaterialRequisicaoSchema)` to create a new message.
+ */
+export const ObterMaterialRequisicaoSchema: GenMessage<ObterMaterialRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_materiais, 5);
+
+/**
+ * @generated from message lixo_certo.v1.ObterMaterialResposta
+ */
+export type ObterMaterialResposta = Message<"lixo_certo.v1.ObterMaterialResposta"> & {
+  /**
+   * @generated from field: bool encontrado = 1;
+   */
+  encontrado: boolean;
+
+  /**
+   * @generated from field: lixo_certo.v1.MaterialResposta material = 2;
+   */
+  material?: MaterialResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.ObterMaterialResposta.
+ * Use `create(ObterMaterialRespostaSchema)` to create a new message.
+ */
+export const ObterMaterialRespostaSchema: GenMessage<ObterMaterialResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_materiais, 6);
+
+/**
+ * @generated from message lixo_certo.v1.CriarMaterialRequisicao
+ */
+export type CriarMaterialRequisicao = Message<"lixo_certo.v1.CriarMaterialRequisicao"> & {
+  /**
+   * @generated from field: lixo_certo.v1.MaterialDadosRequisicao dados = 1;
+   */
+  dados?: MaterialDadosRequisicao | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.CriarMaterialRequisicao.
+ * Use `create(CriarMaterialRequisicaoSchema)` to create a new message.
+ */
+export const CriarMaterialRequisicaoSchema: GenMessage<CriarMaterialRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_materiais, 7);
+
+/**
+ * @generated from message lixo_certo.v1.AtualizarMaterialRequisicao
+ */
+export type AtualizarMaterialRequisicao = Message<"lixo_certo.v1.AtualizarMaterialRequisicao"> & {
+  /**
+   * @generated from field: string id_material = 1;
+   */
+  idMaterial: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.MaterialDadosRequisicao dados = 2;
+   */
+  dados?: MaterialDadosRequisicao | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AtualizarMaterialRequisicao.
+ * Use `create(AtualizarMaterialRequisicaoSchema)` to create a new message.
+ */
+export const AtualizarMaterialRequisicaoSchema: GenMessage<AtualizarMaterialRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_materiais, 8);
+
+/**
+ * @generated from message lixo_certo.v1.AlterarStatusMaterialRequisicao
+ */
+export type AlterarStatusMaterialRequisicao = Message<"lixo_certo.v1.AlterarStatusMaterialRequisicao"> & {
+  /**
+   * @generated from field: string id_material = 1;
+   */
+  idMaterial: string;
+
+  /**
+   * @generated from field: string status_material = 2;
+   */
+  statusMaterial: string;
+
+  /**
+   * @generated from field: string observacao_revisao = 3;
+   */
+  observacaoRevisao: string;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AlterarStatusMaterialRequisicao.
+ * Use `create(AlterarStatusMaterialRequisicaoSchema)` to create a new message.
+ */
+export const AlterarStatusMaterialRequisicaoSchema: GenMessage<AlterarStatusMaterialRequisicao> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_materiais, 9);
+
+/**
+ * @generated from message lixo_certo.v1.CriarMaterialResposta
+ */
+export type CriarMaterialResposta = Message<"lixo_certo.v1.CriarMaterialResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.MaterialResposta material = 3;
+   */
+  material?: MaterialResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.CriarMaterialResposta.
+ * Use `create(CriarMaterialRespostaSchema)` to create a new message.
+ */
+export const CriarMaterialRespostaSchema: GenMessage<CriarMaterialResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_materiais, 10);
+
+/**
+ * @generated from message lixo_certo.v1.AtualizarMaterialResposta
+ */
+export type AtualizarMaterialResposta = Message<"lixo_certo.v1.AtualizarMaterialResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.MaterialResposta material = 3;
+   */
+  material?: MaterialResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AtualizarMaterialResposta.
+ * Use `create(AtualizarMaterialRespostaSchema)` to create a new message.
+ */
+export const AtualizarMaterialRespostaSchema: GenMessage<AtualizarMaterialResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_materiais, 11);
+
+/**
+ * @generated from message lixo_certo.v1.AlterarStatusMaterialResposta
+ */
+export type AlterarStatusMaterialResposta = Message<"lixo_certo.v1.AlterarStatusMaterialResposta"> & {
+  /**
+   * @generated from field: bool operacao_aceita = 1;
+   */
+  operacaoAceita: boolean;
+
+  /**
+   * @generated from field: string mensagem_resultado = 2;
+   */
+  mensagemResultado: string;
+
+  /**
+   * @generated from field: lixo_certo.v1.MaterialResposta material = 3;
+   */
+  material?: MaterialResposta | undefined;
+};
+
+/**
+ * Describes the message lixo_certo.v1.AlterarStatusMaterialResposta.
+ * Use `create(AlterarStatusMaterialRespostaSchema)` to create a new message.
+ */
+export const AlterarStatusMaterialRespostaSchema: GenMessage<AlterarStatusMaterialResposta> = /*@__PURE__*/
+  messageDesc(file_lixo_certo_v1_servico_materiais, 12);
 
 /**
  * @generated from service lixo_certo.v1.ServicoMateriais
@@ -119,6 +489,38 @@ export const ServicoMateriais: GenService<{
     methodKind: "unary";
     input: typeof ListarMateriaisRequisicaoSchema;
     output: typeof ListarMateriaisRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoMateriais.ObterMaterial
+   */
+  obterMaterial: {
+    methodKind: "unary";
+    input: typeof ObterMaterialRequisicaoSchema;
+    output: typeof ObterMaterialRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoMateriais.CriarMaterial
+   */
+  criarMaterial: {
+    methodKind: "unary";
+    input: typeof CriarMaterialRequisicaoSchema;
+    output: typeof CriarMaterialRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoMateriais.AtualizarMaterial
+   */
+  atualizarMaterial: {
+    methodKind: "unary";
+    input: typeof AtualizarMaterialRequisicaoSchema;
+    output: typeof AtualizarMaterialRespostaSchema;
+  },
+  /**
+   * @generated from rpc lixo_certo.v1.ServicoMateriais.AlterarStatusMaterial
+   */
+  alterarStatusMaterial: {
+    methodKind: "unary";
+    input: typeof AlterarStatusMaterialRequisicaoSchema;
+    output: typeof AlterarStatusMaterialRespostaSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_lixo_certo_v1_servico_materiais, 0);

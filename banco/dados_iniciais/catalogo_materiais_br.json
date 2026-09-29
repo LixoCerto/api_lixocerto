@@ -1,0 +1,2164 @@
+{
+  "catalogo": "Guia de descarte — base inicial brasileira",
+  "lotePesquisa": "2026-09-28",
+  "totalRegistros": 54,
+  "notaEditorial": "Todos os registros são importados como rascunho. Fontes e rotas são referências de pesquisa; não representam aceitação de qualquer ponto de coleta e exigem revisão humana antes da publicação.",
+  "registros": [
+    {
+      "codigoCatalogo": "br-br-papel-papelao-rascunho-001-papel-e-papelao-secos-para-coleta-seleti-4bad42fd",
+      "grupoPesquisa": "br-papel-papelao-rascunho-001",
+      "nomeMaterial": "Papel e papelão secos para coleta seletiva",
+      "categoriaMaterial": "Papel e papelão",
+      "classificacao": "Recicláveis secos domiciliares",
+      "instrucaoDescarte": "Em Ribeirão Preto, a prefeitura lista jornais, revistas, cadernos, caixas de papelão, listas telefônicas e embalagens longa vida entre os papéis da coleta seletiva. O serviço local é porta a porta e também ponto a ponto, com recebimento nos ecopontos municipais.",
+      "observacaoImpacto": "A fonte municipal informa que a separação correta na origem favorece a reciclagem e que os recicláveis coletados são encaminhados a cooperativas; isso não garante o mesmo destino em outros locais.",
+      "sinonimos": [
+        "papelão",
+        "caixas de papelão",
+        "papéis",
+        "papel de escritório",
+        "jornais",
+        "revistas",
+        "cadernos",
+        "embalagens longa vida"
+      ],
+      "preparacao": "Separar dos resíduos orgânicos e rejeitos; a prefeitura recomenda que recicláveis estejam limpos e informa que não precisam ser separados por tipo de material, podendo ser colocados juntos no mesmo recipiente.",
+      "cuidados": "A página municipal inclui papel engordurado, papel higiênico, lenços de papel e papel-toalha entre os resíduos da coleta convencional, não da seletiva. A lista é de Ribeirão Preto; não presume aceitação por outros municípios ou operadores.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta seletiva municipal porta a porta em Ribeirão Preto",
+        "Ecopontos municipais de Ribeirão Preto (ponto a ponto)"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal necessária; as categorias, lista e pontos descritos são específicos de Ribeirão Preto, SP, e não constituem regra nacional.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: ribeiraopreto.sp.gov.br",
+          "url": "https://www.ribeiraopreto.sp.gov.br/recicla/residuos-domiciliares",
+          "comprova": "Referência indicada para revisão de “Papel e papelão secos para coleta seletiva”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-br-papel-papelao-rascunho-001-papel-aceito-nos-locais-de-entrega-volun-2c875c00",
+      "grupoPesquisa": "br-papel-papelao-rascunho-001",
+      "nomeMaterial": "Papel aceito nos Locais de Entrega Voluntária da Serra",
+      "categoriaMaterial": "Papel e papelão",
+      "classificacao": "Papel e embalagens listados pelo programa municipal ReciclaSerra",
+      "instrucaoDescarte": "A Prefeitura da Serra lista jornais, revistas, caixas em geral, envelopes, cartazes, sacos de papel, embalagens longa vida, caixas de ovos e livros como materiais de papel aceitos no programa local.",
+      "observacaoImpacto": "O programa municipal informa que materiais entregues nos pontos são encaminhados a associações de catadores para triagem e comercialização; isso descreve o arranjo local.",
+      "sinonimos": [
+        "papelão",
+        "caixas em geral",
+        "caixa de ovos",
+        "caixa longa vida",
+        "tetra pak",
+        "jornais",
+        "revistas",
+        "envelopes",
+        "sacos de papel",
+        "livros",
+        "cartazes"
+      ],
+      "preparacao": "O papel pode ser entregue inteiro ou rasgado; a orientação municipal diz para não amassá-lo. Os materiais podem ser levados aos Locais de Entrega Voluntária (LEVs) ou às associações de catadores citadas pela prefeitura.",
+      "cuidados": "A lista municipal exclui papel engordurado, plastificado, metalizado ou laminado, papel-toalha, higiênico e guardanapos usados, fita crepe e tocos de cigarro. Não generalizar essa lista nem a aceitação de embalagens compostas para outros operadores.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Locais de Entrega Voluntária (LEVs) do município da Serra, ES",
+        "Associações de catadores indicadas pela Prefeitura da Serra"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária; instruções e pontos correspondem ao programa da Serra, ES, e não estabelecem aceitação nacional.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: serra.es.gov.br",
+          "url": "https://serra.es.gov.br/site/publicacao/serra-tem-mais-de-100-pontos-de-entrega-de-material-reciclavel",
+          "comprova": "Referência indicada para revisão de “Papel aceito nos Locais de Entrega Voluntária da Serra”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-br-papel-papelao-rascunho-001-papel-e-papelao-no-fluxo-de-lixo-seco-de-1c2b2048",
+      "grupoPesquisa": "br-papel-papelao-rascunho-001",
+      "nomeMaterial": "Papel e papelão no fluxo de lixo seco de Vitória",
+      "categoriaMaterial": "Papel e papelão",
+      "classificacao": "Lixo seco / recicláveis da coleta seletiva municipal",
+      "instrucaoDescarte": "Vitória lista papel branco, jornal, papelão e embalagens de papel e papelão como lixo seco reciclável; também lista guardanapos sem resíduos de alimentos e líquidos e embalagens de suco longa vida sem resíduos líquidos. A página prevê entrega em PEVs; a coleta porta a porta descrita é para condomínios participantes com contentor identificado.",
+      "observacaoImpacto": "A prefeitura informa que o lixo seco coletado é encaminhado a associações de catadores conveniadas; não se deve inferir que outros serviços tenham o mesmo destino.",
+      "sinonimos": [
+        "papel branco",
+        "papelão",
+        "embalagens de papel",
+        "embalagens de papelão",
+        "guardanapo sem resíduos",
+        "caixa de suco longa vida"
+      ],
+      "preparacao": "Separar o lixo seco do lixo úmido. Para a coleta porta a porta descrita, acondicionar os recicláveis dentro de contentor com tampa identificado como “Lixo Seco”, conforme a orientação municipal para condomínios participantes.",
+      "cuidados": "Resíduos de alimentos ou sanitários não devem ir no depósito de lixo seco; a prefeitura avisa que, se detectar lixo úmido no contentor, o material não será coletado pela seletiva. PEV e porta a porta são modalidades locais; confirmar serviço, acesso e regras vigentes no endereço.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Postos de Entrega Voluntária (PEVs) de Vitória, ES",
+        "Contentor identificado de lixo seco na coleta porta a porta para condomínios participantes nas áreas atendidas"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal necessária; aceitação e modalidades descritas referem-se a Vitória, ES, e não são regra universal brasileira.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: vitoria.es.gov.br",
+          "url": "https://www.vitoria.es.gov.br/central/coleta-seletiva",
+          "comprova": "Referência indicada para revisão de “Papel e papelão no fluxo de lixo seco de Vitória”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-vidro-embalagens-espelhos-ceramica-embalagens-de-vidro-inteiras-garrafas-po-0efa032a",
+      "grupoPesquisa": "vidro-embalagens-espelhos-ceramica",
+      "nomeMaterial": "Embalagens de vidro inteiras (garrafas, potes e frascos)",
+      "categoriaMaterial": "Vidro de embalagens e distinção de espelhos/cerâmica",
+      "classificacao": "Reciclável — embalagem de vidro",
+      "instrucaoDescarte": "Separar embalagens de vidro de outros materiais e encaminhá-las a ponto de recebimento/consolidação do sistema de logística reversa ou a ponto/coleta seletiva municipal que informe aceitar vidro. Embalagens retornáveis aptas podem seguir o ciclo de retorno definido pelo fabricante/comerciante; não presumir que todo ponto aceite todo tipo de vidro.",
+      "observacaoImpacto": "A separação por composição auxilia a triagem e a reciclagem das embalagens; a entidade gestora informa que vidro de embalagem é aceito em centros de triagem e reciclável em fornos convencionais de fabricação de embalagens.",
+      "sinonimos": [
+        "garrafa de vidro",
+        "pote de vidro",
+        "frasco de vidro",
+        "embalagem vítrea",
+        "vidro de embalagem"
+      ],
+      "preparacao": "Higienizar, mesmo que basicamente, retirando resíduos orgânicos; remover tampas e rolhas quando possível. Manter a embalagem íntegra e separada de outros vidros.",
+      "cuidados": "A orientação da entidade gestora é específica a vidro de embalagem; não incluir espelhos, vidros planos ou lâmpadas no mesmo fluxo. Confirmar regras e localização dos pontos no município/operador. Embalagem retornável pode ter fluxo distinto.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ponto de recebimento ou ponto de consolidação da logística reversa de embalagens de vidro, quando disponível e conforme requisitos do sistema",
+        "PEV/ecoponto municipal exclusivo para vidro, se o operador local confirmar aceitação",
+        "Coleta seletiva municipal porta a porta ou ponto a ponto somente onde o serviço local aceite embalagens de vidro"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Logística reversa nacional para embalagens de vidro, instituída pelo Decreto nº 11.300/2022; a disponibilidade, os requisitos e a modalidade de entrega devem ser validados com o sistema e com o município/operador. Não é regra de aceitação para todo vidro.",
+      "fontesReferencia": [
+        {
+          "titulo": "Planalto — legislação federal",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/decreto/d11300.htm",
+          "comprova": "Referência indicada para revisão de “Embalagens de vidro inteiras (garrafas, potes e frascos)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Circula Vidro",
+          "url": "https://circulavidro.org/perguntas-frequentes/",
+          "comprova": "Referência indicada para revisão de “Embalagens de vidro inteiras (garrafas, potes e frascos)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: prefeitura.pbh.gov.br",
+          "url": "https://prefeitura.pbh.gov.br/slu/informacoes/reciclavel/levs",
+          "comprova": "Referência indicada para revisão de “Embalagens de vidro inteiras (garrafas, potes e frascos)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: macapa.ap.gov.br",
+          "url": "https://macapa.ap.gov.br/projeto-da-prefeitura-de-macapa-incentiva-descarte-correto-de-vidros/",
+          "comprova": "Referência indicada para revisão de “Embalagens de vidro inteiras (garrafas, potes e frascos)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-vidro-embalagens-espelhos-ceramica-embalagem-de-vidro-quebrada-843437cc",
+      "grupoPesquisa": "vidro-embalagens-espelhos-ceramica",
+      "nomeMaterial": "Embalagem de vidro quebrada",
+      "categoriaMaterial": "Vidro de embalagens e distinção de espelhos/cerâmica",
+      "classificacao": "Reciclável condicionado à segurança e à aceitação do ponto; resíduo perfurocortante",
+      "instrucaoDescarte": "Não colocar junto aos demais recicláveis da coleta seletiva. A Circula Vidro orienta envolver em jornal, identificar como vidro quebrado e encaminhar junto ao lixo destinado a aterro, exceto quando houver PEV específico para vidro que aceite cacos. Confirmar previamente a regra local e a aceitação do PEV.",
+      "observacaoImpacto": "Acondicionamento e sinalização reduzem o risco de acidentes; cacos podem ser perigosos para a triagem em cooperativas, conforme a entidade gestora.",
+      "sinonimos": [
+        "caco de embalagem",
+        "garrafa quebrada",
+        "pote quebrado",
+        "vidro quebrado",
+        "cacos de vidro"
+      ],
+      "preparacao": "Envolver os fragmentos em jornal e sinalizar claramente a embalagem como “vidro quebrado”, de modo a reduzir risco de acidente na coleta e triagem.",
+      "cuidados": "Não deixar fragmentos soltos nem presumir que um ecoponto de vidro receba cacos: a fonte ressalva apenas PEVs específicos para vidro. Regras de acondicionamento e destino municipal podem variar.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "PEV específico para vidro que confirme aceitar cacos/embalagens quebradas",
+        "Coleta de resíduos não recicláveis/convencional conforme orientação municipal, quando não houver PEV compatível"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Recomendação de entidade gestora para logística reversa, não regra universal de coleta municipal; validar o ponto e a instrução de descarte local.",
+      "fontesReferencia": [
+        {
+          "titulo": "Circula Vidro",
+          "url": "https://circulavidro.org/perguntas-frequentes/",
+          "comprova": "Referência indicada para revisão de “Embalagem de vidro quebrada”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-vidro-embalagens-espelhos-ceramica-espelhos-e-vidros-planos-janelas-box-5bb00110",
+      "grupoPesquisa": "vidro-embalagens-espelhos-ceramica",
+      "nomeMaterial": "Espelhos e vidros planos (janelas/box)",
+      "categoriaMaterial": "Vidro de embalagens e distinção de espelhos/cerâmica",
+      "classificacao": "Não misturar com fluxo comum de embalagens de vidro; destinação específica a confirmar",
+      "instrucaoDescarte": "Não encaminhar automaticamente a PEV/ecoponto ou coleta seletiva de embalagens de vidro. A Circula Vidro recomenda que vidros de janelas e espelhos sejam preferencialmente recolhidos por vidraceiro ou pela empresa instaladora. Consultar operador local para alternativa disponível.",
+      "observacaoImpacto": "Separá-los das embalagens evita misturar materiais de composições diferentes e reduz risco de acidentes; a entidade gestora alerta que podem requerer centros especializados.",
+      "sinonimos": [
+        "espelho",
+        "vidro plano",
+        "vidro de janela",
+        "vidro de box",
+        "vidro laminado/plano"
+      ],
+      "preparacao": "Manter separado das embalagens; se houver quebra, acondicionar e sinalizar de modo seguro conforme orientação do serviço que fará a retirada. Confirmar requisitos com vidraceiro/instalador ou município antes de transportar.",
+      "cuidados": "Belo Horizonte exclui espelhos da coleta seletiva; Macapá exclui espelhos e vidros planos de seus ecopontos de vidro. A página de Belo Horizonte lista vidros planos e lisos entre os recicláveis, então há variação municipal — não generalizar aceitação nem exclusão.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Recolhimento por vidraceiro ou empresa instaladora, preferencialmente conforme orientação da entidade gestora",
+        "Serviço municipal ou operador especializado, somente após confirmar aceitação específica",
+        "PEV de vidro apenas se o operador declarar que recebe espelhos/vidro plano"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária. As fontes municipais consultadas divergem quanto à aceitação de certos vidros planos; não há regra universal dedutível dessas orientações.",
+      "fontesReferencia": [
+        {
+          "titulo": "Circula Vidro",
+          "url": "https://circulavidro.org/perguntas-frequentes/",
+          "comprova": "Referência indicada para revisão de “Espelhos e vidros planos (janelas/box)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: prefeitura.pbh.gov.br",
+          "url": "https://prefeitura.pbh.gov.br/slu/informacoes/reciclavel/levs",
+          "comprova": "Referência indicada para revisão de “Espelhos e vidros planos (janelas/box)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: macapa.ap.gov.br",
+          "url": "https://macapa.ap.gov.br/projeto-da-prefeitura-de-macapa-incentiva-descarte-correto-de-vidros/",
+          "comprova": "Referência indicada para revisão de “Espelhos e vidros planos (janelas/box)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-vidro-embalagens-espelhos-ceramica-ceramica-e-porcelana-incluindo-loucas-3c05d170",
+      "grupoPesquisa": "vidro-embalagens-espelhos-ceramica",
+      "nomeMaterial": "Cerâmica e porcelana (incluindo louças)",
+      "categoriaMaterial": "Vidro de embalagens e distinção de espelhos/cerâmica",
+      "classificacao": "Não reciclável no fluxo de embalagens de vidro; destinação local a verificar",
+      "instrucaoDescarte": "Não depositar em ponto de coleta de embalagens de vidro. Consultar o serviço municipal ou operador sobre a categoria de resíduo e destino aceitos; as fontes consultadas não estabelecem destino nacional único para cerâmica/porcelana.",
+      "observacaoImpacto": "Misturar cerâmica ao vidro de embalagem pode prejudicar a reciclagem; a entidade gestora recomenda separar os diferentes tipos de vidro por composição.",
+      "sinonimos": [
+        "cerâmica",
+        "porcelana",
+        "louça",
+        "prato quebrado",
+        "azulejo"
+      ],
+      "preparacao": "Manter separado de garrafas, potes e demais embalagens de vidro. Para peças quebradas, acondicionar de forma a evitar ferimentos e seguir a instrução municipal aplicável.",
+      "cuidados": "Belo Horizonte lista cerâmica entre os materiais não separados para coleta seletiva; Macapá exclui cerâmicas e porcelana de seus ecopontos de vidro. Não inferir que um ecoponto de entulho ou outro serviço aceite qualquer peça sem consulta local.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Serviço municipal/operador com categoria expressa para cerâmica ou porcelana, após confirmação",
+        "Não usar PEV/ecoponto de vidro, salvo se houver indicação expressa do operador para cerâmica"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária. A exclusão aqui se refere ao fluxo de vidro de embalagem; não especifica destino alternativo uniforme.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: prefeitura.pbh.gov.br",
+          "url": "https://prefeitura.pbh.gov.br/slu/informacoes/reciclavel/levs",
+          "comprova": "Referência indicada para revisão de “Cerâmica e porcelana (incluindo louças)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: macapa.ap.gov.br",
+          "url": "https://macapa.ap.gov.br/projeto-da-prefeitura-de-macapa-incentiva-descarte-correto-de-vidros/",
+          "comprova": "Referência indicada para revisão de “Cerâmica e porcelana (incluindo louças)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Circula Vidro",
+          "url": "https://circulavidro.org/perguntas-frequentes/",
+          "comprova": "Referência indicada para revisão de “Cerâmica e porcelana (incluindo louças)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-plastics-packaging-disposal-br-embalagens-plasticas-reciclaveis-da-roti-99cfc41b",
+      "grupoPesquisa": "plastics-packaging-disposal-br",
+      "nomeMaterial": "Embalagens plásticas recicláveis da rotina doméstica",
+      "categoriaMaterial": "Plásticos e embalagens plásticas",
+      "classificacao": "Plásticos e embalagens plásticas pós-consumo; o MMA lista sacos, embalagens de produtos de limpeza, PET, canos/tubos e plásticos em geral como recicláveis.",
+      "instrucaoDescarte": "Separe do lixo úmido e encaminhe à coleta seletiva, cooperativa de catadores ou central de recebimento de recicláveis disponível na cidade. Se não houver coleta seletiva, consulte o município sobre cooperativas, centrais e pontos locais.",
+      "observacaoImpacto": "Segundo o MMA, resíduos remanescentes podem contaminar o material e inviabilizar sua reciclagem; separar e limpar ajuda a viabilizar o encaminhamento, sem garantir que toda embalagem seja aceita por todo operador.",
+      "sinonimos": [
+        "plástico reciclável",
+        "embalagens PET",
+        "garrafas plásticas",
+        "sacos e sacolas plásticas",
+        "embalagens de produtos de limpeza",
+        "plásticos secos"
+      ],
+      "preparacao": "Retire restos de produto e passe água apenas para remover a sujeira grossa; não é necessário deixar a embalagem brilhando. Mantenha o material separado e limpo para encaminhamento.",
+      "cuidados": "A página do MMA exclui plásticos termofixos e embalagens plásticas metalizadas de sua lista de recicláveis e também classifica isopor como não reciclável; orientações municipais podem divergir — Curitiba, por exemplo, informa que aceita isopor limpo e seco em seu programa. Não presumir aceite de toda resina ou embalagem: confirme a regra local e do operador.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "coleta seletiva municipal, se disponível e conforme regras locais",
+        "cooperativas de catadores",
+        "centrais de recebimento de recicláveis",
+        "contêineres de supermercados ou escolas com parceria de recebimento, quando disponíveis"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Orientação educativa nacional do MMA, mas a disponibilidade dos serviços e o aceite de materiais devem ser verificados no município/operador. Proposta para rascunho, não orientação aprovada.",
+      "fontesReferencia": [
+        {
+          "titulo": "gov.br",
+          "url": "https://www.gov.br/mma/pt-br/assuntos/educacao-ambiental/glossario-ea/o-que-e-reciclagem",
+          "comprova": "Referência indicada para revisão de “Embalagens plásticas recicláveis da rotina doméstica”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: curitiba.pr.gov.br",
+          "url": "https://www.curitiba.pr.gov.br/noticias/saiba-como-separar-e-destinar-corretamente-o-lixo-que-nao-e-lixo/63175",
+          "comprova": "Referência indicada para revisão de “Embalagens plásticas recicláveis da rotina doméstica”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-plastics-packaging-disposal-br-embalagens-plasticas-de-alimentos-e-deli-844dac64",
+      "grupoPesquisa": "plastics-packaging-disposal-br",
+      "nomeMaterial": "Embalagens plásticas de alimentos e delivery — exemplo municipal de Curitiba",
+      "categoriaMaterial": "Plásticos e embalagens plásticas",
+      "classificacao": "Recipientes e sacolas plásticas de delivery/alimentos, conforme orientação da Prefeitura de Curitiba.",
+      "instrucaoDescarte": "Em Curitiba, retire todo o resíduo de alimento e encaminhe o recipiente plástico limpo ao lixo reciclável (coleta municipal Lixo que Não é Lixo). Consulte o calendário e a rota da sua região antes de apresentar o material.",
+      "observacaoImpacto": "A Prefeitura alerta que restos de alimentos podem contaminar o material e atrair vetores durante o armazenamento.",
+      "sinonimos": [
+        "marmita plástica",
+        "pote plástico de delivery",
+        "caixa plástica para alimentos",
+        "sacola plástica de delivery",
+        "embalagem com resto de comida"
+      ],
+      "preparacao": "Remova restos de comida; a Prefeitura orienta aproveitar a água já usada para lavar a louça. A orientação municipal para embalagens de delivery recomenda destinação limpa e seca.",
+      "cuidados": "Esta aceitação é uma orientação municipal de Curitiba, não uma regra nacional. A página consultada não estabelece aceite por outras cidades ou por qualquer PEV/loja; em outro município, confirme a lista e o serviço local.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "coleta seletiva municipal de Curitiba (Lixo que Não é Lixo), conforme calendário/localidade",
+        "outros pontos municipais apenas se o operador confirmar o aceite"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal necessária fora de Curitiba; dentro de Curitiba, seguir a rota e o calendário locais. Proposta para rascunho, não orientação aprovada.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: curitiba.pr.gov.br",
+          "url": "https://www.curitiba.pr.gov.br/noticias/confira-o-jeito-certo-de-descartar-embalagens-de-delivery/58428",
+          "comprova": "Referência indicada para revisão de “Embalagens plásticas de alimentos e delivery — exemplo municipal de Curitiba”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: curitiba.pr.gov.br",
+          "url": "https://www.curitiba.pr.gov.br/noticias/saiba-como-separar-e-destinar-corretamente-o-lixo-que-nao-e-lixo/63175",
+          "comprova": "Referência indicada para revisão de “Embalagens plásticas de alimentos e delivery — exemplo municipal de Curitiba”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: coletalixo.curitiba.pr.gov.br",
+          "url": "https://coletalixo.curitiba.pr.gov.br/lixo-reciclavel",
+          "comprova": "Referência indicada para revisão de “Embalagens plásticas de alimentos e delivery — exemplo municipal de Curitiba”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-plastics-packaging-disposal-br-embalagens-de-plastico-no-sistema-de-log-b1b8ee19",
+      "grupoPesquisa": "plastics-packaging-disposal-br",
+      "nomeMaterial": "Embalagens de plástico no sistema de logística reversa",
+      "categoriaMaterial": "Plásticos e embalagens plásticas",
+      "classificacao": "Embalagens plásticas pós-consumo abrangidas pelo sistema federal de logística reversa; o Decreto também define produtos plásticos recicláveis equiparáveis, como pratos, copos e talheres na fração seca urbana.",
+      "instrucaoDescarte": "Descarte nas condições e nos locais indicados pelo sistema de logística reversa aplicável. O Decreto prevê que soluções do sistema podem integrar pontos de entrega voluntária, coleta seletiva, cooperativas e unidades de triagem; confirme com o sistema/operador quais pontos estão ativos e o que recebem.",
+      "observacaoImpacto": "O sistema legal busca recolhimento e reaproveitamento de embalagens; o SINIR informa que consumidores devem descartar nas condições e nos locais definidos pelos sistemas de logística reversa.",
+      "sinonimos": [
+        "logística reversa de embalagens plásticas",
+        "devolução de embalagem plástica",
+        "PEV de plástico",
+        "ponto de entrega voluntária de embalagens"
+      ],
+      "preparacao": "Siga as condições comunicadas pelo sistema ou operador escolhido. Para embalagens com resíduos, a orientação geral do MMA é remover o grosso da sujeira com água antes de encaminhar para reciclagem.",
+      "cuidados": "O Decreto exclui do seu escopo embalagens cobertas por sistemas específicos (incluindo eletroeletrônicos, medicamentos, agrotóxicos e óleos lubrificantes) e embalagens mistas que contenham papel ou papelão; aplicam-se regras próprias. A previsão legal de PEV/coleta seletiva não significa que exista ponto universal ou que todo ponto aceite qualquer plástico.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "pontos de entrega voluntária (PEV) integrantes do sistema aplicável",
+        "coleta seletiva municipal quando integrada/indicada pelo sistema",
+        "cooperativas, associações ou organizações de catadores participantes do sistema, se houver indicação operacional"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Logística reversa prevista nacionalmente pelo Decreto nº 12.688/2025; o ponto concreto, os materiais aceitos e as condições dependem do sistema/operador e das exclusões legais. Proposta para rascunho, não orientação aprovada.",
+      "fontesReferencia": [
+        {
+          "titulo": "Planalto — legislação federal",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12688.htm",
+          "comprova": "Referência indicada para revisão de “Embalagens de plástico no sistema de logística reversa”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "SINIR — Ministério do Meio Ambiente",
+          "url": "https://sinir.gov.br/perfis/logistica-reversa/logistica-reversa/",
+          "comprova": "Referência indicada para revisão de “Embalagens de plástico no sistema de logística reversa”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "gov.br",
+          "url": "https://www.gov.br/mma/pt-br/assuntos/educacao-ambiental/glossario-ea/o-que-e-reciclagem",
+          "comprova": "Referência indicada para revisão de “Embalagens de plástico no sistema de logística reversa”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-metais-e-latas-latas-de-bebidas-e-de-alimentos-aluminio-bc4efde3",
+      "grupoPesquisa": "metais-e-latas",
+      "nomeMaterial": "Latas de bebidas e de alimentos (alumínio ou aço)",
+      "categoriaMaterial": "Metais e latas",
+      "classificacao": "Metal reciclável seco — exemplos de latas de alumínio e outros metais recicláveis",
+      "instrucaoDescarte": "Separe das frações orgânica e rejeito. A coleta seletiva do DF inclui latas de alumínio e outros metais recicláveis; São Paulo também lista latas de bebidas e alimentos como recicláveis.",
+      "observacaoImpacto": "A separação correta facilita triagem e reaproveitamento; restos de alimentos podem contaminar recicláveis, causar mau cheiro e atrair vetores, conforme orientação municipal de Curitiba.",
+      "sinonimos": [
+        "latas de refrigerante",
+        "latas de cerveja",
+        "latas de sardinha",
+        "latas de óleo",
+        "embalagens metálicas de alimentos",
+        "sucata de latas"
+      ],
+      "preparacao": "Retire, sempre que possível, o excesso de restos de alimentos e deixe o material sem excesso de resíduos; acondicione separado dos orgânicos e rejeitos. No DF, o SLU orienta acondicionar recicláveis em saco resistente e observar dia e horário locais.",
+      "cuidados": "A lista e o serviço descritos são exemplos locais, não garantia de aceite em todo o Brasil. Consulte o calendário e as regras do município ou operador; não misture com rejeitos nem presuma que todo ponto recebe metal.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta seletiva porta a porta, quando disponível no endereço",
+        "PEV/contêiner de recicláveis, se o operador local confirmar aceite de metais",
+        "Ecoponto municipal, se a unidade e as regras locais confirmarem recebimento de recicláveis metálicos"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária. O SLU-DF e a Prefeitura de São Paulo fornecem exemplos de aceitação e serviço locais; não constituem regra nacional de coleta ou de recebimento em cada PEV/Ecoponto.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: slu.df.gov.br",
+          "url": "https://www.slu.df.gov.br/mapa-coleta-seletiva",
+          "comprova": "Referência indicada para revisão de “Latas de bebidas e de alimentos (alumínio ou aço)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/web/comunicacao/w/cuide_da_cidade/noticias/276264",
+          "comprova": "Referência indicada para revisão de “Latas de bebidas e de alimentos (alumínio ou aço)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: curitiba.pr.gov.br",
+          "url": "https://www.curitiba.pr.gov.br/noticias/saiba-como-separar-e-destinar-corretamente-o-lixo-que-nao-e-lixo/63175",
+          "comprova": "Referência indicada para revisão de “Latas de bebidas e de alimentos (alumínio ou aço)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-metais-e-latas-outros-itens-metalicos-reciclaveis-e-emb-956aaf88",
+      "grupoPesquisa": "metais-e-latas",
+      "nomeMaterial": "Outros itens metálicos recicláveis e embalagens de alumínio",
+      "categoriaMaterial": "Metais e latas",
+      "classificacao": "Metais recicláveis — itens específicos citados em listas municipais",
+      "instrucaoDescarte": "A Prefeitura de São Paulo lista folha de alumínio limpa, embalagens de marmitex, ferragens, arames, fios de cobre e panelas sem cabo como recicláveis. Curitiba também indica marmitas de alumínio para reciclagem.",
+      "observacaoImpacto": "Remover resíduos de alimentos reduz a contaminação; a Prefeitura de Curitiba alerta que recicláveis sujos podem perder valor comercial, causar mau cheiro e atrair vetores.",
+      "sinonimos": [
+        "papel-alumínio limpo",
+        "folha de alumínio",
+        "marmitex de alumínio",
+        "bandeja de alumínio",
+        "panela sem cabo",
+        "ferragens",
+        "arames",
+        "fios de cobre"
+      ],
+      "preparacao": "Retire os restos de comida das embalagens de alumínio; encaminhe-as limpas, sem excesso de água, gordura ou resíduos. A orientação de Curitiba diz que basta retirar os excessos e que não é necessário lavar com esponja e detergente.",
+      "cuidados": "A inclusão desses itens em listas municipais não demonstra aceite por todos os serviços ou pontos. Confirme com a coleta seletiva, PEV ou Ecoponto local, especialmente para peças volumosas ou itens não listados pelo operador.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta seletiva municipal, conforme lista do serviço local",
+        "PEV/contêiner de recicláveis, após confirmação de aceite do item",
+        "Ecoponto municipal, somente se a unidade informar recebimento desse reciclável"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária. Os exemplos concretos vêm das Prefeituras de São Paulo e Curitiba, sem regra nacional universal para todos os itens metálicos listados.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/web/comunicacao/w/cuide_da_cidade/noticias/276264",
+          "comprova": "Referência indicada para revisão de “Outros itens metálicos recicláveis e embalagens de alumínio”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: curitiba.pr.gov.br",
+          "url": "https://www.curitiba.pr.gov.br/noticias/saiba-como-separar-e-destinar-corretamente-o-lixo-que-nao-e-lixo/63175",
+          "comprova": "Referência indicada para revisão de “Outros itens metálicos recicláveis e embalagens de alumínio”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-metais-e-latas-latas-de-aerossol-e-latas-de-produtos-qu-877848b6",
+      "grupoPesquisa": "metais-e-latas",
+      "nomeMaterial": "Latas de aerossol e latas de produtos químicos",
+      "categoriaMaterial": "Metais e latas",
+      "classificacao": "Categoria com distinção municipal de reciclável e rejeito; requer verificação específica",
+      "instrucaoDescarte": "Na lista de metais recicláveis da Prefeitura de São Paulo constam latas de aerossol. A mesma lista classifica latas de tinta, verniz, solventes químicos e inseticida como rejeitos — não as encaminhe como recicláveis com base apenas no fato de serem metálicas.",
+      "observacaoImpacto": "Separar itens aceitos dos rejeitos evita encaminhar embalagens de produtos químicos como recicláveis comuns; a fonte local não detalha risco ou destino final específico.",
+      "sinonimos": [
+        "embalagem metálica de aerossol",
+        "lata de spray",
+        "lata de tinta",
+        "lata de verniz",
+        "lata de solvente",
+        "lata de inseticida"
+      ],
+      "preparacao": "A fonte municipal consultada não especifica como preparar ou esvaziar latas de aerossol nem como destinar as latas classificadas como rejeitos. Confirme previamente a instrução e o canal indicado pelo serviço municipal ou operador para o produto específico.",
+      "cuidados": "Não generalize a classificação paulistana para outros municípios. Não presuma que lata de aerossol com conteúdo ou pressão residual será recebida por coleta seletiva, PEV ou Ecoponto; a fonte citada não informa procedimento de manuseio.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta seletiva municipal, apenas para aerossóis se o operador local confirmar aceite e instruções",
+        "PEV ou Ecoponto somente após confirmação expressa do serviço local; para latas de tinta, verniz, solvente ou inseticida, consultar o canal municipal apropriado"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Classificação documentada para a lista municipal da Prefeitura de São Paulo; validação municipal/operador necessária em qualquer outro local e para instruções de preparo ou recebimento.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/web/comunicacao/w/cuide_da_cidade/noticias/276264",
+          "comprova": "Referência indicada para revisão de “Latas de aerossol e latas de produtos químicos”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-restos-alimentares-organicos-jardi-compostagem-de-restos-de-alimentos-com-m-0307de5f",
+      "grupoPesquisa": "restos-alimentares-organicos-jardim",
+      "nomeMaterial": "Compostagem de restos de alimentos com material seco de jardim",
+      "categoriaMaterial": "Restos alimentares e orgânicos de jardim",
+      "classificacao": "Resíduos orgânicos úmidos de cozinha combinados com material seco vegetal; orientação para compostagem, não regra universal de aceitação de resíduos.",
+      "instrucaoDescarte": "Separar resíduos úmidos, como cascas de frutas e verduras, e misturá-los com material seco, como folhas secas ou serragem, em composteira adequada. Cobrir cada camada de resíduos com terra ou composto pronto; manter a mistura arejada e com umidade adequada.",
+      "observacaoImpacto": "O SLU-DF descreve compostagem como forma de reduzir o volume encaminhado a aterros e produzir composto orgânico; o resultado e seu uso dependem do manejo e do sistema.",
+      "sinonimos": [
+        "cascas de frutas e verduras",
+        "sobras de alimentos",
+        "folhas secas",
+        "resíduos orgânicos domiciliares",
+        "compostagem doméstica",
+        "composteira caseira"
+      ],
+      "preparacao": "Reduzir o tamanho dos pedaços para facilitar a decomposição; equilibrar materiais úmidos e secos. Na orientação do SLU-DF, o composto pode ser usado em jardins, vasos e hortas após maturação; o tempo depende do sistema e dos materiais.",
+      "cuidados": "O SLU-DF diz que a compostagem corretamente manejada evita mau cheiro; excesso de umidade ou falta de aeração pode prejudicar o processo. As instruções referem-se a composteiras, não autorizam levar resíduos a qualquer composteira pública ou de condomínio: confirmar lista aceita e procedimento com o operador local.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Composteira doméstica própria",
+        "Composteira comunitária ou de condomínio somente após confirmação das regras do operador"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Orientação prática de órgão público do Distrito Federal para compostagem; útil como referência geral de manejo, mas a aceitação por composteiras comunitárias e as regras de descarte variam por município e operador.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: slu.df.gov.br",
+          "url": "https://www.slu.df.gov.br/w/compostagem-e-alternativa-sustentavel-para-tratar-residuos-organicos",
+          "comprova": "Referência indicada para revisão de “Compostagem de restos de alimentos com material seco de jardim”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-restos-alimentares-organicos-jardi-restos-alimentares-e-organicos-na-coleta-c781f879",
+      "grupoPesquisa": "restos-alimentares-organicos-jardim",
+      "nomeMaterial": "Restos alimentares e orgânicos na coleta domiciliar de Porto Alegre",
+      "categoriaMaterial": "Restos alimentares e orgânicos de jardim",
+      "classificacao": "Resíduos orgânicos domiciliares conforme definição do serviço municipal de Porto Alegre; inclui restos de alimentos, restos de poda, restos de vegetação e galhos finos entre os exemplos divulgados.",
+      "instrucaoDescarte": "A Prefeitura recomenda compostagem como encaminhamento ideal. Se não houver composteira, em Porto Alegre o serviço orienta disponibilizar os resíduos orgânicos embalados, nos dias e horários corretos da coleta domiciliar.",
+      "observacaoImpacto": "A página municipal indica a compostagem como encaminhamento ideal, mas não informa nela o destino específico do orgânico que é colocado na coleta domiciliar; não presumir tratamento separado ou destino final.",
+      "sinonimos": [
+        "restos de comida",
+        "restos de alimentos",
+        "cascas",
+        "borra de café",
+        "erva-mate",
+        "resíduos orgânicos domiciliares",
+        "resíduos de poda fina"
+      ],
+      "preparacao": "Acondicionar em embalagem de até 100 litros, preferencialmente de papelão, papel ou sacola compostável, e respeitar o calendário e horário de coleta do endereço. A página exige que o lixo esteja devidamente embalado.",
+      "cuidados": "Esta orientação e o limite de embalagem são do serviço de Porto Alegre, não uma regra nacional. A coleta domiciliar descrita recebe resíduos orgânicos e rejeito, enquanto recicláveis seguem coleta seletiva. Não se deve presumir que outro município aceite os mesmos itens, embalagens ou horários.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta domiciliar municipal de Porto Alegre, conforme calendário local",
+        "Composteira própria, conforme capacidade e método"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal necessária; instrução específica de Porto Alegre, aplicável somente ao serviço e à programação local.",
+      "fontesReferencia": [
+        {
+          "titulo": "prefeitura.poa.br",
+          "url": "https://prefeitura.poa.br/dmlu/coleta-domiciliar",
+          "comprova": "Referência indicada para revisão de “Restos alimentares e orgânicos na coleta domiciliar de Porto Alegre”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-restos-alimentares-organicos-jardi-podas-e-remocao-de-vegetacao-em-ecoponto-d802737a",
+      "grupoPesquisa": "restos-alimentares-organicos-jardim",
+      "nomeMaterial": "Podas e remoção de vegetação em Ecopontos de Porto Alegre",
+      "categoriaMaterial": "Restos alimentares e orgânicos de jardim",
+      "classificacao": "Resíduo de manejo da vegetação, como podas e supressão, conforme categoria divulgada pelas Unidades de Destino Certo (Ecopontos) de Porto Alegre.",
+      "instrucaoDescarte": "Levar somente resíduos de manejo da vegetação às Unidades de Destino Certo/Ecopontos de Porto Alegre que os recebem. A página municipal informa máximo de 1 m³ por dia para resíduo de manejo da vegetação.",
+      "observacaoImpacto": "O Ecoponto é apresentado como alternativa para resíduos que não são recolhidos pelas coletas regulares; a página não informa o destino posterior da poda recebida.",
+      "sinonimos": [
+        "resíduos verdes",
+        "resíduos de jardinagem",
+        "restos de poda",
+        "galhos",
+        "folhas",
+        "remoção de vegetação",
+        "manejo da vegetação"
+      ],
+      "preparacao": "Separar os resíduos de poda/remoção de vegetação dos demais orgânicos e confirmar previamente unidade, horário e condições de entrega. A fonte não especifica preparo, embalagem ou necessidade de corte; não presumir esses requisitos.",
+      "cuidados": "O recebimento é municipal e restrito à categoria indicada: a página veda orgânicos em geral, exceto os provenientes de remoção de vegetação ou podas. Limite informado: máximo de 1 m³/dia nas UDCs. Não extrapolar aceitação ou limite para outros municípios nem para restos de alimentos, grama ou folhas avulsas sem confirmação com o serviço local.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Unidade de Destino Certo (UDC)/Ecoponto municipal de Porto Alegre, sujeito às condições publicadas pelo DMLU"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária; regra e limite específicos das UDCs de Porto Alegre. Confirmar atualidade e aceitação do resíduo concreto antes de transportar.",
+      "fontesReferencia": [
+        {
+          "titulo": "prefeitura.poa.br",
+          "url": "https://prefeitura.poa.br/dmlu/projetos/destino-certo-ecopontos",
+          "comprova": "Referência indicada para revisão de “Podas e remoção de vegetação em Ecopontos de Porto Alegre”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-oleo-cozinha-usado-oleo-de-cozinha-usado-entrega-voluntaria-c73b2544",
+      "grupoPesquisa": "oleo-cozinha-usado",
+      "nomeMaterial": "Óleo de cozinha usado — entrega voluntária em Florianópolis/Grande Florianópolis (ReÓleo)",
+      "categoriaMaterial": "Óleo de cozinha usado",
+      "classificacao": "Óleo vegetal residual pós-consumo",
+      "instrucaoDescarte": "Após a fritura, aguarde o óleo esfriar; acondicione-o em garrafa PET tampada e entregue em Ecoponto da Comcap ou em ponto voluntário indicado pelo ReÓleo/Acif.",
+      "observacaoImpacto": "A Prefeitura informa que o programa recolhe óleo para destinação à reciclagem; esta instrução descreve a rota local, não uma regra nacional.",
+      "sinonimos": [
+        "óleo de fritura usado",
+        "óleo vegetal residual pós-consumo",
+        "óleo comestível usado",
+        "óleo de cozinha residual"
+      ],
+      "preparacao": "A página municipal sugere usar funil com gaze, se possível, para separar resíduos sólidos antes de colocar o óleo na PET.",
+      "cuidados": "A orientação é para moradores da Grande Florianópolis e indica pontos específicos; não trate esses locais como disponíveis em outros municípios. Confirme os pontos vigentes antes de levar.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ecoponto da Comcap/SMMA",
+        "Ponto de Entrega Voluntária indicado pela Acif/ReÓleo"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária: serviço descrito para moradores da Grande Florianópolis; pontos e operação dependem da Comcap e da Acif/ReÓleo.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: pmf.sc.gov.br",
+          "url": "https://www.pmf.sc.gov.br/entidades/residuos/index.php?cms=reoleo&menu=4&submenuid=150",
+          "comprova": "Referência indicada para revisão de “Óleo de cozinha usado — entrega voluntária em Florianópolis/Grande Florianópolis (ReÓleo)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-oleo-cozinha-usado-oleo-de-fritura-postos-de-entrega-de-ole-5117100c",
+      "grupoPesquisa": "oleo-cozinha-usado",
+      "nomeMaterial": "Óleo de fritura — Postos de Entrega de Óleo de Fritura (Porto Alegre)",
+      "categoriaMaterial": "Óleo de cozinha usado",
+      "classificacao": "Óleo de fritura usado",
+      "instrucaoDescarte": "A Prefeitura recomenda levar o óleo em recipiente plástico ou de vidro a um dos Postos de Entrega de Óleo de Fritura (PEOF) da cidade.",
+      "observacaoImpacto": "A Prefeitura descreve que o óleo recolhido nos PEOF é retirado por empresa conveniada e destinado à produção de biodiesel.",
+      "sinonimos": [
+        "óleo de cozinha usado",
+        "óleo de fritura residual",
+        "óleo vegetal usado"
+      ],
+      "preparacao": "Acondicione em recipiente, como garrafa plástica ou de vidro. A página não detalha outras etapas de preparo.",
+      "cuidados": "Não despeje em pia ou vaso sanitário: a página municipal alerta para entupimentos e impactos em arroios e rios. Confirme a localização do PEOF e eventuais condições pelo serviço municipal (156).",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Posto de Entrega de Óleo de Fritura (PEOF) municipal"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária: instrução e pontos referem-se a Porto Alegre; não presumir que recipientes ou pontos sejam aceitos por outros programas.",
+      "fontesReferencia": [
+        {
+          "titulo": "prefeitura.poa.br",
+          "url": "https://prefeitura.poa.br/dmlu/oleo-de-fritura",
+          "comprova": "Referência indicada para revisão de “Óleo de fritura — Postos de Entrega de Óleo de Fritura (Porto Alegre)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-oleo-cozinha-usado-oleo-de-cozinha-usado-estacoes-de-coleta-44b4ee49",
+      "grupoPesquisa": "oleo-cozinha-usado",
+      "nomeMaterial": "Óleo de cozinha usado — Estações de Coleta do Semasa (Santo André)",
+      "categoriaMaterial": "Óleo de cozinha usado",
+      "classificacao": "Óleo de cozinha usado",
+      "instrucaoDescarte": "Moradores podem levar o óleo acondicionado em recipiente fechado a uma Estação de Coleta do Semasa; a página também menciona ecopontos da autarquia.",
+      "observacaoImpacto": "O Semasa alerta que o descarte em ralos e vasos pode obstruir redes de esgoto; informa parceria com o Instituto Triângulo para o trabalho de coleta/reaproveitamento.",
+      "sinonimos": [
+        "óleo de fritura usado",
+        "óleo vegetal residual",
+        "óleo comestível usado"
+      ],
+      "preparacao": "Coloque o óleo em recipiente fechado, por exemplo uma garrafa PET.",
+      "cuidados": "Não jogue óleo usado no lixo comum, no ralo da pia ou no vaso sanitário, conforme alerta do Semasa. A orientação é municipal; confira os locais e condições atuais da coleta antes de se deslocar.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Estação de Coleta do Semasa",
+        "Ecoponto da autarquia, conforme página municipal"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária: serviço do Semasa em Santo André, não regra nacional. A página descreve incentivo local de troca por sabão, sem que isso deva ser presumido em outros pontos.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: portais.santoandre.sp.gov.br",
+          "url": "https://portais.santoandre.sp.gov.br/semasa/residuos/residuos-perigosos-e-outros/oleo-de-cozinha/",
+          "comprova": "Referência indicada para revisão de “Óleo de cozinha usado — Estações de Coleta do Semasa (Santo André)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-oleo-cozinha-usado-oleo-de-cozinha-usado-projeto-de-olho-no-6c6d4e4f",
+      "grupoPesquisa": "oleo-cozinha-usado",
+      "nomeMaterial": "Óleo de cozinha usado — Projeto De Olho no Óleo (Lucas do Rio Verde)",
+      "categoriaMaterial": "Óleo de cozinha usado",
+      "classificacao": "Óleo de cozinha usado",
+      "instrucaoDescarte": "A orientação municipal do projeto é esperar o óleo esfriar, armazená-lo em garrafa PET e levá-lo ao ponto de coleta indicado; a notícia identifica inicialmente o Ecoponto na Avenida da Fé, bairro Tessele Junior.",
+      "observacaoImpacto": "A notícia municipal informa que o óleo coletado seria encaminhado a empresa especializada e transformado em biocombustível; isso descreve a cadeia do projeto local.",
+      "sinonimos": [
+        "óleo de fritura usado",
+        "óleo vegetal residual",
+        "óleo de cozinha pós-consumo"
+      ],
+      "preparacao": "Deixe esfriar e armazene em garrafa PET. No ponto, as garrafas são transferidas para bombonas; a retirada é feita após o enchimento, segundo a descrição do projeto.",
+      "cuidados": "A notícia diz que inicialmente a coleta ocorreria no Ecoponto e que outros pontos ainda estavam sendo estruturados. Confirme se o ponto e o projeto continuam ativos antes da entrega. Evite pia, ralos e vasos sanitários, conforme alerta municipal.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ecoponto municipal indicado pelo Projeto De Olho no Óleo"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária: informação do projeto local publicada em 2021; não indica rede nacional nem garante situação atual do ponto.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: lucasdorioverde.mt.gov.br",
+          "url": "https://www.lucasdorioverde.mt.gov.br/site/noticias/9280",
+          "comprova": "Referência indicada para revisão de “Óleo de cozinha usado — Projeto De Olho no Óleo (Lucas do Rio Verde)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-rascunho-eletroeletronicos-eletrod-eletroeletronicos-de-uso-domestico-regra-4ed78ec6",
+      "grupoPesquisa": "rascunho-eletroeletronicos-eletrodomesticos-br",
+      "nomeMaterial": "Eletroeletrônicos de uso doméstico — regra geral de logística reversa",
+      "categoriaMaterial": "Eletroeletrônicos e eletrodomésticos",
+      "classificacao": "Equipamento eletroeletrônico ou eletrodoméstico de uso doméstico, incluindo componentes e acessórios abrangidos pelo sistema; a lista do Decreto nº 10.240/2020 é extensa e não exaustiva.",
+      "instrucaoDescarte": "Entregar desligado em ponto específico de recebimento do sistema de logística reversa; consultar antes o ponto, produto e instruções aplicáveis. Não colocar junto a resíduos comuns ou recicláveis mistos.",
+      "observacaoImpacto": "A segregação e a entrega em sistema adequado evitam destinação junto a resíduos comuns e permitem tratamento e destinação ambientalmente adequada conforme o sistema.",
+      "sinonimos": [
+        "lixo eletrônico",
+        "resíduo eletrônico",
+        "REEE",
+        "e-lixo",
+        "aparelhos eletrônicos usados",
+        "eletrodomésticos pós-consumo",
+        "equipamentos eletroeletrônicos domésticos"
+      ],
+      "preparacao": "Manter separado de outras frações de resíduos e preservar a integridade física. Apagar previamente dados pessoais e programas de computadores, celulares, discos rígidos, cartões de memória e dispositivos semelhantes, quando houver. Seguir também o manual do produto e as instruções do ponto.",
+      "cuidados": "Não violar ou desmontar o equipamento por conta própria: pode haver riscos à saúde e ao ambiente. No descarte pelo sistema, dados não apagados ficam sob responsabilidade do consumidor e o produto é entregue sem expectativa de ressarcimento; confirme a cobertura do produto e do ponto.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Pontos específicos de recebimento de sistemas de logística reversa de eletroeletrônicos domésticos",
+        "Pontos de recebimento de entidades gestoras, após confirmação do produto"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Regra nacional para produtos eletroeletrônicos de uso doméstico no escopo do Decreto nº 10.240/2020. A presença de ponto próximo e o recebimento de cada item dependem da localidade e do operador; não presumir aceitação em coleta seletiva ou ecoponto genérico.",
+      "fontesReferencia": [
+        {
+          "titulo": "Planalto — legislação federal",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/decreto/d10240.htm",
+          "comprova": "Referência indicada para revisão de “Eletroeletrônicos de uso doméstico — regra geral de logística reversa”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-rascunho-eletroeletronicos-eletrod-entrega-em-ponto-de-recebimento-abree-fff0e987",
+      "grupoPesquisa": "rascunho-eletroeletronicos-eletrodomesticos-br",
+      "nomeMaterial": "Entrega em ponto de recebimento ABREE",
+      "categoriaMaterial": "Eletroeletrônicos e eletrodomésticos",
+      "classificacao": "Eletroeletrônicos e eletrodomésticos pós-consumo listados para seleção no localizador da ABREE.",
+      "instrucaoDescarte": "No localizador ABREE, informar CEP e selecionar o produto para consultar pontos de recebimento próximos; levar o item ao ponto indicado somente após conferir o resultado para aquele produto e localidade.",
+      "observacaoImpacto": "A ABREE descreve fluxo de recebimento, transporte, triagem, desmontagem e reciclagem, com tratamento de resíduos perigosos.",
+      "sinonimos": [
+        "ponto ABREE",
+        "PEV de eletroeletrônicos",
+        "posto de recebimento de eletrônicos",
+        "local para descartar eletrodoméstico",
+        "coleta ABREE"
+      ],
+      "preparacao": "Separar o produto dos demais resíduos, apagar dados pessoais de aparelhos como computadores e celulares e manter o equipamento íntegro.",
+      "cuidados": "A existência de um ponto no mapa não confirma que ele receba qualquer tipo ou tamanho de item. A ABREE orienta evitar violar os produtos; confirme produto, endereço e condições do ponto antes de deslocar eletrodoméstico volumoso.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Pontos de recebimento ABREE exibidos no localizador por CEP e produto"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Logística reversa operada pela entidade gestora; não é uma regra de aceitação universal em todo comércio ou ponto municipal. Produto e ponto devem ser validados no localizador da ABREE.",
+      "fontesReferencia": [
+        {
+          "titulo": "ABREE",
+          "url": "https://abree.org.br/pontos-de-recebimento",
+          "comprova": "Referência indicada para revisão de “Entrega em ponto de recebimento ABREE”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "ABREE",
+          "url": "https://abree.org.br/",
+          "comprova": "Referência indicada para revisão de “Entrega em ponto de recebimento ABREE”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-rascunho-eletroeletronicos-eletrod-eletrodomesticos-volumosos-remocao-de-be-812e5554",
+      "grupoPesquisa": "rascunho-eletroeletronicos-eletrodomesticos-br",
+      "nomeMaterial": "Eletrodomésticos volumosos — remoção de bens inservíveis da COMLURB (Rio de Janeiro)",
+      "categoriaMaterial": "Eletroeletrônicos e eletrodomésticos",
+      "classificacao": "Bens inservíveis volumosos; a página da COMLURB lista, entre outros, geladeira/freezer, fogão, ar-condicionado e máquina de lavar como itens sujeitos à tabela municipal de remoção.",
+      "instrucaoDescarte": "No município do Rio de Janeiro, solicitar remoção de bens inservíveis pela COMLURB e verificar a tabela vigente para o item e os limites aplicáveis. A página lista serviço gratuito sob solicitação; não deixar o item na calçada por conta própria.",
+      "observacaoImpacto": "A página municipal diferencia bens inservíveis da remoção de entulho e orienta consulta à seção de logística reversa para eletrodomésticos grandes; confirmar o encaminhamento e as regras do serviço no pedido.",
+      "sinonimos": [
+        "geladeira para descarte",
+        "freezer velho",
+        "máquina de lavar inservível",
+        "fogão velho",
+        "remoção de eletrodoméstico volumoso",
+        "Papa-móveis",
+        "bens inservíveis"
+      ],
+      "preparacao": "Deixar o bem no nível da rua, fora de rampas e escadas, até 15 metros do portão para dentro do local de retirada, e providenciar responsável no local para assinar a ordem de serviço. Avisar portaria/síndico, se aplicável.",
+      "cuidados": "A COMLURB determina condições de acesso e limites por item. O material não deve ficar na calçada salvo autorização da COMLURB. Serviço e disponibilidade são municipais; não extrapolar a outros municípios nem presumir que qualquer equipamento será coletado.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Serviço municipal agendado de remoção de bens inservíveis da COMLURB — Rio de Janeiro"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal e operacional necessária; aplica-se apenas ao serviço COMLURB no Rio de Janeiro e às condições/tabela publicadas pelo município.",
+      "fontesReferencia": [
+        {
+          "titulo": "comlurb.prefeitura.rio",
+          "url": "https://comlurb.prefeitura.rio/consulta/remocao/",
+          "comprova": "Referência indicada para revisão de “Eletrodomésticos volumosos — remoção de bens inservíveis da COMLURB (Rio de Janeiro)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-rascunho-eletroeletronicos-eletrod-eletronicos-e-pequenos-eletrodomesticos--3c101a1b",
+      "grupoPesquisa": "rascunho-eletroeletronicos-eletrodomesticos-br",
+      "nomeMaterial": "Eletrônicos e pequenos eletrodomésticos — entrega local no Ipiranga (São Paulo)",
+      "categoriaMaterial": "Eletroeletrônicos e eletrodomésticos",
+      "classificacao": "A página da Subprefeitura Ipiranga lista celulares, computadores e notebooks; TVs, monitores e impressoras; fones, cabos, carregadores e mouses; e pequenos eletrodomésticos como secadores e micro-ondas.",
+      "instrucaoDescarte": "A fonte municipal indica entrega na Subprefeitura do Ipiranga ou no Ecoponto Comandante Taylor. Confirmar previamente funcionamento e recebimento do item antes de levar. A página informa endereço da Subprefeitura: Rua Lino Coutinho, 444; Ecoponto Comandante Taylor: Rua Comandante Taylor, 690.",
+      "observacaoImpacto": "A prefeitura informa que o recebimento local é feito em parceria com a Coopermiti e voltado ao descarte correto dos itens indicados.",
+      "sinonimos": [
+        "descarte de celular Ipiranga",
+        "lixo eletrônico Ipiranga",
+        "ponto de coleta de computador",
+        "descarte de micro-ondas",
+        "caixa coletora de eletrônicos"
+      ],
+      "preparacao": "Para aparelhos com dados, apagar informações pessoais antes de entregar e manter o produto íntegro; separar dos resíduos comuns, conforme regra nacional e orientação da ABREE.",
+      "cuidados": "A lista e os locais citados são específicos do Ipiranga e não demonstram aceitação em outros ecopontos ou subprefeituras. Confirme a informação atual e o item com o operador; não inferir recebimento de eletrodomésticos grandes.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Caixa coletora de eletrônicos na Subprefeitura do Ipiranga",
+        "Ecoponto Comandante Taylor, conforme informação municipal"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária; registro local de São Paulo, restrito aos pontos e categorias indicados pela fonte municipal.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: smartsampa.prefeitura.sp.gov.br",
+          "url": "https://smartsampa.prefeitura.sp.gov.br/web/ipiranga/w/saiba-como-descartar-corretamente-o-lixo-eletr%C3%B4nico-no-ipiranga",
+          "comprova": "Referência indicada para revisão de “Eletrônicos e pequenos eletrodomésticos — entrega local no Ipiranga (São Paulo)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Planalto — legislação federal",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/decreto/d10240.htm",
+          "comprova": "Referência indicada para revisão de “Eletrônicos e pequenos eletrodomésticos — entrega local no Ipiranga (São Paulo)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "ABREE",
+          "url": "https://abree.org.br/pontos-de-recebimento",
+          "comprova": "Referência indicada para revisão de “Eletrônicos e pequenos eletrodomésticos — entrega local no Ipiranga (São Paulo)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-pilhas-baterias-portateis-vs-autom-pilhas-e-baterias-portateis-comuns-e-rec-c6fd37cd",
+      "grupoPesquisa": "pilhas_baterias_portateis_vs_automotivas_br",
+      "nomeMaterial": "Pilhas e baterias portáteis comuns e recarregáveis",
+      "categoriaMaterial": "Pilhas e baterias portáteis versus automotivas",
+      "classificacao": "Resíduo de pilha/bateria portátil pós-consumo",
+      "instrucaoDescarte": "Encaminhe a pilha ou bateria inservível a um ponto de entrega compatível; consulte o localizador da Green Eletron ou o serviço municipal. O SINIR informa que fabricantes, importadores, distribuidores e comerciantes devem disponibilizar recebimento. Em Porto Alegre, a prefeitura também indica comerciantes, assistências técnicas e postos de recebimento como opções.",
+      "observacaoImpacto": "O SINIR alerta que pilhas e baterias podem conter metais pesados; a composição varia. Não encaminhe automaticamente a coletor de baterias automotivas, cujo sistema é separado.",
+      "sinonimos": [
+        "pilhas alcalinas",
+        "pilhas zinco-manganês",
+        "pilhas comuns",
+        "pilhas recarregáveis",
+        "baterias portáteis",
+        "pilhas domésticas"
+      ],
+      "preparacao": "Separe pilhas/baterias portáteis das baterias automotivas chumbo-ácido. As fontes consultadas não especificam preparo ou embalagem universal; confirme com o ponto se recebe aquele tipo e quantidade. A Green Eletron lista pilhas alcalinas, zinco-manganês, recarregáveis e baterias portáteis entre os materiais aceitos em seu sistema.",
+      "cuidados": "Não descarte em lixo comum, conforme orientação municipal de Porto Alegre. Não presuma que todo coletor aceita qualquer tipo: a Green Eletron exclui bateria de lítio solta de seus coletores e indica aceitação apenas quando permanece dentro de equipamento eletroeletrônico e não pode ser removida. Verifique o operador e a aceitação local.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "PEV/ponto de entrega da Green Eletron indicado no localizador de pilhas e baterias portáteis",
+        "Coletor de eletroeletrônicos da Green Eletron, dentro das regras específicas do sistema",
+        "Comerciante ou assistência técnica que receba pilhas/baterias; em Porto Alegre, postos municipais indicados pela prefeitura"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Há obrigação nacional de logística reversa para pilhas e baterias, mas os pontos e materiais aceitos dependem do sistema/operador e da disponibilidade local. Para bateria de lítio solta, esta orientação da Green Eletron não autoriza entrega; consulte alternativa local compatível. A página municipal citada valida opções especificamente em Porto Alegre.",
+      "fontesReferencia": [
+        {
+          "titulo": "SINIR — Ministério do Meio Ambiente",
+          "url": "https://sinir.gov.br/perfis/logistica-reversa/logistica-reversa/pilhas-e-baterias/",
+          "comprova": "Referência indicada para revisão de “Pilhas e baterias portáteis comuns e recarregáveis”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "gov.br",
+          "url": "https://www.gov.br/ibama/pt-br/assuntos/emissoes-e-residuos/residuos/pilhas-e-baterias",
+          "comprova": "Referência indicada para revisão de “Pilhas e baterias portáteis comuns e recarregáveis”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Green Eletron",
+          "url": "https://greeneletron.org.br/perguntas-frequentes/",
+          "comprova": "Referência indicada para revisão de “Pilhas e baterias portáteis comuns e recarregáveis”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "prefeitura.poa.br",
+          "url": "https://prefeitura.poa.br/dmlu/pilhas-e-baterias",
+          "comprova": "Referência indicada para revisão de “Pilhas e baterias portáteis comuns e recarregáveis”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-pilhas-baterias-portateis-vs-autom-baterias-portateis-de-litio-soltas-ou-in-e2d04448",
+      "grupoPesquisa": "pilhas_baterias_portateis_vs_automotivas_br",
+      "nomeMaterial": "Baterias portáteis de lítio soltas ou instaladas em aparelho",
+      "categoriaMaterial": "Pilhas e baterias portáteis versus automotivas",
+      "classificacao": "Bateria portátil de lítio; aceitação específica do operador",
+      "instrucaoDescarte": "Antes de levar, consulte o operador ou ponto local sobre a bateria e sua condição. Pela regra publicada pela Green Eletron, não se recomenda descartar baterias de lítio soltas em seus coletores; o sistema aceita somente as que permanecem dentro de aparelhos eletroeletrônicos e não podem ser removidas.",
+      "observacaoImpacto": "O Ibama informa que, mesmo quando certos tipos de lítio não entram nas exigências específicas de plano/laudo da Resolução CONAMA 401/2008, a destinação adequada continua necessária e a PNRS prevê logística reversa de pilhas e baterias.",
+      "sinonimos": [
+        "bateria de lítio portátil",
+        "bateria recarregável de lítio",
+        "bateria removível de celular",
+        "bateria solta de lítio",
+        "bateria interna de equipamento"
+      ],
+      "preparacao": "Não remova a bateria do aparelho para entregá-la no coletor Green Eletron: a FAQ restringe a aceitação, nesse sistema, à bateria que não pode ser removida e continua instalada no equipamento. Para bateria solta/removível, a fonte não define preparo alternativo; consulte operador ou serviço municipal antes de encaminhar.",
+      "cuidados": "A restrição descrita é do sistema Green Eletron e não deve ser apresentada como regra universal para todos os operadores. Não entregue bateria solta a um coletor Green Eletron com base na orientação geral para pilhas portáteis; confirme outro canal que declare aceitá-la.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coletor de eletroeletrônicos Green Eletron apenas quando a bateria permanece no aparelho e não pode ser removida, conforme FAQ da entidade",
+        "Outro ponto/operador somente após confirmação expressa de que recebe bateria de lítio solta ou removível"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "A obrigação geral de destinação/logística reversa é nacional; a limitação de aceitação aqui descrita se aplica ao sistema Green Eletron. Para bateria solta, é necessária validação com o operador ou serviço municipal, sem presumir ponto ou destino universal.",
+      "fontesReferencia": [
+        {
+          "titulo": "Green Eletron",
+          "url": "https://greeneletron.org.br/perguntas-frequentes/",
+          "comprova": "Referência indicada para revisão de “Baterias portáteis de lítio soltas ou instaladas em aparelho”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "gov.br",
+          "url": "https://www.gov.br/ibama/pt-br/assuntos/emissoes-e-residuos/residuos/pilhas-e-baterias",
+          "comprova": "Referência indicada para revisão de “Baterias portáteis de lítio soltas ou instaladas em aparelho”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-pilhas-baterias-portateis-vs-autom-bateria-automotiva-chumbo-acido-usada-5f0202aa",
+      "grupoPesquisa": "pilhas_baterias_portateis_vs_automotivas_br",
+      "nomeMaterial": "Bateria automotiva chumbo-ácido usada",
+      "categoriaMaterial": "Pilhas e baterias portáteis versus automotivas",
+      "classificacao": "Bateria chumbo-ácido inservível; logística reversa específica, distinta da de pilhas/baterias portáteis",
+      "instrucaoDescarte": "Quando houver troca/reposição, devolva a bateria usada no mesmo estabelecimento comercial em que a substituição for feita, conforme orientação do SINIR. O estabelecimento deve encaminhá-la ao sistema empresarial de destinação adequada.",
+      "observacaoImpacto": "Não confundir com pilhas e baterias portáteis: o SINIR descreve sistema de logística reversa separado para chumbo-ácido, sob gestão do IBER, e identifica chumbo e eletrólito ácido como riscos ambientais.",
+      "sinonimos": [
+        "bateria de carro",
+        "bateria automotiva",
+        "bateria chumbo-ácido",
+        "acumulador chumbo-ácido",
+        "bateria veicular"
+      ],
+      "preparacao": "Entregue-a ao estabelecimento da troca/reposição. O SINIR consultado não especifica embalagem, acondicionamento ou procedimento para transporte pelo consumidor; combine a entrega com o estabelecimento e não a encaminhe a coletor de pilhas portáteis sem confirmação de compatibilidade.",
+      "cuidados": "O SINIR identifica a bateria como resíduo perigoso que contém chumbo e solução de ácido sulfúrico; descarte irregular pode contaminar solo e água. As fontes consultadas não detalham procedimento de manuseio seguro pelo consumidor; não abra nem tente esvaziar a bateria e peça orientação ao estabelecimento/operador para qualquer situação de vazamento ou dano.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Estabelecimento comercial onde a bateria está sendo substituída/reposicionada",
+        "Canal de recebimento do sistema de logística reversa de chumbo-ácido/IBER, após confirmar previamente que recebe a bateria e as condições de entrega"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Orientação nacional do SINIR para devolução no mesmo estabelecimento da troca/reposição, no âmbito da logística reversa chumbo-ácido. Se não houver troca no local ou for necessário outro ponto, valide previamente com o IBER, o comerciante ou o operador; a disponibilidade e as condições concretas podem variar.",
+      "fontesReferencia": [
+        {
+          "titulo": "SINIR — Ministério do Meio Ambiente",
+          "url": "https://sinir.gov.br/perfis/logistica-reversa/logistica-reversa/baterias-de-chumbo-acido/",
+          "comprova": "Referência indicada para revisão de “Bateria automotiva chumbo-ácido usada”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Green Eletron",
+          "url": "https://greeneletron.org.br/perguntas-frequentes/",
+          "comprova": "Referência indicada para revisão de “Bateria automotiva chumbo-ácido usada”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "IBER Brasil",
+          "url": "https://iberbrasil.org.br/",
+          "comprova": "Referência indicada para revisão de “Bateria automotiva chumbo-ácido usada”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-guia-descarte-lampadas-fluorescent-lampadas-fluorescentes-logistica-reversa-dfd3394c",
+      "grupoPesquisa": "guia-descarte-lampadas-fluorescentes-led",
+      "nomeMaterial": "Lâmpadas fluorescentes — logística reversa / ponto Reciclus",
+      "categoriaMaterial": "Lâmpadas fluorescentes e LED",
+      "classificacao": "Lâmpada com mercúrio abrangida pela logística reversa; entrega em ponto de recebimento comercial / PEV Reciclus, conforme disponibilidade local.",
+      "instrucaoDescarte": "Não descarte no lixo comum. O SINIR orienta consumidores a levar as lâmpadas abrangidas a pontos de recebimento no comércio, centros de reciclagem ou cooperativas. A Reciclus permite que pessoas físicas usem seus coletores; consulte o localizador e confirme previamente o tipo aceito e eventual limite por loja.",
+      "observacaoImpacto": "O SINIR alerta que descarte inadequado de lâmpadas com mercúrio pode contaminar ar, solo e água e afetar saúde e ecossistemas. A inclusão na logística reversa não significa que qualquer ponto receba qualquer lâmpada ou quantidade.",
+      "sinonimos": [
+        "lâmpada fluorescente tubular",
+        "fluorescente compacta",
+        "CFL",
+        "lâmpada de vapor de mercúrio",
+        "lâmpada de vapor de sódio",
+        "lâmpada de luz mista",
+        "lâmpada de vapor metálico"
+      ],
+      "preparacao": "A fonte nacional consultada não especifica acondicionamento para entrega doméstica intacta. Para lâmpada quebrada, siga a orientação municipal específica da sua localidade; em Joinville, a prefeitura orienta armazenar em caixa de papelão ou embalagem segura.",
+      "cuidados": "Contêm mercúrio e não devem ir ao lixo comum. A Reciclus informa que a quantidade máxima varia por loja. A coleta itinerante da entidade é destinada a instituições e aceita tipos fluorescentes especificados, mas exclui LED, halógenas, decorativas e luminárias; não estenda essa regra automaticamente a todos os pontos fixos.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ponto de Entrega Reciclus em estabelecimento comercial (consultar localizador, tipo aceito e limite do ponto)",
+        "Ponto de recebimento no comércio, centro de reciclagem ou cooperativa, conforme orientação do SINIR e disponibilidade local"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Logística reversa nacional para as categorias indicadas no sistema oficial; localização, disponibilidade, quantidades e condições do ponto exigem consulta local/ao operador. A regra de caixa para lâmpada quebrada citada aqui é municipal (Joinville), não universal.",
+      "fontesReferencia": [
+        {
+          "titulo": "SINIR — Ministério do Meio Ambiente",
+          "url": "https://sinir.gov.br/perfis/logistica-reversa/logistica-reversa/lampadas-fluorescentes-de-vapor-de-sodio-e-mercurio-e-de-luz-mista/",
+          "comprova": "Referência indicada para revisão de “Lâmpadas fluorescentes — logística reversa / ponto Reciclus”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Reciclus",
+          "url": "https://reciclus.org.br/onde-descartar/",
+          "comprova": "Referência indicada para revisão de “Lâmpadas fluorescentes — logística reversa / ponto Reciclus”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Reciclus",
+          "url": "https://reciclus.org.br/blog/coleta-itinerante-gratuita/",
+          "comprova": "Referência indicada para revisão de “Lâmpadas fluorescentes — logística reversa / ponto Reciclus”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: joinville.sc.gov.br",
+          "url": "https://www.joinville.sc.gov.br/servicos/como-descartar-residuos/",
+          "comprova": "Referência indicada para revisão de “Lâmpadas fluorescentes — logística reversa / ponto Reciclus”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-guia-descarte-lampadas-fluorescent-lampadas-fluorescentes-orientacao-munici-d9528b1c",
+      "grupoPesquisa": "guia-descarte-lampadas-fluorescentes-led",
+      "nomeMaterial": "Lâmpadas fluorescentes — orientação municipal de Joinville (SC)",
+      "categoriaMaterial": "Lâmpadas fluorescentes e LED",
+      "classificacao": "Resíduo especial encaminhado a Ponto de Entrega Voluntária municipal (PEV), conforme lista do serviço local.",
+      "instrucaoDescarte": "A prefeitura orienta que lâmpadas em desuso, quebradas ou não, sejam levadas a um PEV de preferência; consulte a lista de PEVs disponível no serviço municipal antes de se deslocar.",
+      "observacaoImpacto": "A instrução de acondicionamento seguro e os locais de entrega são específicos do município; não são uma regra nacional nem prova de aceite em outros PEVs.",
+      "sinonimos": [
+        "fluorescente tubular",
+        "fluorescente compacta",
+        "lâmpada de vapor de sódio",
+        "lâmpada de mercúrio",
+        "luz mista"
+      ],
+      "preparacao": "Se quebrada, armazenar em caixa de papelão ou embalagem segura, conforme instrução municipal.",
+      "cuidados": "A orientação é de Joinville e enumera fluorescentes, vapor de sódio e mercúrio e luz mista; não confirma aceite de LED. Não presuma que todo PEV recebe lâmpadas: verifique a lista municipal atualizada.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "PEV municipal de Joinville indicado na lista oficial para lâmpadas"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal necessária fora de Joinville; mesmo dentro do município consultar a lista de PEVs vigente.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: joinville.sc.gov.br",
+          "url": "https://www.joinville.sc.gov.br/servicos/como-descartar-residuos/",
+          "comprova": "Referência indicada para revisão de “Lâmpadas fluorescentes — orientação municipal de Joinville (SC)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-guia-descarte-lampadas-fluorescent-lampadas-led-entrega-municipal-especific-394dc305",
+      "grupoPesquisa": "guia-descarte-lampadas-fluorescentes-led",
+      "nomeMaterial": "Lâmpadas LED — entrega municipal específica em Cláudio (MG)",
+      "categoriaMaterial": "Lâmpadas fluorescentes e LED",
+      "classificacao": "Lâmpada LED; ponto municipal indicado pela Prefeitura de Cláudio, sem enquadramento presumido no sistema Reciclus de lâmpadas com mercúrio.",
+      "instrucaoDescarte": "A Prefeitura de Cláudio informa que lâmpadas LED, tubulares e convencionais podem ser entregues diretamente na Secretaria Municipal de Meio Ambiente e Agricultura, Praça dos Ex-Combatentes, 373, Centro. Confirme previamente horário e recebimento atual.",
+      "observacaoImpacto": "A fonte municipal indica o ponto de entrega, mas não informa preparo ou destino final específico; aceite e procedimento devem ser confirmados com o serviço local. A exclusão de LED citada refere-se à coleta itinerante Reciclus, não a todos os operadores.",
+      "sinonimos": [
+        "lâmpada LED",
+        "lâmpada de LED",
+        "LED bulbo",
+        "LED tubular",
+        "lâmpada tubular LED"
+      ],
+      "preparacao": "A notícia municipal não especifica embalagem nem preparo. Não abra nem desmonte a lâmpada; consulte a Secretaria sobre acondicionamento e recebimento antes de levar.",
+      "cuidados": "Esta é uma orientação local de Cláudio, não uma regra nacional. A Reciclus declara expressamente que sua coleta itinerante de lâmpadas não aceita LED. Não encaminhe a um ponto de fluorescentes ou eletroeletrônicos sem confirmação de aceite de lâmpada LED.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Secretaria Municipal de Meio Ambiente e Agricultura de Cláudio (MG), conforme orientação municipal"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária: há indicação expressa para Cláudio (MG), mas o ponto não se generaliza a outros municípios.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: claudio.mg.gov.br",
+          "url": "https://www.claudio.mg.gov.br/portal/noticias/0/3/3387/aprenda-a-descartar-corretamente-eletronicos-lampadas-e-cartelas-de-remedio-sem-agredir-o-meio-ambiente-",
+          "comprova": "Referência indicada para revisão de “Lâmpadas LED — entrega municipal específica em Cláudio (MG)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Reciclus",
+          "url": "https://reciclus.org.br/blog/coleta-itinerante-gratuita/",
+          "comprova": "Referência indicada para revisão de “Lâmpadas LED — entrega municipal específica em Cláudio (MG)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-medicamentos-vencidos-e-embalagens-medicamentos-domiciliares-vencidos-ou-em-6d0d8ef7",
+      "grupoPesquisa": "medicamentos-vencidos-e-embalagens",
+      "nomeMaterial": "Medicamentos domiciliares vencidos ou em desuso (uso humano)",
+      "categoriaMaterial": "Medicamentos vencidos e embalagens",
+      "classificacao": "Medicamentos pós-consumo abrangidos pela logística reversa",
+      "instrucaoDescarte": "Entregue em ponto fixo de recebimento de farmácia/drogaria ou em campanha/ponto temporário indicado localmente; descarte conforme as instruções afixadas no ponto. Não jogue no lixo comum, pia, vaso sanitário ou diretamente no solo.",
+      "observacaoImpacto": "O SINIR alerta para riscos de contaminação do solo e dos recursos hídricos e para o risco de medicamentos descartados junto ao lixo serem consumidos inadequadamente. Destinação e fluxo posterior cabem aos operadores do sistema, conforme a legislação.",
+      "sinonimos": [
+        "remédio vencido",
+        "sobra de medicamento",
+        "medicamento fora da validade",
+        "medicamento não utilizado",
+        "medicamento manipulado vencido"
+      ],
+      "preparacao": "Leve o medicamento ao ponto indicado e siga o material de orientação e a classificação de risco aplicável, quando houver. Não há uma preparação doméstica universal descrita nas fontes consultadas; confirme no ponto como acondicionar e inserir o resíduo.",
+      "cuidados": "O sistema federal trata de medicamentos domiciliares vencidos ou em desuso, de uso humano, industrializados ou manipulados. Não estende automaticamente a mesma regra a medicamentos de uso não domiciliar, não humano ou descartados por serviços de saúde. Evite descarte no esgoto ou no solo por risco de contaminação; não presuma que todo estabelecimento recebe todo tipo de resíduo.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Farmácia ou drogaria com ponto fixo de recebimento/dispensador contentor",
+        "Ponto de campanha de coleta, se houver e conforme instrução local",
+        "UBS, somente onde o serviço municipal informar que recebe esses resíduos"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Sistema de logística reversa nacional para a categoria definida no Decreto nº 10.388/2020; a disponibilidade e localização dos pontos variam e devem ser verificadas no município/operador. Proposta para rascunho, não orientação aprovada.",
+      "fontesReferencia": [
+        {
+          "titulo": "Planalto — legislação federal",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/decreto/d10388.htm",
+          "comprova": "Referência indicada para revisão de “Medicamentos domiciliares vencidos ou em desuso (uso humano)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "SINIR — Ministério do Meio Ambiente",
+          "url": "https://sinir.gov.br/perfis/logistica-reversa/logistica-reversa/medicamentos-seus-residuos-e-embalagens/",
+          "comprova": "Referência indicada para revisão de “Medicamentos domiciliares vencidos ou em desuso (uso humano)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-medicamentos-vencidos-e-embalagens-embalagens-de-medicamentos-domiciliares--e4907df6",
+      "grupoPesquisa": "medicamentos-vencidos-e-embalagens",
+      "nomeMaterial": "Embalagens de medicamentos domiciliares após o descarte pelo consumidor",
+      "categoriaMaterial": "Medicamentos vencidos e embalagens",
+      "classificacao": "Embalagens pós-consumo abrangidas pela logística reversa de medicamentos",
+      "instrucaoDescarte": "Encaminhe as embalagens associadas a medicamentos domiciliares vencidos ou em desuso ao ponto de recebimento da logística reversa e siga as instruções do contentor ou da campanha. A legislação inclui expressamente as embalagens após o descarte pelo consumidor.",
+      "observacaoImpacto": "O descarte de medicamentos e de suas embalagens é objeto do sistema de logística reversa; descarte inadequado de medicamentos pode contaminar solo e água. As fontes não atribuem destino de reciclagem específico a cada material de embalagem.",
+      "sinonimos": [
+        "embalagem de remédio",
+        "cartela de comprimidos",
+        "blíster de medicamento",
+        "frasco de medicamento",
+        "caixa de medicamento",
+        "bula e embalagem de medicamento"
+      ],
+      "preparacao": "Consulte a sinalização do ponto sobre como entregar as embalagens e se devem ser depositadas junto com o medicamento ou separadamente. As fontes consultadas não estabelecem preparo doméstico universal nem autorizam presumir que uma embalagem específica deva ir à coleta seletiva.",
+      "cuidados": "A definição legal de embalagem é ampla e inclui invólucro ou forma de acondicionamento removível ou não. Não presuma que embalagem vazia, bula, cartucho, frasco ou blíster seja aceito em qualquer contentor ou na reciclagem comum: confirme com o operador/ponto. A aplicação deste sistema é para medicamentos domiciliares de uso humano, nos limites do Decreto nº 10.388/2020.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Farmácia ou drogaria com ponto fixo de recebimento, conforme indicação do contentor",
+        "Ponto temporário/campanha, se previsto e com instrução expressa do organizador",
+        "Ponto municipal informado como receptor de medicamentos e embalagens, após confirmação local"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Abrangência nacional definida pelo Decreto nº 10.388/2020 para embalagens de medicamentos domiciliares após descarte pelo consumidor; forma de entrega e aceitação operacional devem ser confirmadas no ponto/município. Proposta para rascunho, não orientação aprovada.",
+      "fontesReferencia": [
+        {
+          "titulo": "Planalto — legislação federal",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/decreto/d10388.htm",
+          "comprova": "Referência indicada para revisão de “Embalagens de medicamentos domiciliares após o descarte pelo consumidor”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "SINIR — Ministério do Meio Ambiente",
+          "url": "https://sinir.gov.br/perfis/logistica-reversa/logistica-reversa/medicamentos-seus-residuos-e-embalagens/",
+          "comprova": "Referência indicada para revisão de “Embalagens de medicamentos domiciliares após o descarte pelo consumidor”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-medicamentos-vencidos-e-embalagens-entrega-municipal-de-medicamentos-vencid-75ef74f0",
+      "grupoPesquisa": "medicamentos-vencidos-e-embalagens",
+      "nomeMaterial": "Entrega municipal de medicamentos vencidos ou sobras — São Paulo (capital)",
+      "categoriaMaterial": "Medicamentos vencidos e embalagens",
+      "classificacao": "Serviço municipal de recebimento de medicamentos domiciliares",
+      "instrucaoDescarte": "Na cidade de São Paulo, a Secretaria Municipal da Saúde informa que medicamentos vencidos ou sobras podem ser entregues nas UBS e em farmácias/drogarias habilitadas. Confirme o serviço e as instruções com a unidade antes de se deslocar.",
+      "observacaoImpacto": "A Prefeitura alerta que princípios ativos podem não ser eliminados pelo tratamento de esgoto e podem contaminar o meio ambiente; informa que os pontos municipais encaminham os resíduos para destinação específica.",
+      "sinonimos": [
+        "descarte de remédio na UBS",
+        "devolver medicamento vencido",
+        "entrega de sobras de medicamentos",
+        "farmácia habilitada para descarte"
+      ],
+      "preparacao": "Leve o medicamento à UBS ou farmácia/drogaria habilitada e siga as orientações do local. A página municipal consultada não especifica um preparo doméstico geral para medicamentos; para embalagens, confirme expressamente a aceitação na unidade.",
+      "cuidados": "Esta é uma instrução municipal, não regra para outros municípios. A página municipal consultada menciona medicamentos vencidos e sobras; não se deve inferir que toda unidade aceite qualquer embalagem, dispositivo ou resíduo associado. Não descarte medicamentos no lixo, pia ou vaso sanitário.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Unidade Básica de Saúde (UBS) no município de São Paulo, conforme serviço municipal divulgado",
+        "Farmácia ou drogaria habilitada no município de São Paulo"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal necessária: aplica-se à cidade de São Paulo conforme informação publicada pela Prefeitura; não extrapolar para outros municípios ou para aceitação de embalagens sem confirmação. Proposta para rascunho, não orientação aprovada.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/web/saude/w/vigilancia_em_saude/vigilancia_sanitaria/312129",
+          "comprova": "Referência indicada para revisão de “Entrega municipal de medicamentos vencidos ou sobras — São Paulo (capital)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/w/noticia/como-fazer-o-descarte-correto-da-medicacao-e-proteger-o-meio-ambiente",
+          "comprova": "Referência indicada para revisão de “Entrega municipal de medicamentos vencidos ou sobras — São Paulo (capital)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-roupas-calcados-texteis-brasil-ras-doacao-de-roupas-calcados-e-acessorios-r-b5fe3ac9",
+      "grupoPesquisa": "roupas-calcados-texteis-brasil-rascunho",
+      "nomeMaterial": "Doação de roupas, calçados e acessórios — Repense Reuse (Salvador/BA)",
+      "categoriaMaterial": "Roupas, calçados e têxteis",
+      "classificacao": "Reutilização/doação em contêiner de coleta de programa local",
+      "instrucaoDescarte": "Entregue roupas, calçados, bolsas, mochilas, roupas de cama e acessórios em um dos contêineres Repense Reuse de Salvador. Consulte o mapa de pontos no site do programa antes de se deslocar.",
+      "observacaoImpacto": "A fonte informa que itens reutilizáveis são triados e destinados às Lojas Humana em Salvador, com venda a preços populares; materiais sem possibilidade de reutilização seguem para reciclagem e coprocessamento.",
+      "sinonimos": [
+        "roupa usada",
+        "calçado usado",
+        "peças têxteis",
+        "roupa de cama",
+        "bolsa",
+        "mochila",
+        "acessórios têxteis",
+        "coleta de roupa para doação"
+      ],
+      "preparacao": "Doe os itens limpos, secos e em condições de uso; roupas podem ter apenas pequenas avarias. Separe cortes industriais e fardamentos, que não são aceitos.",
+      "cuidados": "A fonte limita a iniciativa a pontos em Salvador e não informa uma regra geral para outros municípios. Não coloque peças sujas ou úmidas; cortes industriais e fardamentos são expressamente excluídos.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Contêiner de coleta para doação/reutilização têxtil do Repense Reuse em Salvador"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação local necessária: programa e contêineres da parceria Humana Brasil–Prefeitura de Salvador; não é regra nacional. Confira localização e operação atual do ponto no site do programa.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: salvador.ba.gov.br",
+          "url": "https://salvador.ba.gov.br/salvador-tem-70-pontos-de-coleta-da-prefeitura-para-doacao-de-roupas-e-calcados/",
+          "comprova": "Referência indicada para revisão de “Doação de roupas, calçados e acessórios — Repense Reuse (Salvador/BA)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "repensereusebrasil.org.br",
+          "url": "https://repensereusebrasil.org.br/",
+          "comprova": "Referência indicada para revisão de “Doação de roupas, calçados e acessórios — Repense Reuse (Salvador/BA)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-roupas-calcados-texteis-brasil-ras-residuos-texteis-ecoponto-textil-bras-sa-0f470aa0",
+      "grupoPesquisa": "roupas-calcados-texteis-brasil-rascunho",
+      "nomeMaterial": "Resíduos têxteis — Ecoponto Têxtil Brás (São Paulo/SP)",
+      "categoriaMaterial": "Roupas, calçados e têxteis",
+      "classificacao": "Entrega em ecoponto municipal especializado em resíduos têxteis",
+      "instrucaoDescarte": "A Prefeitura informa que o Ecoponto Têxtil Brás recebe resíduos têxteis, incluindo roupas, cobertores e retalhos. Endereço publicado: Rua Cachoeira, 958, Catumbi; funcionamento informado: 24 horas.",
+      "observacaoImpacto": "A Prefeitura informa que o material entregue será encaminhado para tratamento e transformado em CDR (Combustível Derivado de Resíduo), para uso como combustível em processos industriais.",
+      "sinonimos": [
+        "resíduo têxtil",
+        "retalho de tecido",
+        "resto de tecido",
+        "roupa sem condição de uso",
+        "cobertor",
+        "descarte têxtil"
+      ],
+      "preparacao": "A notícia municipal não especifica acondicionamento, limpeza, limite por entrega nem procedimento de recebimento; confirme instruções atualizadas com o serviço antes de levar o material.",
+      "cuidados": "O ponto aceita apenas resíduos têxteis, segundo a Prefeitura; não leve outros tipos de resíduos. A fonte descreve este ecoponto específico, não a aceitação de têxteis em todos os ecopontos municipais nem em outras cidades.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ecoponto municipal têxtil — unidade Brás/Catumbi, São Paulo"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária: serviço localizado em São Paulo, no endereço informado; não constitui orientação nacional. Verifique se endereço, horário e regras continuam vigentes.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/w/prefeitura-inaugura-no-br%C3%A1s-primeiro-ecoponto-exclusivo-para-receber-restos-de-tecido-e-combater-descarte-irregular%C2%A0",
+          "comprova": "Referência indicada para revisão de “Resíduos têxteis — Ecoponto Têxtil Brás (São Paulo/SP)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-roupas-calcados-texteis-brasil-ras-doacao-de-roupas-e-calcados-disque-solid-2643ac20",
+      "grupoPesquisa": "roupas-calcados-texteis-brasil-rascunho",
+      "nomeMaterial": "Doação de roupas e calçados — Disque Solidariedade/FAS (Curitiba/PR)",
+      "categoriaMaterial": "Roupas, calçados e têxteis",
+      "classificacao": "Doação para assistência social em unidade municipal de recebimento",
+      "instrucaoDescarte": "Pequenas quantidades de roupas, calçados, utensílios e pequenos objetos podem ser entregues na sede da Fundação de Ação Social (FAS), Rua Eduardo Sprada, 4.520, Campo Comprido, ou nos Núcleos Regionais nas Ruas da Cidadania. A FAS coordena a destinação a pessoas em situação de vulnerabilidade social.",
+      "observacaoImpacto": "A doação é encaminhada para pessoas e famílias em situação de vulnerabilidade social atendidas pela rede socioassistencial municipal, conforme a descrição da Prefeitura.",
+      "sinonimos": [
+        "roupa para doação",
+        "calçado para doação",
+        "vestuário usado",
+        "doação para assistência social",
+        "desapego de roupas",
+        "pequena quantidade de roupas"
+      ],
+      "preparacao": "Selecione peças em bom estado e prontas para uso. A fonte não detalha embalagem ou preparo adicional.",
+      "cuidados": "A orientação é específica de Curitiba. A coleta domiciliar descrita para outros itens é voltada a móveis, eletrodomésticos e equipamentos eletrônicos, não a roupas e calçados. Para grandes volumes de campanhas e eventos, a fonte orienta informar a FAS com 30 dias de antecedência; confirme condições e lista atual de itens aceitos.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Sede da FAS em Curitiba",
+        "Núcleos Regionais da FAS nas Ruas da Cidadania"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal necessária: serviço da FAS/Disque Solidariedade em Curitiba; não é logística reversa nacional nem regra geral de aceitação em outros municípios.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: curitiba.pr.gov.br",
+          "url": "https://www.curitiba.pr.gov.br/noticias/hora-do-desapego-que-tal-doar-roupas-e-calcados-para-o-disque-solidariedade-de-curitiba/66882",
+          "comprova": "Referência indicada para revisão de “Doação de roupas e calçados — Disque Solidariedade/FAS (Curitiba/PR)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-pneus-usados-devolucao-ao-revendedor-na-troca-de-pneu-8b218e49",
+      "grupoPesquisa": "pneus-usados",
+      "nomeMaterial": "Devolução ao revendedor na troca de pneus",
+      "categoriaMaterial": "Pneus usados",
+      "classificacao": "Logística reversa — devolução em comércio de pneus",
+      "instrucaoDescarte": "Quando houver troca, procure devolver o pneu usado ao comerciante ou distribuidor participante do fluxo de logística reversa. Antes de levar pneus avulsos, confirme diretamente se o estabelecimento os recebe e quais condições se aplicam.",
+      "observacaoImpacto": "O retorno ao fluxo evita abandono inadequado; pneus expostos podem acumular água e favorecer criadouros de mosquitos, conforme alerta do SINIR.",
+      "sinonimos": [
+        "pneu inservível",
+        "pneu usado",
+        "pneu velho",
+        "pneumático usado",
+        "carcaça de pneu"
+      ],
+      "preparacao": "As fontes consultadas não estabelecem preparo doméstico universal. Mantenha o pneu inteiro e confirme com o estabelecimento se há exigências sobre aro, quantidade ou entrega avulsa.",
+      "cuidados": "Não presumir que toda loja, borracharia ou oficina recebe pneus de qualquer origem ou em qualquer quantidade; aceite e procedimentos variam por estabelecimento e operador.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Comerciante ou revendedor de pneus participante da logística reversa",
+        "Distribuidor de pneus participante"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Logística reversa; a obrigação e o fluxo são nacionais, mas o recebimento prático deve ser confirmado com o comércio/operador local. Não é regra de que toda loja receba entrega avulsa.",
+      "fontesReferencia": [
+        {
+          "titulo": "Reciclanip",
+          "url": "https://www.reciclanip.org.br/pontos-de-coleta/coleta-no-brasil/",
+          "comprova": "Referência indicada para revisão de “Devolução ao revendedor na troca de pneus”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "SINIR — Ministério do Meio Ambiente",
+          "url": "https://sinir.gov.br/perfis/logistica-reversa/logistica-reversa/pneus-inserviveis/",
+          "comprova": "Referência indicada para revisão de “Devolução ao revendedor na troca de pneus”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "gov.br",
+          "url": "https://www.gov.br/ibama/pt-br/assuntos/emissoes-e-residuos/residuos/pneumaticos-inserviveis",
+          "comprova": "Referência indicada para revisão de “Devolução ao revendedor na troca de pneus”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-pneus-usados-entrega-em-ponto-de-coleta-de-pneus-inse-63e710a4",
+      "grupoPesquisa": "pneus-usados",
+      "nomeMaterial": "Entrega em ponto de coleta de pneus inservíveis",
+      "categoriaMaterial": "Pneus usados",
+      "classificacao": "Ponto de coleta definido no sistema de logística reversa",
+      "instrucaoDescarte": "Consulte a lista de pontos de coleta da Reciclanip ou a lista anual publicada pelo Ibama e confirme com o ponto escolhido se está ativo e recebe o seu tipo e quantidade de pneus antes de se deslocar.",
+      "observacaoImpacto": "O SINIR alerta que pneus dispostos inadequadamente podem acumular água, favorecer vetores e ocupar grandes espaços; a destinação deve seguir fluxo ambientalmente adequado.",
+      "sinonimos": [
+        "ponto de coleta de pneus",
+        "ecoponto de pneus",
+        "pneus inservíveis",
+        "pneus para logística reversa",
+        "pneumáticos inservíveis"
+      ],
+      "preparacao": "Não há instrução nacional de limpeza ou desmontagem informada nas fontes consultadas. Preserve o pneu inteiro e pergunte previamente ao ponto sobre preparo, quantidade e forma de entrega.",
+      "cuidados": "A lista da Reciclanip é apresentada como indicativa; disponibilidade, horário e critérios de recebimento podem variar. Não deixe pneus expostos acumulando água nem os descarte no lixo comum ou em terreno baldio.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ponto de coleta de pneus inservíveis cadastrado/indicado pelo sistema de logística reversa",
+        "Ponto municipal parceiro, quando confirmado como recebedor"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Logística reversa nacional para pneus inservíveis; a presença de ponto e as condições de recebimento exigem validação municipal ou com o operador. A Resolução CONAMA nº 416/2009 e a página do Ibama descrevem implantação de pontos e responsabilidades setoriais.",
+      "fontesReferencia": [
+        {
+          "titulo": "Reciclanip",
+          "url": "https://www.reciclanip.org.br/pontos-de-coleta/coleta-no-brasil/",
+          "comprova": "Referência indicada para revisão de “Entrega em ponto de coleta de pneus inservíveis”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "gov.br",
+          "url": "https://www.gov.br/ibama/pt-br/assuntos/emissoes-e-residuos/residuos/pneumaticos-inserviveis",
+          "comprova": "Referência indicada para revisão de “Entrega em ponto de coleta de pneus inservíveis”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "SINIR — Ministério do Meio Ambiente",
+          "url": "https://sinir.gov.br/perfis/logistica-reversa/logistica-reversa/pneus-inserviveis/",
+          "comprova": "Referência indicada para revisão de “Entrega em ponto de coleta de pneus inservíveis”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: conama.mma.gov.br",
+          "url": "https://conama.mma.gov.br/index.php?option=com_sisconama&task=documento.download&id=25356",
+          "comprova": "Referência indicada para revisão de “Entrega em ponto de coleta de pneus inservíveis”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-pneus-usados-ponto-voluntario-municipal-botucatu-sp-571d23e6",
+      "grupoPesquisa": "pneus-usados",
+      "nomeMaterial": "Ponto voluntário municipal — Botucatu (SP)",
+      "categoriaMaterial": "Pneus usados",
+      "classificacao": "Ponto de entrega voluntária municipal",
+      "instrucaoDescarte": "A Prefeitura de Botucatu informa recebimento gratuito de pneus inservíveis de moradores, borracharias, oficinas e demais estabelecimentos comerciais. Endereço publicado: Rua Dr. José Barbosa de Barros, nº 120, Vila dos Lavradores, com entrada pelo galpão da Secretaria Municipal de Educação. Horário informado: segunda a sexta-feira, das 7h30 às 11h e das 13h às 16h30.",
+      "observacaoImpacto": "A Prefeitura alerta que pneus abandonados podem acumular água e criar focos do Aedes aegypti; após a entrega, são armazenados temporariamente e encaminhados ao sistema nacional de logística reversa.",
+      "sinonimos": [
+        "pneu usado",
+        "pneu inservível",
+        "pneu velho",
+        "pneumático inservível",
+        "carcaça de pneu"
+      ],
+      "preparacao": "A notícia municipal não especifica limpeza, desmontagem, aro ou limite de quantidade. Confirme com a Secretaria do Meio Ambiente antes de transportar volumes grandes ou pneus com condições incomuns.",
+      "cuidados": "A instrução é específica de Botucatu e pode mudar; confirme endereço, horário e recebimento antes de ir. A Prefeitura orienta não descartar no lixo comum nem em terrenos baldios.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ponto municipal voluntário de coleta de pneus inservíveis de Botucatu"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal necessária; registro local de Botucatu, não aplicável automaticamente a outros municípios. As condições e horários citados são os publicados na notícia consultada e podem ser alterados pelo serviço municipal.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: botucatu.sp.gov.br",
+          "url": "https://www.botucatu.sp.gov.br/noticia/5136/descarte-consciente-prefeitura-disponibiliza-pontos-de-coleta-para-o-descarte-ambientalmente-correto-de-pneus-garantindo-destinacao-adequada-e-preservacao-ambiental/",
+          "comprova": "Referência indicada para revisão de “Ponto voluntário municipal — Botucatu (SP)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-residuos-construcao-reforma-br-entulho-mineral-de-pequenas-obras-calica-9836ada4",
+      "grupoPesquisa": "residuos-construcao-reforma-br",
+      "nomeMaterial": "Entulho mineral de pequenas obras (caliça, tijolos, restos de cerâmica e cimento) — confirmar aceitação local",
+      "categoriaMaterial": "Resíduos de construção e reforma",
+      "classificacao": "Resíduo de construção civil; resíduos minerais de pequenas obras",
+      "instrucaoDescarte": "Separe os restos de construção e leve somente a ponto municipal que confirme receber esse material. Curitiba orienta entrega de restos de construção/caliça em Ecoponto; São Paulo prevê Ecoponto para pequenos volumes e, na coleta domiciliar convencional, até 50 kg por imóvel/dia se devidamente acondicionados.",
+      "observacaoImpacto": "Exemplos e limites são municipais (Curitiba: até 1 m³/dia por pessoa nos Ecopontos; São Paulo: até 1 m³/dia em Ecoponto ou até 50 kg/dia na coleta domiciliar, nas condições publicadas). Não são regra nacional. Proposta de rascunho, não orientação aprovada.",
+      "sinonimos": [
+        "entulho de obra",
+        "caliça",
+        "restos de reforma",
+        "RCC mineral",
+        "resíduos de construção civil"
+      ],
+      "preparacao": "Mantenha o entulho separado de madeira, poda e outros materiais; em Curitiba, a orientação é separar e depositar conforme indicação do funcionário. Em São Paulo, acondicione corretamente para a opção de coleta domiciliar.",
+      "cuidados": "Não descarte em vias ou logradouros. Os limites e materiais aceitos citados são regras locais diferentes; confirme endereço, limite e acondicionamento com o município antes de transportar. Não presuma que todo resíduo de obra é entulho mineral aceito.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ecoponto municipal / PEV que confirme recebimento de RCC mineral",
+        "Coleta domiciliar municipal, apenas onde prevista e dentro do limite local"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Orientação prática depende de validação municipal. A Resolução CONAMA 307/2002 é referência nacional de diretrizes para gestão de RCC; não implica aceitação universal por Ecopontos.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: curitiba.pr.gov.br",
+          "url": "https://www.curitiba.pr.gov.br/noticias/ecopontos-sao-o-lugar-certo-para-descarte-de-residuos-da-construcao-e-vegetais-veja-os-enderecos/78356",
+          "comprova": "Referência indicada para revisão de “Entulho mineral de pequenas obras (caliça, tijolos, restos de cerâmica e cimento) — confirmar aceitação local”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/web/spregula/w/residuos_solidos/cadastro_sp_regula/4627",
+          "comprova": "Referência indicada para revisão de “Entulho mineral de pequenas obras (caliça, tijolos, restos de cerâmica e cimento) — confirmar aceitação local”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: iema.es.gov.br",
+          "url": "https://iema.es.gov.br/residuos_solidos/conama",
+          "comprova": "Referência indicada para revisão de “Entulho mineral de pequenas obras (caliça, tijolos, restos de cerâmica e cimento) — confirmar aceitação local”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-residuos-construcao-reforma-br-madeira-proveniente-de-obra-ou-reforma-a-bf431b9f",
+      "grupoPesquisa": "residuos-construcao-reforma-br",
+      "nomeMaterial": "Madeira proveniente de obra ou reforma — aceitar somente em ponto que a liste",
+      "categoriaMaterial": "Resíduos de construção e reforma",
+      "classificacao": "Resíduo de construção/reforma: madeira",
+      "instrucaoDescarte": "Separe a madeira do entulho mineral e consulte o Ecoponto/PEV antes de levar. Curitiba lista madeira entre os resíduos recebidos nos Ecopontos; São Paulo também a inclui na relação publicada para seus Ecopontos.",
+      "observacaoImpacto": "A inclusão de madeira é documentada para Ecopontos de Curitiba e São Paulo, mas não constitui regra nacional nem garante aceitação em qualquer unidade. Proposta de rascunho, não orientação aprovada.",
+      "sinonimos": [
+        "madeira de descarte",
+        "sobras de madeira de obra",
+        "resíduo de madeira de reforma",
+        "madeiramento usado"
+      ],
+      "preparacao": "Separe por material e siga a orientação do funcionário do ponto; confirme previamente se a unidade recebe o tipo e o volume de madeira que você tem.",
+      "cuidados": "As páginas consultadas não especificam aceitação para toda madeira tratada, pintada, contaminada ou com componentes anexos. Não assuma que esses casos são aceitos; pergunte ao operador e não misture com resíduos perigosos.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ecoponto municipal que confirme recebimento de madeira",
+        "PEV ou unidade municipal de triagem que confirme a categoria e as condições"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária; fontes locais consultadas: Curitiba e São Paulo.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: curitiba.pr.gov.br",
+          "url": "https://www.curitiba.pr.gov.br/noticias/ecopontos-sao-o-lugar-certo-para-descarte-de-residuos-da-construcao-e-vegetais-veja-os-enderecos/78356",
+          "comprova": "Referência indicada para revisão de “Madeira proveniente de obra ou reforma — aceitar somente em ponto que a liste”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/web/spregula/w/residuos_solidos/cadastro_sp_regula/4627",
+          "comprova": "Referência indicada para revisão de “Madeira proveniente de obra ou reforma — aceitar somente em ponto que a liste”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-residuos-construcao-reforma-br-sobras-de-tinta-thinner-piche-oleo-soda--c53b5f9f",
+      "grupoPesquisa": "residuos-construcao-reforma-br",
+      "nomeMaterial": "Sobras de tinta, thinner, piche, óleo, soda cáustica ou outros produtos químicos da reforma",
+      "categoriaMaterial": "Resíduos de construção e reforma",
+      "classificacao": "Resíduo químico/perigoso associado a obra ou reforma; não misturar ao entulho comum",
+      "instrucaoDescarte": "Não leve automaticamente ao Ecoponto de RCC. A Prefeitura da Serra lista latas contendo tinta, thinner, piche, óleo, soda cáustica e outros produtos químicos entre os itens proibidos nos Ecopontos; consulte o serviço municipal ou operador autorizado para confirmar uma rota de recebimento apropriada.",
+      "observacaoImpacto": "A proibição documentada vale para os Ecopontos da Serra; não permite inferir as regras de outros municípios. Nenhuma rota alternativa ou aceite de logística reversa foi presumido. Proposta de rascunho, não orientação aprovada.",
+      "sinonimos": [
+        "resto de tinta",
+        "lata de tinta com sobra",
+        "solvente de obra",
+        "thinner",
+        "resíduo químico de reforma",
+        "piche"
+      ],
+      "preparacao": "Mantenha o conteúdo em sua embalagem original, fechada e identificada quando isso puder ser feito com segurança; não despeje, misture nem transfira o produto. Confirme instruções de transporte e recebimento com o serviço indicado pelo município/operador.",
+      "cuidados": "A fonte municipal citada estabelece proibição nos Ecopontos da Serra, mas não informa uma rota alternativa universal. Não encaminhe para coleta comum, RCC ou logística reversa específica sem confirmação expressa de que recebe aquele produto e recipiente.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ponto autorizado para resíduos químicos/perigosos, somente após confirmação do município ou operador",
+        "Serviço de recebimento indicado pelo fabricante/operador, se houver confirmação de aceitação do produto específico"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador obrigatória. Fonte primária municipal da Serra para a lista de itens proibidos nos seus Ecopontos.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: serra.es.gov.br",
+          "url": "https://www.serra.es.gov.br/noticias/morador-da-serra-possui-locais-adequados-e-gratuitos-para-o-descarte-de-entulhos",
+          "comprova": "Referência indicada para revisão de “Sobras de tinta, thinner, piche, óleo, soda cáustica ou outros produtos químicos da reforma”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-residuos-construcao-reforma-br-grande-volume-de-entulho-de-obra-contrat-120b0c35",
+      "grupoPesquisa": "residuos-construcao-reforma-br",
+      "nomeMaterial": "Grande volume de entulho de obra — contratar transporte regularizado conforme regra local",
+      "categoriaMaterial": "Resíduos de construção e reforma",
+      "classificacao": "RCC em volume acima do limite de entrega voluntária local",
+      "instrucaoDescarte": "Quando o volume exceder o limite local, consulte o município e use transportador regularizado. Em São Paulo, a SP Regula orienta verificar a lista municipal de empresas cadastradas, exigir contrato com responsabilidade pela destinação e obter uma via do Controle de Transporte de Resíduo (CTR).",
+      "observacaoImpacto": "A SP Regula atribui ao gerador a remoção e destinação quando excedidos os limites aplicáveis e orienta documentação do serviço. Isso não estabelece um limite ou procedimento uniforme para o Brasil. Proposta de rascunho, não orientação aprovada.",
+      "sinonimos": [
+        "grande gerador de RCC",
+        "caçamba de entulho",
+        "resíduo de demolição",
+        "volume de entulho acima do limite do Ecoponto",
+        "RCC em grande quantidade"
+      ],
+      "preparacao": "Antes da remoção, confira cadastro do transportador e destino licenciado indicado para a operação; guarde contrato e CTR como comprovantes da entrega, conforme a orientação publicada para São Paulo.",
+      "cuidados": "Não contrate caçamba sem verificar regularização e destinação. Os critérios e documentos mencionados são os publicados para São Paulo; confirme exigências, transportadores e instalações autorizadas no município onde a obra ocorre. Não descarte em via pública.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Transportador/caçamba regularizado pelo município",
+        "Área licenciada de transbordo e triagem (ATT) ou aterro de RCC, somente conforme indicação e comprovação do operador/município"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal e do operador necessária; instrução e documentação citadas são específicas da cidade de São Paulo.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/web/spregula/w/residuos_solidos/cadastro_sp_regula/4627",
+          "comprova": "Referência indicada para revisão de “Grande volume de entulho de obra — contratar transporte regularizado conforme regra local”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-rascunho-descarte-tintas-solventes-sobras-de-tintas-imobiliarias-e-embalage-b8d83e95",
+      "grupoPesquisa": "rascunho-descarte-tintas-solventes-aerossois-quimicos-domesticos-br",
+      "nomeMaterial": "Sobras de tintas imobiliárias e embalagens — RetornaTinta",
+      "categoriaMaterial": "Tintas, solventes, aerossóis e químicos domésticos",
+      "classificacao": "Sobras de tinta imobiliária e sua embalagem original pós-consumo",
+      "instrucaoDescarte": "Levar a embalagem original, com tampa, com ou sem sobra de tinta, a um Ponto de Entrega Voluntária (PEV) participante do RetornaTinta. O programa informa triagem e reciclagem das embalagens e coprocessamento das sobras.",
+      "observacaoImpacto": "A fonte diz que o programa está disponível em São Paulo e Recife e lista unidades participantes; disponibilidade e recebimento dependem do PEV listado, não é um serviço nacional universal.",
+      "sinonimos": [
+        "tinta de parede",
+        "tinta imobiliária",
+        "resto de tinta",
+        "lata de tinta",
+        "embalagem pós-consumo de tinta"
+      ],
+      "preparacao": "Manter na embalagem original e com a tampa; entregar fechada ao PEV participante.",
+      "cuidados": "Não presumir que qualquer loja de tintas recebe. Consultar a lista atual de PEVs do programa; a lista publicada inclui pontos em São Paulo/SP, Grande São Paulo, Santos/SP e Recife/PE. Não extrapolar a aceitação para solventes avulsos, aerossóis ou químicos domésticos.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "PEV participante do programa RetornaTinta"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Logística reversa setorial, com cobertura territorial e pontos participantes limitados conforme lista do programa; confirmar a unidade antes de ir.",
+      "fontesReferencia": [
+        {
+          "titulo": "Abrafati — RetornaTinta",
+          "url": "https://abrafati.com.br/retorna-tinta/",
+          "comprova": "Referência indicada para revisão de “Sobras de tintas imobiliárias e embalagens — RetornaTinta”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-rascunho-descarte-tintas-solventes-sobras-de-tintas-vernizes-e-solventes-or-d20e4c0e",
+      "grupoPesquisa": "rascunho-descarte-tintas-solventes-aerossois-quimicos-domesticos-br",
+      "nomeMaterial": "Sobras de tintas, vernizes e solventes — orientação municipal de Jundiaí",
+      "categoriaMaterial": "Tintas, solventes, aerossóis e químicos domésticos",
+      "classificacao": "Sobras de tintas, vernizes e solventes; não aceitos nos ecopontos de Jundiaí",
+      "instrucaoDescarte": "A Prefeitura orienta acondicionar esses materiais em caixas com tampas bem vedadas e destiná-los ao comércio onde foram comprados, para contato com fabricante/vendedor e providências de logística reversa.",
+      "observacaoImpacto": "Orientação da Prefeitura de Jundiaí; a própria página informa que esses itens não são captados nos ecopontos locais e recomenda retorno ao comércio de compra.",
+      "sinonimos": [
+        "restos de tinta",
+        "tinta líquida",
+        "tinta seca em lata",
+        "verniz",
+        "solvente",
+        "lata com sobra de tinta"
+      ],
+      "preparacao": "Acondicionar em caixas, com as tampas bem vedadas, conforme orientação municipal. A fonte não descreve outras etapas de preparo.",
+      "cuidados": "Não levar aos ecopontos nem descartar em áreas públicas; a orientação é procurar o comércio onde o produto foi adquirido. Não assumir que lojas de outros municípios ou operadores aceitam o mesmo conjunto de materiais.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Comércio onde o produto foi comprado, para encaminhamento pelo fabricante/vendedor; não ecoponto municipal"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal e do comércio/fabricante necessária; não é regra de recebimento universal no Brasil.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: jundiai.sp.gov.br",
+          "url": "https://jundiai.sp.gov.br/infraestrutura-e-servicos-publicos/limpeza-publica/ecopontos/",
+          "comprova": "Referência indicada para revisão de “Sobras de tintas, vernizes e solventes — orientação municipal de Jundiaí”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-rascunho-descarte-tintas-solventes-residuos-toxicos-domiciliares-especifica-01c7a083",
+      "grupoPesquisa": "rascunho-descarte-tintas-solventes-aerossois-quimicos-domesticos-br",
+      "nomeMaterial": "Resíduos tóxicos domiciliares especificados — coleta especial de Curitiba",
+      "categoriaMaterial": "Tintas, solventes, aerossóis e químicos domésticos",
+      "classificacao": "Pequenas quantidades domiciliares de tintas, cola, solventes e embalagens de inseticidas, entre outros itens listados pelo serviço",
+      "instrucaoDescarte": "Levar os itens à coleta especial periódica do caminhão que faz rodízio nas proximidades dos terminais de Curitiba; consultar no site as datas e endereços. O serviço recebe somente pequenas quantidades de domicílios.",
+      "observacaoImpacto": "A relação municipal nomeia tintas, cola, solventes e embalagens de inseticidas, mas não estabelece que todo químico doméstico ou toda embalagem de aerossol seja aceita.",
+      "sinonimos": [
+        "tinta",
+        "cola",
+        "solvente",
+        "embalagem de inseticida",
+        "lixo tóxico domiciliar",
+        "resíduo químico doméstico especificado"
+      ],
+      "preparacao": "Separar da coleta porta a porta e levar ao local e horário da coleta especial. A página não informa embalagem ou preparo específico para tintas, colas, solventes e embalagens de inseticidas.",
+      "cuidados": "Não apresentar esses itens à coleta porta a porta. A aceitação indicada é apenas para pequenas quantidades domiciliares e para os materiais expressamente listados. A página não nomeia latas de aerossol: confirmar diretamente com o serviço antes de levar aerossóis ou outros químicos não listados.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta especial municipal em caminhão, em locais periódicos próximos aos terminais de Curitiba"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Serviço municipal de Curitiba; verificar calendário, endereço e limites vigentes. Não generalizar para outros municípios.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: coletalixo.curitiba.pr.gov.br",
+          "url": "https://coletalixo.curitiba.pr.gov.br/lixo-toxico",
+          "comprova": "Referência indicada para revisão de “Resíduos tóxicos domiciliares especificados — coleta especial de Curitiba”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-rascunho-descarte-tintas-solventes-latas-de-aerossol-vazias-orientacao-muni-539e8727",
+      "grupoPesquisa": "rascunho-descarte-tintas-solventes-aerossois-quimicos-domesticos-br",
+      "nomeMaterial": "Latas de aerossol vazias — orientação municipal de Porto Lucena",
+      "categoriaMaterial": "Tintas, solventes, aerossóis e químicos domésticos",
+      "classificacao": "Embalagens de aerossol realmente vazias, conforme orientação local",
+      "instrucaoDescarte": "A Prefeitura de Porto Lucena orienta colocar latas de aerossol vazias junto aos outros recicláveis na coleta seletiva domiciliar do município.",
+      "observacaoImpacto": "O município orienta a coleta seletiva para latas realmente vazias. As condições de recebimento podem variar por município e operador; não extrapolar esta rota para outros locais.",
+      "sinonimos": [
+        "aerossol",
+        "lata de spray",
+        "embalagem de spray",
+        "desodorante aerosol",
+        "spray de cabelo",
+        "spray inseticida",
+        "tinta spray"
+      ],
+      "preparacao": "Certificar-se de que a lata está realmente vazia. Não perfurar a embalagem nem separar a tampa plástica; manter recicláveis separados dos resíduos orgânicos, segundo a orientação municipal.",
+      "cuidados": "A própria Prefeitura alerta que pode haver pressão interna mesmo em lata aparentemente vazia, com risco de explosão ou intoxicação; não perfurar. Esta é uma orientação de Porto Lucena, não uma regra nacional: confirmar a orientação da coleta local em outro município e não presumir que latas com conteúdo sejam aceitas como recicláveis.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta seletiva domiciliar de recicláveis em Porto Lucena, somente conforme a orientação municipal citada"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária fora de Porto Lucena; fonte municipal local, não orientação nacional.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: portolucena.rs.gov.br",
+          "url": "https://www.portolucena.rs.gov.br/site/noticias/saude/84525-descarte-de-embalagens-de-aerossois",
+          "comprova": "Referência indicada para revisão de “Latas de aerossol vazias — orientação municipal de Porto Lucena”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-moveis-residuos-volumosos-moveis-velhos-e-colchoes-entrega-em-ecop-94c45fbd",
+      "grupoPesquisa": "moveis-residuos-volumosos",
+      "nomeMaterial": "Móveis velhos e colchões — entrega em Ecoponto (São Paulo/SP)",
+      "categoriaMaterial": "Móveis e resíduos volumosos",
+      "classificacao": "Móveis e objetos volumosos domiciliares",
+      "instrucaoDescarte": "A Prefeitura de São Paulo informa que móveis velhos (como camas, armários e sofás), colchões e pedaços de madeira e metal podem ser levados aos Ecopontos, com entrega voluntária e gratuita. Consulte a unidade mais próxima e confirme seu funcionamento antes do deslocamento.",
+      "observacaoImpacto": "Orientação municipal localizada; a fonte não estabelece regra nacional nem detalha destino final individual dos móveis.",
+      "sinonimos": [
+        "móveis usados",
+        "móveis inservíveis",
+        "sofá",
+        "cama",
+        "armário",
+        "colchão",
+        "grandes objetos",
+        "volumosos"
+      ],
+      "preparacao": "A fonte não informa preparo específico para móveis ou colchões. Organize transporte seguro e confirme previamente com a unidade se o item e suas dimensões são aceitos; não deixe o material na rua como se fosse coleta agendada.",
+      "cuidados": "A página lista itens aceitos, mas não informa limite específico de volume para móveis. Horários divulgados podem variar entre páginas oficiais; confirme no canal municipal atual. Não extrapole a aceitação para Ecopontos de outros municípios.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ecoponto municipal / ponto de entrega voluntária de volumosos"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal necessária — regra divulgada para São Paulo/SP; não é orientação universal para o Brasil.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/w/noticia/encontre-o-ecoponto-mais-perto-de-sua-casa",
+          "comprova": "Referência indicada para revisão de “Móveis velhos e colchões — entrega em Ecoponto (São Paulo/SP)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-moveis-residuos-volumosos-moveis-velhos-e-restos-de-moveis-cata-ba-d8c371a0",
+      "grupoPesquisa": "moveis-residuos-volumosos",
+      "nomeMaterial": "Móveis velhos e restos de móveis — Cata-bagulho (São Paulo/SP)",
+      "categoriaMaterial": "Móveis e resíduos volumosos",
+      "classificacao": "Móveis domiciliares e restos de móveis",
+      "instrucaoDescarte": "A Prefeitura de São Paulo lista móveis velhos, inclusive restos de móveis, entre os itens do Cata-bagulho. Consulte o itinerário e a data de atendimento pelo endereço/CEP nos canais municipais antes de contar com a coleta.",
+      "observacaoImpacto": "Serviço municipal de São Paulo; a página oferece consulta por localização e não define uma regra nacional para coleta de volumosos.",
+      "sinonimos": [
+        "Cata-bagulho",
+        "coleta de volumosos",
+        "móveis velhos",
+        "restos de móveis",
+        "descarte de móveis"
+      ],
+      "preparacao": "A página consultada não especifica como colocar os móveis para coleta, horário exato de exposição ou necessidade de desmontagem. Confirme essas instruções para sua rua com a Prefeitura antes de disponibilizar o item.",
+      "cuidados": "O serviço opera por rotas e datas regulares, não como coleta sob demanda imediata. Não deixe móveis na calçada fora da orientação municipal; não presuma que itens desmontados, partes soltas ou qualquer volume serão aceitos sem confirmação.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta municipal programada de volumosos (Cata-bagulho)",
+        "Ecoponto municipal como alternativa indicada pela Prefeitura, sujeito às regras locais"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal necessária — consultar rota, data e forma de apresentação em São Paulo/SP; outros municípios podem não oferecer serviço equivalente.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: prefeitura.sp.gov.br",
+          "url": "https://prefeitura.sp.gov.br/sp-mais-limpo",
+          "comprova": "Referência indicada para revisão de “Móveis velhos e restos de móveis — Cata-bagulho (São Paulo/SP)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-moveis-residuos-volumosos-moveis-inserviveis-e-colchoes-coleta-age-82d43817",
+      "grupoPesquisa": "moveis-residuos-volumosos",
+      "nomeMaterial": "Móveis inservíveis e colchões — coleta agendada (São José/SC)",
+      "categoriaMaterial": "Móveis e resíduos volumosos",
+      "classificacao": "Móveis e itens domésticos volumosos",
+      "instrucaoDescarte": "A Prefeitura de São José informa que moradores podem agendar recolhimento gratuito com a Secretaria de Infraestrutura, de segunda a sexta-feira, pelo telefone da Ouvidoria indicado na página; também descreve coleta de móveis e colchões pela empresa Ambiental, mediante agendamento com o operador.",
+      "observacaoImpacto": "A publicação descreve serviço e operador locais; não permite inferir que coleta domiciliar de móveis seja oferecida em todo o país.",
+      "sinonimos": [
+        "móveis inservíveis",
+        "sofá",
+        "colchão",
+        "portas",
+        "móveis velhos",
+        "resíduos volumosos domiciliares"
+      ],
+      "preparacao": "A orientação publicada não determina como preparar móveis para a coleta municipal. Para a coleta da Ambiental, a página lista móveis inservíveis (incluindo sofá, colchão e portas) e indica limite de 1 m³ por domicílio; confirme com o operador como e quando disponibilizar o item.",
+      "cuidados": "A fonte exclui resíduos de construção civil da categoria de volumosos atendida pela coleta de móveis. Não coloque entulho, telhas ou outros materiais de obra como se fossem móveis. Telefones, disponibilidade e regras são locais e devem ser confirmados antes do agendamento.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta municipal agendada de volumosos",
+        "Coleta agendada pelo operador municipal de resíduos"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária — serviço descrito para São José/SC; limite de 1 m³ informado especificamente para o serviço da Ambiental.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: saojose.sc.gov.br",
+          "url": "https://saojose.sc.gov.br/prefeitura-de-sao-jose-recolhe-moveis-e-residuos-volumosos/73867/",
+          "comprova": "Referência indicada para revisão de “Móveis inservíveis e colchões — coleta agendada (São José/SC)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-moveis-residuos-volumosos-moveis-colchoes-e-sofas-pev-sao-jose-sc-ff9de1d7",
+      "grupoPesquisa": "moveis-residuos-volumosos",
+      "nomeMaterial": "Móveis, colchões e sofás — PEV (São José/SC)",
+      "categoriaMaterial": "Móveis e resíduos volumosos",
+      "classificacao": "Móveis e resíduos volumosos domiciliares",
+      "instrucaoDescarte": "A Prefeitura de São José informa que o Ponto de Entrega Voluntária mantido pela empresa Ambiental recebe móveis, colchões e sofás, considerando o limite de 1 m³ por munícipe. A página informa funcionamento de segunda a sábado, das 8h às 16h20, no endereço publicado; confirme antes de levar o item.",
+      "observacaoImpacto": "Informação específica de um PEV em São José/SC; os limites e materiais aceitos dependem do município e do operador.",
+      "sinonimos": [
+        "PEV",
+        "ponto de entrega voluntária",
+        "móveis inservíveis",
+        "colchões",
+        "sofás",
+        "volumosos"
+      ],
+      "preparacao": "Não há na fonte uma exigência específica de desmontagem ou acondicionamento para móveis. Leve apenas após confirmar aceitação e condições atuais com o PEV; respeite o limite informado e planeje transporte e descarga seguros.",
+      "cuidados": "A página lista resíduos perigosos e determinados itens que não são aceitos no PEV, incluindo tintas, solventes, óleos, agrotóxicos, itens com amianto, pilhas e baterias, pneus, medicamentos vencidos e lâmpadas fluorescentes. Não misture esses materiais ao móvel nem presuma que a lista ou limite se aplique a outros pontos.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Ponto de Entrega Voluntária (PEV) municipal operado por empresa contratada"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Validação municipal/operador necessária — local, horário, lista de aceitação e limite são os publicados para São José/SC.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: saojose.sc.gov.br",
+          "url": "https://saojose.sc.gov.br/prefeitura-de-sao-jose-recolhe-moveis-e-residuos-volumosos/73867/",
+          "comprova": "Referência indicada para revisão de “Móveis, colchões e sofás — PEV (São José/SC)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-guia-descarte-rejeitos-sanitarios--rejeitos-sanitarios-domesticos-202b3e80",
+      "grupoPesquisa": "guia-descarte-rejeitos-sanitarios-rascunho",
+      "nomeMaterial": "Rejeitos sanitários domésticos",
+      "categoriaMaterial": "Rejeitos, papel sanitário, fraldas e absorventes",
+      "classificacao": "Rejeito doméstico (classificação e encaminhamento conforme serviço local)",
+      "instrucaoDescarte": "Separar dos recicláveis secos. As orientações oficiais consultadas classificam papel higiênico usado, fraldas descartáveis e absorventes como rejeitos e os encaminham à coleta convencional, onde o serviço local assim os recebe.",
+      "observacaoImpacto": "Separar rejeitos dos recicláveis reduz contaminação e facilita o aproveitamento dos recicláveis; a PNRS determina disposição final ambientalmente adequada dos rejeitos.",
+      "sinonimos": [
+        "rejeito de banheiro",
+        "resíduo sanitário usado",
+        "lixo de banheiro",
+        "papel higiênico usado",
+        "fralda descartável usada",
+        "absorvente usado"
+      ],
+      "preparacao": "Acondicionar em saco bem fechado e apresentar de acordo com dias, horários e forma definidos pelo serviço municipal. Em Porto Alegre, os resíduos devem estar embalados e levados ao logradouro nos dias/turnos locais; em coleta automatizada, devem ser colocados no contêiner indicado pelo município.",
+      "cuidados": "A PNRS define rejeito como resíduo sem possibilidade de tratamento/recuperação viável; isso não cria uma regra nacional detalhada para cada item ou ponto de entrega. Não misturar à coleta seletiva. Não presumir aceitação em ecoponto, PEV ou programa de logística reversa; confirmar com o município/operador. A recomendação de saco duplo e limite de enchimento publicada pelo DF era orientação de contexto pandêmico de 2020, não regra geral atual.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta domiciliar convencional/indiferenciada, se o serviço local incluir rejeitos sanitários",
+        "Contêiner municipal destinado a rejeitos ou à fração convencional, apenas quando indicado pelo serviço local"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Definição legal geral nacional para a categoria de rejeito; exemplos e forma de coleta dependem da validação municipal/operador. As fontes consultadas não estabelecem logística reversa para estes resíduos pós-uso.",
+      "fontesReferencia": [
+        {
+          "titulo": "Planalto — legislação federal",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/lei/l12305.htm",
+          "comprova": "Referência indicada para revisão de “Rejeitos sanitários domésticos”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: sema.df.gov.br",
+          "url": "https://sema.df.gov.br/w/continue-acertando-dica-de-como-acondicionar-o-lixo-em-tempo-de-pandemia",
+          "comprova": "Referência indicada para revisão de “Rejeitos sanitários domésticos”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "prefeitura.poa.br",
+          "url": "https://prefeitura.poa.br/carta-de-servicos/coleta-domiciliar-de-residuos",
+          "comprova": "Referência indicada para revisão de “Rejeitos sanitários domésticos”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-guia-descarte-rejeitos-sanitarios--papel-higienico-usado-e-papel-sanitario--49f256f0",
+      "grupoPesquisa": "guia-descarte-rejeitos-sanitarios-rascunho",
+      "nomeMaterial": "Papel higiênico usado e papel sanitário sujo",
+      "categoriaMaterial": "Rejeitos, papel sanitário, fraldas e absorventes",
+      "classificacao": "Rejeito sanitário (papel higiênico); outros papéis sujos podem variar conforme regra local",
+      "instrucaoDescarte": "Papel higiênico usado não deve ir à coleta seletiva de papel: as fontes oficiais consultadas o listam como rejeito/coleta convencional. Papel-toalha, lenços e guardanapos sujos também aparecem na lista de coleta convencional de Ribeirão Preto; confirme a regra local para esses itens.",
+      "observacaoImpacto": "Papel sanitário usado não deve contaminar a fração de papel reciclável; a coleta e destinação final são conforme o sistema municipal aplicável.",
+      "sinonimos": [
+        "papel higiênico usado",
+        "papel sanitário",
+        "papel de banheiro",
+        "papel-toalha usado",
+        "lenço de papel usado",
+        "guardanapo sujo"
+      ],
+      "preparacao": "Colocar no saco da fração convencional/rejeitos e fechá-lo; seguir os dias, horários e forma de apresentação definidos pelo município. Não é necessário lavar papel descartável usado.",
+      "cuidados": "A classificação municipal de papéis sujos não é idêntica em todas as fontes: no DF, papéis sujos/engordurados aparecem entre orgânicos, enquanto papel higiênico aparece entre rejeitos. Portanto, para papel-toalha, lenços e guardanapos, validar com o serviço local e não generalizar a categoria. Não descartar em recicláveis secos.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta domiciliar convencional/indiferenciada, quando aceita papel higiênico como rejeito",
+        "Fração orgânica ou convencional somente se a orientação municipal local assim determinar"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Papel higiênico usado aparece como rejeito em referências oficiais locais; itens próximos (toalha, lenço, guardanapo) têm classificação variável, exigindo validação municipal/operador. Sem indicação de logística reversa específica nas fontes consultadas.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: saaevicosa.mg.gov.br",
+          "url": "https://www.saaevicosa.mg.gov.br/noticia/740/saiba-a-forma-correta-de-descartar-os-residuos-de-sua-casa/",
+          "comprova": "Referência indicada para revisão de “Papel higiênico usado e papel sanitário sujo”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: sema.df.gov.br",
+          "url": "https://sema.df.gov.br/w/continue-acertando-dica-de-como-acondicionar-o-lixo-em-tempo-de-pandemia",
+          "comprova": "Referência indicada para revisão de “Papel higiênico usado e papel sanitário sujo”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: ribeiraopreto.sp.gov.br",
+          "url": "https://www.ribeiraopreto.sp.gov.br/recicla/residuos-domiciliares",
+          "comprova": "Referência indicada para revisão de “Papel higiênico usado e papel sanitário sujo”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    },
+    {
+      "codigoCatalogo": "br-guia-descarte-rejeitos-sanitarios--fraldas-descartaveis-e-absorventes-usado-a2891e6c",
+      "grupoPesquisa": "guia-descarte-rejeitos-sanitarios-rascunho",
+      "nomeMaterial": "Fraldas descartáveis e absorventes usados",
+      "categoriaMaterial": "Rejeitos, papel sanitário, fraldas e absorventes",
+      "classificacao": "Rejeito sanitário doméstico nas orientações municipais consultadas",
+      "instrucaoDescarte": "Separar dos recicláveis e encaminhar à coleta domiciliar convencional/indiferenciada se o serviço municipal aceitar rejeitos sanitários nessa coleta. Orientações do SAAE de Viçosa, da SEMA-DF e de Ribeirão Preto listam fraldas e/ou absorventes como rejeitos ou itens da coleta convencional.",
+      "observacaoImpacto": "Separá-los dos recicláveis evita encaminhar resíduos sanitários à triagem de secos; o destino efetivo é determinado pelo sistema municipal de coleta e disposição.",
+      "sinonimos": [
+        "fralda usada",
+        "fralda descartável",
+        "fralda geriátrica",
+        "absorvente higiênico usado",
+        "absorvente íntimo",
+        "protetor diário usado"
+      ],
+      "preparacao": "Acondicionar em saco fechado e disponibilizar conforme o calendário e as instruções do serviço local. Não levar a PEV, ecoponto ou ponto de logística reversa sem confirmação expressa de aceitação.",
+      "cuidados": "A classificação nos exemplos consultados é local, não uma instrução federal item a item. Não há nas fontes consultadas instrução universal de enrolar, usar saco duplo ou descartar em um ponto específico; siga eventual regra municipal/operador. Não afirmar que qualquer ecoponto ou programa recebe fraldas/absorventes usados.",
+      "categoriasPontos": [],
+      "rotasReferencia": [
+        "Coleta domiciliar convencional/indiferenciada, quando o serviço local recebe esses itens como rejeitos",
+        "Contêiner municipal da fração convencional/rejeitos somente se autorizado localmente"
+      ],
+      "abrangencia": "confirmar_localmente",
+      "notaAbrangencia": "Classificação respaldada por exemplos oficiais municipais/distritais; validação municipal/operador necessária para acondicionamento, calendário e ponto de entrega. As fontes consultadas não comprovam logística reversa para fraldas ou absorventes pós-uso.",
+      "fontesReferencia": [
+        {
+          "titulo": "Portal público: saaevicosa.mg.gov.br",
+          "url": "https://www.saaevicosa.mg.gov.br/noticia/740/saiba-a-forma-correta-de-descartar-os-residuos-de-sua-casa/",
+          "comprova": "Referência indicada para revisão de “Fraldas descartáveis e absorventes usados”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: sema.df.gov.br",
+          "url": "https://sema.df.gov.br/w/continue-acertando-dica-de-como-acondicionar-o-lixo-em-tempo-de-pandemia",
+          "comprova": "Referência indicada para revisão de “Fraldas descartáveis e absorventes usados”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "Portal público: ribeiraopreto.sp.gov.br",
+          "url": "https://www.ribeiraopreto.sp.gov.br/recicla/residuos-domiciliares",
+          "comprova": "Referência indicada para revisão de “Fraldas descartáveis e absorventes usados”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        },
+        {
+          "titulo": "prefeitura.poa.br",
+          "url": "https://prefeitura.poa.br/carta-de-servicos/coleta-domiciliar-de-residuos",
+          "comprova": "Referência indicada para revisão de “Fraldas descartáveis e absorventes usados”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+        }
+      ],
+      "dataVerificacao": "",
+      "statusMaterial": "rascunho",
+      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+    }
+  ]
+}
