@@ -8,6 +8,10 @@ const banco = {
   database: process.env.BANCO_DADOS_NOME,
   dialect: "postgres",
   logging: false,
+  dialectOptions:
+    process.env.BANCO_DADOS_SSL === "true"
+      ? { ssl: { require: true, rejectUnauthorized: true } }
+      : undefined,
 };
 
 module.exports = {
@@ -25,6 +29,5 @@ module.exports = {
   },
   production: {
     ...banco,
-    dialectOptions: { ssl: { require: true, rejectUnauthorized: true } },
   },
 };
