@@ -176,7 +176,10 @@ bancoDescribe("integração PostgreSQL", () => {
       pendente.lcr_pco_id_ponto_coleta,
     );
 
-    const resumo = await new ServicoAdministracao(banco).obterResumo();
+    const resumo = await new ServicoAdministracao(
+      banco,
+      new ServicoAuditoria(new RepositorioAuditoria(banco)),
+    ).obterResumo();
     expect(resumo.quantidadeUsuarios).toBeGreaterThanOrEqual(1);
     expect(resumo.quantidadeMateriais).toBeGreaterThanOrEqual(1);
     expect(await new ServicoPapeis(banco).listarAtivos()).toHaveLength(4);
@@ -295,7 +298,7 @@ bancoDescribe("integração PostgreSQL", () => {
     expect(progresso.quantidadePontos).toBe(desafio!.lcr_des_quantidade_pontos);
     const eventos = await auditoria.listar("desafio_concluido", 10);
     expect(
-      eventos.some(
+      eventos.registros.some(
         (evento) => evento.lcr_aud_id_usuario === usuario!.lcr_usr_id_usuario,
       ),
     ).toBe(true);

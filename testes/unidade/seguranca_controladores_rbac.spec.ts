@@ -12,7 +12,7 @@ const identidadeSemAcesso = {
   nome: 'Usuário sem acesso',
   email: 'sem-acesso@exemplo.test',
   papeis: ['usuario'],
-  permissoes: [],
+  permissoes: [] as string[],
 };
 
 function metadadosAutenticados() {

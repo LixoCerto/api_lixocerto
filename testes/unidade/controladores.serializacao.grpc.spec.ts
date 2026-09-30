@@ -20,7 +20,7 @@ function dependenciasQuestionario(servico: object) {
     { exigirPermissao: vi.fn() },
     { obterIdInterno: vi.fn().mockResolvedValue('usuario-interno') },
     { registrar: vi.fn().mockResolvedValue(undefined) },
-  ] as const;
+  ] as unknown as ConstructorParameters<typeof ControladorGrpcQuestionarios>;
 }
 
 describe('serialização dos controladores gRPC', () => {
@@ -52,7 +52,7 @@ describe('serialização dos controladores gRPC', () => {
       quantidadePontos: 0,
       explicacaoResposta: 'Questao ou alternativa indisponivel.',
     }) };
-    const controlador = new ControladorGrpcQuestionarios(...dependenciasQuestionario(servico) as never);
+    const controlador = new ControladorGrpcQuestionarios(...dependenciasQuestionario(servico));
     const metadados = new Metadata();
     metadados.set('authorization', 'Bearer token-teste');
 

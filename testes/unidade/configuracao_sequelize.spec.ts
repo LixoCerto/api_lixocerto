@@ -21,8 +21,8 @@ describe('configuração Sequelize de migrations', () => {
     process.env.BANCO_DADOS_SSL = 'false';
     const configuracao = carregarConfiguracao();
 
-    expect(configuracao.development.dialectOptions).toBeUndefined();
-    expect(configuracao.production.dialectOptions).toBeUndefined();
+    expect(configuracao.development!.dialectOptions).toBeUndefined();
+    expect(configuracao.production!.dialectOptions).toBeUndefined();
   });
 
   it('usa TLS validado em todos os ambientes quando BANCO_DADOS_SSL=true', () => {
@@ -30,7 +30,7 @@ describe('configuração Sequelize de migrations', () => {
     const configuracao = carregarConfiguracao();
     const tlsEsperado = { ssl: { require: true, rejectUnauthorized: true } };
 
-    expect(configuracao.development.dialectOptions).toEqual(tlsEsperado);
-    expect(configuracao.production.dialectOptions).toEqual(tlsEsperado);
+    expect(configuracao.development!.dialectOptions).toEqual(tlsEsperado);
+    expect(configuracao.production!.dialectOptions).toEqual(tlsEsperado);
   });
 });

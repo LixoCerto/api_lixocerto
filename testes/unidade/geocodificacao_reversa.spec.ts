@@ -5,7 +5,7 @@ afterEach(() => vi.unstubAllGlobals());
 
 describe('geocodificação reversa de pontos de coleta', () => {
   it('mapeia CEP/endereço brasileiro e reutiliza coordenadas arredondadas do cache', async () => {
-    const fetchMock = vi.fn(async () => new Response(JSON.stringify({
+    const fetchMock = vi.fn(async (_input: RequestInfo | URL, _init?: RequestInit) => new Response(JSON.stringify({
       address: {
         country_code: 'br',
         postcode: '58013-000',

@@ -29,7 +29,7 @@ describe('migration 031 — permissão de gestão de acessos', () => {
     await expect(migration.up(mock.interface)).resolves.toBeUndefined();
 
     expect(mock.bulkInsert).toHaveBeenCalledTimes(1);
-    expect(mock.bulkInsert.mock.calls[0][0]).toBe('lcr_permissoes');
+    expect(mock.bulkInsert.mock.calls[0]![0]).toBe('lcr_permissoes');
     expect(mock.transaction.commit).toHaveBeenCalledOnce();
     expect(mock.transaction.rollback).not.toHaveBeenCalled();
   });
@@ -44,8 +44,8 @@ describe('migration 031 — permissão de gestão de acessos', () => {
     await migration.up(mock.interface);
 
     expect(mock.bulkInsert).toHaveBeenCalledTimes(1);
-    expect(mock.bulkInsert.mock.calls[0][0]).toBe('lcr_papeis_permissoes');
-    expect(mock.bulkInsert.mock.calls[0][1][0]).toMatchObject({
+    expect(mock.bulkInsert.mock.calls[0]![0]).toBe('lcr_papeis_permissoes');
+    expect(mock.bulkInsert.mock.calls[0]![1][0]).toMatchObject({
       lcr_ppm_id_papel: 'id-administrador',
       lcr_ppm_id_permissao: 'id-permissao-existente',
     });

@@ -18,20 +18,20 @@ function metadadosAutenticados() {
   return metadados;
 }
 
-function dependencias(servico: object) {
+function dependencias(servico: object): ConstructorParameters<typeof ControladorGrpcMateriais> {
   return [
     servico,
     { obterIdentidadeAtual: vi.fn().mockResolvedValue(identidade) },
     { exigirPermissao: vi.fn(), temPermissao: vi.fn().mockReturnValue(true) },
     { obterIdInterno: vi.fn().mockResolvedValue('00000000-0000-4000-8000-000000000001') },
     { registrar: vi.fn().mockResolvedValue(undefined) },
-  ] as const;
+  ] as unknown as ConstructorParameters<typeof ControladorGrpcMateriais>;
 }
 
 describe('ControladorGrpcMateriais', () => {
   it('retorna resposta vazia quando o banco nao esta configurado para identidade autorizada', async () => {
     const servico = new ServicoMateriais(new RepositorioMateriais(null));
-    const controlador = new ControladorGrpcMateriais(...dependencias(servico) as never);
+    const controlador = new ControladorGrpcMateriais(...dependencias(servico));
 
     const resposta = await controlador.listarMateriais({ texto_pesquisa: 'vidro' }, metadadosAutenticados());
 
@@ -47,7 +47,7 @@ describe('ControladorGrpcMateriais', () => {
       lcr_mat_status_material: 'rascunho',
     };
     const servico = { criar: vi.fn().mockResolvedValue(material) };
-    const controlador = new ControladorGrpcMateriais(...dependencias(servico) as never);
+    const controlador = new ControladorGrpcMateriais(...dependencias(servico));
 
     const resposta = await controlador.criarMaterial({ dados: {
       nome_material: 'Pote de vidro',
@@ -69,7 +69,7 @@ describe('ControladorGrpcMateriais', () => {
 
   it('impede publicação sem fonte de referência', async () => {
     const servico = { obter: vi.fn().mockResolvedValue({ lcr_mat_fontes_referencia: [] }) };
-    const controlador = new ControladorGrpcMateriais(...dependencias(servico) as never);
+    const controlador = new ControladorGrpcMateriais(...dependencias(servico));
 
     await expect(controlador.alterarStatusMaterial({ id_material: 'material-id', status_material: 'publicado' }, metadadosAutenticados()))
       .rejects.toThrow('Inclua ao menos uma fonte antes de publicar.');

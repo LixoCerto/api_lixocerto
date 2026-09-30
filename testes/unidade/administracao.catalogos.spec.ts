@@ -5,7 +5,7 @@ import { ServicoPermissoes } from '../../src/modulos/permissoes/permissoes.servi
 
 describe('administracao e catalogos', () => {
   it('retorna resumo neutro quando o banco não está disponível', async () => {
-    await expect(new ServicoAdministracao(null).obterResumo()).resolves.toEqual({
+    await expect(new ServicoAdministracao(null, null as never).obterResumo()).resolves.toEqual({
       quantidadeUsuarios: 0,
       quantidadeMateriais: 0,
       quantidadePapeis: 0,

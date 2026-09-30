@@ -56,7 +56,7 @@ describe('seed geral — matriz de papéis-base', () => {
       (efetivas[papel] ??= []).push(permissao);
     }
     for (const papel of ['usuario', 'pesquisador', 'revisor']) {
-      expect(efetivas[papel].sort()).toEqual([...esperadas[papel]].sort());
+      expect([...efetivas[papel]!].sort()).toEqual([...esperadas[papel]!].sort());
     }
     expect(new Set(efetivas.administrador)).toEqual(new Set(permissoes.map(permissao => permissao.lcr_prm_codigo_permissao)));
     expect(permissoes.map(permissao => permissao.lcr_prm_codigo_permissao)).toContain('gamificacao:participar');
