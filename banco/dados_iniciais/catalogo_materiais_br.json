@@ -9,9 +9,9 @@
       "grupoPesquisa": "br-papel-papelao-rascunho-001",
       "nomeMaterial": "Papel e papelão secos para coleta seletiva",
       "categoriaMaterial": "Papel e papelão",
-      "classificacao": "Recicláveis secos domiciliares",
-      "instrucaoDescarte": "Em Ribeirão Preto, a prefeitura lista jornais, revistas, cadernos, caixas de papelão, listas telefônicas e embalagens longa vida entre os papéis da coleta seletiva. O serviço local é porta a porta e também ponto a ponto, com recebimento nos ecopontos municipais.",
-      "observacaoImpacto": "A fonte municipal informa que a separação correta na origem favorece a reciclagem e que os recicláveis coletados são encaminhados a cooperativas; isso não garante o mesmo destino em outros locais.",
+      "classificacao": "Papel e papelão secos da fração de recicláveis domiciliares; a coleta depende do serviço local.",
+      "instrucaoDescarte": "Separe papel e papelão limpos e secos para a coleta seletiva do seu endereço, somente quando o serviço local aceitar esses materiais.",
+      "observacaoImpacto": "Separar papel e papelão secos da fração úmida reduz contaminação e facilita o encaminhamento à coleta seletiva, quando disponível.",
       "sinonimos": [
         "papelão",
         "caixas de papelão",
@@ -22,25 +22,36 @@
         "cadernos",
         "embalagens longa vida"
       ],
-      "preparacao": "Separar dos resíduos orgânicos e rejeitos; a prefeitura recomenda que recicláveis estejam limpos e informa que não precisam ser separados por tipo de material, podendo ser colocados juntos no mesmo recipiente.",
-      "cuidados": "A página municipal inclui papel engordurado, papel higiênico, lenços de papel e papel-toalha entre os resíduos da coleta convencional, não da seletiva. A lista é de Ribeirão Preto; não presume aceitação por outros municípios ou operadores.",
+      "preparacao": "Separe-os de restos de alimentos, líquidos, orgânicos e rejeitos. Remova resíduos de comida ou líquido e deixe papel e papelão secarem completamente. Acondicione e disponibilize conforme o local, dia e horário indicados pelo serviço municipal.",
+      "cuidados": "Não misture papéis engordurados ou molhados, guardanapos usados, papel higiênico, papel-toalha, fraldas, absorventes, filtros ou borra de café com os recicláveis secos. Embalagens de papel/papelão com restos de alimentos ou líquidos não devem ser presumidas aceitas. Consulte a orientação do serviço local.",
       "categoriasPontos": [],
       "rotasReferencia": [
-        "Coleta seletiva municipal porta a porta em Ribeirão Preto",
-        "Ecopontos municipais de Ribeirão Preto (ponto a ponto)"
+        "Coleta seletiva municipal, se disponível no endereço e se aceitar papel/papelão",
+        "Cooperativa ou ponto de entrega que confirme o recebimento de papel e papelão",
+        "PEV/ecoponto municipal, somente se a unidade confirmar o aceite"
       ],
       "abrangencia": "confirmar_localmente",
-      "notaAbrangencia": "Validação municipal necessária; as categorias, lista e pontos descritos são específicos de Ribeirão Preto, SP, e não constituem regra nacional.",
+      "notaAbrangencia": "Manter papel e papelão separados, limpos e secos é uma recomendação geral de baixo risco. A aceitação, o tipo de serviço, o acondicionamento, os dias e as rotas variam por endereço. Consulte a prefeitura, o serviço de limpeza urbana ou o ponto de entrega local; listas municipais não são regra nacional.",
       "fontesReferencia": [
         {
-          "titulo": "Portal público: ribeiraopreto.sp.gov.br",
-          "url": "https://www.ribeiraopreto.sp.gov.br/recicla/residuos-domiciliares",
-          "comprova": "Referência indicada para revisão de “Papel e papelão secos para coleta seletiva”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+          "titulo": "Coleta Seletiva — Serviço de Limpeza Urbana do Distrito Federal (SLU/DF)",
+          "url": "https://www.slu.df.gov.br/coletaseletiva",
+          "comprova": "Inclui papel e papelão entre os recicláveis secos, recomenda materiais limpos e secos quando possível, exclui papel engordurado ou molhado e informa que disponibilidade, dias e horários dependem da região/endereço."
+        },
+        {
+          "titulo": "Como Separar o Lixo — Prefeitura de Jundiaí",
+          "url": "https://jundiai.sp.gov.br/infraestrutura-e-servicos-publicos/limpeza-publica/residuos-solidos/reciclagem/como-separar-o-lixo/",
+          "comprova": "Orienta guardar papéis limpos e secos e separar lixo seco do lixo úmido para a coleta seletiva municipal."
+        },
+        {
+          "titulo": "Coleta seletiva — Prefeitura de Vitória",
+          "url": "https://www.vitoria.es.gov.br/central/coleta-seletiva",
+          "comprova": "Lista papel e papelão no lixo seco e exclui materiais com líquidos, restos de alimentos ou contaminação; descreve serviços e pontos locais."
         }
       ],
-      "dataVerificacao": "",
+      "dataVerificacao": "2026-09-30",
       "statusMaterial": "rascunho",
-      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+      "observacaoRevisao": "Curadoria técnica preliminar conferida em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por revisor autenticado; confirme as regras do município ou operador antes da aprovação."
     },
     {
       "codigoCatalogo": "br-br-papel-papelao-rascunho-001-papel-aceito-nos-locais-de-entrega-volun-2c875c00",
@@ -124,9 +135,9 @@
       "grupoPesquisa": "vidro-embalagens-espelhos-ceramica",
       "nomeMaterial": "Embalagens de vidro inteiras (garrafas, potes e frascos)",
       "categoriaMaterial": "Vidro de embalagens e distinção de espelhos/cerâmica",
-      "classificacao": "Reciclável — embalagem de vidro",
-      "instrucaoDescarte": "Separar embalagens de vidro de outros materiais e encaminhá-las a ponto de recebimento/consolidação do sistema de logística reversa ou a ponto/coleta seletiva municipal que informe aceitar vidro. Embalagens retornáveis aptas podem seguir o ciclo de retorno definido pelo fabricante/comerciante; não presumir que todo ponto aceite todo tipo de vidro.",
-      "observacaoImpacto": "A separação por composição auxilia a triagem e a reciclagem das embalagens; a entidade gestora informa que vidro de embalagem é aceito em centros de triagem e reciclável em fornos convencionais de fabricação de embalagens.",
+      "classificacao": "Embalagens domésticas comuns de vidro inteiras; espelhos, vidro plano e itens especiais não fazem parte deste registro.",
+      "instrucaoDescarte": "Separe a embalagem de vidro comum inteira (garrafa, pote ou frasco), vazia, e encaminhe-a à coleta seletiva, PEV ou contentor de vidro que aceite esse material no seu município.",
+      "observacaoImpacto": "Embalagens comuns de vidro podem ser encaminhadas à reciclagem onde houver serviço e cadeia local; cacos e outros tipos de vidro seguem regras próprias e podem não ser aceitos.",
       "sinonimos": [
         "garrafa de vidro",
         "pote de vidro",
@@ -134,41 +145,36 @@
         "embalagem vítrea",
         "vidro de embalagem"
       ],
-      "preparacao": "Higienizar, mesmo que basicamente, retirando resíduos orgânicos; remover tampas e rolhas quando possível. Manter a embalagem íntegra e separada de outros vidros.",
-      "cuidados": "A orientação da entidade gestora é específica a vidro de embalagem; não incluir espelhos, vidros planos ou lâmpadas no mesmo fluxo. Confirmar regras e localização dos pontos no município/operador. Embalagem retornável pode ter fluxo distinto.",
+      "preparacao": "Esvazie completamente e faça um enxágue rápido para remover resíduos. Entregue a embalagem diretamente no PEV ou contentor, sem saco plástico ou caixa, quando essa for a orientação local. Retire tampas e rolhas se o serviço local orientar assim; confirme também a regra para rótulos.",
+      "cuidados": "Não misture espelhos, cerâmica, porcelana ou louça, cristal, lâmpadas, vidro temperado, vidro plano, frascos de laboratório ou recipientes com produtos químicos. Este registro trata de embalagens inteiras, não de cacos. Para vidro quebrado, siga a orientação municipal específica e acondicione de forma a evitar ferimentos.",
       "categoriasPontos": [],
       "rotasReferencia": [
-        "Ponto de recebimento ou ponto de consolidação da logística reversa de embalagens de vidro, quando disponível e conforme requisitos do sistema",
-        "PEV/ecoponto municipal exclusivo para vidro, se o operador local confirmar aceitação",
-        "Coleta seletiva municipal porta a porta ou ponto a ponto somente onde o serviço local aceite embalagens de vidro"
+        "PEV ou contentor identificado para vidro, se disponível e se aceitar embalagens inteiras",
+        "Coleta seletiva municipal, somente quando aceitar embalagens de vidro",
+        "Ecoponto municipal, após confirmar que recebe vidro de embalagem"
       ],
       "abrangencia": "confirmar_localmente",
-      "notaAbrangencia": "Logística reversa nacional para embalagens de vidro, instituída pelo Decreto nº 11.300/2022; a disponibilidade, os requisitos e a modalidade de entrega devem ser validados com o sistema e com o município/operador. Não é regra de aceitação para todo vidro.",
+      "notaAbrangencia": "A orientação é para embalagens domésticas comuns intactas, não uma garantia de coleta em todo o Brasil. Aceitação, preparação e acondicionamento dependem da coleta seletiva, PEV ou ecoponto local. Não generalize listas municipais: confirme a regra do município antes de levar o material.",
       "fontesReferencia": [
         {
-          "titulo": "Planalto — legislação federal",
-          "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/decreto/d11300.htm",
-          "comprova": "Referência indicada para revisão de “Embalagens de vidro inteiras (garrafas, potes e frascos)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+          "titulo": "Saiba o que pode e o que não pode ser descartado na coleta de vidros — Prefeitura de Vitória",
+          "url": "https://www.vitoria.es.gov.br/noticia/saiba-o-que-pode-e-o-que-nao-pode-ser-descartado-na-coleta-de-vidros-57021",
+          "comprova": "Lista garrafas, potes e frascos em contentores locais; orienta depositar limpos e diretamente, sem sacolas ou caixas; exclui louças, cristal, lâmpadas, vidro temperado e espelhos."
         },
         {
-          "titulo": "Circula Vidro",
-          "url": "https://circulavidro.org/perguntas-frequentes/",
-          "comprova": "Referência indicada para revisão de “Embalagens de vidro inteiras (garrafas, potes e frascos)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+          "titulo": "Prefeitura de Joinville implanta sistema de coleta de embalagens de vidro",
+          "url": "https://www.joinville.sc.gov.br/noticias/prefeitura-de-joinville-implanta-sistema-de-coleta-de-embalagens-de-vidro/",
+          "comprova": "Descreve aceitação local de garrafas de bebida, potes de alimento e frascos após higienização e lista itens não aceitos, incluindo frascos de laboratório, vidro temperado e espelhos."
         },
         {
-          "titulo": "Portal público: prefeitura.pbh.gov.br",
-          "url": "https://prefeitura.pbh.gov.br/slu/informacoes/reciclavel/levs",
-          "comprova": "Referência indicada para revisão de “Embalagens de vidro inteiras (garrafas, potes e frascos)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
-        },
-        {
-          "titulo": "Portal público: macapa.ap.gov.br",
-          "url": "https://macapa.ap.gov.br/projeto-da-prefeitura-de-macapa-incentiva-descarte-correto-de-vidros/",
-          "comprova": "Referência indicada para revisão de “Embalagens de vidro inteiras (garrafas, potes e frascos)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+          "titulo": "Resíduos sólidos — Prefeitura de São José dos Campos",
+          "url": "https://www.sjc.sp.gov.br/servicos/manutencao-da-cidade/simisa/residuos-solidos/",
+          "comprova": "Lista embalagens de vidro aceitas na coleta seletiva municipal e apresenta limites específicos para cacos e vidros de portas/janelas, mostrando que regras dependem do serviço local."
         }
       ],
-      "dataVerificacao": "",
+      "dataVerificacao": "2026-09-30",
       "statusMaterial": "rascunho",
-      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+      "observacaoRevisao": "Curadoria técnica preliminar conferida em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por revisor autenticado; confirme as regras do município ou operador antes da aprovação."
     },
     {
       "codigoCatalogo": "br-vidro-embalagens-espelhos-ceramica-embalagem-de-vidro-quebrada-843437cc",
@@ -301,9 +307,9 @@
       "grupoPesquisa": "plastics-packaging-disposal-br",
       "nomeMaterial": "Embalagens plásticas recicláveis da rotina doméstica",
       "categoriaMaterial": "Plásticos e embalagens plásticas",
-      "classificacao": "Plásticos e embalagens plásticas pós-consumo; o MMA lista sacos, embalagens de produtos de limpeza, PET, canos/tubos e plásticos em geral como recicláveis.",
-      "instrucaoDescarte": "Separe do lixo úmido e encaminhe à coleta seletiva, cooperativa de catadores ou central de recebimento de recicláveis disponível na cidade. Se não houver coleta seletiva, consulte o município sobre cooperativas, centrais e pontos locais.",
-      "observacaoImpacto": "Segundo o MMA, resíduos remanescentes podem contaminar o material e inviabilizar sua reciclagem; separar e limpar ajuda a viabilizar o encaminhamento, sem garantir que toda embalagem seja aceita por todo operador.",
+      "classificacao": "Embalagens plásticas comuns pós-consumo; aceitação e triagem dependem da infraestrutura local.",
+      "instrucaoDescarte": "Separe embalagens plásticas comuns da rotina doméstica, como garrafas, potes e sacolas, na fração seca dos recicláveis e encaminhe-as apenas à coleta seletiva, cooperativa ou ponto de entrega que exista e aceite plástico no seu município.",
+      "observacaoImpacto": "Separar embalagens plásticas sem excesso de resíduos facilita sua triagem e possível recuperação; coleta e destino efetivo dependem da infraestrutura local.",
       "sinonimos": [
         "plástico reciclável",
         "embalagens PET",
@@ -312,32 +318,41 @@
         "embalagens de produtos de limpeza",
         "plásticos secos"
       ],
-      "preparacao": "Retire restos de produto e passe água apenas para remover a sujeira grossa; não é necessário deixar a embalagem brilhando. Mantenha o material separado e limpo para encaminhamento.",
-      "cuidados": "A página do MMA exclui plásticos termofixos e embalagens plásticas metalizadas de sua lista de recicláveis e também classifica isopor como não reciclável; orientações municipais podem divergir — Curitiba, por exemplo, informa que aceita isopor limpo e seco em seu programa. Não presumir aceite de toda resina ou embalagem: confirme a regra local e do operador.",
+      "preparacao": "Retire restos de alimentos e líquidos. Raspe ou remova o excesso com colher ou guardanapo; se necessário, faça um enxágue rápido, de preferência aproveitando água que já seria usada na lavagem da louça, e deixe a embalagem escorrer/secar. Não é necessário detergente nem lavagem profunda. Mantenha recicláveis separados de orgânicos e rejeitos.",
+      "cuidados": "Não coloque embalagens com líquidos, restos de comida ou resíduos químicos na fração seca. O símbolo ou número da resina identifica o tipo de plástico, mas não garante que o item será aceito ou reciclado localmente; confirme a lista do serviço ou operador antes de descartar.",
       "categoriasPontos": [],
       "rotasReferencia": [
-        "coleta seletiva municipal, se disponível e conforme regras locais",
-        "cooperativas de catadores",
-        "centrais de recebimento de recicláveis",
-        "contêineres de supermercados ou escolas com parceria de recebimento, quando disponíveis"
+        "Coleta seletiva municipal, se disponível e se aceitar o tipo de embalagem",
+        "Cooperativa de catadores que confirme o recebimento de plástico",
+        "Central de recebimento, PEV ou ecoponto que aceite plástico conforme as regras locais"
       ],
       "abrangencia": "confirmar_localmente",
-      "notaAbrangencia": "Orientação educativa nacional do MMA, mas a disponibilidade dos serviços e o aceite de materiais devem ser verificados no município/operador. Proposta para rascunho, não orientação aprovada.",
+      "notaAbrangencia": "A orientação vale para embalagens plásticas comuns sem excesso de resíduos e integrantes da fração seca. Aceitação, dias, acondicionamento e destino variam por município, cooperativa e ponto de entrega. Confirme a lista local; não presuma que todo tipo de resina ou embalagem será recebido.",
       "fontesReferencia": [
         {
-          "titulo": "gov.br",
+          "titulo": "O que é Reciclagem? — Ministério do Meio Ambiente e Mudança do Clima",
           "url": "https://www.gov.br/mma/pt-br/assuntos/educacao-ambiental/glossario-ea/o-que-e-reciclagem",
-          "comprova": "Referência indicada para revisão de “Embalagens plásticas recicláveis da rotina doméstica”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+          "comprova": "Orienta separar embalagens plásticas, remover apenas o grosso dos resíduos, encaminhar à coleta seletiva/cooperativa/central e consultar a disponibilidade do serviço em cada município."
         },
         {
-          "titulo": "Portal público: curitiba.pr.gov.br",
+          "titulo": "Mapa mostra onde descartar o lixo que pode ser reciclado — Prefeitura de Vitória",
+          "url": "https://vitoria.es.gov.br/central/mapa-mostra-onde-descartar-o-lixo-que-pode-ser-reciclado",
+          "comprova": "Lista embalagens plásticas sem resíduos na fração seca e descreve os pontos e serviços de recebimento locais."
+        },
+        {
+          "titulo": "Saiba como separar e destinar corretamente o Lixo que Não é Lixo — Prefeitura de Curitiba",
           "url": "https://www.curitiba.pr.gov.br/noticias/saiba-como-separar-e-destinar-corretamente-o-lixo-que-nao-e-lixo/63175",
-          "comprova": "Referência indicada para revisão de “Embalagens plásticas recicláveis da rotina doméstica”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+          "comprova": "Orienta separar seco/úmido, retirar restos de alimento, fazer limpeza simples sem detergente e verificar dias, horários e regras por região."
+        },
+        {
+          "titulo": "Precisa lavar a embalagem antes de reciclar? Desvendamos 5 mitos do lixo doméstico — eureciclo",
+          "url": "https://eureciclo.com.br/blog/5-mitos-do-lixo-domestico",
+          "comprova": "Apoio setorial: reforça que lavagem profunda não é necessária e que o símbolo de resina não garante aceitação ou reciclagem na cadeia local."
         }
       ],
-      "dataVerificacao": "",
+      "dataVerificacao": "2026-09-30",
       "statusMaterial": "rascunho",
-      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+      "observacaoRevisao": "Curadoria técnica preliminar conferida em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por revisor autenticado; confirme as regras do município ou operador antes da aprovação."
     },
     {
       "codigoCatalogo": "br-plastics-packaging-disposal-br-embalagens-plasticas-de-alimentos-e-deli-844dac64",
@@ -434,9 +449,9 @@
       "grupoPesquisa": "metais-e-latas",
       "nomeMaterial": "Latas de bebidas e de alimentos (alumínio ou aço)",
       "categoriaMaterial": "Metais e latas",
-      "classificacao": "Metal reciclável seco — exemplos de latas de alumínio e outros metais recicláveis",
-      "instrucaoDescarte": "Separe das frações orgânica e rejeito. A coleta seletiva do DF inclui latas de alumínio e outros metais recicláveis; São Paulo também lista latas de bebidas e alimentos como recicláveis.",
-      "observacaoImpacto": "A separação correta facilita triagem e reaproveitamento; restos de alimentos podem contaminar recicláveis, causar mau cheiro e atrair vetores, conforme orientação municipal de Curitiba.",
+      "classificacao": "Latas de alumínio ou aço de bebidas e alimentos; fração seca de recicláveis quando aceita pelo serviço local.",
+      "instrucaoDescarte": "Separe latas de bebidas e de alimentos, de alumínio ou aço, para a coleta seletiva, cooperativa ou ponto de entrega que aceite recicláveis.",
+      "observacaoImpacto": "Orientações ambientais incluem latas de alumínio e aço entre os recicláveis; separar resíduos de alimentos e seguir o serviço local favorece o encaminhamento adequado.",
       "sinonimos": [
         "latas de refrigerante",
         "latas de cerveja",
@@ -445,36 +460,36 @@
         "embalagens metálicas de alimentos",
         "sucata de latas"
       ],
-      "preparacao": "Retire, sempre que possível, o excesso de restos de alimentos e deixe o material sem excesso de resíduos; acondicione separado dos orgânicos e rejeitos. No DF, o SLU orienta acondicionar recicláveis em saco resistente e observar dia e horário locais.",
-      "cuidados": "A lista e o serviço descritos são exemplos locais, não garantia de aceite em todo o Brasil. Consulte o calendário e as regras do município ou operador; não misture com rejeitos nem presuma que todo ponto recebe metal.",
+      "preparacao": "Retire o restante do conteúdo e passe água para remover apenas o grosso dos resíduos; deixe a lata sem sobras visíveis e separada dos resíduos úmidos.",
+      "cuidados": "A orientação aplica-se a latas comuns de bebidas e alimentos; outros recipientes metálicos podem ter regras próprias. Não misture com lixo orgânico/úmido, pilhas, baterias, lâmpadas ou produtos químicos. Confirme o aceite no serviço ou ponto local.",
       "categoriasPontos": [],
       "rotasReferencia": [
-        "Coleta seletiva porta a porta, quando disponível no endereço",
-        "PEV/contêiner de recicláveis, se o operador local confirmar aceite de metais",
-        "Ecoponto municipal, se a unidade e as regras locais confirmarem recebimento de recicláveis metálicos"
+        "Coleta seletiva porta a porta, quando disponível no endereço e se aceitar metais",
+        "Cooperativa, PEV ou contentor que confirme recebimento de latas",
+        "Ecoponto municipal, somente após confirmar a unidade e suas regras"
       ],
       "abrangencia": "confirmar_localmente",
-      "notaAbrangencia": "Validação municipal/operador necessária. O SLU-DF e a Prefeitura de São Paulo fornecem exemplos de aceitação e serviço locais; não constituem regra nacional de coleta ou de recebimento em cada PEV/Ecoponto.",
+      "notaAbrangencia": "A classificação como reciclável não garante coleta em todo o Brasil. A existência do serviço, do ponto de entrega e os materiais efetivamente aceitos são definidos localmente; confirme as regras da prefeitura, cooperativa ou PEV da sua cidade.",
       "fontesReferencia": [
         {
-          "titulo": "Portal público: slu.df.gov.br",
-          "url": "https://www.slu.df.gov.br/mapa-coleta-seletiva",
-          "comprova": "Referência indicada para revisão de “Latas de bebidas e de alimentos (alumínio ou aço)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+          "titulo": "O que é Reciclagem? — Ministério do Meio Ambiente e Mudança do Clima",
+          "url": "https://www.gov.br/mma/pt-br/assuntos/educacao-ambiental/glossario-ea/o-que-e-reciclagem",
+          "comprova": "Lista latas de alumínio de bebidas e latas de produtos alimentícios como recicláveis, inclui aço e alumínio entre os materiais e informa que a disponibilidade de coleta e pontos deve ser consultada em cada município."
         },
         {
-          "titulo": "Portal público: prefeitura.sp.gov.br",
-          "url": "https://prefeitura.sp.gov.br/web/comunicacao/w/cuide_da_cidade/noticias/276264",
-          "comprova": "Referência indicada para revisão de “Latas de bebidas e de alimentos (alumínio ou aço)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+          "titulo": "Mapa mostra onde descartar o lixo que pode ser reciclado — Prefeitura de Vitória",
+          "url": "https://vitoria.es.gov.br/central/mapa-mostra-onde-descartar-o-lixo-que-pode-ser-reciclado",
+          "comprova": "Orienta separar lixo seco de úmido, inclui latas sem resíduos de líquidos na categoria de metais recicláveis e exclui recipientes com líquidos ou resíduos de alimentos."
         },
         {
-          "titulo": "Portal público: curitiba.pr.gov.br",
-          "url": "https://www.curitiba.pr.gov.br/noticias/saiba-como-separar-e-destinar-corretamente-o-lixo-que-nao-e-lixo/63175",
-          "comprova": "Referência indicada para revisão de “Latas de bebidas e de alimentos (alumínio ou aço)”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+          "titulo": "Dia Mundial da Reciclagem: saiba como fazer o descarte correto do lixo — Prefeitura de Fortaleza",
+          "url": "https://www.fortaleza.ce.gov.br/noticias/dia-mundial-da-reciclagem-saiba-como-fazer-o-descarte-correto-do-lixo",
+          "comprova": "Descreve a aceitação local de latas de alimentos de ferro e de bebidas/alimentos de alumínio e orienta armazená-las sem sobras de alimentos; não constitui regra nacional."
         }
       ],
-      "dataVerificacao": "",
+      "dataVerificacao": "2026-09-30",
       "statusMaterial": "rascunho",
-      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+      "observacaoRevisao": "Curadoria técnica preliminar conferida em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por revisor autenticado; confirme as regras do município ou operador antes da aprovação."
     },
     {
       "codigoCatalogo": "br-metais-e-latas-outros-itens-metalicos-reciclaveis-e-emb-956aaf88",
@@ -561,9 +576,9 @@
       "grupoPesquisa": "restos-alimentares-organicos-jardim",
       "nomeMaterial": "Compostagem de restos de alimentos com material seco de jardim",
       "categoriaMaterial": "Restos alimentares e orgânicos de jardim",
-      "classificacao": "Resíduos orgânicos úmidos de cozinha combinados com material seco vegetal; orientação para compostagem, não regra universal de aceitação de resíduos.",
-      "instrucaoDescarte": "Separar resíduos úmidos, como cascas de frutas e verduras, e misturá-los com material seco, como folhas secas ou serragem, em composteira adequada. Cobrir cada camada de resíduos com terra ou composto pronto; manter a mistura arejada e com umidade adequada.",
-      "observacaoImpacto": "O SLU-DF descreve compostagem como forma de reduzir o volume encaminhado a aterros e produzir composto orgânico; o resultado e seu uso dependem do manejo e do sistema.",
+      "classificacao": "Manejo doméstico ou de pequena escala de orgânicos; não representa serviço público de coleta ou aceite universal.",
+      "instrucaoDescarte": "Na compostagem doméstica ou de pequena escala, separe na origem os restos orgânicos de alimentos e os resíduos verdes do jardim. Misture os restos úmidos com material seco, como folhas secas, palha ou pequenos galhos, mantendo a composteira ou pilha arejada.",
+      "observacaoImpacto": "A compostagem manejada adequadamente trata resíduos orgânicos; controle de umidade e aeração ajuda a evitar odores, chorume e vetores. Resultado e uso dependem do sistema.",
       "sinonimos": [
         "cascas de frutas e verduras",
         "sobras de alimentos",
@@ -572,25 +587,36 @@
         "compostagem doméstica",
         "composteira caseira"
       ],
-      "preparacao": "Reduzir o tamanho dos pedaços para facilitar a decomposição; equilibrar materiais úmidos e secos. Na orientação do SLU-DF, o composto pode ser usado em jardins, vasos e hortas após maturação; o tempo depende do sistema e dos materiais.",
-      "cuidados": "O SLU-DF diz que a compostagem corretamente manejada evita mau cheiro; excesso de umidade ou falta de aeração pode prejudicar o processo. As instruções referem-se a composteiras, não autorizam levar resíduos a qualquer composteira pública ou de condomínio: confirmar lista aceita e procedimento com o operador local.",
+      "preparacao": "Use um recipiente ou local bem ventilado e, se possível, protegido da chuva direta. Corte materiais muito grandes e cubra cada adição de restos de alimentos com folhas secas ou outro material seco. Como referência operacional do método municipal de Joinville, use cerca de 2 a 3 partes de material marrom/seco para 1 parte de material verde/úmido; essa proporção não é uma regra nacional.",
+      "cuidados": "Mantenha a mistura úmida, mas não encharcada, e revolva quando necessário para arejar. Se houver odor forte, excesso de umidade ou pragas, ajuste a mistura com material seco e siga as restrições do método utilizado. Não deixe restos expostos. Confirme regras antes de entregar orgânicos a uma composteira comunitária, condomínio ou serviço externo.",
       "categoriasPontos": [],
       "rotasReferencia": [
-        "Composteira doméstica própria",
-        "Composteira comunitária ou de condomínio somente após confirmação das regras do operador"
+        "Composteira doméstica própria, seguindo o método e os materiais aceitos pelo sistema",
+        "Composteira comunitária ou de condomínio, somente após confirmação das regras do operador",
+        "Programa municipal de coleta de orgânicos, se disponível e se aceitar os materiais"
       ],
       "abrangencia": "confirmar_localmente",
-      "notaAbrangencia": "Orientação prática de órgão público do Distrito Federal para compostagem; útil como referência geral de manejo, mas a aceitação por composteiras comunitárias e as regras de descarte variam por município e operador.",
+      "notaAbrangencia": "Esta é uma orientação para compostagem doméstica ou de pequena escala, não uma promessa de coleta ou aceitação por composteira comunitária, PEV, condomínio ou serviço privado. Tipos de resíduos aceitos e regras de manejo variam por município e sistema. A proporção de 2–3 partes secas para 1 parte úmida citada é uma referência local de Joinville, não uma regra nacional.",
       "fontesReferencia": [
         {
-          "titulo": "Portal público: slu.df.gov.br",
-          "url": "https://www.slu.df.gov.br/w/compostagem-e-alternativa-sustentavel-para-tratar-residuos-organicos",
-          "comprova": "Referência indicada para revisão de “Compostagem de restos de alimentos com material seco de jardim”. Confira a afirmação, vigência, município e operador diretamente na página antes de publicar."
+          "titulo": "Como fazer compostagem — Prefeitura de Joinville",
+          "url": "https://www.joinville.sc.gov.br/servicos/como-fazer-compostagem/",
+          "comprova": "Apresenta exemplos de resíduos verdes e marrons, a referência local de 2–3 partes secas para 1 parte verde/úmida, umidade sem encharcamento, aeração e cobertura de restos com material seco."
+        },
+        {
+          "titulo": "Compostagem — Embrapa Hortaliças",
+          "url": "https://www.embrapa.br/en/web/hortalicas/hortalica-nao-e-so-salada/secoes/compostagem",
+          "comprova": "Explica que resíduos orgânicos urbanos incluem restos de alimentos e resíduos de jardim, que compostagem ocorre em diferentes escalas e que o processo requer controle de umidade e aeração para evitar odores, chorume e vetores; recomenda consultar possibilidades locais."
+        },
+        {
+          "titulo": "O que é compostagem e como fazê-la em casa — Universidade Federal do Vale do São Francisco",
+          "url": "https://portais.univasf.edu.br/sustentabilidade/noticias-sustentaveis/o-que-e-compostagem-e-como-faze-la-em-casa",
+          "comprova": "Apoio de universidade pública: descreve folhas secas, pequenos galhos ou serragem como material de cobertura e a importância de oxigenação."
         }
       ],
-      "dataVerificacao": "",
+      "dataVerificacao": "2026-09-30",
       "statusMaterial": "rascunho",
-      "observacaoRevisao": "RASCUNHO DE PESQUISA. Revisão humana obrigatória: confirme o texto na fonte, a relação entre cada afirmação e sua referência, a vigência, o município/operador e os limites de aceitação antes de publicar."
+      "observacaoRevisao": "Curadoria técnica preliminar conferida em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por revisor autenticado; confirme as regras do município ou operador antes da aprovação."
     },
     {
       "codigoCatalogo": "br-restos-alimentares-organicos-jardi-restos-alimentares-e-organicos-na-coleta-c781f879",

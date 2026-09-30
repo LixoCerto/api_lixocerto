@@ -30,7 +30,7 @@ module.exports = {
         lcr_mat_abrangencia: registro.abrangencia,
         lcr_mat_escopo_detalhado: registro.notaAbrangencia,
         lcr_mat_fontes_referencia: JSON.stringify(registro.fontesReferencia),
-        lcr_mat_data_verificacao: null,
+        lcr_mat_data_verificacao: registro.dataVerificacao || null,
         lcr_mat_observacao_revisao: registro.observacaoRevisao,
         lcr_mat_id_usuario_criador: null,
         lcr_mat_id_usuario_editor: null,
