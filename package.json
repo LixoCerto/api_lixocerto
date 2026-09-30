@@ -20,6 +20,7 @@
     "integracao:banco": "pnpm migrar && pnpm semear"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1144.0",
     "@grpc/grpc-js": "^1.13.4",
     "@grpc/proto-loader": "^0.7.15",
     "@grpc/reflection": "^1.0.4",

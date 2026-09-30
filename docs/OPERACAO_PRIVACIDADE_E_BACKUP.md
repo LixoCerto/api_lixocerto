@@ -25,7 +25,7 @@ O fluxo de gamificação acrescenta atribuições e respostas de quiz, eventos d
 ## Check-in, fotos e retenção de evidências
 
 - O check-in só é iniciado por ação da pessoa, num ponto verificado com coordenadas válidas; o servidor calcula novamente a distância geodésica e exige raio estrito de 5 m. A precisão declarada pelo navegador precisa ser de até 10 m. Um check-in expira em 30 minutos.
-- Cada categoria aceita selecionada gera um registro pendente e exige sua própria foto. O servidor aceita JPEG, PNG ou WebP estáticos (até 2 MiB por arquivo), valida o conteúdo real, corrige a orientação, redimensiona/comprime para WebP e calcula SHA-256/tamanho. A recodificação remove metadados EXIF. Arquivos ficam fora do banco e do Git, num volume Docker local dedicado com acesso privado; a API não publica caminhos nem URLs permanentes.
+- Cada categoria aceita selecionada gera um registro pendente e exige sua própria foto. O servidor aceita JPEG, PNG ou WebP estáticos (até 2 MiB por arquivo), valida o conteúdo real, corrige a orientação, redimensiona/comprime para WebP e calcula SHA-256/tamanho. A recodificação remove metadados EXIF. Em Docker, os objetos ficam fora do banco e do Git, no bucket privado `lcr-evidencias-descartes` do serviço MinIO local, persistido no volume `lcr-minio-data`; a API usa uma chave S3 de menor privilégio e não publica caminhos nem URLs permanentes. A referência Docker é `minio/minio:latest`, conforme escolhida pelo responsável, e o bootstrap usa `minio/mc:latest` para preparar o bucket e a identidade da aplicação.
 - Só a pessoa proprietária ou um revisor autorizado consegue consultar a foto, por RPC autenticado; as coordenadas exatas não são retornadas no histórico nem registradas na auditoria. Aprovação exige check-in e foto ainda disponíveis, ponto verificado e categoria aceita.
 - Um envio pendente conserva foto e dados do check-in até a decisão. Após aprovação/rejeição, as fotos expiram 90 dias depois da decisão, e as coordenadas do check-in são removidas 90 dias após a última decisão dos registros daquele check-in. Check-ins abandonados sem registros expiram em 30 minutos e são removidos na rotina de expurgo (executada na inicialização e a cada 10 minutos). Até o expurgo, endpoints deixam de servir fotos assim que a validade termina.
 - A expiração da foto não remove o registro de auditoria, a categoria, o estado, os pontos já concedidos nem outros campos do descarte. Se não houver revisão, a retenção permanece pendente; defina responsáveis e prazo operacional de revisão antes de convidar participantes reais.
@@ -87,7 +87,7 @@ Enquanto a aplicação estiver em desenvolvimento, o responsável pode começar 
 
 ## Backup pareado de PostgreSQL e evidências (PowerShell)
 
-O banco guarda apenas chaves e metadados; as imagens ficam no volume Docker `lcr-descartes-evidencias`. Para obter artefatos do mesmo estado, o script abaixo interrompe temporariamente a API, faz `pg_dump` e arquiva o volume na mesma janela. Ele preserva o estado anterior da API (só a inicia ao final se ela estava ativa). Os dois artefatos ficam em `%USERPROFILE%\LixoCertoBackups`, fora do Git; armazene-os juntos com acesso restrito e criptografia em repouso.
+O banco guarda apenas chaves e metadados; após a migração, as imagens ficam no bucket privado `lcr-evidencias-descartes`, persistido no volume Docker `lcr-minio-data`. Para obter artefatos do mesmo estado, o script abaixo interrompe temporariamente API e MinIO, faz `pg_dump` e arquiva o volume na mesma janela. Ele preserva o estado anterior dos dois serviços e só os inicia ao final se estavam ativos. Os dois artefatos ficam em `%USERPROFILE%\LixoCertoBackups`, fora do Git; armazene-os juntos com acesso restrito e criptografia em repouso. O volume legado `lcr-descartes-evidencias` não é o destino ativo após a migração e permanece preservado separadamente até validação operacional.
 
 ```powershell
 $ErrorActionPreference = 'Stop'
@@ -96,8 +96,8 @@ $diretorio = Join-Path $env:USERPROFILE 'LixoCertoBackups'
 New-Item -ItemType Directory -Force -Path $diretorio | Out-Null
 $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $arquivoBanco = Join-Path $diretorio "lixocerto-$timestamp.dump"
-$nomeArquivoFotos = "lcr-evidencias-$timestamp.tar.gz"
-$arquivoFotos = Join-Path $diretorio $nomeArquivoFotos
+$nomeArquivoMinio = "lcr-minio-data-$timestamp.tar.gz"
+$arquivoMinio = Join-Path $diretorio $nomeArquivoMinio
 $bind = "type=bind,source=$($diretorio.Replace('\', '/')),target=/backup"
 
 $env:PGHOST = Read-Host 'Host PostgreSQL deste ambiente'
@@ -108,6 +108,8 @@ $senhaSegura = Read-Host 'Senha PostgreSQL' -AsSecureString
 $ponteiro = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($senhaSegura)
 $apiEstavaAtiva = [bool](docker compose -f compose.yml --profile app ps -q --status running api)
 if ($LASTEXITCODE -ne 0) { throw 'Não foi possível consultar o estado da API.' }
+$minioEstavaAtivo = [bool](docker compose -f compose.yml --profile app ps -q --status running minio)
+if ($LASTEXITCODE -ne 0) { throw 'Não foi possível consultar o estado do MinIO.' }
 
 try {
   docker image inspect alpine:3.20 *> $null
@@ -115,8 +117,8 @@ try {
     docker pull alpine:3.20
     if ($LASTEXITCODE -ne 0) { throw 'Não foi possível obter a imagem utilitária Alpine.' }
   }
-  docker compose -f compose.yml --profile app stop api
-  if ($LASTEXITCODE -ne 0) { throw 'Não foi possível parar a API para o snapshot.' }
+  docker compose -f compose.yml --profile app stop api minio
+  if ($LASTEXITCODE -ne 0) { throw 'Não foi possível parar API e MinIO para o snapshot.' }
 
   $env:PGPASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($ponteiro)
   & pg_dump --format=custom --no-owner --no-acl --file $arquivoBanco
@@ -125,18 +127,22 @@ try {
   if ($LASTEXITCODE -ne 0) { throw 'O dump PostgreSQL falhou na verificação pg_restore --list.' }
 
   docker run --rm `
-    --mount 'type=volume,source=lcr-descartes-evidencias,target=/origem,readonly' `
+    --mount 'type=volume,source=lcr-minio-data,target=/origem,readonly' `
     --mount $bind `
-    alpine:3.20 sh -c "tar -czf /backup/$nomeArquivoFotos -C /origem ."
-  if ($LASTEXITCODE -ne 0) { throw 'Falha ao arquivar o volume de evidências.' }
-  docker run --rm --mount $bind alpine:3.20 tar -tzf "/backup/$nomeArquivoFotos" | Out-Null
-  if ($LASTEXITCODE -ne 0) { throw 'O arquivo do volume falhou na verificação tar -tzf.' }
+    alpine:3.20 sh -c "tar -czf /backup/$nomeArquivoMinio -C /origem ."
+  if ($LASTEXITCODE -ne 0) { throw 'Falha ao arquivar o volume de dados do MinIO.' }
+  docker run --rm --mount $bind alpine:3.20 tar -tzf "/backup/$nomeArquivoMinio" | Out-Null
+  if ($LASTEXITCODE -ne 0) { throw 'O arquivo MinIO falhou na verificação tar -tzf.' }
 
-  Get-Item $arquivoBanco, $arquivoFotos | Select-Object FullName, Length, LastWriteTime
+  Get-Item $arquivoBanco, $arquivoMinio | Select-Object FullName, Length, LastWriteTime
 } finally {
   Remove-Item Env:PGPASSWORD, Env:PGHOST, Env:PGPORT, Env:PGDATABASE, Env:PGUSER -ErrorAction SilentlyContinue
   [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ponteiro)
   $senhaSegura.Dispose()
+  if ($minioEstavaAtivo) {
+    docker compose -f compose.yml --profile app start minio
+    if ($LASTEXITCODE -ne 0) { Write-Warning 'O MinIO não reiniciou automaticamente; verifique docker compose ps.' }
+  }
   if ($apiEstavaAtiva) {
     docker compose -f compose.yml --profile app start api
     if ($LASTEXITCODE -ne 0) { Write-Warning 'A API não reiniciou automaticamente; verifique docker compose ps.' }
@@ -151,8 +157,8 @@ Restaure primeiro para um volume de teste isolado. O nome abaixo é único para 
 ```powershell
 $ErrorActionPreference = 'Stop'
 $diretorio = Join-Path $env:USERPROFILE 'LixoCertoBackups'
-$nomeArquivoFotos = 'NOME-DO-ARQUIVO.tar.gz' # use o arquivo validado do backup
-$volumeEnsaio = "lcr-descartes-evidencias-restore-test-$([guid]::NewGuid().ToString('N').Substring(0,8))"
+$nomeArquivoMinio = 'NOME-DO-ARQUIVO.tar.gz' # use o arquivo MinIO validado do backup
+$volumeEnsaio = "lcr-minio-data-restore-test-$([guid]::NewGuid().ToString('N').Substring(0,8))"
 $bind = "type=bind,source=$($diretorio.Replace('\', '/')),target=/backup"
 Write-Host "Volume isolado deste ensaio: $volumeEnsaio"
 docker volume create $volumeEnsaio | Out-Null
@@ -160,9 +166,9 @@ if ($LASTEXITCODE -ne 0) { throw 'Não foi possível criar o volume de ensaio.' 
 docker run --rm `
   --mount "type=volume,source=$volumeEnsaio,target=/destino" `
   --mount $bind `
-  alpine:3.20 sh -c "tar -xzf /backup/$nomeArquivoFotos -C /destino"
+  alpine:3.20 sh -c "tar -xzf /backup/$nomeArquivoMinio -C /destino"
 if ($LASTEXITCODE -ne 0) { throw 'Restauração de ensaio do volume falhou.' }
 docker run --rm --mount "type=volume,source=$volumeEnsaio,target=/dados,readonly" alpine:3.20 sh -c 'find /dados -type f | wc -l'
 ```
 
-Compare a quantidade de arquivos e valide sua associação com uma cópia de teste do banco. Só remova o volume de ensaio após conferir o nome e o conteúdo; não use `docker volume prune`.
+Compare a quantidade de arquivos e valide a inicialização em uma instância MinIO de ensaio e sua associação com uma cópia de teste do banco. Só remova o volume de ensaio após conferir o nome e o conteúdo; não use `docker volume prune`.
