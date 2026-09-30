@@ -15,6 +15,7 @@ const secretAccessKey = process.env.LCR_EVIDENCIAS_S3_SECRET_KEY;
 const regiao = process.env.LCR_EVIDENCIAS_S3_REGION || 'us-east-1';
 const somenteValidar = process.argv.includes('--dry-run');
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+let etapaAtual = 'validar configuração';
 
 if (!endpoint || !accessKeyId || !secretAccessKey || !bucket) {
   throw new Error('Configuração S3 incompleta; confira os nomes das variáveis locais, sem compartilhá-las.');
@@ -44,8 +45,13 @@ async function lerObjetoRemoto(chave) {
 }
 
 async function executar() {
+  etapaAtual = 'conectar ao MinIO e validar o bucket';
   await s3.send(new HeadBucketCommand({ Bucket: bucket }));
+
+  etapaAtual = 'conectar ao PostgreSQL';
   await banco.authenticate();
+
+  etapaAtual = 'consultar referências de evidências no PostgreSQL';
   const referencias = await banco.query(`
     SELECT DISTINCT
       lcr_rde_chave_foto AS "chaveFoto",
@@ -58,6 +64,7 @@ async function executar() {
     ORDER BY "chaveFoto"
   `, { type: QueryTypes.SELECT });
 
+  etapaAtual = 'ler o volume legado de evidências';
   const nomes = await readdir(diretorioLegado, { withFileTypes: true });
   const arquivos = new Set();
   for (const entrada of nomes) {
@@ -100,6 +107,7 @@ async function executar() {
   }
 
   for (const chave of chavesReferenciadas) {
+    etapaAtual = 'validar arquivo e metadados locais';
     const referencia = metadadosPorChave.get(chave);
     if (!arquivos.has(chave)) throw new Error(`Falta arquivo local para uma evidência ainda válida (${chave}); a API não deve ser apontada ao MinIO.`);
     const local = await readFile(join(diretorioLegado, `${chave}.webp`));
@@ -116,6 +124,7 @@ async function executar() {
 
     let remoto;
     try {
+      etapaAtual = 'verificar eventual objeto já existente no MinIO';
       remoto = await lerObjetoRemoto(chave);
     } catch (erro) {
       if (!erroObjetoAusente(erro)) throw erro;
@@ -127,6 +136,7 @@ async function executar() {
       continue;
     }
 
+    etapaAtual = 'copiar evidência ao MinIO';
     await s3.send(new PutObjectCommand({
       Bucket: bucket,
       Key: `${chave}.webp`,
@@ -134,6 +144,7 @@ async function executar() {
       ContentType: 'image/webp',
       Metadata: { sha256: hashLocal },
     }));
+    etapaAtual = 'verificar conteúdo copiado no MinIO';
     const gravado = await lerObjetoRemoto(chave);
     if (sha256(gravado) !== hashLocal) throw new Error(`A verificação após upload falhou (${chave}); o volume original continua intacto.`);
     copiados += 1;
@@ -153,7 +164,23 @@ async function executar() {
 try {
   await executar();
 } catch (erro) {
-  console.error(`Migração interrompida; o volume legado não foi alterado. Tipo do erro: ${erro instanceof Error ? erro.name : 'erro'}.`);
+  const falha = erro && typeof erro === 'object' ? erro : {};
+  const tipo = String(falha.name || falha.Code || falha.code || falha.constructor?.name || typeof erro).slice(0, 80);
+  const codigo = falha.code && falha.code !== tipo ? String(falha.code).slice(0, 80) : '';
+  const status = falha.$metadata?.httpStatusCode;
+  let detalhe = typeof falha.message === 'string' ? falha.message : '';
+  detalhe = detalhe
+    .replace(/https?:\/\/[^\s"'<>]+/gi, '[endpoint]')
+    .replace(/(access.?key|secret.?key|password|authorization|signature|token)\s*[:=]\s*[^\s,;]+/gi, '$1=[redigido]')
+    .replace(uuid, '[chave]')
+    .slice(0, 240);
+  const diagnostico = [
+    `tipo=${tipo}`,
+    codigo ? `codigo=${codigo}` : '',
+    Number.isInteger(status) ? `http=${status}` : '',
+    detalhe ? `detalhe=${detalhe}` : '',
+  ].filter(Boolean).join('; ');
+  console.error(`Migração interrompida na etapa "${etapaAtual}"; o volume legado não foi alterado. ${diagnostico}.`);
   process.exitCode = 1;
 } finally {
   s3.destroy();
