@@ -2,7 +2,7 @@
 
 **Verificação das fontes: 30/09/2026.** Os cinco itens abaixo têm orientação de baixo risco apoiada por fontes abertas e são candidatos à primeira leva pública. A aceitação de recicláveis depende do serviço de cada município. Por isso, a curadoria mantém essa ressalva em cada registro.
 
-Os registros devem ser atualizados e continuar como **rascunho** até a aprovação de um revisor autenticado na Central de revisão. Essa etapa final registra o responsável e a auditoria de publicação. Os demais materiais do catálogo permanecem inalterados e em rascunho.
+Os registros devem ser atualizados e continuar como **rascunho** até a aprovação de um perfil autenticado autorizado com `materiais:aprovar` (revisor ou administrador) na Central de revisão. Essa etapa final registra o responsável e a auditoria de publicação. Os demais materiais do catálogo permanecem inalterados e em rascunho.
 
 ## Papel e papelão secos
 
@@ -110,4 +110,4 @@ try {
 }
 ```
 
-A saída esperada informa que cinco registros foram preparados como rascunho e que nenhum foi publicado. Entre na aplicação com uma conta de revisor, abra **Central de revisão**, confira as fontes e os limites locais dos cinco itens e use **Publicar** individualmente. Essa ação autenticada define o revisor e registra a auditoria. Só então os materiais aparecem no **Guia de descarte** para os perfis com `materiais:ler`. Não existe motivo para reaplicar migrations ou recriar containers de cache/gateway nesta atualização.
+A saída esperada informa que cinco registros foram preparados como rascunho e que nenhum foi publicado. Entre na aplicação com um perfil autorizado com `materiais:aprovar` (revisor ou administrador), abra **Central de revisão**, confira as fontes e os limites locais dos cinco itens e use **Publicar** individualmente. Essa ação autenticada registra o responsável e a auditoria. Só então os materiais aparecem no **Guia de descarte** para os perfis com `materiais:ler`. Não existe motivo para reaplicar migrations ou recriar containers de cache/gateway nesta atualização.

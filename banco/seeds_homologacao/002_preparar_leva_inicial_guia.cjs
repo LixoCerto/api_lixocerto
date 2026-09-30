@@ -10,7 +10,7 @@ const CODIGOS_LEVA = [
   'br-metais-e-latas-latas-de-bebidas-e-de-alimentos-aluminio-bc4efde3',
   'br-restos-alimentares-organicos-jardi-compostagem-de-restos-de-alimentos-com-m-0307de5f',
 ];
-const MARCADOR_CURADORIA = 'Curadoria técnica preliminar conferida em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por revisor autenticado; confirme as regras do município ou operador antes da aprovação.';
+const MARCADOR_CURADORIA = 'Curadoria técnica preliminar conferida em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por perfil autorizado na Central de revisão; confirme as regras do município ou operador antes da aprovação.';
 const TEXTO_RASCUNHO_ANTERIOR = 'RASCUNHO DE PESQUISA';
 const DATA_CURADORIA = '2026-09-30';
 
@@ -149,7 +149,7 @@ async function up(queryInterface) {
     } else {
       console.log('Os cinco registros já estão preparados e continuam como rascunhos; nenhuma alteração necessária.');
     }
-    console.log('A publicação deve ser feita por um revisor autenticado na Central de revisão para registrar autoria e auditoria.');
+    console.log('A publicação deve ser feita por um perfil autenticado com materiais:aprovar (revisor ou administrador) na Central de revisão para registrar autoria e auditoria.');
   });
 }
 
