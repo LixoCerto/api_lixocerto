@@ -126,22 +126,72 @@ export class ControladorGrpcPontosColeta {
 
   @GrpcMethod('ServicoPontosColeta', 'RegistrarDescarte')
   async registrarDescarte(requisicao: { id_ponto_coleta?: string; categoria_material?: string; relato?: string }, metadados: Metadata) {
+    await this.obterUsuario(metadados, 'gamificacao:participar');
+    return {
+      operacao_aceita: false,
+      mensagem_resultado: 'O fluxo antigo foi desativado. Inicie um check-in no ponto verificado e envie uma foto para cada categoria.',
+      registro: {},
+    };
+  }
+
+  @GrpcMethod('ServicoPontosColeta', 'IniciarCheckinDescarte')
+  async iniciarCheckinDescarte(requisicao: { id_ponto_coleta?: string; latitude?: number; longitude?: number; precisao_metros?: number }, metadados: Metadata) {
     const identidade = await this.obterIdentidade(metadados);
     this.autorizacao.exigirPermissao(identidade, 'pontos_coleta:ler');
     this.autorizacao.exigirPermissao(identidade, 'gamificacao:participar');
     const idUsuario = await this.usuarios.obterIdInterno(identidade.idExterno);
     if (!idUsuario) throw new Error('Usuário autenticado sem registro interno');
-    const registro = await this.descartes.registrar(idUsuario, {
+    const resultado = await this.descartes.iniciarCheckin(idUsuario, {
       idPontoColeta: requisicao.id_ponto_coleta ?? '',
-      categoria: requisicao.categoria_material ?? '',
-      relato: requisicao.relato ?? '',
+      latitude: requisicao.latitude ?? Number.NaN,
+      longitude: requisicao.longitude ?? Number.NaN,
+      precisaoMetros: requisicao.precisao_metros ?? Number.NaN,
     });
-    if (registro) await this.registrarAuditoria('descarte_enviado_para_validacao', registro.idRegistro, idUsuario, metadados);
+    if (resultado?.operacaoAceita) await this.registrarAuditoria('descarte_checkin_validado', resultado.idCheckin, idUsuario, metadados);
     return {
-      operacao_aceita: Boolean(registro),
-      mensagem_resultado: registro ? 'Registro enviado para validação. Os pontos serão creditados somente se aprovado.' : 'O ponto pode estar indisponível, não aceitar essa categoria, já ter um registro igual nas últimas 24 horas ou o limite de 10 registros em 24 horas foi atingido.',
-      registro: registro ? this.mapearDescarte(registro) : {},
+      operacao_aceita: Boolean(resultado?.operacaoAceita),
+      mensagem_resultado: resultado?.operacaoAceita ? 'Check-in validado. Você tem 30 minutos para enviar as fotos.' : 'O serviço de check-in está indisponível agora.',
+      id_checkin: resultado?.operacaoAceita ? resultado.idCheckin : '',
+      distancia_metros: resultado?.operacaoAceita ? resultado.distanciaMetros : 0,
+      precisao_metros: resultado?.operacaoAceita ? resultado.precisaoMetros : 0,
+      data_expiracao: resultado?.operacaoAceita ? resultado.dataExpiracao : '',
     };
+  }
+
+  @GrpcMethod('ServicoPontosColeta', 'ConcluirDescarte')
+  async concluirDescarte(requisicao: { id_checkin?: string; itens?: Array<{ categoria_material?: string; relato?: string; foto?: Uint8Array }> }, metadados: Metadata) {
+    const identidade = await this.obterIdentidade(metadados);
+    this.autorizacao.exigirPermissao(identidade, 'pontos_coleta:ler');
+    this.autorizacao.exigirPermissao(identidade, 'gamificacao:participar');
+    const idUsuario = await this.usuarios.obterIdInterno(identidade.idExterno);
+    if (!idUsuario) throw new Error('Usuário autenticado sem registro interno');
+    const registros = await this.descartes.concluir(idUsuario, requisicao.id_checkin ?? '', (requisicao.itens ?? []).map(item => ({
+      categoria: item.categoria_material ?? '',
+      relato: item.relato ?? '',
+      foto: item.foto ? Buffer.from(item.foto) : new Uint8Array(),
+    })));
+    if (registros) {
+      for (const registro of registros) await this.registrarAuditoria('descarte_enviado_para_validacao', registro.idRegistro, idUsuario, metadados);
+    }
+    return {
+      operacao_aceita: Boolean(registros),
+      mensagem_resultado: registros ? 'Evidências recebidas. Os pontos serão creditados somente após a revisão.' : 'O check-in pode ter expirado, já ter sido usado, não pertencer à sua conta ou não atender às regras do ponto e do limite diário.',
+      registros: (registros ?? []).map(registro => this.mapearDescarte(registro)),
+    };
+  }
+
+  @GrpcMethod('ServicoPontosColeta', 'ObterEvidenciaDescarte')
+  async obterEvidenciaDescarte(requisicao: { id_registro?: string }, metadados: Metadata) {
+    const identidade = await this.obterIdentidade(metadados);
+    const podeRevisar = this.autorizacao.temPermissao(identidade, 'pontos_coleta:aprovar');
+    if (!podeRevisar) {
+      this.autorizacao.exigirPermissao(identidade, 'pontos_coleta:ler');
+      this.autorizacao.exigirPermissao(identidade, 'gamificacao:ler');
+    }
+    const idUsuario = await this.usuarios.obterIdInterno(identidade.idExterno);
+    if (!idUsuario) throw new Error('Usuário autenticado sem registro interno');
+    const foto = await this.descartes.obterEvidencia(requisicao.id_registro ?? '', idUsuario, podeRevisar);
+    return { evidencia_disponivel: Boolean(foto), foto_webp: foto ?? Buffer.alloc(0), tipo_conteudo: foto ? 'image/webp' : '' };
   }
 
   @GrpcMethod('ServicoPontosColeta', 'ListarMeusDescartes')
@@ -205,6 +255,10 @@ export class ControladorGrpcPontosColeta {
       identificador_participante: registro.identificadorParticipante ?? '',
       quantidade: registro.quantidade,
       pontos_concedidos: registro.pontosConcedidos,
+      evidencia_disponivel: registro.evidenciaDisponivel,
+      distancia_checkin_metros: registro.distanciaCheckinMetros,
+      precisao_checkin_metros: registro.precisaoCheckinMetros,
+      tem_checkin: registro.temCheckin,
     };
   }
   private registrarAuditoria(tipoEvento: string, idRecurso: string | undefined, idUsuario: string, metadados: Metadata) {

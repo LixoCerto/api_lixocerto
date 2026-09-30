@@ -72,8 +72,46 @@ message RegistroDescarteResposta {
   string identificador_participante = 10;
   int32 quantidade = 11;
   int32 pontos_concedidos = 12;
+  bool evidencia_disponivel = 13;
+  double distancia_checkin_metros = 14;
+  double precisao_checkin_metros = 15;
+  bool tem_checkin = 16;
 }
 message RegistrarDescarteResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; RegistroDescarteResposta registro = 3; }
+message IniciarCheckinDescarteRequisicao {
+  string id_ponto_coleta = 1;
+  double latitude = 2;
+  double longitude = 3;
+  double precisao_metros = 4;
+}
+message IniciarCheckinDescarteResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  string id_checkin = 3;
+  double distancia_metros = 4;
+  double precisao_metros = 5;
+  string data_expiracao = 6;
+}
+message EvidenciaDescarteItem {
+  string categoria_material = 1;
+  bytes foto = 2;
+  string relato = 3;
+}
+message ConcluirDescarteRequisicao {
+  string id_checkin = 1;
+  repeated EvidenciaDescarteItem itens = 2;
+}
+message ConcluirDescarteResposta {
+  bool operacao_aceita = 1;
+  string mensagem_resultado = 2;
+  repeated RegistroDescarteResposta registros = 3;
+}
+message ObterEvidenciaDescarteRequisicao { string id_registro = 1; }
+message ObterEvidenciaDescarteResposta {
+  bool evidencia_disponivel = 1;
+  bytes foto_webp = 2;
+  string tipo_conteudo = 3;
+}
 message ListarMeusDescartesRequisicao {}
 message ListarMeusDescartesResposta { repeated RegistroDescarteResposta registros = 1; }
 message ListarDescartesGestaoRequisicao { string status = 1; }
@@ -92,4 +130,7 @@ service ServicoPontosColeta {
   rpc ListarMeusDescartes(ListarMeusDescartesRequisicao) returns (ListarMeusDescartesResposta);
   rpc ListarDescartesGestao(ListarDescartesGestaoRequisicao) returns (ListarDescartesGestaoResposta);
   rpc RevisarDescarte(RevisarDescarteRequisicao) returns (RevisarDescarteResposta);
+  rpc IniciarCheckinDescarte(IniciarCheckinDescarteRequisicao) returns (IniciarCheckinDescarteResposta);
+  rpc ConcluirDescarte(ConcluirDescarteRequisicao) returns (ConcluirDescarteResposta);
+  rpc ObterEvidenciaDescarte(ObterEvidenciaDescarteRequisicao) returns (ObterEvidenciaDescarteResposta);
 }

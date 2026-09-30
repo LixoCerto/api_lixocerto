@@ -63,6 +63,41 @@ describe('autorização dos controladores gRPC', () => {
     expect(descartes.listarGestao).toHaveBeenCalledWith('todos');
   });
 
+  it('exige leitura e participação para check-in e protege a leitura de evidências', async () => {
+    const identidade = { ...identidadeSemAcesso, permissoes: ['pontos_coleta:ler'] };
+    const usuarios = { obterIdInterno: vi.fn() };
+    const descartes = { iniciarCheckin: vi.fn(), concluir: vi.fn(), obterEvidencia: vi.fn() };
+    const controlador = new ControladorGrpcPontosColeta(
+      {} as never,
+      autenticacao(identidade) as never,
+      new ServicoAutorizacao(),
+      usuarios as never,
+      {} as never,
+      {} as never,
+      descartes as never,
+    );
+    const metadados = metadadosAutenticados();
+
+    await expect(controlador.iniciarCheckinDescarte({ id_ponto_coleta: 'ponto-1' }, metadados)).rejects.toBeInstanceOf(ForbiddenException);
+    await expect(controlador.concluirDescarte({ id_checkin: 'checkin-1' }, metadados)).rejects.toBeInstanceOf(ForbiddenException);
+    expect(usuarios.obterIdInterno).not.toHaveBeenCalled();
+    expect(descartes.iniciarCheckin).not.toHaveBeenCalled();
+    expect(descartes.concluir).not.toHaveBeenCalled();
+
+    const identidadeSomenteGamificacao = { ...identidadeSemAcesso, permissoes: ['gamificacao:ler'] };
+    const controladorSemPontos = new ControladorGrpcPontosColeta(
+      {} as never,
+      autenticacao(identidadeSomenteGamificacao) as never,
+      new ServicoAutorizacao(),
+      usuarios as never,
+      {} as never,
+      {} as never,
+      descartes as never,
+    );
+    await expect(controladorSemPontos.obterEvidenciaDescarte({ id_registro: 'registro-1' }, metadados)).rejects.toBeInstanceOf(ForbiddenException);
+    expect(descartes.obterEvidencia).not.toHaveBeenCalled();
+  });
+
   it('deriva o progresso gamificado do bearer autenticado e ignora x-id-usuario-externo fornecido pelo cliente', async () => {
     const identidade = { ...identidadeSemAcesso, permissoes: ['gamificacao:ler'] };
     const servico = {

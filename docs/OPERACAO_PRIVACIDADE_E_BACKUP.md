@@ -20,11 +20,21 @@
 
 O fluxo atual mantém contas e sessões, incluindo endereço IP e agente do navegador na sessão. O cadastro exige confirmação de e-mail antes de abrir sessão. Os seeders de homologação usam contas `.test` e são restritos a desenvolvimento.
 
-O fluxo de gamificação acrescenta atribuições e respostas de quiz, eventos de pontuação, selos e relatos de descarte ligados ao identificador interno da conta. Um relato contém ponto, categoria, data, status de revisão e texto opcional limitado a 500 caracteres; não coleta localização atual do navegador nem foto como prova. A equipe revisa manualmente a compatibilidade ponto/categoria e o relato, portanto a aprovação **não deve ser descrita como comprovação automática da entrega física**. Oriente participantes a não inserir nomes, contatos ou outros dados pessoais no relato. A pontuação só é liberada após a aprovação e os endpoints restringem a consulta à própria pessoa ou à equipe revisora autorizada.
+O fluxo de gamificação acrescenta atribuições e respostas de quiz, eventos de pontuação, selos e relatos de descarte ligados ao identificador interno da conta. O fluxo novo de descarte grava latitude/longitude e precisão do GPS durante o check-in, além de metadados de fotos por categoria; cada relato contém ponto, categoria, data, estado e texto opcional limitado a 500 caracteres. A API exige até 5 m do ponto e precisão reportada de até 10 m. A equipe revisa manualmente a compatibilidade ponto/categoria e a evidência, portanto a aprovação **não deve ser descrita como comprovação automática da entrega física**. Oriente participantes a não inserir nomes, contatos ou outros dados pessoais no relato nem fotografar pessoas, documentos ou placas. A pontuação só é liberada após a aprovação e os endpoints restringem a consulta à própria pessoa ou à equipe revisora autorizada.
+
+## Check-in, fotos e retenção de evidências
+
+- O check-in só é iniciado por ação da pessoa, num ponto verificado com coordenadas válidas; o servidor calcula novamente a distância geodésica e exige raio estrito de 5 m. A precisão declarada pelo navegador precisa ser de até 10 m. Um check-in expira em 30 minutos.
+- Cada categoria aceita selecionada gera um registro pendente e exige sua própria foto. O servidor aceita JPEG, PNG ou WebP estáticos (até 2 MiB por arquivo), valida o conteúdo real, corrige a orientação, redimensiona/comprime para WebP e calcula SHA-256/tamanho. A recodificação remove metadados EXIF. Arquivos ficam fora do banco e do Git, num volume Docker local dedicado com acesso privado; a API não publica caminhos nem URLs permanentes.
+- Só a pessoa proprietária ou um revisor autorizado consegue consultar a foto, por RPC autenticado; as coordenadas exatas não são retornadas no histórico nem registradas na auditoria. Aprovação exige check-in e foto ainda disponíveis, ponto verificado e categoria aceita.
+- Um envio pendente conserva foto e dados do check-in até a decisão. Após aprovação/rejeição, as fotos expiram 90 dias depois da decisão, e as coordenadas do check-in são removidas 90 dias após a última decisão dos registros daquele check-in. Check-ins abandonados sem registros expiram em 30 minutos e são removidos na rotina de expurgo (executada na inicialização e a cada 10 minutos). Até o expurgo, endpoints deixam de servir fotos assim que a validade termina.
+- A expiração da foto não remove o registro de auditoria, a categoria, o estado, os pontos já concedidos nem outros campos do descarte. Se não houver revisão, a retenção permanece pendente; defina responsáveis e prazo operacional de revisão antes de convidar participantes reais.
+
+Antes de coleta acadêmica real, atualize aviso e consentimento aprovado pela instituição para explicar check-in, precisão/uso da localização, fotos, revisão humana, armazenamento local e prazos acima. Avalie a necessidade de proteção adicional/criptografia do volume e restrinja o acesso à máquina que hospeda o Docker.
 
 Antes de coletar dados de participantes, atualize o aviso de privacidade e o consentimento aprovado pela instituição para explicar esse histórico de participação/pontuação e sua retenção. O ledger registra a origem e a categoria da recompensa para idempotência e auditoria; o ranking público usa rótulos genéricos em vez de nome ou e-mail.
 
-Antes de uma coleta acadêmica real, defina e aprove com a instituição: finalidade, aviso/consentimento, dados estritamente necessários, responsáveis, retenção, canal de solicitação/remoção e tratamento de incidentes. Não use contas reais de participantes no ambiente de desenvolvimento. Não há, neste repositório, prazo automático documentado para expurgo desses registros nem fluxo completo de autoatendimento para exportação/exclusão; não prometa essas funcionalidades.
+Antes de uma coleta acadêmica real, defina e aprove com a instituição: finalidade, aviso/consentimento, dados estritamente necessários, responsáveis, retenção, canal de solicitação/remoção e tratamento de incidentes. Não use contas reais de participantes no ambiente de desenvolvimento. O expurgo automático descrito acima cobre fotos e coordenadas de check-in; não apaga eventos de pontuação, respostas, registros de descarte ou o histórico de auditoria, e não há fluxo completo de autoatendimento para exportação/exclusão desses registros — não prometa essa funcionalidade.
 
 ## Backup PostgreSQL manual (PowerShell)
 
@@ -73,3 +83,86 @@ Valide migrations, contagens agregadas e login de homologação no destino desca
 ## Retenção recomendada para homologação
 
 Enquanto a aplicação estiver em desenvolvimento, o responsável pode começar com backup antes de cada migration e um backup semanal durante a fase ativa; manter cópias rotacionadas (por exemplo, até quatro semanas) é uma **proposta operacional**, não um job configurado. Ajuste o período às regras acadêmicas e institucionais, remova dumps vencidos de forma segura e teste restauração antes de depender do backup.
+
+
+## Backup pareado de PostgreSQL e evidências (PowerShell)
+
+O banco guarda apenas chaves e metadados; as imagens ficam no volume Docker `lcr-descartes-evidencias`. Para obter artefatos do mesmo estado, o script abaixo interrompe temporariamente a API, faz `pg_dump` e arquiva o volume na mesma janela. Ele preserva o estado anterior da API (só a inicia ao final se ela estava ativa). Os dois artefatos ficam em `%USERPROFILE%\LixoCertoBackups`, fora do Git; armazene-os juntos com acesso restrito e criptografia em repouso.
+
+```powershell
+$ErrorActionPreference = 'Stop'
+Set-Location G:\LixoCerto\infra_lixocerto
+$diretorio = Join-Path $env:USERPROFILE 'LixoCertoBackups'
+New-Item -ItemType Directory -Force -Path $diretorio | Out-Null
+$timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+$arquivoBanco = Join-Path $diretorio "lixocerto-$timestamp.dump"
+$nomeArquivoFotos = "lcr-evidencias-$timestamp.tar.gz"
+$arquivoFotos = Join-Path $diretorio $nomeArquivoFotos
+$bind = "type=bind,source=$($diretorio.Replace('\', '/')),target=/backup"
+
+$env:PGHOST = Read-Host 'Host PostgreSQL deste ambiente'
+$env:PGPORT = Read-Host 'Porta PostgreSQL'
+$env:PGDATABASE = Read-Host 'Nome da base de desenvolvimento'
+$env:PGUSER = Read-Host 'Usuário de backup'
+$senhaSegura = Read-Host 'Senha PostgreSQL' -AsSecureString
+$ponteiro = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($senhaSegura)
+$apiEstavaAtiva = [bool](docker compose -f compose.yml --profile app ps -q --status running api)
+if ($LASTEXITCODE -ne 0) { throw 'Não foi possível consultar o estado da API.' }
+
+try {
+  docker image inspect alpine:3.20 *> $null
+  if ($LASTEXITCODE -ne 0) {
+    docker pull alpine:3.20
+    if ($LASTEXITCODE -ne 0) { throw 'Não foi possível obter a imagem utilitária Alpine.' }
+  }
+  docker compose -f compose.yml --profile app stop api
+  if ($LASTEXITCODE -ne 0) { throw 'Não foi possível parar a API para o snapshot.' }
+
+  $env:PGPASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($ponteiro)
+  & pg_dump --format=custom --no-owner --no-acl --file $arquivoBanco
+  if ($LASTEXITCODE -ne 0) { throw 'pg_dump falhou; não use o arquivo como backup válido.' }
+  & pg_restore --list $arquivoBanco | Out-Null
+  if ($LASTEXITCODE -ne 0) { throw 'O dump PostgreSQL falhou na verificação pg_restore --list.' }
+
+  docker run --rm `
+    --mount 'type=volume,source=lcr-descartes-evidencias,target=/origem,readonly' `
+    --mount $bind `
+    alpine:3.20 sh -c "tar -czf /backup/$nomeArquivoFotos -C /origem ."
+  if ($LASTEXITCODE -ne 0) { throw 'Falha ao arquivar o volume de evidências.' }
+  docker run --rm --mount $bind alpine:3.20 tar -tzf "/backup/$nomeArquivoFotos" | Out-Null
+  if ($LASTEXITCODE -ne 0) { throw 'O arquivo do volume falhou na verificação tar -tzf.' }
+
+  Get-Item $arquivoBanco, $arquivoFotos | Select-Object FullName, Length, LastWriteTime
+} finally {
+  Remove-Item Env:PGPASSWORD, Env:PGHOST, Env:PGPORT, Env:PGDATABASE, Env:PGUSER -ErrorAction SilentlyContinue
+  [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ponteiro)
+  $senhaSegura.Dispose()
+  if ($apiEstavaAtiva) {
+    docker compose -f compose.yml --profile app start api
+    if ($LASTEXITCODE -ne 0) { Write-Warning 'A API não reiniciou automaticamente; verifique docker compose ps.' }
+  }
+}
+```
+
+### Ensaio de restauração do volume, sem sobrescrever o original
+
+Restaure primeiro para um volume de teste isolado. O nome abaixo é único para não misturar arquivos de um ensaio anterior; o Compose continua usando o volume original:
+
+```powershell
+$ErrorActionPreference = 'Stop'
+$diretorio = Join-Path $env:USERPROFILE 'LixoCertoBackups'
+$nomeArquivoFotos = 'NOME-DO-ARQUIVO.tar.gz' # use o arquivo validado do backup
+$volumeEnsaio = "lcr-descartes-evidencias-restore-test-$([guid]::NewGuid().ToString('N').Substring(0,8))"
+$bind = "type=bind,source=$($diretorio.Replace('\', '/')),target=/backup"
+Write-Host "Volume isolado deste ensaio: $volumeEnsaio"
+docker volume create $volumeEnsaio | Out-Null
+if ($LASTEXITCODE -ne 0) { throw 'Não foi possível criar o volume de ensaio.' }
+docker run --rm `
+  --mount "type=volume,source=$volumeEnsaio,target=/destino" `
+  --mount $bind `
+  alpine:3.20 sh -c "tar -xzf /backup/$nomeArquivoFotos -C /destino"
+if ($LASTEXITCODE -ne 0) { throw 'Restauração de ensaio do volume falhou.' }
+docker run --rm --mount "type=volume,source=$volumeEnsaio,target=/dados,readonly" alpine:3.20 sh -c 'find /dados -type f | wc -l'
+```
+
+Compare a quantidade de arquivos e valide sua associação com uma cópia de teste do banco. Só remova o volume de ensaio após conferir o nome e o conteúdo; não use `docker volume prune`.

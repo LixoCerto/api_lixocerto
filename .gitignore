@@ -3,3 +3,4 @@ dist/
 coverage/
 relatorios/
 *.log
+.dados/

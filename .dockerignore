@@ -4,6 +4,7 @@ dist
 coverage
 *.log
 .git
+.dados/
 .env
 .env.*
 !.env.example
