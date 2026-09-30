@@ -25,17 +25,25 @@ function dependenciasQuestionario(servico: object) {
 
 describe('serialização dos controladores gRPC', () => {
   it('converte o resultado SUS para snake_case do Protobuf', async () => {
+    const servico = { enviar: vi.fn().mockResolvedValue({ avaliacaoAceita: false, pontuacaoSus: 0, mensagemResultado: 'Consentimento obrigatorio.' }) };
+    const autenticacao = { obterIdentidadeAtual: vi.fn().mockResolvedValue(identidade) };
+    const autorizacao = { exigirPermissao: vi.fn() };
     const controlador = new ControladorGrpcAvaliacaoUsabilidade(
-      { enviar: async () => ({ avaliacaoAceita: false, pontuacaoSus: 0, mensagemResultado: 'Consentimento obrigatorio.' }) } as unknown as ServicoAvaliacaoUsabilidade,
-      {} as never,
-      {} as never,
+      servico as unknown as ServicoAvaliacaoUsabilidade,
+      autenticacao as never,
+      autorizacao as never,
     );
+    const metadados = new Metadata();
+    metadados.set('authorization', 'Bearer token-teste');
 
-    await expect(controlador.enviarAvaliacaoSus({})).resolves.toEqual({
+    await expect(controlador.enviarAvaliacaoSus({ codigo_participante: 'identidade-de-outra-pessoa', indica_consentimento: true, notas_itens: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3] }, metadados)).resolves.toEqual({
       avaliacao_aceita: false,
       pontuacao_sus: 0,
       mensagem_resultado: 'Consentimento obrigatorio.',
     });
+    expect(autenticacao.obterIdentidadeAtual).toHaveBeenCalledWith('Bearer token-teste');
+    expect(autorizacao.exigirPermissao).toHaveBeenCalledWith(identidade, 'avaliacao_usabilidade:enviar');
+    expect(servico.enviar).toHaveBeenCalledWith(identidade.idExterno, true, [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]);
   });
 
   it('serializa resposta de quiz e registra a tentativa do usuário autenticado', async () => {

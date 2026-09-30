@@ -91,7 +91,7 @@ export class ControladorGrpcDesafios {
 
   @GrpcMethod('ServicoDesafios', 'ParticiparDesafio')
   async participarDesafio(requisicao: { id_desafio?: string }, metadados: Metadata): Promise<{ participacao_aceita: boolean; desafio: Partial<DesafioGrpc>; mensagem_resultado: string }> {
-    const idUsuario = await this.obterUsuario(metadados, 'gamificacao:ler');
+    const idUsuario = await this.obterUsuario(metadados, ['gamificacao:ler', 'gamificacao:participar']);
     await this.protegerMutacao(idUsuario, 'participar-desafio', 10);
     const desafio = await this.servico.participar(idUsuario, requisicao.id_desafio ?? '', this.obterCorrelacao(metadados));
     return desafio
@@ -101,7 +101,7 @@ export class ControladorGrpcDesafios {
 
   @GrpcMethod('ServicoDesafios', 'RegistrarAcaoSustentavel')
   async registrarAcaoSustentavel(requisicao: { id_desafio?: string; tipo_acao?: string; descricao_acao?: string }, metadados: Metadata) {
-    const idUsuario = await this.obterUsuario(metadados, 'gamificacao:ler');
+    const idUsuario = await this.obterUsuario(metadados, ['gamificacao:ler', 'gamificacao:participar']);
     await this.protegerMutacao(idUsuario, 'registrar-acao', 20);
     const resultado = await this.servico.registrarAcao(idUsuario, {
       idDesafio: requisicao.id_desafio ?? '',
@@ -119,9 +119,11 @@ export class ControladorGrpcDesafios {
     return this.autenticacao.obterIdentidadeAtual(autorizacao);
   }
 
-  private async obterUsuario(metadados: Metadata, permissao: string) {
+  private async obterUsuario(metadados: Metadata, permissoes: string | readonly string[]) {
     const identidade = await this.obterIdentidade(metadados);
-    this.autorizacao.exigirPermissao(identidade, permissao);
+    for (const permissao of typeof permissoes === 'string' ? [permissoes] : permissoes) {
+      this.autorizacao.exigirPermissao(identidade, permissao);
+    }
     const idUsuario = await this.usuarios.obterIdInterno(identidade.idExterno);
     if (!idUsuario) throw new ServiceUnavailableException('Usuário autenticado sem registro interno');
     return idUsuario;

@@ -12,6 +12,17 @@ O seeder cria ou atualiza somente estas identidades reservadas, usando o domíni
 
 As contas ficam ativas e com e-mail confirmado para uso local. O seeder grava somente hashes scrypt compatíveis com o login; não imprime as senhas durante a execução. **Essas credenciais estão versionadas no repositório privado por solicitação e são exclusivamente para desenvolvimento local. Qualquer pessoa com acesso ao repositório poderá vê-las: não as use em produção, não as reutilize em outros serviços e mantenha os repositórios privados.**
 
+## Matriz dos perfis-base
+
+| Perfil | Capacidades principais | Áreas exibidas |
+|---|---|---|
+| `usuario` | Ler guia e pontos; responder quiz; ler gamificação e **participar** de desafios; enviar avaliação SUS | Visão geral, Guia, Pontos, Quiz, Desafios, Pesquisa e Perfil |
+| `pesquisador` | Ler guia e pontos; ler seu progresso; consultar **somente agregados** da avaliação SUS | Visão geral, Guia, Pontos, Pesquisa e Perfil; sem quiz, participação em desafios, gestão ou auditoria |
+| `revisor` | Ler/escrever/aprovar materiais e pontos; responder/administrar questionários; ler e administrar desafios | Visão geral, Guia, Pontos, Quiz, Desafios (gestão), Central de revisão e Perfil |
+| `administrador` | Catálogo completo de permissões, incluindo resumo/administração, gestão de acessos e auditoria | Todas as áreas. A matriz do papel `administrador` continua protegida no backend. |
+
+`gamificacao:participar` foi separado de `gamificacao:ler`: pesquisador não recebe ações de participação, e o servidor exige ambos para entrar/registrar ações em um desafio. Para atualizar bancos já semeados, execute novamente **somente para frente** o seed idempotente `001_inserir_papeis_permissoes.cjs`; isso adiciona a permissão nova e a associa aos papéis previstos. Não execute o `down` do seed.
+
 ## Proteções e repetição
 
 - Só executa quando `AMBIENTE_EXECUCAO=desenvolvimento` **e** `LCR_SEMEAR_CONTAS_HOMOLOGACAO=true`.
@@ -26,19 +37,32 @@ As contas ficam ativas e com e-mail confirmado para uso local. O seeder grava so
 Set-Location G:\LixoCerto
 
 git -C .\api_lixocerto pull --ff-only origin main
+git -C .\frontend_lixocerto pull --ff-only origin main
 git -C .\infra_lixocerto pull --ff-only origin main
 
 Set-Location G:\LixoCerto\infra_lixocerto
-docker compose -f compose.yml --profile app build --no-cache api
+docker compose -f compose.yml --profile app build --no-cache api frontend
+docker compose -f compose.yml --profile app up -d --no-deps --force-recreate api frontend
+
+# Atualiza catálogo e atribuições de permissões (seed idempotente; não apaga dados).
+docker compose -f compose.yml --profile app run --rm --no-deps `
+  --entrypoint node `
+  api node_modules/sequelize-cli/lib/sequelize db:seed `
+    --seed 001_inserir_papeis_permissoes.cjs `
+    --config configuracao_sequelize.cjs `
+    --seeders-path banco/dados_iniciais
 
 $env:LCR_SEMEAR_CONTAS_HOMOLOGACAO = 'true'
 try {
   docker compose -f compose.yml --profile app run --rm --no-deps `
     -e LCR_SEMEAR_CONTAS_HOMOLOGACAO `
-    api pnpm semear:homologacao
+    --entrypoint node `
+    api node_modules/sequelize-cli/lib/sequelize db:seed:all `
+      --config configuracao_sequelize.cjs `
+      --seeders-path banco/seeds_homologacao
 } finally {
   Remove-Item Env:LCR_SEMEAR_CONTAS_HOMOLOGACAO -ErrorAction SilentlyContinue
 }
 ```
 
-A execução precisa terminar com a mensagem de sucesso `Contas locais de homologação prontas`. Não execute esse seeder contra produção. Depois, entre com cada e-mail em uma sessão separada; mantenha as contas administrativas atuais para testar o nível administrador.
+A execução de contas precisa terminar com a mensagem de sucesso `Contas locais de homologação prontas`. Não execute esses comandos contra produção nem apague volumes. Depois de aplicar a matriz e criar as contas, encerre as sessões antigas e entre novamente com cada e-mail em uma sessão separada para receber permissões atualizadas; mantenha as contas administrativas atuais para testar o nível administrador.

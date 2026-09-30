@@ -14,9 +14,13 @@ export class ControladorGrpcAvaliacaoUsabilidade {
   ) {}
 
   @GrpcMethod('ServicoAvaliacaoUsabilidade', 'EnviarAvaliacaoSus')
-  enviarAvaliacaoSus(requisicao: { codigo_participante?: string; indica_consentimento?: boolean; notas_itens?: number[] }) {
+  async enviarAvaliacaoSus(requisicao: { codigo_participante?: string; indica_consentimento?: boolean; notas_itens?: number[] }, metadados: Metadata) {
+    const valor = metadados.get('authorization')[0];
+    const autorizacao = Buffer.isBuffer(valor) ? valor.toString('utf8') : typeof valor === 'string' ? valor : undefined;
+    const usuario = await this.autenticacao.obterIdentidadeAtual(autorizacao);
+    this.autorizacao.exigirPermissao(usuario, 'avaliacao_usabilidade:enviar');
     return this.servico.enviar(
-      requisicao.codigo_participante ?? '',
+      usuario.idExterno,
       requisicao.indica_consentimento === true,
       requisicao.notas_itens ?? [],
     ).then(resultado => ({

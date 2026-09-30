@@ -48,6 +48,7 @@ export class ControladorGrpcPontosColeta {
   @GrpcMethod('ServicoPontosColeta', 'ListarPontosColeta')
   async listarPontosColeta(requisicao: { cidade_ponto_coleta?: string; categoria_material?: string; latitude?: number; longitude?: number; raio_metros?: number }, metadados: Metadata): Promise<{ pontos_coleta: PontoResposta[] }> {
     const identidade = await this.obterIdentidade(metadados);
+    this.autorizacao.exigirPermissao(identidade, 'pontos_coleta:ler');
     const incluirTodos = this.autorizacao.temPermissao(identidade, 'pontos_coleta:aprovar');
     const pontos = await this.servico.listar({ cidadePontoColeta: requisicao.cidade_ponto_coleta, categoriaMaterial: requisicao.categoria_material, latitude: requisicao.latitude || undefined, longitude: requisicao.longitude || undefined, raioMetros: requisicao.raio_metros }, incluirTodos);
     return { pontos_coleta: pontos.map(ponto => this.mapear(ponto)) };
@@ -75,6 +76,7 @@ export class ControladorGrpcPontosColeta {
   @GrpcMethod('ServicoPontosColeta', 'ObterPontoColeta')
   async obterPontoColeta(requisicao: { id_ponto_coleta?: string }, metadados: Metadata) {
     const identidade = await this.obterIdentidade(metadados);
+    this.autorizacao.exigirPermissao(identidade, 'pontos_coleta:ler');
     const ponto = await this.servico.obter(requisicao.id_ponto_coleta ?? '');
     if (!ponto || (ponto.lcr_pco_status_verificacao !== 'verificado' && !this.autorizacao.temPermissao(identidade, 'pontos_coleta:aprovar'))) return { ponto: {} };
     return { ponto: this.mapear(ponto) };

@@ -8,6 +8,7 @@ export const permissoes = {
   questionariosResponder: 'questionarios:responder',
   questionariosAdministrar: 'questionarios:administrar',
   gamificacaoLer: 'gamificacao:ler',
+  gamificacaoParticipar: 'gamificacao:participar',
   gamificacaoAdministrar: 'gamificacao:administrar',
   avaliacaoSusEnviar: 'avaliacao_usabilidade:enviar',
   avaliacaoSusConsultarAgregados: 'avaliacao_usabilidade:consultar_agregados',

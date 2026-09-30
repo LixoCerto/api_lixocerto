@@ -36,18 +36,21 @@ module.exports = {
         "SELECT lcr_pap_id_papel FROM lcr_papeis WHERE lcr_pap_nome_papel = 'administrador' AND lcr_pap_status_papel = 'ativo' FOR UPDATE",
         { type: QueryTypes.SELECT, transaction },
       );
-      if (!papeis[0]) throw new Error('Papel administrador ativo não encontrado.');
-      const relacoes = await queryInterface.sequelize.query(
-        'SELECT lcr_ppm_id_papel_permissao FROM lcr_papeis_permissoes WHERE lcr_ppm_id_papel = :idPapel AND lcr_ppm_id_permissao = :idPermissao',
-        { replacements: { idPapel: papeis[0].lcr_pap_id_papel, idPermissao }, type: QueryTypes.SELECT, transaction },
-      );
-      if (!relacoes.length) {
-        await queryInterface.bulkInsert('lcr_papeis_permissoes', [{
-          lcr_ppm_id_papel_permissao: randomUUID(),
-          lcr_ppm_id_papel: papeis[0].lcr_pap_id_papel,
-          lcr_ppm_id_permissao: idPermissao,
-          lcr_ppm_data_atribuicao: new Date(),
-        }], { transaction });
+      // Migrations rodam antes dos seeds em uma instalação limpa. Nesse caso,
+      // o seed inicial associa a permissão ao papel administrador depois.
+      if (papeis[0]) {
+        const relacoes = await queryInterface.sequelize.query(
+          'SELECT lcr_ppm_id_papel_permissao FROM lcr_papeis_permissoes WHERE lcr_ppm_id_papel = :idPapel AND lcr_ppm_id_permissao = :idPermissao',
+          { replacements: { idPapel: papeis[0].lcr_pap_id_papel, idPermissao }, type: QueryTypes.SELECT, transaction },
+        );
+        if (!relacoes.length) {
+          await queryInterface.bulkInsert('lcr_papeis_permissoes', [{
+            lcr_ppm_id_papel_permissao: randomUUID(),
+            lcr_ppm_id_papel: papeis[0].lcr_pap_id_papel,
+            lcr_ppm_id_permissao: idPermissao,
+            lcr_ppm_data_atribuicao: new Date(),
+          }], { transaction });
+        }
       }
       await transaction.commit();
     } catch (erro) {
