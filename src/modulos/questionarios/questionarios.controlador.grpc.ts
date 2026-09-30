@@ -13,6 +13,7 @@ type DadosQuestaoGrpc = {
   enunciado_questao?: string;
   explicacao_questao?: string;
   quantidade_pontos?: number;
+  tema_questao?: string;
   alternativas?: Array<{ texto_alternativa?: string; indica_correta?: boolean; ordem_exibicao?: number }>;
 };
 interface RespostaListarQuestoes {
@@ -20,6 +21,8 @@ interface RespostaListarQuestoes {
     id_questao: string;
     enunciado_questao: string;
     quantidade_pontos: number;
+    tema_questao: string;
+    data_expiracao: string;
     alternativas: Array<{ id_alternativa: string; texto_alternativa: string; ordem_exibicao: number }>;
   }>;
 }
@@ -38,12 +41,14 @@ export class ControladorGrpcQuestionarios {
   async listarQuestoes(requisicao: { numero_pagina?: number; tamanho_pagina?: number }, metadados: Metadata): Promise<RespostaListarQuestoes> {
     const identidade = await this.obterIdentidade(metadados);
     this.autorizacao.exigirPermissao(identidade, 'questionarios:responder');
-    const questoes = await this.servico.listar(requisicao.numero_pagina, requisicao.tamanho_pagina);
+    const questoes = await this.servico.listar(identidade.idExterno, requisicao.numero_pagina, requisicao.tamanho_pagina);
     return {
       questoes: questoes.map(({ questao, alternativas }) => ({
         id_questao: questao.lcr_que_id_questao,
         enunciado_questao: questao.lcr_que_enunciado_questao,
         quantidade_pontos: questao.lcr_que_quantidade_pontos,
+        tema_questao: questao.lcr_que_tema_questao,
+        data_expiracao: new Date(questao.lcr_que_data_expiracao).toISOString(),
         // O RPC público não recebe gabarito nem explicação; isso só é retornado após o envio da resposta.
         alternativas: alternativas.map(alternativa => ({
           id_alternativa: alternativa.lcr_alt_id_alternativa,
@@ -135,6 +140,7 @@ export class ControladorGrpcQuestionarios {
       enunciadoQuestao: dados.enunciado_questao ?? '',
       explicacaoQuestao: dados.explicacao_questao ?? '',
       quantidadePontos: dados.quantidade_pontos ?? 0,
+      temaQuestao: dados.tema_questao ?? '',
       alternativas: (dados.alternativas ?? []).map((alternativa, indice) => ({
         textoAlternativa: alternativa.texto_alternativa ?? '',
         indicaCorreta: alternativa.indica_correta ?? false,
@@ -149,6 +155,7 @@ export class ControladorGrpcQuestionarios {
       enunciado_questao: item.questao.lcr_que_enunciado_questao,
       explicacao_questao: item.questao.lcr_que_explicacao_questao,
       quantidade_pontos: item.questao.lcr_que_quantidade_pontos,
+      tema_questao: item.questao.lcr_que_tema_questao,
       status_questao: item.questao.lcr_que_status_questao,
       data_atualizacao: item.questao.lcr_que_data_atualizacao instanceof Date ? item.questao.lcr_que_data_atualizacao.toISOString() : String(item.questao.lcr_que_data_atualizacao ?? ''),
       alternativas: item.alternativas.map(alternativa => ({

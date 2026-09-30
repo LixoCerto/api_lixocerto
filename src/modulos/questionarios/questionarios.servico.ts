@@ -1,20 +1,40 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, OnModuleDestroy, OnModuleInit, Optional } from '@nestjs/common';
+import { randomInt } from 'node:crypto';
 import { ServicoGamificacao } from '../gamificacao/gamificacao.servico.js';
 import { ServicoUsuarios } from '../usuarios/usuarios.servico.js';
+import { ServicoDesafios } from '../desafios/desafios.servico.js';
 import { DadosQuestao, RepositorioQuestionarios, StatusQuestao } from './questionarios.repositorio.js';
 
 const statusValidos = new Set<StatusQuestao>(['rascunho', 'publicada', 'arquivada']);
+const INTERVALO_AGENDADOR_MS = 5 * 60 * 1000;
 
 @Injectable()
-export class ServicoQuestionarios {
+export class ServicoQuestionarios implements OnModuleInit, OnModuleDestroy {
+  private readonly logger = new Logger(ServicoQuestionarios.name);
+  private temporizador?: NodeJS.Timeout;
+  private processandoAgendamentos = false;
+
   constructor(
     private readonly repositorio: RepositorioQuestionarios,
     private readonly usuarios: ServicoUsuarios,
     private readonly gamificacao: ServicoGamificacao,
+    @Optional() private readonly desafios?: ServicoDesafios,
   ) {}
 
-  listar(numeroPagina?: number, tamanhoPagina?: number) {
-    return this.repositorio.listarPublicadas(numeroPagina, tamanhoPagina);
+  onModuleInit(): void {
+    void this.processarAgendamentos();
+    this.temporizador = setInterval(() => void this.processarAgendamentos(), INTERVALO_AGENDADOR_MS);
+    this.temporizador.unref?.();
+  }
+
+  onModuleDestroy(): void {
+    if (this.temporizador) clearInterval(this.temporizador);
+  }
+
+  async listar(idExternoUsuario: string, numeroPagina?: number, tamanhoPagina?: number) {
+    const idUsuario = await this.usuarios.obterIdInterno(idExternoUsuario);
+    if (!idUsuario) return [];
+    return this.repositorio.listarPublicadas(idUsuario, numeroPagina, tamanhoPagina);
   }
 
   listarGestao(filtro: { status?: StatusQuestao | 'todos'; textoPesquisa?: string; numeroPagina?: number; tamanhoPagina?: number }) {
@@ -48,40 +68,61 @@ export class ServicoQuestionarios {
   }
 
   async responder(idQuestao: string, idAlternativa: string, idExternoUsuario?: string) {
-    if (!idQuestao.trim() || !idAlternativa.trim()) {
-      return { indicaCorreta: false, quantidadePontos: 0, explicacaoResposta: 'Questao ou alternativa indisponivel.' };
+    if (!idQuestao.trim() || !idAlternativa.trim() || !idExternoUsuario?.trim()) return respostaIndisponivel();
+    const idUsuario = await this.usuarios.obterIdInterno(idExternoUsuario);
+    if (!idUsuario) return respostaIndisponivel();
+    const resposta = await this.repositorio.registrarTentativa(
+      { idUsuario, idQuestao, idAlternativa },
+      (evento, transacao) => this.gamificacao.concederPontos(idUsuario, evento.quantidadePontos, 'quiz_correto', evento.idAtribuicao, evento.temaQuestao, transacao),
+    );
+    if (!resposta) return respostaIndisponivel();
+    if (resposta.jaRespondida) {
+      return { indicaCorreta: false, quantidadePontos: 0, explicacaoResposta: resposta.explicacaoResposta };
     }
-    const resposta = await this.repositorio.obterResposta(idQuestao, idAlternativa);
-    if (!resposta) {
-      return { indicaCorreta: false, quantidadePontos: 0, explicacaoResposta: 'Questao ou alternativa indisponivel.' };
-    }
-
-    const indicaCorreta = resposta.alternativa.lcr_alt_indica_correta;
-    let quantidadePontos = indicaCorreta ? resposta.questao.lcr_que_quantidade_pontos : 0;
-    let explicacaoResposta = resposta.questao.lcr_que_explicacao_questao;
-    const idUsuario = idExternoUsuario ? await this.usuarios.obterIdInterno(idExternoUsuario) : null;
-    if (idUsuario) {
-      const tentativaRegistrada = await this.repositorio.registrarTentativa({ idUsuario, idQuestao, idAlternativa, indicaCorreta, quantidadePontos });
-      if (!tentativaRegistrada && indicaCorreta) {
-        quantidadePontos = 0;
-        explicacaoResposta = 'Você já recebeu a recompensa desta questão.';
+    if (!resposta.registrada) return respostaIndisponivel();
+    if (resposta.indicaCorreta && resposta.registrada && this.desafios) {
+      try {
+        await this.desafios.processarProgresso(idUsuario);
+      } catch (erro) {
+        this.logger.warn(`Não foi possível atualizar metas após o quiz: ${erro instanceof Error ? erro.name : 'erro'}`);
       }
-      if (tentativaRegistrada && indicaCorreta && quantidadePontos > 0) await this.gamificacao.concederPontos(idUsuario, quantidadePontos);
     }
-    return { indicaCorreta, quantidadePontos, explicacaoResposta };
+    return {
+      indicaCorreta: resposta.indicaCorreta,
+      quantidadePontos: resposta.quantidadePontos,
+      explicacaoResposta: resposta.explicacaoResposta,
+    };
   }
+
+  private async processarAgendamentos() {
+    if (this.processandoAgendamentos) return;
+    this.processandoAgendamentos = true;
+    try {
+      await this.repositorio.processarAgendamentos();
+    } catch (erro) {
+      this.logger.warn(`Não foi possível processar os quizzes agendados: ${erro instanceof Error ? erro.name : 'erro'}`);
+    } finally {
+      this.processandoAgendamentos = false;
+    }
+  }
+}
+
+function respostaIndisponivel() {
+  return { indicaCorreta: false, quantidadePontos: 0, explicacaoResposta: 'Questão ou atribuição indisponível. Cada questão pode ser respondida uma única vez.' };
 }
 
 function validarDados(dados: DadosQuestao): DadosQuestao {
   const enunciadoQuestao = dados.enunciadoQuestao?.trim();
   const explicacaoQuestao = dados.explicacaoQuestao?.trim();
+  const temaQuestao = dados.temaQuestao?.trim().toLocaleLowerCase('pt-BR');
   if (!enunciadoQuestao || enunciadoQuestao.length > 4000) throw new BadRequestException('Enunciado obrigatório, com até 4000 caracteres');
   if (!explicacaoQuestao || explicacaoQuestao.length > 8000) throw new BadRequestException('Explique a resposta, com até 8000 caracteres');
-  if (!Number.isInteger(dados.quantidadePontos) || dados.quantidadePontos < 0 || dados.quantidadePontos > 10000) {
-    throw new BadRequestException('A pontuação deve ser um número inteiro entre 0 e 10000');
+  if (!temaQuestao || temaQuestao.length > 80 || !/^[\p{L}\p{N} _-]+$/u.test(temaQuestao)) throw new BadRequestException('Informe um tema com até 80 caracteres');
+  if (!Number.isInteger(dados.quantidadePontos) || dados.quantidadePontos < 10 || dados.quantidadePontos > 50) {
+    throw new BadRequestException('O limite superior dos pontos sorteados deve estar entre 10 e 50');
   }
   const alternativas = validarAlternativas(dados.alternativas);
-  return { enunciadoQuestao, explicacaoQuestao, quantidadePontos: dados.quantidadePontos, alternativas };
+  return { enunciadoQuestao, explicacaoQuestao, quantidadePontos: dados.quantidadePontos, temaQuestao, alternativas };
 }
 
 function validarAlternativas(alternativas: DadosQuestao['alternativas']): DadosQuestao['alternativas'] {

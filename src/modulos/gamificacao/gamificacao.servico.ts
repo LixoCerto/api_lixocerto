@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { RepositorioProgresso } from './progresso.repositorio.js';
+import { randomUUID } from 'node:crypto';
+import { Transaction } from 'sequelize';
+import { ProgressoGamificacao, RepositorioProgresso, TipoOrigemPontos } from './progresso.repositorio.js';
 
 export type NivelGamificacao = 'iniciante' | 'explorador' | 'reciclador' | 'agente_ambiental' | 'guerreiro_ecologico';
 
@@ -17,13 +19,10 @@ export class ServicoGamificacao {
 
   aplicarPontos(quantidadePontosAtual: number, quantidadePontosConcedidos: number) {
     const quantidadePontos = Math.max(0, quantidadePontosAtual + quantidadePontosConcedidos);
-    return {
-      quantidadePontos,
-      nivelGamificacao: this.calcularNivel(quantidadePontos),
-    };
+    return { quantidadePontos, nivelGamificacao: this.calcularNivel(quantidadePontos) };
   }
 
-  obterProgresso(idUsuario: string) {
+  obterProgresso(idUsuario: string): Promise<ProgressoGamificacao> {
     return this.progresso.obter(idUsuario);
   }
 
@@ -31,10 +30,21 @@ export class ServicoGamificacao {
     return this.progresso.ranking(limiteResultado);
   }
 
-  async concederPontos(idUsuario: string, quantidadePontosConcedidos: number) {
-    const atual = await this.progresso.obter(idUsuario);
-    const novo = this.aplicarPontos(atual.quantidadePontos, quantidadePontosConcedidos);
-    await this.progresso.atualizar(idUsuario, novo);
-    return { ...atual, ...novo };
+  concederPontos(
+    idUsuario: string,
+    quantidadePontosConcedidos: number,
+    tipoOrigem: TipoOrigemPontos = 'ajuste',
+    codigoOrigem: string = randomUUID(),
+    categoria?: string,
+    transacao?: Transaction,
+  ) {
+    return this.progresso.registrarEvento({
+      idUsuario,
+      quantidadePontos: quantidadePontosConcedidos,
+      tipoOrigem,
+      codigoOrigem,
+      categoria,
+      transacao,
+    });
   }
 }

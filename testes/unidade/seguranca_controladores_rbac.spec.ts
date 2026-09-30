@@ -35,6 +35,7 @@ describe('autorização dos controladores gRPC', () => {
       {} as never,
       {} as never,
       {} as never,
+      {} as never,
     );
     const metadados = metadadosAutenticados();
 
@@ -44,10 +45,28 @@ describe('autorização dos controladores gRPC', () => {
     expect(servico.obter).not.toHaveBeenCalled();
   });
 
+  it('mantém o filtro Todos da fila de descartes para revisores autorizados', async () => {
+    const identidade = { ...identidadeSemAcesso, permissoes: ['pontos_coleta:aprovar'] };
+    const descartes = { listarGestao: vi.fn().mockResolvedValue([]) };
+    const usuarios = { obterIdInterno: vi.fn().mockResolvedValue('id-revisor') };
+    const controlador = new ControladorGrpcPontosColeta(
+      {} as never,
+      autenticacao(identidade) as never,
+      new ServicoAutorizacao(),
+      usuarios as never,
+      {} as never,
+      {} as never,
+      descartes as never,
+    );
+
+    await expect(controlador.listarDescartesGestao({ status: 'todos' }, metadadosAutenticados())).resolves.toEqual({ registros: [] });
+    expect(descartes.listarGestao).toHaveBeenCalledWith('todos');
+  });
+
   it('deriva o progresso gamificado do bearer autenticado e ignora x-id-usuario-externo fornecido pelo cliente', async () => {
     const identidade = { ...identidadeSemAcesso, permissoes: ['gamificacao:ler'] };
     const servico = {
-      obterProgresso: vi.fn().mockResolvedValue({ quantidadePontos: 120, nivelGamificacao: 'iniciante', sequenciaDias: 2, quantidadeConquistas: 1 }),
+      obterProgresso: vi.fn().mockResolvedValue({ quantidadePontos: 120, nivelGamificacao: 'iniciante', sequenciaDias: 2, quantidadeConquistas: 1, selos: [], pontosPorOrigem: [] }),
       obterRanking: vi.fn().mockResolvedValue([]),
     };
     const usuarios = { obterIdInterno: vi.fn().mockResolvedValue('id-interno-proprio') };

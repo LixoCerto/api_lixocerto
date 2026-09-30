@@ -1,6 +1,20 @@
 syntax = "proto3";
 package lixo_certo.v1;
 
+message CriterioDesafio {
+  string tipo = 1;
+  int32 meta = 2;
+  string categoria = 3;
+  string tema = 4;
+  repeated string categorias = 5;
+}
+
+message ProgressoCriterioDesafio {
+  CriterioDesafio criterio = 1;
+  int32 progresso = 2;
+  bool concluido = 3;
+}
+
 message ListarDesafiosRequisicao {
   int32 numero_pagina = 1;
   int32 tamanho_pagina = 2;
@@ -16,6 +30,11 @@ message DesafioResposta {
   string status_desafio = 7;
   int32 quantidade_progresso = 8;
   string status_participacao = 9;
+  string periodicidade = 10;
+  string periodo_chave = 11;
+  repeated CriterioDesafio criterios = 12;
+  repeated ProgressoCriterioDesafio progresso_criterios = 13;
+  string data_fim_periodo = 14;
 }
 
 message ListarDesafiosResposta {
@@ -54,6 +73,8 @@ message DadosDesafio {
   int32 quantidade_pontos = 5;
   string data_inicio = 6;
   string data_fim = 7;
+  string periodicidade = 8;
+  repeated CriterioDesafio criterios = 9;
 }
 
 message ListarDesafiosGestaoRequisicao {
@@ -73,6 +94,8 @@ message DesafioGestaoResposta {
   string status_desafio = 7;
   string data_inicio = 8;
   string data_fim = 9;
+  string periodicidade = 10;
+  repeated CriterioDesafio criterios = 11;
 }
 
 message ListarDesafiosGestaoResposta {

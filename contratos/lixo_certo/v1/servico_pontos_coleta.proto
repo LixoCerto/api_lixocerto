@@ -58,6 +58,28 @@ message CriarPontoColetaResposta { bool operacao_aceita = 1; string mensagem_res
 message AtualizarPontoColetaResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; PontoColetaResposta ponto = 3; }
 message ExcluirPontoColetaResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; }
 message AlterarStatusPontoColetaResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; PontoColetaResposta ponto = 3; }
+message RegistrarDescarteRequisicao { string id_ponto_coleta = 1; string categoria_material = 2; string relato = 3; }
+message RegistroDescarteResposta {
+  string id_registro = 1;
+  string id_ponto_coleta = 2;
+  string nome_ponto_coleta = 3;
+  string cidade_ponto_coleta = 4;
+  string categoria_material = 5;
+  string status = 6;
+  string data_registro = 7;
+  string data_revisao = 8;
+  string relato = 9;
+  string identificador_participante = 10;
+  int32 quantidade = 11;
+  int32 pontos_concedidos = 12;
+}
+message RegistrarDescarteResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; RegistroDescarteResposta registro = 3; }
+message ListarMeusDescartesRequisicao {}
+message ListarMeusDescartesResposta { repeated RegistroDescarteResposta registros = 1; }
+message ListarDescartesGestaoRequisicao { string status = 1; }
+message ListarDescartesGestaoResposta { repeated RegistroDescarteResposta registros = 1; }
+message RevisarDescarteRequisicao { string id_registro = 1; string status = 2; }
+message RevisarDescarteResposta { bool operacao_aceita = 1; string mensagem_resultado = 2; RegistroDescarteResposta registro = 3; }
 service ServicoPontosColeta {
   rpc ListarPontosColeta(ListarPontosColetaRequisicao) returns (ListarPontosColetaResposta);
   rpc ObterPontoColeta(ObterPontoColetaRequisicao) returns (ObterPontoColetaResposta);
@@ -66,4 +88,8 @@ service ServicoPontosColeta {
   rpc ExcluirPontoColeta(ExcluirPontoColetaRequisicao) returns (ExcluirPontoColetaResposta);
   rpc AlterarStatusPontoColeta(AlterarStatusPontoColetaRequisicao) returns (AlterarStatusPontoColetaResposta);
   rpc BuscarEnderecoPorCoordenadas(BuscarEnderecoPorCoordenadasRequisicao) returns (BuscarEnderecoPorCoordenadasResposta);
+  rpc RegistrarDescarte(RegistrarDescarteRequisicao) returns (RegistrarDescarteResposta);
+  rpc ListarMeusDescartes(ListarMeusDescartesRequisicao) returns (ListarMeusDescartesResposta);
+  rpc ListarDescartesGestao(ListarDescartesGestaoRequisicao) returns (ListarDescartesGestaoResposta);
+  rpc RevisarDescarte(RevisarDescarteRequisicao) returns (RevisarDescarteResposta);
 }

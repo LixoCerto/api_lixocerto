@@ -17,6 +17,8 @@ message QuestaoResposta {
   string enunciado_questao = 2;
   int32 quantidade_pontos = 3;
   repeated AlternativaResposta alternativas = 4;
+  string tema_questao = 5;
+  string data_expiracao = 6;
 }
 
 message ListarQuestoesResposta {
@@ -46,6 +48,7 @@ message DadosQuestao {
   string explicacao_questao = 2;
   int32 quantidade_pontos = 3;
   repeated AlternativaQuestaoGestao alternativas = 4;
+  string tema_questao = 5;
 }
 
 message ListarQuestoesGestaoRequisicao {
@@ -63,6 +66,7 @@ message QuestaoGestaoResposta {
   string status_questao = 5;
   string data_atualizacao = 6;
   repeated AlternativaQuestaoGestao alternativas = 7;
+  string tema_questao = 8;
 }
 
 message ListarQuestoesGestaoResposta {

@@ -60,6 +60,8 @@ describe('auditoria, rate limit e desafios', () => {
       quantidadePontos: 100,
       dataInicio: new Date(),
       dataFim: null,
+      periodicidade: 'unica',
+      criterios: [],
     })).resolves.toBeNull();
     expect(() => servico.criar({
       nomeDesafio: '',
@@ -69,6 +71,8 @@ describe('auditoria, rate limit e desafios', () => {
       quantidadePontos: -1,
       dataInicio: new Date(Number.NaN),
       dataFim: null,
+      periodicidade: 'unica',
+      criterios: [],
     })).toThrow('Nome obrigatório');
   });
 });

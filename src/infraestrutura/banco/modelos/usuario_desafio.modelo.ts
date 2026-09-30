@@ -4,6 +4,8 @@ export class ModeloUsuarioDesafio extends Model<InferAttributes<ModeloUsuarioDes
   declare lcr_ude_id_usuario_desafio: CreationOptional<string>;
   declare lcr_ude_id_usuario: string;
   declare lcr_ude_id_desafio: string;
+  declare lcr_ude_periodo_chave: CreationOptional<string>;
+  declare lcr_ude_progresso_criterios: CreationOptional<Array<Record<string, unknown>>>;
   declare lcr_ude_quantidade_progresso: CreationOptional<number>;
   declare lcr_ude_status_participacao: CreationOptional<'participando' | 'concluido' | 'abandonado'>;
   declare lcr_ude_data_inicio: CreationOptional<Date>;
@@ -16,6 +18,8 @@ export function inicializarModeloUsuarioDesafio(sequelize: Sequelize): void {
     lcr_ude_id_usuario_desafio: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
     lcr_ude_id_usuario: { type: DataTypes.UUID, allowNull: false },
     lcr_ude_id_desafio: { type: DataTypes.UUID, allowNull: false },
+    lcr_ude_periodo_chave: { type: DataTypes.STRING(20), allowNull: false, defaultValue: 'unica' },
+    lcr_ude_progresso_criterios: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
     lcr_ude_quantidade_progresso: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     lcr_ude_status_participacao: { type: DataTypes.ENUM('participando', 'concluido', 'abandonado'), allowNull: false, defaultValue: 'participando' },
     lcr_ude_data_inicio: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },

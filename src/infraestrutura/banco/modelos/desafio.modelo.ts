@@ -7,6 +7,8 @@ export class ModeloDesafio extends Model<InferAttributes<ModeloDesafio>, InferCr
   declare lcr_des_tipo_acao: string;
   declare lcr_des_meta_quantidade: number;
   declare lcr_des_quantidade_pontos: CreationOptional<number>;
+  declare lcr_des_periodicidade: CreationOptional<'unica' | 'diaria' | 'semanal' | 'mensal'>;
+  declare lcr_des_criterios: CreationOptional<Array<Record<string, unknown>>>;
   declare lcr_des_status_desafio: CreationOptional<'rascunho' | 'publicado' | 'arquivado'>;
   declare lcr_des_data_inicio: CreationOptional<Date>;
   declare lcr_des_data_fim: Date | null;
@@ -22,6 +24,8 @@ export function inicializarModeloDesafio(sequelize: Sequelize): void {
     lcr_des_tipo_acao: { type: DataTypes.STRING(100), allowNull: false },
     lcr_des_meta_quantidade: { type: DataTypes.INTEGER, allowNull: false },
     lcr_des_quantidade_pontos: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+    lcr_des_periodicidade: { type: DataTypes.STRING(20), allowNull: false, defaultValue: 'unica' },
+    lcr_des_criterios: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
     lcr_des_status_desafio: { type: DataTypes.ENUM('rascunho', 'publicado', 'arquivado'), allowNull: false, defaultValue: 'rascunho' },
     lcr_des_data_inicio: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
     lcr_des_data_fim: { type: DataTypes.DATE, allowNull: true },

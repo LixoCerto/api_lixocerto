@@ -17,6 +17,7 @@ const dadosValidos = {
   enunciadoQuestao: 'Como descartar uma pilha usada?',
   explicacaoQuestao: 'Leve a um ponto que aceite pilhas.',
   quantidadePontos: 25,
+  temaQuestao: 'pilhas',
   alternativas: [
     { textoAlternativa: 'Ponto de coleta apropriado', indicaCorreta: true, ordemExibicao: 1 },
     { textoAlternativa: 'Lixo comum', indicaCorreta: false, ordemExibicao: 2 },
@@ -26,7 +27,7 @@ const dadosValidos = {
 describe('ServicoQuestionarios', () => {
   it('não lista questões quando a persistência não está configurada', async () => {
     const servico = novoServico();
-    expect(await servico.listar(1, 20)).toEqual([]);
+    expect(await servico.listar('usuario-externo', 1, 20)).toEqual([]);
     expect(await servico.listarGestao({ status: 'todos' })).toEqual({ questoes: [], quantidadeTotal: 0 });
   });
 
@@ -35,7 +36,7 @@ describe('ServicoQuestionarios', () => {
     expect(await servico.responder('questao-inexistente', 'alternativa-inexistente')).toEqual({
       indicaCorreta: false,
       quantidadePontos: 0,
-      explicacaoResposta: 'Questao ou alternativa indisponivel.',
+      explicacaoResposta: 'Questão ou atribuição indisponível. Cada questão pode ser respondida uma única vez.',
     });
   });
 
@@ -45,7 +46,7 @@ describe('ServicoQuestionarios', () => {
     await expect(servico.responder('', '')).resolves.toEqual({
       indicaCorreta: false,
       quantidadePontos: 0,
-      explicacaoResposta: 'Questao ou alternativa indisponivel.',
+      explicacaoResposta: 'Questão ou atribuição indisponível. Cada questão pode ser respondida uma única vez.',
     });
   });
 
@@ -69,21 +70,45 @@ describe('ServicoQuestionarios', () => {
 
   it('não concede novamente os pontos de uma questão já respondida corretamente', async () => {
     const repositorio = {
-      obterResposta: async () => ({
-        questao: { lcr_que_quantidade_pontos: 25, lcr_que_explicacao_questao: 'Leve a um ponto apropriado.' },
-        alternativa: { lcr_alt_indica_correta: true },
+      registrarTentativa: async () => ({
+        registrada: false,
+        jaRespondida: true,
+        indicaCorreta: false,
+        quantidadePontos: 0,
+        explicacaoResposta: 'Você já respondeu esta questão; novas tentativas não são permitidas.',
       }),
-      registrarTentativa: async () => false,
     } as unknown as RepositorioQuestionarios;
     const gamificacao = { concederPontos: vi.fn() } as unknown as ServicoGamificacao;
     const usuarios = { obterIdInterno: async () => 'usuario-interno' } as unknown as ServicoUsuarios;
     const servico = new ServicoQuestionarios(repositorio, usuarios, gamificacao);
 
     await expect(servico.responder('questao-1', 'alternativa-1', 'usuario-externo')).resolves.toEqual({
-      indicaCorreta: true,
+      indicaCorreta: false,
       quantidadePontos: 0,
-      explicacaoResposta: 'Você já recebeu a recompensa desta questão.',
+      explicacaoResposta: 'Você já respondeu esta questão; novas tentativas não são permitidas.',
     });
     expect(gamificacao.concederPontos).not.toHaveBeenCalled();
+  });
+
+  it('grava pontos corretos na mesma tentativa e reconcilia metas após o commit', async () => {
+    const transacao = {};
+    const gamificacao = { concederPontos: vi.fn().mockResolvedValue(undefined) } as unknown as ServicoGamificacao;
+    const desafios = { processarProgresso: vi.fn().mockResolvedValue(undefined) };
+    const repositorio = {
+      registrarTentativa: vi.fn(async (_dados: unknown, aoResponderCorretamente: (evento: { idAtribuicao: string; temaQuestao: string; quantidadePontos: number }, tx: never) => Promise<unknown>) => {
+        await aoResponderCorretamente({ idAtribuicao: 'atribuicao-1', temaQuestao: 'pilhas', quantidadePontos: 27 }, transacao as never);
+        return { registrada: true, indicaCorreta: true, quantidadePontos: 27, explicacaoResposta: 'Correta.', idAtribuicao: 'atribuicao-1', temaQuestao: 'pilhas' };
+      }),
+    } as unknown as RepositorioQuestionarios;
+    const usuarios = { obterIdInterno: vi.fn().mockResolvedValue('usuario-interno') } as unknown as ServicoUsuarios;
+    const servico = new ServicoQuestionarios(repositorio, usuarios, gamificacao, desafios as never);
+
+    await expect(servico.responder('questao-1', 'alternativa-1', 'usuario-externo')).resolves.toMatchObject({
+      indicaCorreta: true,
+      quantidadePontos: 27,
+      explicacaoResposta: 'Correta.',
+    });
+    expect(gamificacao.concederPontos).toHaveBeenCalledWith('usuario-interno', 27, 'quiz_correto', 'atribuicao-1', 'pilhas', transacao);
+    expect(desafios.processarProgresso).toHaveBeenCalledWith('usuario-interno');
   });
 });

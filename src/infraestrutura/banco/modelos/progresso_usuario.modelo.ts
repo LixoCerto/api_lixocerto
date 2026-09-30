@@ -7,6 +7,8 @@ export class ModeloProgressoUsuario extends Model<InferAttributes<ModeloProgress
   declare lcr_prg_nivel_gamificacao: CreationOptional<string>;
   declare lcr_prg_sequencia_dias: CreationOptional<number>;
   declare lcr_prg_data_ultima_atividade: Date | null;
+  declare lcr_prg_proximo_quiz_em: Date | null;
+  declare lcr_prg_ultimo_tema_quiz: string | null;
   declare lcr_prg_data_atualizacao: CreationOptional<Date>;
 }
 
@@ -18,6 +20,8 @@ export function inicializarModeloProgressoUsuario(sequelize: Sequelize): void {
     lcr_prg_nivel_gamificacao: { type: DataTypes.STRING(80), allowNull: false, defaultValue: 'iniciante' },
     lcr_prg_sequencia_dias: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     lcr_prg_data_ultima_atividade: { type: DataTypes.DATE, allowNull: true },
+    lcr_prg_proximo_quiz_em: { type: DataTypes.DATE, allowNull: true },
+    lcr_prg_ultimo_tema_quiz: { type: DataTypes.STRING(80), allowNull: true },
     lcr_prg_data_atualizacao: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   }, {
     sequelize,

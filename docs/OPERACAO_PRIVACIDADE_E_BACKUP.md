@@ -20,6 +20,10 @@
 
 O fluxo atual mantém contas e sessões, incluindo endereço IP e agente do navegador na sessão. O cadastro exige confirmação de e-mail antes de abrir sessão. Os seeders de homologação usam contas `.test` e são restritos a desenvolvimento.
 
+O fluxo de gamificação acrescenta atribuições e respostas de quiz, eventos de pontuação, selos e relatos de descarte ligados ao identificador interno da conta. Um relato contém ponto, categoria, data, status de revisão e texto opcional limitado a 500 caracteres; não coleta localização atual do navegador nem foto como prova. A equipe revisa manualmente a compatibilidade ponto/categoria e o relato, portanto a aprovação **não deve ser descrita como comprovação automática da entrega física**. Oriente participantes a não inserir nomes, contatos ou outros dados pessoais no relato. A pontuação só é liberada após a aprovação e os endpoints restringem a consulta à própria pessoa ou à equipe revisora autorizada.
+
+Antes de coletar dados de participantes, atualize o aviso de privacidade e o consentimento aprovado pela instituição para explicar esse histórico de participação/pontuação e sua retenção. O ledger registra a origem e a categoria da recompensa para idempotência e auditoria; o ranking público usa rótulos genéricos em vez de nome ou e-mail.
+
 Antes de uma coleta acadêmica real, defina e aprove com a instituição: finalidade, aviso/consentimento, dados estritamente necessários, responsáveis, retenção, canal de solicitação/remoção e tratamento de incidentes. Não use contas reais de participantes no ambiente de desenvolvimento. Não há, neste repositório, prazo automático documentado para expurgo desses registros nem fluxo completo de autoatendimento para exportação/exclusão; não prometa essas funcionalidades.
 
 ## Backup PostgreSQL manual (PowerShell)

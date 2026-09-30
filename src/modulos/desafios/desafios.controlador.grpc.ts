@@ -7,7 +7,7 @@ import { ServicoAutorizacao } from '../autorizacao/autorizacao.servico.js';
 import { ServicoAuditoria } from '../auditoria/auditoria.servico.js';
 import { ServicoRateLimit } from '../../infraestrutura/cache/rate_limit.servico.js';
 import { ServicoUsuarios } from '../usuarios/usuarios.servico.js';
-import { DadosDesafio, StatusDesafio } from './desafios.repositorio.js';
+import { CriterioDesafio, DadosDesafio, ResumoDesafio, StatusDesafio } from './desafios.repositorio.js';
 import { ServicoDesafios } from './desafios.servico.js';
 
 interface DesafioGrpc {
@@ -20,6 +20,11 @@ interface DesafioGrpc {
   status_desafio: string;
   quantidade_progresso: number;
   status_participacao: string;
+  periodicidade: string;
+  periodo_chave: string;
+  criterios: Array<{ tipo: string; meta: number; categoria: string; tema: string; categorias: string[] }>;
+  progresso_criterios: Array<{ criterio: { tipo: string; meta: number; categoria: string; tema: string; categorias: string[] }; progresso: number; concluido: boolean }>;
+  data_fim_periodo: string;
 }
 type RequisicaoDadosDesafio = {
   nome_desafio?: string;
@@ -29,6 +34,8 @@ type RequisicaoDadosDesafio = {
   quantidade_pontos?: number;
   data_inicio?: string;
   data_fim?: string;
+  periodicidade?: string;
+  criterios?: Array<{ tipo?: string; meta?: number; categoria?: string; tema?: string; categorias?: string[] }>;
 };
 
 @Controller()
@@ -144,10 +151,18 @@ export class ControladorGrpcDesafios {
       quantidadePontos: dados.quantidade_pontos ?? 0,
       dataInicio: dados.data_inicio ? new Date(dados.data_inicio) : new Date(Number.NaN),
       dataFim: dados.data_fim?.trim() ? new Date(dados.data_fim) : null,
+      periodicidade: (dados.periodicidade ?? 'unica') as DadosDesafio['periodicidade'],
+      criterios: (dados.criterios ?? []).map(criterio => ({
+        tipo: (criterio.tipo ?? '') as CriterioDesafio['tipo'],
+        meta: criterio.meta ?? 0,
+        categoria: criterio.categoria,
+        tema: criterio.tema,
+        categorias: criterio.categorias ?? [],
+      })),
     };
   }
 
-  private mapearDesafio(desafio: { idDesafio: string; nomeDesafio: string; descricaoDesafio: string; tipoAcao: string; metaQuantidade: number; quantidadePontos: number; statusDesafio: string; quantidadeProgresso: number; statusParticipacao: string }): DesafioGrpc {
+  private mapearDesafio(desafio: ResumoDesafio): DesafioGrpc {
     return {
       id_desafio: desafio.idDesafio,
       nome_desafio: desafio.nomeDesafio,
@@ -158,6 +173,15 @@ export class ControladorGrpcDesafios {
       status_desafio: desafio.statusDesafio,
       quantidade_progresso: desafio.quantidadeProgresso,
       status_participacao: desafio.statusParticipacao,
+      periodicidade: desafio.periodicidade,
+      periodo_chave: desafio.periodoChave,
+      criterios: desafio.criterios.map(criterio => this.mapearCriterio(criterio)),
+      progresso_criterios: desafio.progressoCriterios.map(progresso => ({
+        criterio: this.mapearCriterio(progresso),
+        progresso: progresso.progresso,
+        concluido: progresso.concluido,
+      })),
+      data_fim_periodo: desafio.dataFimPeriodo.toISOString(),
     };
   }
 
@@ -172,6 +196,18 @@ export class ControladorGrpcDesafios {
       status_desafio: desafio.lcr_des_status_desafio,
       data_inicio: desafio.lcr_des_data_inicio instanceof Date ? desafio.lcr_des_data_inicio.toISOString() : String(desafio.lcr_des_data_inicio ?? ''),
       data_fim: desafio.lcr_des_data_fim instanceof Date ? desafio.lcr_des_data_fim.toISOString() : String(desafio.lcr_des_data_fim ?? ''),
+      periodicidade: desafio.lcr_des_periodicidade ?? 'unica',
+      criterios: (desafio.lcr_des_criterios ?? []).map((criterio: CriterioDesafio) => this.mapearCriterio(criterio)),
+    };
+  }
+
+  private mapearCriterio(criterio: CriterioDesafio) {
+    return {
+      tipo: criterio.tipo,
+      meta: criterio.meta,
+      categoria: criterio.categoria ?? '',
+      tema: criterio.tema ?? '',
+      categorias: criterio.categorias ?? [],
     };
   }
 

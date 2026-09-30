@@ -9,6 +9,24 @@ message ObterProgressoUsuarioResposta {
   string nivel_gamificacao = 2;
   int32 sequencia_dias = 3;
   int32 quantidade_conquistas = 4;
+  repeated SeloGamificacao selos = 5;
+  repeated PontosPorOrigem resumo_por_origem = 6;
+}
+
+message SeloGamificacao {
+  string codigo = 1;
+  string nome = 2;
+  string descricao = 3;
+  int32 pontos_minimos = 4;
+  string icone = 5;
+  bool conquistado = 6;
+  string data_conquista = 7;
+}
+
+message PontosPorOrigem {
+  string origem = 1;
+  int32 quantidade_pontos = 2;
+  int32 quantidade_eventos = 3;
 }
 
 message ObterRankingRequisicao {

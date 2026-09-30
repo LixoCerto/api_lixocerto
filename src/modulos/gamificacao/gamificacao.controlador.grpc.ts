@@ -16,7 +16,14 @@ export class ControladorGrpcGamificacao {
   ) {}
 
   @GrpcMethod('ServicoGamificacao', 'ObterProgressoUsuario')
-  async obterProgressoUsuario(_requisicao: unknown, metadados: Metadata) {
+  async obterProgressoUsuario(_requisicao: unknown, metadados: Metadata): Promise<{
+    quantidade_pontos: number;
+    nivel_gamificacao: string;
+    sequencia_dias: number;
+    quantidade_conquistas: number;
+    selos: Array<{ codigo: string; nome: string; descricao: string; pontos_minimos: number; icone: string; conquistado: boolean; data_conquista: string }>;
+    resumo_por_origem: Array<{ origem: string; quantidade_pontos: number; quantidade_eventos: number }>;
+  }> {
     const identidade = await this.obterIdentidade(metadados);
     this.autorizacao.exigirPermissao(identidade, 'gamificacao:ler');
     const idUsuario = await this.usuarios.obterIdInterno(identidade.idExterno);
@@ -28,6 +35,20 @@ export class ControladorGrpcGamificacao {
       nivel_gamificacao: progresso.nivelGamificacao,
       sequencia_dias: progresso.sequenciaDias,
       quantidade_conquistas: progresso.quantidadeConquistas,
+      selos: progresso.selos.map(selo => ({
+        codigo: selo.codigo,
+        nome: selo.nome,
+        descricao: selo.descricao,
+        pontos_minimos: selo.pontosMinimos,
+        icone: selo.icone,
+        conquistado: selo.conquistado,
+        data_conquista: selo.dataConquista,
+      })),
+      resumo_por_origem: progresso.pontosPorOrigem.map(item => ({
+        origem: item.origem,
+        quantidade_pontos: item.quantidadePontos,
+        quantidade_eventos: item.quantidadeEventos,
+      })),
     };
   }
 
