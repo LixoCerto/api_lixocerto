@@ -16,8 +16,8 @@ As contas ficam ativas e com e-mail confirmado para uso local. O seeder grava so
 
 | Perfil | Capacidades principais | Áreas exibidas |
 |---|---|---|
-| `usuario` | Ler guia e pontos; responder quiz; ler gamificação e **participar** de desafios; enviar avaliação SUS | Visão geral, Guia, Pontos, Quiz, Desafios, Pesquisa e Perfil |
-| `pesquisador` | Ler guia e pontos; ler seu progresso; consultar **somente agregados** da avaliação SUS | Visão geral, Guia, Pontos, Pesquisa e Perfil; sem quiz, participação em desafios, gestão ou auditoria |
+| `usuario` | Ler guia e pontos; responder quiz; ler gamificação e **participar** de desafios; enviar avaliação de usabilidade | Visão geral, Guia, Pontos, Quiz, Desafios, Pesquisa de usabilidade e Perfil |
+| `pesquisador` | Ler guia e pontos; ler seu progresso; consultar **somente agregados** da avaliação de usabilidade | Visão geral, Guia, Pontos, Pesquisa de usabilidade e Perfil; sem quiz, participação em desafios, gestão ou auditoria |
 | `revisor` | Ler/escrever/aprovar materiais e pontos; responder/administrar questionários; ler e administrar desafios | Visão geral, Guia, Pontos, Quiz, Desafios (gestão), Central de revisão e Perfil |
 | `administrador` | Catálogo completo de permissões, incluindo resumo/administração, gestão de acessos e auditoria | Todas as áreas. A matriz do papel `administrador` continua protegida no backend. |
 
@@ -42,9 +42,30 @@ git -C .\infra_lixocerto pull --ff-only origin main
 
 Set-Location G:\LixoCerto\infra_lixocerto
 docker compose -f compose.yml --profile app build --no-cache api frontend
-docker compose -f compose.yml --profile app up -d --no-deps --force-recreate api frontend
 
-# Atualiza catálogo e atribuições de permissões (seed idempotente; não apaga dados).
+# Antes de migrations, crie e valide um backup PostgreSQL fora dos clones Git;
+# consulte G:\LixoCerto\api_lixocerto\docs\OPERACAO_PRIVACIDADE_E_BACKUP.md.
+docker compose -f compose.yml --profile app run --rm --no-deps --entrypoint node api `
+  node_modules/sequelize-cli/lib/sequelize db:migrate:status `
+  --config configuracao_sequelize.cjs `
+  --migrations-path banco/migracoes
+
+# Aplica somente migrations pendentes, incluindo a 032 (campos opcionais dos pontos).
+docker compose -f compose.yml --profile app run --rm --no-deps --entrypoint node api `
+  node_modules/sequelize-cli/lib/sequelize db:migrate `
+  --config configuracao_sequelize.cjs `
+  --migrations-path banco/migracoes
+
+# Preenche apenas códigos de catálogo que ainda não existem. É seguro repetir;
+# NÃO execute db:seed:undo, pois o down remove registros do catálogo.
+docker compose -f compose.yml --profile app run --rm --no-deps `
+  --entrypoint node `
+  api node_modules/sequelize-cli/lib/sequelize db:seed `
+    --seed 003_inserir_catalogo_materiais_base.cjs `
+    --config configuracao_sequelize.cjs `
+    --seeders-path banco/dados_iniciais
+
+# Reaplica a matriz RBAC de modo idempotente (não apaga dados).
 docker compose -f compose.yml --profile app run --rm --no-deps `
   --entrypoint node `
   api node_modules/sequelize-cli/lib/sequelize db:seed `
@@ -52,6 +73,21 @@ docker compose -f compose.yml --profile app run --rm --no-deps `
     --config configuracao_sequelize.cjs `
     --seeders-path banco/dados_iniciais
 
+# Prepara cinco materiais curados como rascunhos; não publica.
+$env:LCR_PREPARAR_LEVA_GUIA_INICIAL = 'true'
+try {
+  docker compose -f compose.yml --profile app run --rm --no-deps `
+    -e LCR_PREPARAR_LEVA_GUIA_INICIAL `
+    --entrypoint node `
+    api node_modules/sequelize-cli/lib/sequelize db:seed `
+      --seed 002_preparar_leva_inicial_guia.cjs `
+      --config configuracao_sequelize.cjs `
+      --seeders-path banco/seeds_homologacao
+} finally {
+  Remove-Item Env:LCR_PREPARAR_LEVA_GUIA_INICIAL -ErrorAction SilentlyContinue
+}
+
+# Cria/atualiza somente as três contas reservadas para homologação local.
 $env:LCR_SEMEAR_CONTAS_HOMOLOGACAO = 'true'
 try {
   docker compose -f compose.yml --profile app run --rm --no-deps `
@@ -63,6 +99,12 @@ try {
 } finally {
   Remove-Item Env:LCR_SEMEAR_CONTAS_HOMOLOGACAO -ErrorAction SilentlyContinue
 }
+
+# Recria somente os serviços de aplicação após concluir migrations e seeds.
+docker compose -f compose.yml --profile app up -d --no-deps --force-recreate api frontend
+Start-Sleep -Seconds 20
+docker compose -f compose.yml --profile app ps
+curl.exe -I http://localhost:3000/
 ```
 
-A execução de contas precisa terminar com a mensagem de sucesso `Contas locais de homologação prontas`. Não execute esses comandos contra produção nem apague volumes. Depois de aplicar a matriz e criar as contas, encerre as sessões antigas e entre novamente com cada e-mail em uma sessão separada para receber permissões atualizadas; mantenha as contas administrativas atuais para testar o nível administrador.
+A preparação do Guia deve terminar com a mensagem de cinco rascunhos preparados, e a execução de contas com `Contas locais de homologação prontas`. Não execute esses comandos contra produção nem apague volumes. Depois de aplicar a matriz e criar as contas, encerre as sessões antigas e entre novamente com cada e-mail em uma sessão separada para receber permissões atualizadas; mantenha as contas administrativas atuais para testar o nível administrador. Os cinco materiais continuam rascunhos até revisão e publicação individual por revisor/administrador na Central de revisão.

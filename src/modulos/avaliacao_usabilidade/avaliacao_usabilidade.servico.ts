@@ -20,7 +20,7 @@ export class ServicoAvaliacaoUsabilidade {
     }
     const pontuacaoSus = this.calcularPontuacao(notasItens);
     if (pontuacaoSus === null || !codigoParticipante.trim()) {
-      return { avaliacaoAceita: false, pontuacaoSus: 0, mensagemResultado: 'A escala SUS exige dez notas inteiras entre 1 e 5 e um codigo anonimo.' };
+      return { avaliacaoAceita: false, pontuacaoSus: 0, mensagemResultado: 'A avaliação exige dez notas inteiras entre 1 e 5 e uma conta autenticada.' };
     }
 
     const segredo = process.env.SEGREDO_HASH_PARTICIPANTE;

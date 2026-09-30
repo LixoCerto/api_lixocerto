@@ -714,7 +714,7 @@
       "item": [
         {
           "name": "EnviarAvaliacaoSus",
-          "description": "Submete avaliação SUS anônima. Exige consentimento e exatamente dez notas entre 1 e 5.\n\nRPC: lixo_certo.v1.ServicoAvaliacaoUsabilidade/EnviarAvaliacaoSus\nMensagem: EnviarAvaliacaoSusRequisicao.",
+          "description": "Envia uma avaliação anônima de usabilidade. Exige consentimento e exatamente dez notas entre 1 e 5.\n\nRPC: lixo_certo.v1.ServicoAvaliacaoUsabilidade/EnviarAvaliacaoSus\nMensagem: EnviarAvaliacaoSusRequisicao.",
           "request": {
             "method": "POST",
             "header": [

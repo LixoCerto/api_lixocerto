@@ -20,6 +20,9 @@ export interface DadosPontoColeta {
   longitudePontoColeta?: number | null;
   categoriasAceitas: string[];
   origemInformacao?: string | null;
+  horarioFuncionamento?: string | null;
+  telefoneContato?: string | null;
+  urlInformacoes?: string | null;
   idUsuarioCadastrador?: string | null;
 }
 
@@ -87,6 +90,9 @@ function dadosToModel(dados: Partial<DadosPontoColeta>): Record<string, unknown>
   if (dados.longitudePontoColeta !== undefined) resultado.lcr_pco_longitude_ponto_coleta = dados.longitudePontoColeta;
   if (dados.categoriasAceitas !== undefined) resultado.lcr_pco_categorias_aceitas = dados.categoriasAceitas;
   if (dados.origemInformacao !== undefined) resultado.lcr_pco_origem_informacao = dados.origemInformacao;
+  if (dados.horarioFuncionamento !== undefined) resultado.lcr_pco_horario_funcionamento = dados.horarioFuncionamento;
+  if (dados.telefoneContato !== undefined) resultado.lcr_pco_telefone_contato = dados.telefoneContato;
+  if (dados.urlInformacoes !== undefined) resultado.lcr_pco_url_informacoes = dados.urlInformacoes;
   if (dados.idUsuarioCadastrador !== undefined) resultado.lcr_pco_id_usuario_cadastrador = dados.idUsuarioCadastrador;
   return resultado;
 }

@@ -19,6 +19,10 @@ message PontoColetaResposta {
   repeated string categorias_aceitas = 9;
   string origem_informacao = 10;
   string cep_ponto_coleta = 11;
+  string horario_funcionamento = 12;
+  string telefone_contato = 13;
+  string url_informacoes = 14;
+  string data_verificacao = 15;
 }
 message ListarPontosColetaResposta { repeated PontoColetaResposta pontos_coleta = 1; }
 message ObterPontoColetaRequisicao { string id_ponto_coleta = 1; }
@@ -33,6 +37,9 @@ message DadosPontoColetaRequisicao {
   repeated string categorias_aceitas = 7;
   string origem_informacao = 8;
   string cep_ponto_coleta = 9;
+  string horario_funcionamento = 10;
+  string telefone_contato = 11;
+  string url_informacoes = 12;
 }
 message BuscarEnderecoPorCoordenadasRequisicao { double latitude = 1; double longitude = 2; }
 message BuscarEnderecoPorCoordenadasResposta {

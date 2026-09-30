@@ -68,9 +68,11 @@ describe('seeder do lote inicial do Guia', () => {
     expect(atualizacoes).toHaveLength(5);
     for (const [sql, options] of atualizacoes) {
       expect(sql).toContain("lcr_mat_status_material = 'rascunho'");
-      expect(sql).toContain('lcr_mat_versao_conteudo = 1');
+      expect(sql).toContain('lcr_mat_versao_conteudo = :versaoOriginal');
+      expect(sql).toContain('lcr_mat_versao_conteudo = 3');
       expect(sql).not.toContain("lcr_mat_status_material = 'publicado'");
       expect(options).toHaveProperty('transaction');
+      expect((options as { replacements: { versaoOriginal: number } }).replacements.versaoOriginal).toBe(1);
     }
   });
 
@@ -79,7 +81,7 @@ describe('seeder do lote inicial do Guia', () => {
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const registros = registrosRascunhoOriginal().map(registro => ({
       ...registro,
-      lcr_mat_versao_conteudo: 2,
+      lcr_mat_versao_conteudo: 3,
       lcr_mat_observacao_revisao: seeder.MARCADOR_CURADORIA,
       lcr_mat_data_verificacao: seeder.DATA_CURADORIA,
     }));
@@ -88,6 +90,26 @@ describe('seeder do lote inicial do Guia', () => {
     await seeder.up(queryInterface);
 
     expect(query.mock.calls.filter(([sql]) => sql.includes('UPDATE lcr_materiais'))).toHaveLength(0);
+  });
+
+  it('atualiza somente drafts não publicados preparados pela revisão anterior', async () => {
+    prepararAmbiente();
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const registros = registrosRascunhoOriginal().map(registro => ({
+      ...registro,
+      lcr_mat_versao_conteudo: 2,
+      lcr_mat_observacao_revisao: 'Curadoria técnica preliminar conferida em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por perfil autorizado na Central de revisão; confirme as regras do município ou operador antes da aprovação.',
+      lcr_mat_data_verificacao: seeder.DATA_CURADORIA,
+    }));
+    const { queryInterface, query } = queryInterfaceCom(registros);
+
+    await seeder.up(queryInterface);
+
+    const atualizacoes = query.mock.calls.filter(([sql]) => sql.includes('UPDATE lcr_materiais'));
+    expect(atualizacoes).toHaveLength(5);
+    for (const [, options] of atualizacoes) {
+      expect((options as { replacements: { versaoOriginal: number } }).replacements.versaoOriginal).toBe(2);
+    }
   });
 
   it('não altera nada se algum registro foi publicado ou editado fora do estado esperado', async () => {

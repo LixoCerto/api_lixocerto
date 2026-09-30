@@ -2,11 +2,13 @@
 
 **Status: concluída em 100%.**
 
-A Fase 4 entregou a API independente do Lixo Certo com NestJS, gRPC, Protocol Buffers, PostgreSQL, Sequelize, Redis, autenticação própria com JWT, autorização por papéis e permissões, auditoria, gamificação, avaliação SUS e proteção contra abuso.
+> Registro histórico da entrega original da Fase 4. As quantidades, commits, testes e validações abaixo são uma fotografia daquela etapa e não representam o estado atual da plataforma; consulte o changelog e os roteiros de homologação mais recentes para as versões posteriores.
+
+A Fase 4 entregou a API independente do Lixo Certo com NestJS, gRPC, Protocol Buffers, PostgreSQL, Sequelize, Redis, autenticação própria com JWT, autorização por papéis e permissões, auditoria, gamificação, avaliação de usabilidade e proteção contra abuso.
 
 ## Escopo concluído
 
-A implementação possui autenticação, sincronização de usuários, identidade interna, perfil, sessões com hashes e revogação, papéis, permissões, administração, materiais, pontos de coleta, questionários, gamificação, desafios, ações sustentáveis, avaliação de usabilidade SUS, ranking anonimizado, auditoria, cache, rate limiting, health check, validação de ambiente e observabilidade segura.
+A implementação possui autenticação, sincronização de usuários, identidade interna, perfil, sessões com hashes e revogação, papéis, permissões, administração, materiais, pontos de coleta, questionários, gamificação, desafios, ações sustentáveis, avaliação de usabilidade, ranking anonimizado, auditoria, cache, rate limiting, health check, validação de ambiente e observabilidade segura.
 
 O backend segue a convenção LCR definida para o projeto. Tabelas, colunas, migrations, contratos e módulos estão em português. Os tokens nunca são retornados nos contratos de sessão, os detalhes de auditoria passam por redaction e as mutações protegidas falham fechadas quando o rate limiting não está disponível.
 
@@ -46,4 +48,4 @@ Todos os commits foram publicados na branch `main` com autoria de ArthurNobrega.
 
 ## Limite entre Fase 4 e Fase 5
 
-A Fase 4 encerra a implementação e validação da API. A Fase 5 permanece destinada à integração do webapp com a API, configuração de ambiente real, coleta de evidências acadêmicas, avaliação SUS com participantes conforme as regras institucionais, análise dos resultados e redação final do TCC II.
+A Fase 4 encerra a implementação e validação da API. A Fase 5 permanece destinada à integração do webapp com a API, configuração de ambiente real, coleta de evidências acadêmicas, aplicação da avaliação de usabilidade com participantes conforme as regras institucionais, análise dos resultados e redação final do TCC II.

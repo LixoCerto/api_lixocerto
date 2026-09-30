@@ -45,7 +45,7 @@ A gestão Docker foi retirada da API e está no projeto separado `infra_lixocert
 
 ## Migrations
 
-As migrations `001` a `021` criam usuários, papéis, permissões, sessões, materiais, pontos de coleta, questionários, gamificação, avaliação SUS, auditoria e desafios.
+As migrations versionadas `001` a `032` cobrem usuários, papéis, permissões, sessões, materiais, pontos de coleta, questionários, gamificação, avaliação de usabilidade, auditoria, desafios e dados opcionais de atendimento dos pontos. Em uma atualização, aplique somente migrations pendentes.
 
 ## Validações
 

@@ -73,7 +73,7 @@ Os registros devem ser atualizados e continuar como **rascunho** até a aprovaç
 
 ## Atualização local e aprovação
 
-Não há migration de banco nesta alteração. O seeder de curadoria é separado, exige explicitamente o ambiente de desenvolvimento e o sinalizador `LCR_PREPARAR_LEVA_GUIA_INICIAL=true`, e não publica nenhum registro. Ele atualiza somente os cinco códigos listados neste documento. Se algum deles já foi editado ou publicado, o seeder falha sem sobrescrevê-lo. Os outros 49 materiais não são alterados.
+A atualização do conteúdo não exige migration. A melhoria paralela de pontos de coleta adiciona a migration 032 para horário, telefone e URL informativa. O seeder de curadoria é separado, exige explicitamente o ambiente de desenvolvimento e o sinalizador `LCR_PREPARAR_LEVA_GUIA_INICIAL=true`, e não publica nenhum registro. Ele atualiza somente os cinco códigos listados neste documento: drafts originais esperados e, uma única vez, o lote v2 identificado pelo marcador anterior exato. Registros publicados, revisados ou em qualquer outro estado são recusados. Os outros 49 materiais não são alterados.
 
 No notebook Windows, atualize os repositórios e reconstrua apenas API e frontend, que são as imagens afetadas:
 
@@ -85,6 +85,18 @@ git -C .\frontend_lixocerto pull --ff-only origin main
 
 Set-Location G:\LixoCerto\infra_lixocerto
 docker compose -f compose.yml --profile app build --no-cache api frontend
+
+# Verificar e aplicar somente as migrations pendentes, incluindo a 032
+docker compose -f compose.yml --profile app run --rm --no-deps --entrypoint node api `
+  node_modules/sequelize-cli/lib/sequelize db:migrate:status `
+  --config configuracao_sequelize.cjs `
+  --migrations-path banco/migracoes
+
+docker compose -f compose.yml --profile app run --rm --no-deps --entrypoint node api `
+  node_modules/sequelize-cli/lib/sequelize db:migrate `
+  --config configuracao_sequelize.cjs `
+  --migrations-path banco/migracoes
+
 docker compose -f compose.yml --profile app up -d --force-recreate api frontend
 Start-Sleep -Seconds 20
 docker compose -f compose.yml --profile app ps
@@ -111,3 +123,27 @@ try {
 ```
 
 A saída esperada informa que cinco registros foram preparados como rascunho e que nenhum foi publicado. Entre na aplicação com um perfil autorizado com `materiais:aprovar` (revisor ou administrador), abra **Central de revisão**, confira as fontes e os limites locais dos cinco itens e use **Publicar** individualmente. Essa ação autenticada registra o responsável e a auditoria. Só então os materiais aparecem no **Guia de descarte** para os perfis com `materiais:ler`. Não existe motivo para reaplicar migrations ou recriar containers de cache/gateway nesta atualização.
+
+
+## Revalidação independente do texto e das fontes — 30/09/2026
+
+Uma segunda leitura independente das páginas citadas foi concluída em 30/09/2026. As cinco fichas permanecem **rascunhos**: isto valida a sustentação editorial preliminar, não equivale a aprovação institucional nem publicação no banco.
+
+| Ficha | Resultado | Correção/limite editorial |
+|---|---|---|
+| Papel e papelão | Parcialmente apoiada | Especificar gordura, alimentos, líquidos, papel higiênico, **papel-toalha** e guardanapos usados/sujos/úmidos. Não usar “toalhas usadas” ou “contaminados” sem explicar. Regras variam por endereço e operador. Fontes municipais: SLU/DF, Jundiaí e Vitória. |
+| Embalagens de vidro inteiras | Parcialmente apoiada | Limitar o item a embalagens comuns vazias e limpas. Não apresentar a regra de vidro quebrado como universal: Vitória aceita cacos comuns no seu fluxo; São José dos Campos não os inclui na reciclagem e oferece orientação local própria. Outros itens (espelhos, cerâmica, cristal, lâmpadas, planos/temperados e laboratório) não são uma lista nacional única. |
+| Embalagens plásticas comuns | Parcialmente apoiada | Retirar a exigência implícita de “escorrer”; usar “deixe secar”. Remover resíduos e fazer enxágue breve somente quando necessário. O símbolo da resina não garante recebimento/reciclagem local. Não ampliar para todos os plásticos; há variação para metalizados, termofixos e outros fluxos. A afirmação sobre o símbolo tem apoio setorial adicional da eureciclo, não governamental. |
+| Latas de bebidas/alimentos | Apoiada para o escopo definido | Manter só latas comuns de bebidas/alimentos, alumínio ou aço, sem sobras visíveis e em serviço que as aceite. Não extrapolar para outros objetos metálicos ou recipientes químicos. O MMA sustenta o núcleo; Vitória e Fortaleza descrevem fluxos locais. |
+| Compostagem doméstica/pequena escala | Apoiada com condicionantes | Manter a proporção de 2–3 partes secas para 1 parte úmida apenas como referência do método municipal de Joinville, nunca norma nacional. Diferenciar minhocário, compostagem termofílica e serviço externo; tipos aceitos dependem do sistema. A Embrapa fundamenta aeração/umidade e diferenças de método. |
+
+### Fontes verificadas
+
+Todas as páginas abaixo foram acessadas e lidas nas partes relevantes em 30/09/2026. São fontes públicas municipais/federais ou institucionais; não devem ser usadas para afirmar que existe uma regra nacional uniforme.
+
+- Papel: [SLU/DF — Coleta Seletiva](https://www.slu.df.gov.br/coletaseletiva); [Prefeitura de Jundiaí — Como Separar o Lixo](https://jundiai.sp.gov.br/infraestrutura-e-servicos-publicos/limpeza-publica/residuos-solidos/reciclagem/como-separar-o-lixo/); [Prefeitura de Vitória — Coleta seletiva](https://www.vitoria.es.gov.br/central/coleta-seletiva).
+- Vidro: [Prefeitura de Vitória — coleta de vidros](https://www.vitoria.es.gov.br/noticia/saiba-o-que-pode-e-o-que-nao-pode-ser-descartado-na-coleta-de-vidros-57021); [Prefeitura de Joinville — embalagens de vidro](https://www.joinville.sc.gov.br/noticias/prefeitura-de-joinville-implanta-sistema-de-coleta-de-embalagens-de-vidro/); [Prefeitura de São José dos Campos — Resíduos sólidos](https://www.sjc.sp.gov.br/servicos/manutencao-da-cidade/simisa/residuos-solidos/).
+- Plástico e metal: [MMA — O que é Reciclagem?](https://www.gov.br/mma/pt-br/assuntos/educacao-ambiental/glossario-ea/o-que-e-reciclagem); [Prefeitura de Vitória — mapa de descarte](https://vitoria.es.gov.br/central/mapa-mostra-onde-descartar-o-lixo-que-pode-ser-reciclado); [Prefeitura de Curitiba — separação de resíduos](https://www.curitiba.pr.gov.br/noticias/saiba-como-separar-e-destinar-corretamente-o-lixo-que-nao-e-lixo/63175); [Prefeitura de Fortaleza — descarte e reciclagem](https://www.fortaleza.ce.gov.br/noticias/dia-mundial-da-reciclagem-saiba-como-fazer-o-descarte-correto-do-lixo); [eureciclo — identificação de resinas](https://eureciclo.com.br/blog/5-mitos-do-lixo-domestico) (fonte setorial).
+- Compostagem: [Prefeitura de Joinville — Como fazer compostagem](https://www.joinville.sc.gov.br/servicos/como-fazer-compostagem/); [Embrapa Hortaliças — Compostagem](https://www.embrapa.br/en/web/hortalicas/hortalica-nao-e-so-salada/secoes/compostagem); [UNIVASF — compostagem doméstica](https://portais.univasf.edu.br/sustentabilidade/noticias-sustentaveis/o-que-e-compostagem-e-como-faze-la-em-casa) (texto institucional que credita material de apoio a fonte setorial).
+
+**Próximo controle editorial:** atualizar as cinco fichas no banco local como rascunhos; revisar cada fonte/escopo na Central; publicar individualmente só após decisão do responsável pelo conteúdo. Não publicar outros 49 materiais nesta leva.

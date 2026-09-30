@@ -19,6 +19,9 @@ type RequisicaoDados = {
   longitude_ponto_coleta?: number;
   categorias_aceitas?: string[];
   origem_informacao?: string;
+  horario_funcionamento?: string;
+  telefone_contato?: string;
+  url_informacoes?: string;
 };
 type PontoResposta = {
   id_ponto_coleta: string;
@@ -32,6 +35,10 @@ type PontoResposta = {
   status_verificacao: string;
   categorias_aceitas: string[];
   origem_informacao: string;
+  horario_funcionamento: string;
+  telefone_contato: string;
+  url_informacoes: string;
+  data_verificacao: string;
 };
 
 @Controller()
@@ -127,10 +134,10 @@ export class ControladorGrpcPontosColeta {
     return { idUsuario };
   }
   private converterDados(requisicao: RequisicaoDados) {
-    return { nomePontoColeta: requisicao.nome_ponto_coleta ?? '', enderecoPontoColeta: requisicao.endereco_ponto_coleta ?? '', cepPontoColeta: requisicao.cep_ponto_coleta ?? '', cidadePontoColeta: requisicao.cidade_ponto_coleta ?? '', estadoPontoColeta: requisicao.estado_ponto_coleta ?? '', latitudePontoColeta: requisicao.latitude_ponto_coleta, longitudePontoColeta: requisicao.longitude_ponto_coleta, categoriasAceitas: requisicao.categorias_aceitas ?? [], origemInformacao: requisicao.origem_informacao };
+    return { nomePontoColeta: requisicao.nome_ponto_coleta ?? '', enderecoPontoColeta: requisicao.endereco_ponto_coleta ?? '', cepPontoColeta: requisicao.cep_ponto_coleta ?? '', cidadePontoColeta: requisicao.cidade_ponto_coleta ?? '', estadoPontoColeta: requisicao.estado_ponto_coleta ?? '', latitudePontoColeta: requisicao.latitude_ponto_coleta, longitudePontoColeta: requisicao.longitude_ponto_coleta, categoriasAceitas: requisicao.categorias_aceitas ?? [], origemInformacao: requisicao.origem_informacao, horarioFuncionamento: requisicao.horario_funcionamento, telefoneContato: requisicao.telefone_contato, urlInformacoes: requisicao.url_informacoes };
   }
   private mapear(ponto: any): PontoResposta {
-    return { id_ponto_coleta: ponto.lcr_pco_id_ponto_coleta, nome_ponto_coleta: ponto.lcr_pco_nome_ponto_coleta, endereco_ponto_coleta: ponto.lcr_pco_endereco_ponto_coleta, cidade_ponto_coleta: ponto.lcr_pco_cidade_ponto_coleta, estado_ponto_coleta: ponto.lcr_pco_estado_ponto_coleta, cep_ponto_coleta: ponto.lcr_pco_cep_ponto_coleta ?? '', latitude_ponto_coleta: ponto.lcr_pco_latitude_ponto_coleta === null ? 0 : Number(ponto.lcr_pco_latitude_ponto_coleta), longitude_ponto_coleta: ponto.lcr_pco_longitude_ponto_coleta === null ? 0 : Number(ponto.lcr_pco_longitude_ponto_coleta), status_verificacao: ponto.lcr_pco_status_verificacao, categorias_aceitas: ponto.lcr_pco_categorias_aceitas ?? [], origem_informacao: ponto.lcr_pco_origem_informacao ?? '' };
+    return { id_ponto_coleta: ponto.lcr_pco_id_ponto_coleta, nome_ponto_coleta: ponto.lcr_pco_nome_ponto_coleta, endereco_ponto_coleta: ponto.lcr_pco_endereco_ponto_coleta, cidade_ponto_coleta: ponto.lcr_pco_cidade_ponto_coleta, estado_ponto_coleta: ponto.lcr_pco_estado_ponto_coleta, cep_ponto_coleta: ponto.lcr_pco_cep_ponto_coleta ?? '', latitude_ponto_coleta: ponto.lcr_pco_latitude_ponto_coleta === null ? 0 : Number(ponto.lcr_pco_latitude_ponto_coleta), longitude_ponto_coleta: ponto.lcr_pco_longitude_ponto_coleta === null ? 0 : Number(ponto.lcr_pco_longitude_ponto_coleta), status_verificacao: ponto.lcr_pco_status_verificacao, categorias_aceitas: ponto.lcr_pco_categorias_aceitas ?? [], origem_informacao: ponto.lcr_pco_origem_informacao ?? '', horario_funcionamento: ponto.lcr_pco_horario_funcionamento ?? '', telefone_contato: ponto.lcr_pco_telefone_contato ?? '', url_informacoes: ponto.lcr_pco_url_informacoes ?? '', data_verificacao: ponto.lcr_pco_data_verificacao ? new Date(ponto.lcr_pco_data_verificacao).toISOString() : '' };
   }
   private registrarAuditoria(tipoEvento: string, idRecurso: string | undefined, idUsuario: string, metadados: Metadata) {
     return this.auditoria.registrar({ idUsuario, tipoEvento, recursoEvento: 'ponto_coleta', idRecurso, idCorrelacao: this.obterCorrelacao(metadados), detalhesEvento: { recurso: 'ponto_coleta' } });

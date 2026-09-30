@@ -47,5 +47,28 @@ function validarDados(dados: Partial<DadosPontoColeta>, parcial: boolean): Parti
   if (lon !== undefined && lon !== null && (lon < -180 || lon > 180)) throw new BadRequestException('Longitude inválida');
   resultado.estadoPontoColeta = resultado.estadoPontoColeta?.toUpperCase();
   resultado.categoriasAceitas = [...new Set((resultado.categoriasAceitas ?? []).map(item => item.trim()).filter(Boolean))].slice(0, 30);
+  if (resultado.horarioFuncionamento !== undefined) {
+    const horario = resultado.horarioFuncionamento?.trim() ?? '';
+    if (horario.length > 500) throw new BadRequestException('Horário de funcionamento deve ter no máximo 500 caracteres');
+    resultado.horarioFuncionamento = horario || null;
+  }
+  if (resultado.telefoneContato !== undefined) {
+    const telefone = resultado.telefoneContato?.trim() ?? '';
+    if (telefone && (!/^[+()\d\s./-]{8,40}$/.test(telefone) || telefone.replace(/\D/g, '').length < 8)) {
+      throw new BadRequestException('Telefone de contato inválido');
+    }
+    resultado.telefoneContato = telefone || null;
+  }
+  if (resultado.urlInformacoes !== undefined) {
+    const valor = resultado.urlInformacoes?.trim() ?? '';
+    if (valor) {
+      let url: URL;
+      try { url = new URL(valor); } catch { throw new BadRequestException('URL de informações inválida'); }
+      if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || valor.length > 2048) {
+        throw new BadRequestException('URL de informações deve usar HTTP ou HTTPS e ter no máximo 2048 caracteres');
+      }
+      resultado.urlInformacoes = url.toString();
+    } else resultado.urlInformacoes = null;
+  }
   return resultado;
 }

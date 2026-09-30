@@ -10,7 +10,8 @@ const CODIGOS_LEVA = [
   'br-metais-e-latas-latas-de-bebidas-e-de-alimentos-aluminio-bc4efde3',
   'br-restos-alimentares-organicos-jardi-compostagem-de-restos-de-alimentos-com-m-0307de5f',
 ];
-const MARCADOR_CURADORIA = 'Curadoria técnica preliminar conferida em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por perfil autorizado na Central de revisão; confirme as regras do município ou operador antes da aprovação.';
+const MARCADOR_CURADORIA = 'Curadoria editorial revalidada em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por perfil autorizado na Central de revisão; confirme as regras do município ou operador antes da aprovação.';
+const MARCADOR_CURADORIA_ANTERIOR = 'Curadoria técnica preliminar conferida em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por perfil autorizado na Central de revisão; confirme as regras do município ou operador antes da aprovação.';
 const TEXTO_RASCUNHO_ANTERIOR = 'RASCUNHO DE PESQUISA';
 const DATA_CURADORIA = '2026-09-30';
 
@@ -62,8 +63,8 @@ function classificarEstado(registro) {
   const semPublicacao = !registro.lcr_mat_id_usuario_revisor && !registro.lcr_mat_data_publicacao;
 
   if (status !== 'rascunho' || !semPublicacao) return 'conflito';
-  if (versao === 2 && observacao === MARCADOR_CURADORIA && dataVerificacao === DATA_CURADORIA) return 'preparado';
-  if (versao === 1 && observacao === MARCADOR_CURADORIA && dataVerificacao === DATA_CURADORIA) return 'ja_curado_no_seed_inicial';
+  if (versao === 3 && observacao === MARCADOR_CURADORIA && dataVerificacao === DATA_CURADORIA) return 'preparado';
+  if (versao === 2 && observacao === MARCADOR_CURADORIA_ANTERIOR && dataVerificacao === DATA_CURADORIA) return 'curado_anterior';
   if (versao === 1 && observacao.startsWith(TEXTO_RASCUNHO_ANTERIOR)) return 'rascunho_original';
   return 'conflito';
 }
@@ -102,7 +103,7 @@ async function up(queryInterface) {
 
     let atualizados = 0;
     for (const item of estados) {
-      if (item.estado !== 'rascunho_original') continue;
+      if (!['rascunho_original', 'curado_anterior'].includes(item.estado)) continue;
       const dados = mapearDados(item.registro);
       const [linhas] = await queryInterface.sequelize.query(
         `UPDATE lcr_materiais
@@ -121,11 +122,11 @@ async function up(queryInterface) {
              lcr_mat_fontes_referencia = CAST(:fontes AS jsonb),
              lcr_mat_data_verificacao = :dataVerificacao,
              lcr_mat_observacao_revisao = :observacaoRevisao,
-             lcr_mat_versao_conteudo = 2,
+             lcr_mat_versao_conteudo = 3,
              lcr_mat_data_atualizacao = CURRENT_TIMESTAMP
          WHERE lcr_mat_codigo_catalogo = :codigo
            AND lcr_mat_status_material = 'rascunho'
-           AND lcr_mat_versao_conteudo = 1
+           AND lcr_mat_versao_conteudo = :versaoOriginal
            AND lcr_mat_observacao_revisao = :observacaoOriginal
            AND lcr_mat_id_usuario_revisor IS NULL
            AND lcr_mat_data_publicacao IS NULL
@@ -133,6 +134,7 @@ async function up(queryInterface) {
         {
           replacements: {
             ...dados,
+            versaoOriginal: item.existente.lcr_mat_versao_conteudo,
             observacaoOriginal: item.existente.lcr_mat_observacao_revisao,
           },
           transaction,
