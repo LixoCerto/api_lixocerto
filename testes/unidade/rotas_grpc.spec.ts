@@ -62,10 +62,10 @@ describe('contrato e implementação das rotas gRPC', () => {
     const chavesContratos = contratos.map(chave);
     const chavesControladores = controladores.map(chave);
 
-    expect(contratos).toHaveLength(66);
-    expect(new Set(chavesContratos).size).toBe(66);
-    expect(controladores).toHaveLength(66);
-    expect(new Set(chavesControladores).size).toBe(66);
+    expect(contratos).toHaveLength(67);
+    expect(new Set(chavesContratos).size).toBe(67);
+    expect(controladores).toHaveLength(67);
+    expect(new Set(chavesControladores).size).toBe(67);
     expect(chavesControladores.sort()).toEqual(chavesContratos.sort());
   });
 

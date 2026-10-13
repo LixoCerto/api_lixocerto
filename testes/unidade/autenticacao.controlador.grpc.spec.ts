@@ -42,4 +42,49 @@ describe('controlador gRPC de autenticacao', () => {
       identidade: { nome_usuario: 'Usuario Postman' },
     });
   });
+
+  it('grava um único IP válido ao receber a cadeia encaminhada por Cloudflare e Docker', async () => {
+    const servico = {
+      entrar: vi.fn().mockResolvedValue(resposta),
+    };
+    const controlador = new ControladorGrpcAutenticacao(servico as never);
+    const metadados = new Metadata();
+    metadados.set('cf-connecting-ip', '198.51.100.42');
+    metadados.set('x-forwarded-for', '172.70.193.152, 172.18.0.1');
+
+    await controlador.entrar({
+      email_usuario: 'usuario@exemplo.test',
+      senha_usuario: 'SenhaPostman123',
+    }, metadados);
+
+    expect(servico.entrar).toHaveBeenCalledWith(
+      'usuario@exemplo.test',
+      'SenhaPostman123',
+      expect.objectContaining({ enderecoIp: '198.51.100.42' }),
+    );
+  });
+
+  it('encaminha o ID token Google, o nonce e o contexto da sessão', async () => {
+    const servico = {
+      entrarComGoogle: vi.fn().mockResolvedValue(resposta),
+    };
+    const controlador = new ControladorGrpcAutenticacao(servico as never);
+    const metadados = new Metadata();
+    metadados.set('cf-connecting-ip', '198.51.100.42');
+
+    const retorno = await controlador.entrarComGoogle({
+      idToken: 'jwt-google-de-teste',
+      nonce: 'nonce-google-de-teste',
+    }, metadados);
+
+    expect(servico.entrarComGoogle).toHaveBeenCalledWith(
+      'jwt-google-de-teste',
+      'nonce-google-de-teste',
+      expect.objectContaining({ enderecoIp: '198.51.100.42' }),
+    );
+    expect(retorno).toMatchObject({
+      token_acesso: 'token-acesso-teste',
+      identidade: { nome_usuario: 'Usuario Postman' },
+    });
+  });
 });

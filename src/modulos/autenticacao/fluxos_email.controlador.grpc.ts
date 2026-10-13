@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { Metadata } from '@grpc/grpc-js';
 import { GrpcMethod } from '@nestjs/microservices';
+import { normalizarEnderecoIp } from '../../comum/rede/endereco_ip.js';
 import { ContextoFluxoEmail, ServicoFluxosEmail } from './fluxos_email.servico.js';
 
 interface RequisicaoEmail {
@@ -91,7 +92,11 @@ export class ControladorGrpcFluxosEmail {
 
   private obterContexto(metadados: Metadata): ContextoFluxoEmail {
     return {
-      enderecoIp: this.obterMetadado(metadados, 'x-forwarded-for') ?? this.obterMetadado(metadados, 'x-real-ip'),
+      enderecoIp: normalizarEnderecoIp(
+        this.obterMetadado(metadados, 'cf-connecting-ip'),
+        this.obterMetadado(metadados, 'x-forwarded-for'),
+        this.obterMetadado(metadados, 'x-real-ip'),
+      ),
       agenteUsuario: this.obterMetadado(metadados, 'user-agent'),
     };
   }

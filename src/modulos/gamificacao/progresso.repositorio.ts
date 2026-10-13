@@ -46,14 +46,15 @@ export class RepositorioProgresso {
       },
     });
     await this.gravarSelosAtingidos(idUsuario, progresso.lcr_prg_quantidade_pontos);
-    const [selos, pontosPorOrigem] = await Promise.all([
+    const [selos, pontosPorOrigem, diasAtivos] = await Promise.all([
       this.listarSelos(idUsuario),
       this.resumirPontosPorOrigem(idUsuario),
+      this.listarDiasAtivos(idUsuario),
     ]);
     return {
       quantidadePontos: progresso.lcr_prg_quantidade_pontos,
       nivelGamificacao: progresso.lcr_prg_nivel_gamificacao,
-      sequenciaDias: progresso.lcr_prg_sequencia_dias,
+      sequenciaDias: calcularSequenciaDiasAtivos(diasAtivos, dataAtualSaoPaulo()),
       quantidadeConquistas: selos.filter(selo => selo.conquistado).length,
       selos,
       pontosPorOrigem,
@@ -205,6 +206,18 @@ export class RepositorioProgresso {
     return linhas.map(linha => ({ origem: linha.origem, quantidadePontos: Number(linha.pontos), quantidadeEventos: Number(linha.eventos) }));
   }
 
+  private async listarDiasAtivos(idUsuario: string): Promise<string[]> {
+    if (!this.banco) return [];
+    const linhas = await this.banco.query<{ dia: string }>(
+      `SELECT DISTINCT TO_CHAR(lcr_evp_data_registro AT TIME ZONE 'America/Sao_Paulo', 'YYYY-MM-DD') AS dia
+       FROM lcr_eventos_pontos
+       WHERE lcr_evp_id_usuario = :idUsuario
+       ORDER BY dia DESC`,
+      { replacements: { idUsuario }, type: QueryTypes.SELECT },
+    );
+    return linhas.map(linha => String(linha.dia));
+  }
+
   private async gravarSelosAtingidos(idUsuario: string, totalPontos: number, transaction?: Transaction) {
     if (!this.banco) return;
     await this.banco.query(
@@ -224,4 +237,36 @@ function calcularNivel(pontos: number): string {
   if (pontos >= 1000) return 'reciclador';
   if (pontos >= 500) return 'explorador';
   return 'iniciante';
+}
+
+export function calcularSequenciaDiasAtivos(diasAtivos: readonly string[], diaAtual: string): number {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(diaAtual)) return 0;
+  const dias = new Set(diasAtivos.filter(dia => /^\d{4}-\d{2}-\d{2}$/.test(dia)));
+  let diaEmSequencia = dias.has(diaAtual) ? diaAtual : diaAnteriorIso(diaAtual);
+  if (!diaEmSequencia || !dias.has(diaEmSequencia)) return 0;
+
+  let total = 0;
+  while (dias.has(diaEmSequencia)) {
+    total += 1;
+    diaEmSequencia = diaAnteriorIso(diaEmSequencia);
+  }
+  return total;
+}
+
+function diaAnteriorIso(dia: string): string {
+  const data = new Date(`${dia}T00:00:00.000Z`);
+  if (Number.isNaN(data.getTime()) || data.toISOString().slice(0, 10) !== dia) return '';
+  data.setUTCDate(data.getUTCDate() - 1);
+  return data.toISOString().slice(0, 10);
+}
+
+function dataAtualSaoPaulo(): string {
+  const partes = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Sao_Paulo',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date());
+  const campos = new Map(partes.map(({ type, value }) => [type, value]));
+  return `${campos.get('year') ?? '1970'}-${campos.get('month') ?? '01'}-${campos.get('day') ?? '01'}`;
 }

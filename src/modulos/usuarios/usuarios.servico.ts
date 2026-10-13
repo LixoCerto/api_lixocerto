@@ -4,6 +4,7 @@ import { QueryTypes, Sequelize } from 'sequelize';
 import { UsuarioAutenticado } from '../../comum/autenticacao/usuario_autenticado.js';
 import { ModeloSessao } from '../../infraestrutura/banco/modelos/sessao.modelo.js';
 import { ModeloUsuario } from '../../infraestrutura/banco/modelos/usuario.modelo.js';
+import type { IdentidadeGoogleVerificada } from '../autenticacao/identidade_google.js';
 
 const PAPEIS_PERMITIDOS = ['usuario', 'pesquisador', 'revisor', 'administrador'] as const;
 type PapelPermitido = (typeof PAPEIS_PERMITIDOS)[number];
@@ -121,6 +122,87 @@ export class ServicoUsuarios {
       { replacements: { idUsuario: usuario.lcr_usr_id_usuario, idPapel: papel[0].lcr_pap_id_papel } },
     );
     return this.obterIdentidadeLocal(usuario.lcr_usr_id_externo) as Promise<UsuarioAutenticado>;
+  }
+
+  async autenticarComGoogle(dados: IdentidadeGoogleVerificada): Promise<UsuarioAutenticado> {
+    if (!this.banco) throw new Error('Banco de dados indisponivel');
+    const email = dados.email.trim().toLowerCase();
+    const transacao = await this.banco.transaction();
+    let idExterno: string;
+
+    try {
+      let usuario = await ModeloUsuario.findOne({
+        where: { lcr_usr_google_subject: dados.sub },
+        transaction: transacao,
+        lock: transacao.LOCK.UPDATE,
+      });
+
+      if (!usuario) {
+        usuario = await ModeloUsuario.findOne({
+          where: { lcr_usr_email: email },
+          transaction: transacao,
+          lock: transacao.LOCK.UPDATE,
+        });
+
+        if (usuario) {
+          if (usuario.lcr_usr_google_subject && usuario.lcr_usr_google_subject !== dados.sub) {
+            throw new Error('GOOGLE_ACCOUNT_CONFLICT');
+          }
+          if (!usuario.lcr_usr_google_subject && !dados.emailAutoritativo) {
+            throw new Error('GOOGLE_LINK_REQUIRED');
+          }
+          await usuario.update({
+            lcr_usr_google_subject: dados.sub,
+            lcr_usr_email_verificado_em: usuario.lcr_usr_email_verificado_em ?? new Date(),
+          }, { transaction: transacao });
+        } else {
+          usuario = await ModeloUsuario.create({
+            lcr_usr_id_externo: `google:${dados.sub}`,
+            lcr_usr_nome: dados.nome.trim().slice(0, 180),
+            lcr_usr_email: email,
+            lcr_usr_hash_senha: null,
+            lcr_usr_email_verificado_em: new Date(),
+            lcr_usr_google_subject: dados.sub,
+            lcr_usr_status_usuario: 'ativo',
+            lcr_usr_data_ultimo_acesso: new Date(),
+          }, { transaction: transacao });
+
+          const papeis = await this.banco.query<{ lcr_pap_id_papel: string }>(
+            `SELECT lcr_pap_id_papel
+             FROM lcr_papeis
+             WHERE lcr_pap_nome_papel = 'usuario' AND lcr_pap_status_papel = 'ativo'
+             LIMIT 1`,
+            { type: QueryTypes.SELECT, transaction: transacao },
+          );
+          if (!papeis[0]) throw new Error('Papel usuario nao configurado');
+          await this.banco.query(
+            `INSERT INTO lcr_usuarios_papeis (
+              lcr_upr_id_usuario_papel, lcr_upr_id_usuario, lcr_upr_id_papel, lcr_upr_data_atribuicao
+            ) VALUES (gen_random_uuid(), :idUsuario, :idPapel, CURRENT_TIMESTAMP)`,
+            {
+              replacements: { idUsuario: usuario.lcr_usr_id_usuario, idPapel: papeis[0].lcr_pap_id_papel },
+              transaction: transacao,
+            },
+          );
+        }
+      }
+
+      if (usuario.lcr_usr_status_usuario !== 'ativo') throw new Error('Usuario sem acesso ativo');
+      idExterno = usuario.lcr_usr_id_externo;
+      await transacao.commit();
+    } catch (erro) {
+      await transacao.rollback().catch(() => undefined);
+      const concorrente = await ModeloUsuario.findOne({ where: { lcr_usr_google_subject: dados.sub } }).catch(() => null);
+      if (concorrente?.lcr_usr_status_usuario === 'ativo') {
+        const identidadeConcorrente = await this.obterIdentidadeLocal(concorrente.lcr_usr_id_externo);
+        if (identidadeConcorrente) return identidadeConcorrente;
+      }
+      throw erro;
+    }
+
+    const identidade = await this.obterIdentidadeLocal(idExterno);
+    if (!identidade) throw new Error('Identidade Google sem usuario local');
+    return identidade;
   }
 
   async obterIdentidadeLocal(idExterno: string): Promise<UsuarioAutenticado | null> {

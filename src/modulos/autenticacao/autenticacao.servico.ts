@@ -6,8 +6,11 @@ import { Op, Sequelize } from 'sequelize';
 import { UsuarioAutenticado } from '../../comum/autenticacao/usuario_autenticado.js';
 import { ModeloSessao } from '../../infraestrutura/banco/modelos/sessao.modelo.js';
 import { ModeloUsuario } from '../../infraestrutura/banco/modelos/usuario.modelo.js';
+import { ServicoRateLimit } from '../../infraestrutura/cache/rate_limit.servico.js';
 import { ServicoUsuarios } from '../usuarios/usuarios.servico.js';
 import { criarHashSenha, senhaValida, verificarSenha } from './senha.util.js';
+import type { IdentidadeGoogleVerificada } from './identidade_google.js';
+import { VerificadorGoogleServico } from './verificador_google.servico.js';
 import {
   EXPIRACAO_TOKEN_ATUALIZACAO_DIAS,
   EXPIRACAO_TOKEN_ACESSO_SEGUNDOS,
@@ -37,7 +40,9 @@ export interface RespostaAutenticacao {
 export class ServicoAutenticacao {
   constructor(
     private readonly verificadorJwt: VerificadorJwtServico,
+    private readonly verificadorGoogle: VerificadorGoogleServico,
     private readonly usuarios: ServicoUsuarios,
+    private readonly rateLimit: ServicoRateLimit,
     @Inject('CONEXAO_BANCO_DADOS') private readonly banco: Sequelize | null,
   ) {}
 
@@ -81,6 +86,27 @@ export class ServicoAutenticacao {
       this.erro(codigoGrpc.UNAUTHENTICATED, 'Usuario sem identidade local valida');
     }
     if (!identidade) this.erro(codigoGrpc.UNAUTHENTICATED, 'Usuario nao encontrado');
+    return this.emitirTokens(identidade, contexto);
+  }
+
+  async entrarComGoogle(idTokenGoogle: string, nonce: string, contexto?: ContextoSessao): Promise<RespostaAutenticacao> {
+    if (contexto?.enderecoIp) {
+      await this.aplicarRateLimitGoogle(`lcr:auth:google:ip:${this.hash(contexto.enderecoIp)}`, 30, 60);
+    }
+    const identidadeGoogle: IdentidadeGoogleVerificada = await this.verificadorGoogle.verificar(idTokenGoogle, nonce);
+    await this.aplicarRateLimitGoogle(`lcr:auth:google:sub:${this.hash(identidadeGoogle.sub)}`, 10, 300);
+    let identidade: UsuarioAutenticado;
+    try {
+      identidade = await this.usuarios.autenticarComGoogle(identidadeGoogle);
+    } catch (erro) {
+      if (erro instanceof Error && erro.message === 'GOOGLE_LINK_REQUIRED') {
+        this.erro(codigoGrpc.FAILED_PRECONDITION, 'Esta conta ja existe. Entre pelo metodo de login atual; o Google nao foi vinculado');
+      }
+      if (erro instanceof Error && erro.message === 'GOOGLE_ACCOUNT_CONFLICT') {
+        this.erro(codigoGrpc.FAILED_PRECONDITION, 'Esta conta já está associada a outra identidade Google');
+      }
+      throw erro;
+    }
     return this.emitirTokens(identidade, contexto);
   }
 
@@ -191,6 +217,12 @@ export class ServicoAutenticacao {
 
   private hash(valor: string): string {
     return createHash('sha256').update(valor, 'utf8').digest('hex');
+  }
+
+  private async aplicarRateLimitGoogle(chave: string, limite: number, janelaSegundos: number): Promise<void> {
+    const resultado = await this.rateLimit.permitir(chave, limite, janelaSegundos);
+    if (!resultado.disponivel) this.erro(codigoGrpc.UNAVAILABLE, 'Autenticacao Google temporariamente indisponivel');
+    if (!resultado.permitido) this.erro(codigoGrpc.RESOURCE_EXHAUSTED, 'Muitas tentativas. Aguarde e tente novamente');
   }
 
   private erro(codigo: number, mensagem: string): never {

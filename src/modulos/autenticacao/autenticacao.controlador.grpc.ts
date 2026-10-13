@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { Metadata } from '@grpc/grpc-js';
 import { GrpcMethod } from '@nestjs/microservices';
+import { normalizarEnderecoIp } from '../../comum/rede/endereco_ip.js';
 import { ContextoSessao, RespostaAutenticacao, ServicoAutenticacao } from './autenticacao.servico.js';
 
 interface RequisicaoCadastro {
@@ -17,6 +18,12 @@ interface RequisicaoLogin {
   emailUsuario?: string;
   senha_usuario?: string;
   senhaUsuario?: string;
+}
+
+interface RequisicaoLoginGoogle {
+  id_token?: string;
+  idToken?: string;
+  nonce?: string;
 }
 
 interface RequisicaoTokenAtualizacao {
@@ -43,6 +50,15 @@ export class ControladorGrpcAutenticacao {
     return this.mapearResposta(await this.servico.entrar(
       requisicao.email_usuario?.trim() || requisicao.emailUsuario?.trim() || '',
       requisicao.senha_usuario || requisicao.senhaUsuario || '',
+      this.obterContexto(metadados),
+    ));
+  }
+
+  @GrpcMethod('ServicoAutenticacao', 'EntrarComGoogle')
+  async entrarComGoogle(requisicao: RequisicaoLoginGoogle, metadados: Metadata) {
+    return this.mapearResposta(await this.servico.entrarComGoogle(
+      requisicao.id_token?.trim() || requisicao.idToken?.trim() || '',
+      requisicao.nonce?.trim() || '',
       this.obterContexto(metadados),
     ));
   }
@@ -87,7 +103,11 @@ export class ControladorGrpcAutenticacao {
 
   private obterContexto(metadados: Metadata): ContextoSessao {
     return {
-      enderecoIp: this.obterMetadado(metadados, 'x-forwarded-for') ?? this.obterMetadado(metadados, 'x-real-ip'),
+      enderecoIp: normalizarEnderecoIp(
+        this.obterMetadado(metadados, 'cf-connecting-ip'),
+        this.obterMetadado(metadados, 'x-forwarded-for'),
+        this.obterMetadado(metadados, 'x-real-ip'),
+      ),
       agenteUsuario: this.obterMetadado(metadados, 'user-agent'),
     };
   }

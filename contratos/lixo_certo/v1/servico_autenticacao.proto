@@ -21,6 +21,11 @@ message EntrarRequisicao {
   string senha_usuario = 2;
 }
 
+message EntrarComGoogleRequisicao {
+  string id_token = 1;
+  string nonce = 2;
+}
+
 message RenovarTokenRequisicao {
   string token_atualizacao = 1;
 }
@@ -47,6 +52,15 @@ message EntrarResposta {
   IdentidadeAutenticada identidade = 4;
   // Quando verdadeiro, as credenciais estão corretas mas o e-mail ainda não foi
   // confirmado: nenhum token de sessão é emitido antes da verificação.
+  bool requer_verificacao_email = 5;
+  string id_sessao = 6;
+}
+
+message EntrarComGoogleResposta {
+  string token_acesso = 1;
+  string token_atualizacao = 2;
+  int32 expira_em_segundos = 3;
+  IdentidadeAutenticada identidade = 4;
   bool requer_verificacao_email = 5;
   string id_sessao = 6;
 }
@@ -128,6 +142,7 @@ message RedefinirSenhaResposta {
 service ServicoAutenticacao {
   rpc CadastrarUsuario(CadastrarUsuarioRequisicao) returns (CadastrarUsuarioResposta);
   rpc Entrar(EntrarRequisicao) returns (EntrarResposta);
+  rpc EntrarComGoogle(EntrarComGoogleRequisicao) returns (EntrarComGoogleResposta);
   rpc RenovarToken(RenovarTokenRequisicao) returns (RenovarTokenResposta);
   rpc Sair(SairRequisicao) returns (SairResposta);
   rpc ObterIdentidadeAtual(ObterIdentidadeAtualRequisicao) returns (ObterIdentidadeAtualResposta);
