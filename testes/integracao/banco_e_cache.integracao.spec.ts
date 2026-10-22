@@ -78,6 +78,10 @@ afterAll(async () => {
         where: { lcr_mat_id_material: idsMateriais },
       });
     for (const idUsuario of idsUsuarios) {
+      await banco.query(
+        "DELETE FROM lcr_eventos_pontos WHERE lcr_evp_id_usuario = :idUsuario",
+        { replacements: { idUsuario } },
+      );
       await ModeloAcaoSustentavel.destroy({
         where: { lcr_ast_id_usuario: idUsuario },
       });
@@ -183,7 +187,7 @@ bancoDescribe("integração PostgreSQL", () => {
     expect(resumo.quantidadeUsuarios).toBeGreaterThanOrEqual(1);
     expect(resumo.quantidadeMateriais).toBeGreaterThanOrEqual(1);
     expect(await new ServicoPapeis(banco).listarAtivos()).toHaveLength(4);
-    expect(await new ServicoPermissoes(banco).listarAtivas()).toHaveLength(11);
+    expect(await new ServicoPermissoes(banco).listarAtivas()).toHaveLength(16);
 
     const identidadeInterna = new ServicoIdentidade(banco);
     const perfil = new ServicoPerfil(banco, identidadeInterna);
@@ -229,7 +233,7 @@ bancoDescribe("integração PostgreSQL", () => {
     expect(outraIdentidade.papeis).toContain("usuario");
     expect(await sessoes.revogar(outroIdExterno, idSessao!)).toBe(false);
     expect(await sessoes.revogar(idExterno, idSessao!)).toBe(true);
-    expect((await sessoes.listar(idExterno))[0]?.dataRevogacao).toBeTruthy();
+    expect(await sessoes.listar(idExterno)).toHaveLength(0);
   });
 
   it("processa desafio, concede pontos na conclusão e grava auditoria", async () => {
