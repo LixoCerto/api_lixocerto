@@ -4,13 +4,13 @@ Este seeder separado prepara contas para testar os papéis **usuário**, **pesqu
 
 O seeder cria ou atualiza somente estas identidades reservadas, usando o domínio não roteável `.test`:
 
-| Papel | E-mail local | Senha fixa de desenvolvimento |
+| Papel | E-mail local | Senha |
 |---|---|---|
-| Usuário | `homologacao.usuario@exemplo.test` | `LcrHml_Usr_7Qv2!2026` |
-| Pesquisador | `homologacao.pesquisador@exemplo.test` | `LcrHml_Pesq_4Mx8!2026` |
-| Revisor | `homologacao.revisor@exemplo.test` | `LcrHml_Rev_9Ka3!2026` |
+| Usuário | `homologacao.usuario@exemplo.test` | `LCR_HOMOLOGACAO_SENHA_USUARIO` |
+| Pesquisador | `homologacao.pesquisador@exemplo.test` | `LCR_HOMOLOGACAO_SENHA_PESQUISADOR` |
+| Revisor | `homologacao.revisor@exemplo.test` | `LCR_HOMOLOGACAO_SENHA_REVISOR` |
 
-As contas ficam ativas e com e-mail confirmado para uso local. O seeder grava somente hashes scrypt compatíveis com o login; não imprime as senhas durante a execução. **Essas credenciais estão versionadas no repositório privado por solicitação e são exclusivamente para desenvolvimento local. Qualquer pessoa com acesso ao repositório poderá vê-las: não as use em produção, não as reutilize em outros serviços e mantenha os repositórios privados.**
+As contas ficam ativas e com e-mail confirmado para uso local. O seeder recebe as senhas somente pelas variáveis do ambiente, grava apenas hashes scrypt compatíveis com o login e não imprime as senhas durante a execução.
 
 ## Matriz dos perfis-base
 
@@ -28,7 +28,7 @@ As contas ficam ativas e com e-mail confirmado para uso local. O seeder grava so
 - Só executa quando `AMBIENTE_EXECUCAO=desenvolvimento` **e** `LCR_SEMEAR_CONTAS_HOMOLOGACAO=true`.
 - Usa um caminho de seed separado; não faz parte de `pnpm semear` nem dos seeds normais.
 - Verifica previamente os papéis e um administrador ativo. Se um e-mail reservado pertencer a outra identidade, falha em vez de sobrescrevê-la.
-- É idempotente para as três identidades reservadas. Ao repetir, redefine a senha fixa, mantém exatamente um papel por conta e revoga sessões antigas dessas contas.
+- É idempotente para as três identidades reservadas. Ao repetir, redefine as senhas fornecidas no ambiente, mantém exatamente um papel por conta e revoga sessões antigas dessas contas.
 - O `down` **bloqueia** essas contas e revoga suas sessões, sem apagá-las nem tocar nas demais contas, preservando o histórico de testes.
 
 ## Atualizar e executar no Docker Desktop (PowerShell)

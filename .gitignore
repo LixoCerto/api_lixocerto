@@ -4,3 +4,8 @@ coverage/
 relatorios/
 *.log
 .dados/
+
+# Configuração local e credenciais; o exemplo é o único arquivo de ambiente versionado.
+.env
+.env.*
+!.env.exemplo

@@ -16,21 +16,21 @@ const CONTAS = [
     idExterno: 'local:homologacao:usuario',
     nome: 'Homologação — Usuário',
     email: 'homologacao.usuario@exemplo.test',
-    senhaFixa: 'LcrHml_Usr_7Qv2!2026',
+    variavelSenha: 'LCR_HOMOLOGACAO_SENHA_USUARIO',
   },
   {
     papel: 'pesquisador',
     idExterno: 'local:homologacao:pesquisador',
     nome: 'Homologação — Pesquisador',
     email: 'homologacao.pesquisador@exemplo.test',
-    senhaFixa: 'LcrHml_Pesq_4Mx8!2026',
+    variavelSenha: 'LCR_HOMOLOGACAO_SENHA_PESQUISADOR',
   },
   {
     papel: 'revisor',
     idExterno: 'local:homologacao:revisor',
     nome: 'Homologação — Revisor',
     email: 'homologacao.revisor@exemplo.test',
-    senhaFixa: 'LcrHml_Rev_9Ka3!2026',
+    variavelSenha: 'LCR_HOMOLOGACAO_SENHA_REVISOR',
   },
 ];
 
@@ -44,14 +44,14 @@ function exigirOptIn() {
 }
 
 function senhasFixas() {
-  const senhas = CONTAS.map(conta => ({ conta, senha: conta.senhaFixa }));
+  const senhas = CONTAS.map(conta => ({ conta, senha: process.env[conta.variavelSenha] }));
   for (const { conta, senha } of senhas) {
-    if (senha.length < 12 || !/[A-Za-z]/.test(senha) || !/\d/.test(senha)) {
-      throw new Error(`A senha fixa configurada para ${conta.email} não atende aos requisitos mínimos.`);
+    if (!senha || senha.length < 12 || !/[A-Za-z]/.test(senha) || !/\d/.test(senha)) {
+      throw new Error(`A senha de ${conta.email} deve ser fornecida por ${conta.variavelSenha} e atender aos requisitos mínimos.`);
     }
   }
   if (new Set(senhas.map(item => item.senha)).size !== senhas.length) {
-    throw new Error('Cada conta de homologação deve ter uma senha fixa diferente.');
+    throw new Error('Cada conta de homologação deve ter uma senha diferente.');
   }
   return senhas;
 }

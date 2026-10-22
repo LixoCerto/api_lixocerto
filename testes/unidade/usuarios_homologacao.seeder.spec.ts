@@ -11,17 +11,23 @@ const seeder = require('../../banco/seeds_homologacao/001_usuarios_homologacao.c
 const variaveis = [
   'AMBIENTE_EXECUCAO',
   'LCR_SEMEAR_CONTAS_HOMOLOGACAO',
+  'LCR_HOMOLOGACAO_SENHA_USUARIO',
+  'LCR_HOMOLOGACAO_SENHA_PESQUISADOR',
+  'LCR_HOMOLOGACAO_SENHA_REVISOR',
 ] as const;
 const originais = new Map(variaveis.map(nome => [nome, process.env[nome]]));
 const senhas = [
-  'LcrHml_Usr_7Qv2!2026',
-  'LcrHml_Pesq_4Mx8!2026',
-  'LcrHml_Rev_9Ka3!2026',
+  'TesteLocalUsuario_2026',
+  'TesteLocalPesquisador_2026',
+  'TesteLocalRevisor_2026',
 ] as const;
 
 function configurarAmbiente() {
   process.env.AMBIENTE_EXECUCAO = 'desenvolvimento';
   process.env.LCR_SEMEAR_CONTAS_HOMOLOGACAO = 'true';
+  process.env.LCR_HOMOLOGACAO_SENHA_USUARIO = senhas[0];
+  process.env.LCR_HOMOLOGACAO_SENHA_PESQUISADOR = senhas[1];
+  process.env.LCR_HOMOLOGACAO_SENHA_REVISOR = senhas[2];
 }
 
 afterEach(() => {
