@@ -1,8 +1,8 @@
-# Lixo Certo — API
+# LixoCerto — API
 
-API de domínio da plataforma educacional **Lixo Certo**, desenvolvida como parte do TCC II. O backend organiza autenticação, autorização e os serviços de educação ambiental, participação e administração.
+API de domínio da plataforma **LixoCerto**. Centraliza autenticação, autorização e as regras dos serviços de orientação ambiental, participação e administração, expondo contratos gRPC para os clientes autorizados.
 
-> **Status:** projeto em desenvolvimento. A presença de um módulo no código ou de testes unitários não significa, por si só, validação ponta a ponta com usuários, dados reais ou ambiente de produção. Consulte os testes e a documentação de cada fluxo antes de utilizá-lo.
+> **Status:** em desenvolvimento. A presença de um módulo no código ou a aprovação de testes automatizados não implica validação de todos os fluxos, operação em produção ou avaliação com participantes. Consulte o escopo de cada teste e a documentação dos fluxos antes de utilizá-los.
 
 ## Visão geral
 
@@ -62,6 +62,7 @@ As variáveis estão agrupadas por finalidade: `BANCO_DADOS_*`, `REDIS_*` e `RED
 | `pnpm tipos` | Verifica os tipos TypeScript |
 | `pnpm testar` | Executa os testes unitários |
 | `pnpm testar:integracao` | Executa testes de integração; requer serviços e configuração de teste |
+| `pnpm testar:e2e` | Compila a API e executa os testes ponta a ponta; requer configuração de teste |
 | `pnpm compilar` | Compila a aplicação |
 
 Para uma verificação local padrão:
@@ -72,6 +73,8 @@ pnpm tipos
 pnpm testar
 pnpm compilar
 ```
+
+Execute testes de integração e ponta a ponta somente com a configuração de teste e serviços locais descartáveis. Nunca aponte testes ou fixtures para um banco com dados importantes.
 
 A API escuta gRPC na porta `50051` por padrão. No ambiente Compose, o acesso do navegador passa pelo Envoy; consulte o repositório [`infra_lixocerto`](https://github.com/LixoCerto/infra_lixocerto).
 
@@ -101,3 +104,5 @@ pnpm semear
 - [Fluxos de e-mail e autenticação](docs/FLUXOS_EMAIL_AUTENTICACAO.md)
 - [Operação, privacidade e backup](docs/OPERACAO_PRIVACIDADE_E_BACKUP.md)
 - [Catálogo do guia de descarte](docs/catalogo-guia-descarte.md)
+- [Frontend da plataforma](https://github.com/LixoCerto/frontend_lixocerto)
+- [Infraestrutura Docker](https://github.com/LixoCerto/infra_lixocerto)
