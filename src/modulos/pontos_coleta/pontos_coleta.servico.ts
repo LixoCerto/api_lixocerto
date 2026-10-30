@@ -43,8 +43,8 @@ function validarDados(dados: Partial<DadosPontoColeta>, parcial: boolean): Parti
   const lat = resultado.latitudePontoColeta;
   const lon = resultado.longitudePontoColeta;
   if ((lat === null) !== (lon === null) || (lat === undefined) !== (lon === undefined)) throw new BadRequestException('Latitude e longitude devem ser informadas juntas');
-  if (lat !== undefined && lat !== null && (lat < -90 || lat > 90)) throw new BadRequestException('Latitude inválida');
-  if (lon !== undefined && lon !== null && (lon < -180 || lon > 180)) throw new BadRequestException('Longitude inválida');
+  if (lat !== undefined && lat !== null && (!Number.isFinite(lat) || lat < -90 || lat > 90)) throw new BadRequestException('Latitude inválida');
+  if (lon !== undefined && lon !== null && (!Number.isFinite(lon) || lon < -180 || lon > 180)) throw new BadRequestException('Longitude inválida');
   resultado.estadoPontoColeta = resultado.estadoPontoColeta?.toUpperCase();
   resultado.categoriasAceitas = [...new Set((resultado.categoriasAceitas ?? []).map(item => item.trim()).filter(Boolean))].slice(0, 30);
   if (resultado.horarioFuncionamento !== undefined) {

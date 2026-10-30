@@ -57,7 +57,7 @@ export class ServicoDescartes implements OnModuleInit, OnModuleDestroy {
     const resultado = await this.repositorio.iniciarCheckin({ ...dados, idUsuario, idPontoColeta });
     if (resultado && !resultado.operacaoAceita) {
       if (resultado.motivo === 'fora_raio') {
-        throw new BadRequestException(`Check-in não aceito: você está a ${Math.ceil(resultado.distanciaMetros ?? 0)} m do ponto; o limite é 5 m.`);
+        throw new BadRequestException(`Check-in não aceito: você está a ${Math.ceil(resultado.distanciaMetros ?? 0)} m do ponto; o limite é 5 m. Aproxime-se até ficar a 5 m ou menos e tente novamente.`);
       }
       throw new BadRequestException('Este ponto não está verificado ou não possui coordenadas válidas para check-in.');
     }

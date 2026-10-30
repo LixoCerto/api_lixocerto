@@ -10,7 +10,7 @@
       "nomeMaterial": "Papel e papelão secos para coleta seletiva",
       "categoriaMaterial": "Papel e papelão",
       "classificacao": "Papel e papelão secos da fração de recicláveis domiciliares; a coleta depende do serviço local.",
-      "instrucaoDescarte": "Separe papel e papelão limpos e secos, sem resíduos de alimentos, gordura ou líquidos, para a coleta seletiva somente quando o serviço do seu município ou operador aceitar esse material. Não encaminhe papel engordurado ou molhado, papel higiênico, papel-toalha usado, nem guardanapos usados, sujos ou muito úmidos; para outros papéis contaminados, siga a regra local.",
+      "instrucaoDescarte": "Separe papel e papelão limpos e secos, sem resíduos de alimentos, gordura ou líquidos, para a coleta seletiva somente quando o serviço do seu município ou operador aceitar esse material. Não encaminhe papel engordurado ou molhado, papel higiênico, papel-toalha usado, nem guardanapos com resíduos de alimento, sujos ou muito úmidos. Guardanapos limpos e secos só devem ser encaminhados se o serviço local os aceitar; para outros tipos de papel, confirme a lista do município ou operador.",
       "observacaoImpacto": "Separar papel e papelão secos da fração úmida reduz contaminação e facilita o encaminhamento à coleta seletiva, quando disponível.",
       "sinonimos": [
         "papelão",
@@ -23,7 +23,7 @@
         "embalagens longa vida"
       ],
       "preparacao": "Remova restos de alimentos e líquidos e deixe papel e papelão secarem. Acondicione e disponibilize conforme o endereço, dia e horário informados pelo serviço local.",
-      "cuidados": "Não misture papel engordurado ou molhado, papel higiênico, papel-toalha usado ou guardanapos usados, sujos ou muito úmidos com recicláveis secos. A aceitação varia por município, bairro e operador; confirme a regra local. A expressão “papel contaminado” não define por si só uma rota de descarte.",
+      "cuidados": "Não misture papel engordurado ou molhado, papel higiênico, papel-toalha usado ou guardanapos com resíduos de alimento, sujos ou muito úmidos à fração de recicláveis secos. Guardanapos limpos e secos só entram se o serviço local os aceitar. A aceitação varia por município, bairro e operador; confirme a lista, o endereço e a rota disponíveis.",
       "categoriasPontos": [],
       "rotasReferencia": [
         "Coleta seletiva municipal, se disponível no endereço e se aceitar papel/papelão",
@@ -49,9 +49,9 @@
           "comprova": "Inclui papéis no fluxo seco e exclui papéis sanitários, papel-toalha e guardanapos sujos/úmidos no serviço local."
         }
       ],
-      "dataVerificacao": "2026-09-30",
+      "dataVerificacao": "2026-10-30",
       "statusMaterial": "rascunho",
-      "observacaoRevisao": "Curadoria editorial revalidada em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por perfil autorizado na Central de revisão; confirme as regras do município ou operador antes da aprovação."
+      "observacaoRevisao": "Revisão documental e ajustes editoriais concluídos em 2026-10-30 com fontes citadas; não houve validação de campo. Permanece em rascunho até aprovação e publicação por perfil autorizado. Confirme a aceitação e a rota com o município/operador."
     },
     {
       "codigoCatalogo": "br-br-papel-papelao-rascunho-001-papel-aceito-nos-locais-de-entrega-volun-2c875c00",
@@ -146,7 +146,7 @@
         "vidro de embalagem"
       ],
       "preparacao": "Esvazie a embalagem e remova resíduos; enxágue quando necessário. Use PEV/contentor diretamente, sem saco ou caixa, somente quando essa for a regra local. Retire tampas/rolhas se o serviço orientar assim e confirme a regra para rótulos.",
-      "cuidados": "Não inclua automaticamente espelhos, cerâmica, porcelana/louça, cristal, lâmpadas, vidro plano/temperado ou frascos de laboratório. As listas variam localmente. A orientação para vidro quebrado diverge entre municípios; não o misture à embalagem inteira e consulte a regra local para coleta e acondicionamento que evite ferimentos.",
+      "cuidados": "Não inclua automaticamente espelhos, louças, porcelana e outros itens cerâmicos, cristal, lâmpadas, vidro plano/temperado ou frascos de laboratório; as listas variam localmente. Esta ficha cobre apenas embalagens inteiras. Para vidro quebrado, consulte a regra local de coleta e acondicionamento seguro, sem aplicar automaticamente as orientações desta ficha.",
       "categoriasPontos": [],
       "rotasReferencia": [
         "PEV ou contentor identificado para vidro, se disponível e se aceitar embalagens inteiras",
@@ -172,9 +172,9 @@
           "comprova": "Lista embalagens aceitas no serviço municipal e exclui cacos/vidros planos da reciclagem local; não generalizar para outros municípios."
         }
       ],
-      "dataVerificacao": "2026-09-30",
+      "dataVerificacao": "2026-10-30",
       "statusMaterial": "rascunho",
-      "observacaoRevisao": "Curadoria editorial revalidada em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por perfil autorizado na Central de revisão; confirme as regras do município ou operador antes da aprovação."
+      "observacaoRevisao": "Revisão documental e ajustes editoriais concluídos em 2026-10-30 com fontes citadas; não houve validação de campo. Permanece em rascunho até aprovação e publicação por perfil autorizado. Confirme a aceitação e a rota com o município/operador."
     },
     {
       "codigoCatalogo": "br-vidro-embalagens-espelhos-ceramica-embalagem-de-vidro-quebrada-843437cc",
@@ -318,8 +318,8 @@
         "embalagens de produtos de limpeza",
         "plásticos secos"
       ],
-      "preparacao": "Raspe ou remova o excesso de resíduos. Se ainda houver sujeira, faça um enxágue breve, sem detergente nem lavagem profunda, e deixe secar. Quando possível, aproveite água que já seria usada. Mantenha recicláveis separados de orgânicos e rejeitos.",
-      "cuidados": "Não coloque embalagens com líquidos, restos de comida ou resíduos químicos na fração seca. Nem todo tipo de plástico, resina ou embalagem é recebido localmente; verifique a lista do município, cooperativa ou operador. O símbolo de resina identifica o tipo de plástico, não assegura uma cadeia local de coleta/reciclagem.",
+      "preparacao": "Raspe ou remova o excesso de resíduos. Se ainda houver sujeira e o serviço local orientar enxágue, use água brevemente, sem detergente nem lavagem profunda, e deixe secar. Quando possível, aproveite água que já seria usada. Mantenha recicláveis separados de orgânicos e rejeitos.",
+      "cuidados": "Não coloque na fração seca embalagens com líquidos, restos de comida ou resíduos de produtos químicos/perigosos. Para medicamentos, saneantes ou recipientes com resíduos químicos, siga a rota específica indicada pelo município, sistema de logística reversa ou operador; não misture ao fluxo comum. Nem todo tipo de plástico, resina ou embalagem é recebido localmente; verifique a lista do município, cooperativa ou operador. O símbolo de resina identifica o tipo de plástico, não assegura uma cadeia local de coleta/reciclagem.",
       "categoriasPontos": [],
       "rotasReferencia": [
         "Coleta seletiva municipal, se disponível e se aceitar o tipo de embalagem",
@@ -350,9 +350,9 @@
           "comprova": "Fonte setorial, não governamental: explica que identificação de resina não garante reciclabilidade, que depende de demanda e capacidade local."
         }
       ],
-      "dataVerificacao": "2026-09-30",
+      "dataVerificacao": "2026-10-30",
       "statusMaterial": "rascunho",
-      "observacaoRevisao": "Curadoria editorial revalidada em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por perfil autorizado na Central de revisão; confirme as regras do município ou operador antes da aprovação."
+      "observacaoRevisao": "Revisão documental e ajustes editoriais concluídos em 2026-10-30 com fontes citadas; não houve validação de campo. Permanece em rascunho até aprovação e publicação por perfil autorizado. Confirme a aceitação e a rota com o município/operador."
     },
     {
       "codigoCatalogo": "br-plastics-packaging-disposal-br-embalagens-plasticas-de-alimentos-e-deli-844dac64",
@@ -460,8 +460,8 @@
         "embalagens metálicas de alimentos",
         "sucata de latas"
       ],
-      "preparacao": "Retire o restante do conteúdo. Se necessário, passe água apenas para remover o grosso dos resíduos; deixe a lata sem sobras visíveis e separada dos resíduos úmidos.",
-      "cuidados": "Esta ficha trata de latas comuns de bebidas e alimentos; outros objetos metálicos podem ter regras próprias. Não inclua pilhas, baterias, lâmpadas ou recipientes químicos neste fluxo. Confirme o aceite junto ao serviço, cooperativa ou ponto local.",
+      "preparacao": "Retire o restante do conteúdo. Se necessário e se o serviço local orientar enxágue, passe água brevemente apenas para remover o grosso dos resíduos; deixe secar e separe a lata dos resíduos úmidos.",
+      "cuidados": "Esta ficha trata de latas comuns de bebidas e alimentos; outros objetos metálicos podem ter regras próprias. Não inclua pilhas, baterias, lâmpadas ou embalagens com resíduos de produtos perigosos (por exemplo, defensivos agrícolas) no fluxo de latas. Siga a rota de logística reversa indicada localmente e confirme o aceite junto ao serviço, cooperativa ou ponto.",
       "categoriasPontos": [],
       "rotasReferencia": [
         "Coleta seletiva porta a porta, quando disponível no endereço e se aceitar metais",
@@ -487,9 +487,9 @@
           "comprova": "Descreve aceitação local de latas de alimentos/bebidas nos fluxos de ferro/alumínio do programa municipal."
         }
       ],
-      "dataVerificacao": "2026-09-30",
+      "dataVerificacao": "2026-10-30",
       "statusMaterial": "rascunho",
-      "observacaoRevisao": "Curadoria editorial revalidada em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por perfil autorizado na Central de revisão; confirme as regras do município ou operador antes da aprovação."
+      "observacaoRevisao": "Revisão documental e ajustes editoriais concluídos em 2026-10-30 com fontes citadas; não houve validação de campo. Permanece em rascunho até aprovação e publicação por perfil autorizado. Confirme a aceitação e a rota com o município/operador."
     },
     {
       "codigoCatalogo": "br-metais-e-latas-outros-itens-metalicos-reciclaveis-e-emb-956aaf88",
@@ -588,7 +588,7 @@
         "composteira caseira"
       ],
       "preparacao": "Use recipiente ou local ventilado e, se possível, protegido de chuva direta. Corte materiais grandes e cubra cada adição de restos de alimentos com material seco. A Prefeitura de Joinville recomenda, para o método descrito na sua orientação, cerca de 2–3 partes de material marrom/seco para 1 parte de material verde/úmido; é uma referência local, não regra nacional.",
-      "cuidados": "Mantenha boa aeração e umidade, sem encharcar. Se houver odor forte ou excesso de umidade, adicione material seco e areje; siga as restrições do método. Minhocários e compostagem termofílica têm condições distintas; não presuma que todo resíduo seja aceito. Confirme as regras antes de entregar orgânicos a composteira comunitária, condomínio ou serviço externo.",
+      "cuidados": "Mantenha boa aeração e umidade, sem encharcar. Cheiro de podre ou de amônia, excesso de umidade ou compactação pode indicar desequilíbrio; adicione material seco e areje/revolva conforme o método, observando suas restrições. Minhocários e compostagem termofílica têm condições distintas; em minhocários, consulte o manual ou o programa do sistema para confirmar os tipos e quantidades permitidos, sem aplicar automaticamente regras de compostagem termofílica. Confirme as regras antes de entregar orgânicos a composteira comunitária, condomínio ou serviço externo.",
       "categoriasPontos": [],
       "rotasReferencia": [
         "Composteira doméstica própria, seguindo o método e os materiais aceitos pelo sistema",
@@ -614,9 +614,9 @@
           "comprova": "Fonte institucional complementar sobre composteiras domésticas e material seco; não é usada como lista universal de aceitação."
         }
       ],
-      "dataVerificacao": "2026-09-30",
+      "dataVerificacao": "2026-10-30",
       "statusMaterial": "rascunho",
-      "observacaoRevisao": "Curadoria editorial revalidada em 2026-09-30 com fontes citadas. Permanece em rascunho até validação e publicação individual por perfil autorizado na Central de revisão; confirme as regras do município ou operador antes da aprovação."
+      "observacaoRevisao": "Revisão documental e ajustes editoriais concluídos em 2026-10-30 com fontes citadas; não houve validação de campo. Permanece em rascunho até aprovação e publicação por perfil autorizado. Confirme a aceitação e a rota com o município/operador."
     },
     {
       "codigoCatalogo": "br-restos-alimentares-organicos-jardi-restos-alimentares-e-organicos-na-coleta-c781f879",
