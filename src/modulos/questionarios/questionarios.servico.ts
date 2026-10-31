@@ -77,7 +77,13 @@ export class ServicoQuestionarios implements OnModuleInit, OnModuleDestroy {
     );
     if (!resposta) return respostaIndisponivel();
     if (resposta.jaRespondida) {
-      return { indicaCorreta: false, quantidadePontos: 0, explicacaoResposta: resposta.explicacaoResposta };
+      return {
+        tentativaRegistrada: false,
+        questaoJaRespondida: true,
+        indicaCorreta: false,
+        quantidadePontos: 0,
+        explicacaoResposta: resposta.explicacaoResposta,
+      };
     }
     if (!resposta.registrada) return respostaIndisponivel();
     if (resposta.indicaCorreta && resposta.registrada && this.desafios) {
@@ -88,6 +94,8 @@ export class ServicoQuestionarios implements OnModuleInit, OnModuleDestroy {
       }
     }
     return {
+      tentativaRegistrada: true,
+      questaoJaRespondida: false,
       indicaCorreta: resposta.indicaCorreta,
       quantidadePontos: resposta.quantidadePontos,
       explicacaoResposta: resposta.explicacaoResposta,
@@ -108,7 +116,13 @@ export class ServicoQuestionarios implements OnModuleInit, OnModuleDestroy {
 }
 
 function respostaIndisponivel() {
-  return { indicaCorreta: false, quantidadePontos: 0, explicacaoResposta: 'Questão ou atribuição indisponível. Cada questão pode ser respondida uma única vez.' };
+  return {
+    tentativaRegistrada: false,
+    questaoJaRespondida: false,
+    indicaCorreta: false,
+    quantidadePontos: 0,
+    explicacaoResposta: 'Questão ou atribuição indisponível. Cada questão pode ser respondida uma única vez.',
+  };
 }
 
 function validarDados(dados: DadosQuestao): DadosQuestao {

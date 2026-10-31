@@ -115,6 +115,8 @@ export class ControladorGrpcQuestionarios {
     this.autorizacao.exigirPermissao(identidade, 'questionarios:responder');
     const resposta = await this.servico.responder(requisicao.id_questao ?? '', requisicao.id_alternativa ?? '', identidade.idExterno);
     return {
+      tentativa_registrada: resposta.tentativaRegistrada,
+      questao_ja_respondida: resposta.questaoJaRespondida,
       indica_correta: resposta.indicaCorreta,
       quantidade_pontos: resposta.quantidadePontos,
       explicacao_resposta: resposta.explicacaoResposta,

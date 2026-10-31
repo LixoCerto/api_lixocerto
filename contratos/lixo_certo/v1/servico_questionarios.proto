@@ -34,6 +34,10 @@ message EnviarRespostaQuestionarioResposta {
   bool indica_correta = 1;
   int32 quantidade_pontos = 2;
   string explicacao_resposta = 3;
+  // Indica que esta tentativa foi persistida pelo serviço.
+  bool tentativa_registrada = 4;
+  // Indica que a questão já tinha uma tentativa anterior para este usuário.
+  bool questao_ja_respondida = 5;
 }
 
 message AlternativaQuestaoGestao {

@@ -34,6 +34,8 @@ describe('ServicoQuestionarios', () => {
   it('não concede pontos para questão indisponível', async () => {
     const servico = novoServico();
     expect(await servico.responder('questao-inexistente', 'alternativa-inexistente')).toEqual({
+      tentativaRegistrada: false,
+      questaoJaRespondida: false,
       indicaCorreta: false,
       quantidadePontos: 0,
       explicacaoResposta: 'Questão ou atribuição indisponível. Cada questão pode ser respondida uma única vez.',
@@ -44,6 +46,8 @@ describe('ServicoQuestionarios', () => {
     const repositorio = { obterResposta: async () => { throw new Error('não deveria consultar o banco'); } } as unknown as RepositorioQuestionarios;
     const servico = novoServico(repositorio);
     await expect(servico.responder('', '')).resolves.toEqual({
+      tentativaRegistrada: false,
+      questaoJaRespondida: false,
       indicaCorreta: false,
       quantidadePontos: 0,
       explicacaoResposta: 'Questão ou atribuição indisponível. Cada questão pode ser respondida uma única vez.',
@@ -83,6 +87,8 @@ describe('ServicoQuestionarios', () => {
     const servico = new ServicoQuestionarios(repositorio, usuarios, gamificacao);
 
     await expect(servico.responder('questao-1', 'alternativa-1', 'usuario-externo')).resolves.toEqual({
+      tentativaRegistrada: false,
+      questaoJaRespondida: true,
       indicaCorreta: false,
       quantidadePontos: 0,
       explicacaoResposta: 'Você já respondeu esta questão; novas tentativas não são permitidas.',
@@ -104,6 +110,8 @@ describe('ServicoQuestionarios', () => {
     const servico = new ServicoQuestionarios(repositorio, usuarios, gamificacao, desafios as never);
 
     await expect(servico.responder('questao-1', 'alternativa-1', 'usuario-externo')).resolves.toMatchObject({
+      tentativaRegistrada: true,
+      questaoJaRespondida: false,
       indicaCorreta: true,
       quantidadePontos: 27,
       explicacaoResposta: 'Correta.',
